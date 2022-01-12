@@ -52,7 +52,7 @@ Hello World
 
 === top
 
-Displays the running Linux processes
+Displays information about the running Linux processes
 
 *Example:*
 
@@ -92,15 +92,75 @@ d.   6260.8 avail Mem
 
 === env
 
+Displays all environment variables running on system
+
 === export
 
+Creates an environment variable with a value and then exports the environment variable/value pair to the system.
+
+*Example:*
+
+The following command creates an environment variable named `WEB_PAGE` and sets the value to `https://www.redhat.com/en`. Then the `echo` command is used to confirm the value of the environment variable.
+
+
+```
+$ export WEB_PAGE="https://www.redhat.com/en"
+$ echo $WEB_PAGE
+https://www.redhat.com/en
+```
+
 === source
+
+`source </path/to/filename>`
+
+The `source` command executes commands stored in a file from within the current shell. The `source` command can be used to refresh environment variables.
+
+By default a new shell is launched to run a script, therefore changes to environment variables are not visible in the current shell.
+
+*Example:*
+
+The following example uses the `cat` command to create a file name `new_vars.sh`.The file contains an `export` instruction set for the environment variable `ALT_USER=barry`. Then the `source` command is called to set the environment variable. The `echo` command is called to verify that the environment variable `ALT_USER` is in force. (`$` indicates the command prompt.)
+
+```
+$ cat <<EOF > new_vars.sh
+> #!/bin/bash
+> export ALT_USER=barry
+> EOF
+$ source ./new_vars.sh
+$ echo $ALT_USER
+barry
+
+```
 
 == file and directory management
 
 === cd
 
+`cd </path/to/directory>`
+
+Change to another current directory
+
+*Example:*
+
+The following example change the current directory to the user's home directory
+
+`cd ~/`
+
 === cp
+
+`cp </path/to/source/filename> </path/to/target/filename>`
+
+Copies the contents of the source directory or file to a target directory or file.
+
+*Example:*
+
+The following example copies the contents of the file `helloworld.txt` to the file named `helloworld.bak` and then executes the `cat` command to verify that the file and it's contents have been copied.
+
+```
+$ cp helloworld.txt helloworld.bak
+$ cat helloworld.bak 
+Hello World!
+```
 
 === find
 
