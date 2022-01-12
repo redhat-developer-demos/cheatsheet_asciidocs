@@ -13,6 +13,8 @@ Easy to use Linux shortcuts for developers organized according to category
 
 `cat | more` Displays the contents of the file with forward paging
 
+image::./images/cat-etc.png[]
+
 
 === clear
 
