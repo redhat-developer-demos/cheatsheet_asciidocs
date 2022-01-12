@@ -119,7 +119,7 @@ By default a new shell is launched to run a script, therefore changes to environ
 
 *Example:*
 
-The following example uses the `cat` command to create a file name `new_vars.sh`.The file contains an `export` instruction set for the environment variable `ALT_USER=barry`. Then the `source` command is called to set the environment variable. The `echo` command is called to verify that the environment variable `ALT_USER` is in force. (`$` indicates the command prompt.)
+The following example uses the `cat` command to create a file named `new_vars.sh`. The file contains an `export` instruction set for the environment variable `ALT_USER=barry`. Then the `source` command is called to set the environment variable into the system. The `echo` command is called to verify that the environment variable `ALT_USER` is in force. (`$` indicates the command prompt.)
 
 ```
 $ cat <<EOF > new_vars.sh
@@ -164,23 +164,175 @@ Hello World!
 
 === find
 
+`sudo find <starting/directory> -name <file/directory name>`
+
+Finds a file or directory by name
+
+*Example:*
+
+The following command finds a file named `hostname` starting from the root (`/`) directory of the computer's file system. The command starts with the `sudo` in order to access files restricted to the `root` user.
+
+```
+$ sudo find / -name hostname
+/proc/sys/kernel/hostname
+/etc/hostname
+/var/lib/selinux/targeted/active/modules/100/hostname
+/usr/bin/hostname
+/usr/lib64/gettext/hostname
+/usr/share/licenses/hostname
+/usr/share/doc/hostname
+/usr/share/bash-completion/completions/hostname
+/usr/share/selinux/targeted/default/active/modules/100/hostname
+/usr/libexec/hostname
+```
+
 === grep
+
+`grep <search_expression> <input>`
+
+Searches plain-text input from a file or stdout according according to a regular expression
+
+*Example:*
+
+The following example searches the file `/etc/password` for lines that have the string `ftp`.
+
+```
+$ grep ftp /etc/passwd
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+```
 
 === head
 
+`head </path/to/filename>`
+
+Outputs the first part of a file (first 10 lines)
+
+*Example:*
+
+The following example uses the command `head` to output the first ten lines of the file `~/.bashrc`.
+
+```
+$ head ~/.bashrc
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+```
+
 === less
+
+`less [options] </path/to/filename>`
+
+The `less` command allows you to view and navigate the contents of a plain text file or stdout in a controlled manner. Once you open a file using `less` you can navigate the file using the following keystrokes.
+
+* Scroll forward: `Ctrl-f`
+* Scroll backward: `Ctrl-b`
+* End of file: `G`
+* Quit less: `q`
+
+*Example:*
+
+The following example uses the `less` command to open file `~/.bashrc` and to display the file with line numbers using the option `-N`.
+
+```
+$ less -N ~/.bashrc
+```
+
+Result:
+
+```
+1 # .bashrc
+2 
+3 # Source global definitions
+4 if [ -f /etc/bashrc ]; then
+5         . /etc/bashrc
+6 fi
+7 
+8 # User specific environment
+9 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+10 then
+11     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+12 fi
+13 export PATH
+14 
+15 # Uncomment the following line if you don't like systemctl's auto-paging feature:
+16 # export SYSTEMD_PAGER=
+17 
+18 # User specific aliases and functions
+19 PS1="$ "
+```
 
 === ls
 
+`ls [options] </path/to/directory>`
+
+Lists the contents of a directory. Defaults to the current directory.
+
+*Examples:*
+
+List all the directories in the current directory.
+
+```
+$ ls 
+code  docs  images
+```
+
+List all the files and directories in the current directory along using long listing option `-l`.
+
+```
+$ ls -l
+total 0
+drwxrwxr-x. 2 reselbob reselbob  6 Jan 12 11:33 code
+drwxrwxr-x. 2 reselbob reselbob 25 Jan 12 11:37 docs
+drwxrwxr-x. 2 reselbob reselbob  6 Jan 12 11:34 images
+```
+
+List all the files and directories in the current directory along with the hidden files using long listing option `-l` and the show hidden files option `-a`.
+
+```
+$ ls -la
+total 4
+drwxrwxr-x. 5 reselbob reselbob 60 Jan 12 11:36 .
+drwxr-xr-x. 3 reselbob reselbob 68 Jan 12 11:33 ..
+drwxrwxr-x. 2 reselbob reselbob  6 Jan 12 11:33 code
+drwxrwxr-x. 2 reselbob reselbob 25 Jan 12 11:37 docs
+drwxrwxr-x. 2 reselbob reselbob  6 Jan 12 11:34 images
+-rw-rw-r--. 1 reselbob reselbob 15 Jan 12 11:36 .secrets
+```
+
+list all the files and directories in the subdirectory named `docs` using long listing option `-l`.
+
+```
+$ ls -l docs
+total 4
+drwxrwxr-x. 2 reselbob reselbob  6 Jan 12 11:44 drafts
+-rw-rw-r--. 1 reselbob reselbob 49 Jan 12 11:37 hithere.txt
+-rw-rw-r--. 1 reselbob reselbob  0 Jan 12 11:45 notes.txt
+```
+
 === mkdir
+
+Creates a directory
 
 === more
 
 === mv
 
+Moves a file or directory
+
 === pwd
 
+Displays the name of the present working directory.
+
 === rm
+
+Removes a file or directory.
 
 === tar
 
@@ -188,11 +340,17 @@ Hello World!
 
 === man
 
+`man <path/to/command>`
+
 == network
 
 === curl
 
+Gets a file from the internet according to a URL.
+
 === ip
+
+Get the IP address information for the physical or virtual machine.
 
 === netstat
 
