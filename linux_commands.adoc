@@ -1,0 +1,88 @@
+= Linux Commands Cheat Sheet
+:experimental: true
+:product-name:
+:version: 1.0.0
+
+Easy to use Linux shortcuts for developers organized according to category
+
+== console and output management
+
+`cat`
+
+`cat | less`
+
+`cat | more`
+
+`clear`
+
+`echo`
+
+`top`
+
+== environment variables
+
+`env`
+
+`export`
+
+`source`
+
+== file and directory management
+
+`cd`
+
+`cp`
+
+`find`
+
+`grep`
+
+`head`
+
+`ls`
+
+`mkdir`
+
+`mv`
+
+`pwd`
+
+`rm`
+
+`tar`
+
+== help
+
+`man`
+
+== network
+
+`curl`
+
+`ip`
+
+`netstat`
+
+`ssh`
+
+`wget`
+
+== process management
+
+`&`
+
+`kill`
+
+`ps`
+
+`which`
+
+== system control
+
+`poweroff`
+
+`restart`
+
+== user management
+
+`whomai`
