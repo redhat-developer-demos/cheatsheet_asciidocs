@@ -527,6 +527,29 @@ $ ip addr
 
 === netstat
 
+`netstat  [options]`
+
+Displays information about network connections, routing tables, interface statistics, masquerade connections, and multicast memberships.
+
+**Example:**
+
+The following example uses `netstat` to lists the status of ports and the process using the particular port
+
+```
+$ sudo netstat -anp | grep tcp
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      1/systemd           
+tcp        0      0 192.168.122.1:53        0.0.0.0:*               LISTEN      1987/dnsmasq        
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1084/sshd           
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      1087/cupsd          
+tcp       32      0 192.168.86.34:57152     8.43.85.13:443          CLOSE_WAIT  6588/gnome-shell    
+tcp        0      0 192.168.86.34:22        192.168.86.20:56253     ESTABLISHED 82512/sshd: guest 
+tcp6       0      0 :::111                  :::*                    LISTEN      1/systemd           
+tcp6       0      0 :::22                   :::*                    LISTEN      1084/sshd           
+tcp6       0      0 ::1:631                 :::*                    LISTEN      1087/cupsd          
+tcp6       0      0 :::9090                 :::*                    LISTEN      1/systemd           
+         
+```
+
 
 === ssh
 
