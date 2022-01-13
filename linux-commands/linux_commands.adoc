@@ -84,7 +84,7 @@ Tasks: 201 total,   2 running, 199 sleeping,   0 stopped,   0 zombie
 MiB Mem :   7770.8 total,   5409.8 free,   1240.8 used,   1120.2 buff/cache
 MiB Swap:   8092.0 total,   8092.0 free,      0.0 used.   6205.6 avail Mem 
     PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                 
-  82399 reselbob  20   0   65584   5120   4212 R   5.9   0.1   0:00.02 top                                      
+  82399 guest  20   0   65584   5120   4212 R   5.9   0.1   0:00.02 top                                      
       1 root      20   0  175932  14212   8924 S   0.0   0.2   0:06.21 systemd                                
       2 root      20   0       0      0      0 S   0.0   0.0   0:00.13 kthreadd                               
       3 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_gp                                 
@@ -303,9 +303,9 @@ List all the files and directories in the current directory along using long lis
 ```
 $ ls -l
 total 0
-drwxrwxr-x. 2 reselbob reselbob  6 Jan 12 11:33 code
-drwxrwxr-x. 2 reselbob reselbob 25 Jan 12 11:37 docs
-drwxrwxr-x. 2 reselbob reselbob  6 Jan 12 11:34 images
+drwxrwxr-x. 2 guest guest  6 Jan 12 11:33 code
+drwxrwxr-x. 2 guest guest 25 Jan 12 11:37 docs
+drwxrwxr-x. 2 guest guest  6 Jan 12 11:34 images
 ```
 
 List all the files and directories in the current directory along with the hidden files using long listing option `-l` and the show hidden files option `-a`.
@@ -313,12 +313,12 @@ List all the files and directories in the current directory along with the hidde
 ```
 $ ls -la
 total 4
-drwxrwxr-x. 5 reselbob reselbob 60 Jan 12 11:36 .
-drwxr-xr-x. 3 reselbob reselbob 68 Jan 12 11:33 ..
-drwxrwxr-x. 2 reselbob reselbob  6 Jan 12 11:33 code
-drwxrwxr-x. 2 reselbob reselbob 25 Jan 12 11:37 docs
-drwxrwxr-x. 2 reselbob reselbob  6 Jan 12 11:34 images
--rw-rw-r--. 1 reselbob reselbob 15 Jan 12 11:36 .secrets
+drwxrwxr-x. 5 guest guest 60 Jan 12 11:36 .
+drwxr-xr-x. 3 guest guest 68 Jan 12 11:33 ..
+drwxrwxr-x. 2 guest guest  6 Jan 12 11:33 code
+drwxrwxr-x. 2 guest guest 25 Jan 12 11:37 docs
+drwxrwxr-x. 2 guest guest  6 Jan 12 11:34 images
+-rw-rw-r--. 1 guest guest 15 Jan 12 11:36 .secrets
 ```
 
 list all the files and directories in the subdirectory named `docs` using long listing option `-l`.
@@ -326,9 +326,9 @@ list all the files and directories in the subdirectory named `docs` using long l
 ```
 $ ls -l docs
 total 4
-drwxrwxr-x. 2 reselbob reselbob  6 Jan 12 11:44 drafts
--rw-rw-r--. 1 reselbob reselbob 49 Jan 12 11:37 hithere.txt
--rw-rw-r--. 1 reselbob reselbob  0 Jan 12 11:45 notes.txt
+drwxrwxr-x. 2 guest guest  6 Jan 12 11:44 drafts
+-rw-rw-r--. 1 guest guest 49 Jan 12 11:37 hithere.txt
+-rw-rw-r--. 1 guest guest  0 Jan 12 11:45 notes.txt
 ```
 
 === mkdir
