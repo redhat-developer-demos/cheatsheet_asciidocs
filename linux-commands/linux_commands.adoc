@@ -5,7 +5,7 @@
 
 Easy to use Linux shortcuts for developers organized according to category
 
-== application management
+== application management commands
 
 === yum
 
@@ -17,7 +17,7 @@ The following command installs `net-tools` application which has many handy util
 
 `sudo yum -y install net-tools`
 
-== console and output management
+== console and output management commands
 
 === cat
 
@@ -88,7 +88,7 @@ d.   6260.8 avail Mem
 --More--
 ```
 
-== environment variables
+== environment variables commands
 
 === env
 
@@ -318,43 +318,204 @@ drwxrwxr-x. 2 reselbob reselbob  6 Jan 12 11:44 drafts
 
 === mkdir
 
+`cd <directory_name>`
+
 Creates a directory
+
+*Example:*
+
+Creates a new directory named `documents` in the users home directory.
+
+`mkdir ~/documents`
 
 === more
 
+`more [options] </path/to/filename or stdout>`
+
+Allows a user to view and traverse the content of a file or stdout. The command `more` invokes in a process the displays a command line user interface. The exit the process users strike the `q` key.
+
+**Examples:**
+
+The following example show using the `more` command to display the first 4 lines of the file `/etc/passwd `. Then users can traverse through the rest of the file a line at time by striking the `<ENTER>` key.
+
+```
+$ more -4 /etc/passwd 
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+--More--(5%)
+```
+
+The following example illustrates using the `more` command to process stdout data. The example pipes the result of running the `ls` against the directory `/etc`. The command `more` displays the first 4 lines of the output from stdout as declared in the option `-4`.
+
+Users can traverse through the rest of stdout a line at time by striking the `<ENTER>` key.
+
+```
+$ ls /etc | more -4
+accountsservice
+adjtime
+aliases
+alsa
+--More--
+```
+
 === mv
 
-Moves a file or directory
+`mv <source file/directory> <target file/directory>`
+
+Moves a file or directory. The `mv` command transfers all the contents from the source file or directory to the new location.
+
+**Examples:**
+
+The following example moves the directory `documents` to the directory `docs-bak`. When `move` is invokes the source directory will be renamed `docs-bak`.
+
+`mv ./documents ./docs-bak`
+
+The following example moves the contents of the file `hithere.txt` in the directory `documents` to a file named `new_hithere.txt` in the same directory.
+
+`mv ./documents/hithere.txt ./documents/new_hithere.txt`
 
 === pwd
 
+`pwd`
+
 Displays the name of the present working directory.
+
+**Example:**
+
+The following example displays the invocation and result of using the command `pwd` in the `HOME` directory for a user named `guest`
+
+```
+$ pwd
+/home/guest
+```
 
 === rm
 
+`rm [options] <file or directory>`
+
 Removes a file or directory.
 
+**Examples:**
+
+The following example removes the file named `hithere.txt` from the current directory. (`$` indicates the command line prompt.)
+
+```
+$ rm hithere.txt
+```
+
+The following example removes the directory named `documents` along with all the files and subdirectories. The options `-rf` **f**orce the removal **r**ecursively. 
+
+```
+$ rm -rf ./documents
+```
 === tar
 
-== help
+`tar [options] <archive filename> <file or directory to be compressed>`
+
+Compresses and decompresses files or directories.
+
+**Examples:**
+
+The following example compresses a directory named `documents`, shows the output of the `tar` command and then invokes the `ls` command to list the contents of the current directory.
+
+```
+$ tar cvzf docs.tar.gz documents/
+documents/
+documents/1.txt
+documents/2.txt
+documents/3.txt
+documents/4.txt
+
+$ ls
+docs.tar.gz  documents
+```
+
+The following example extracts the contents of the compressed file `docs.tar.gz` in to an existing directory named `new-docs`.
+
+```
+$ tar -xvf docs.tar.gz -C  ./new-docs
+```
+
+== help commands
 
 === man
 
 `man <path/to/command>`
 
-== network
+Display the internal help documentation for a given command.
+
+**Example:**
+
+The following example shows how to display the command line help documentation for the command `cp`;
+
+```
+$ man cp
+```
+
+== network commands
 
 === curl
 
-Gets a file from the internet according to a URL.
+`curl [options] <url>`
+
+Gets or posts a file to/from the internet according to a URL.
+
+**Examples:**
+
+The following example downloads a web page from the Red Hat Developer webs site and implements the `-o` option to save the page to the file `article.html`.
+
+```
+$ curl https://developers.redhat.com/articles/2022/01/11/5-design-principles-microservices -o article.html
+```
+
+The following example uses the `curl` command to upload a file named `data.txt` to the URL `https://example.com/api/data`.
+
+Notice the use of the `-X` option to tell `curl` to use the HTTP POST method, the `-H` option to set the content type header in the request and the `-d` option to define the file to upload.
+
+```
+$ curl -X POST -H "Content-Type: text/plain" -d "data.txt" https://example.com/api/data
+```
 
 === ip
 
-Get the IP address information for the physical or virtual machine.
+`ip [ OPTIONS ] OBJECT { COMMAND | help }`
+
+Gets the IP information for the physical or virtual machine.
+
+**Example:**
+
+The following example returns the IP address information associated with network interfaces on the current machine.
+
+```
+$ ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:45:95:d3 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.86.34/24 brd 192.168.86.255 scope global dynamic noprefixroute enp0s3
+       valid_lft 80971sec preferred_lft 80971sec
+    inet6 fe80::a00:27ff:fe45:95d3/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: virbr0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+    link/ether 52:54:00:f7:2c:71 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
+       valid_lft forever preferred_lft forever
+4: virbr0-nic: <BROADCAST,MULTICAST> mtu 1500 qdisc fq_codel master virbr0 state DOWN group default qlen 1000
+    link/ether 52:54:00:f7:2c:71 brd ff:ff:ff:ff:ff:ff
+```
 
 === netstat
 
+
 === ssh
+
+`ssh [options] <ip_address>`
 
 Secure shell, an encrypted network protocol allowing for remote login and command execution
 
@@ -362,24 +523,122 @@ On Windows: PuTTY and WinSCP
 
 An “ssh.exe” is also available via Cygwin as well as with a Git installation.
 
+**Example:**
+
+The following example shows how to use `ssh` to login to a remote computer that has the ip address `192.168.86.11`
+
+```
+$ ssh 192.168.86.11
+```
+
 === wget
 
-== process management
+`wget [options] <url>`
 
-=== &
+Downloads files from the internet. Supports HTTP, HTTPS, and FTP protocols. You can use wget as an alternative to `curl`.
+
+**Example:**
+
+The following example uses the `wget` command to download a file from the URL `https://developers.redhat.com/articles/2022/01/11/5-design-principles-microservices` and uses the `-o` options to save the content to a file named `article.html`
+
+```
+$ wget https://developers.redhat.com/articles/2022/01/11/5-design-principles-microservices -o article.html
+```
+
+== process management commands
+
+=== &&
+
+`<command> && <command>`
+
+Executes command in a sequence
+
+**Example:**
+
+The following changes the current directory to `/etc` and then executes the command `ls` to list the contents of the directory.
+
+```
+$ cd /etc && ls
+```
 
 === kill
 
+`kill <process_id>`
+
+Removes a running process from memory.
+
+**Example:**
+
 === ps
 
+`ps [options]`
+
+Displays the status of the current processes.
+
+The following example invokes the `ps command` with the options `aux` to display every process on the system. The result of the invocation is piped to the `more` command using the `-10` to display the first ten lines of results for stdout.
+
+**Example:**
+
+```
+$ ps aux | more -10
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.1 175932 14212 ?        Ss   Jan07   0:06 /usr/lib/systemd/systemd --switched-root --syst
+em --deserialize 18
+root           2  0.0  0.0      0     0 ?        S    Jan07   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        I<   Jan07   0:00 [rcu_gp]
+root           4  0.0  0.0      0     0 ?        I<   Jan07   0:00 [rcu_par_gp]
+root           6  0.0  0.0      0     0 ?        I<   Jan07   0:00 [kworker/0:0H-events_highpri]
+root           9  0.0  0.0      0     0 ?        I<   Jan07   0:00 [mm_percpu_wq]
+root          10  0.0  0.0      0     0 ?        S    Jan07   0:02 [ksoftirqd/0]
+root          11  0.0  0.0      0     0 ?        I    Jan07   0:01 [rcu_sched]
+--More--
+
+```
 === which
 
-== system control
+`which <command>`
+
+Describes the location of a command. If a command is not installed on the computer and its parent directory is not part of the system's `$PATH`, the command will report an error.
+
+**Example:**
+
+The following example invokes the `which` command against the command `clear` and shows the result of the `which` command.
+
+```
+$ which clear
+/usr/bin/clear 
+```
+
+== system control commands
 
 === poweroff
 
+`poweroff`
+
+Shuts down a computer. (Must be run as `sudo`.)
+
+**Example:**
+
+(`$` indicates the command line prompt)
+
+```
+$ sudo poweroff
+```
+
 === restart
 
-== user management
+`restart`
+
+Restarts a computer. (Must be run as `sudo`.)
+
+**Example:**
+
+(`$` indicates the command line prompt)
+
+```
+$ sudo restart
+```
+
+== user management commands
 
 === whomai
