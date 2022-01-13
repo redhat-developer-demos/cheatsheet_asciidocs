@@ -9,7 +9,7 @@ Easy to use Linux shortcuts for developers organized according to category
 
 === yum
 
-`yum` is the application installation tool for Fedora, Centos and RHEL.
+`yum` is the application installation and removal tool for Fedora, Centos and RHEL.
 
 *Example:*
 
@@ -35,22 +35,39 @@ Red Hat Enterprise Linux release 8.5 (Ootpa)
 
 === clear
 
-Clear the terminal screen
+Clear the terminal screen.
+
+*Example:*
+
+(`$` is the command prompt symbol.)
+
+```
+$ clear
+```
 
 === echo
 
 `echo <string>`
 
-Displays a string to stdout by default
+Displays a string to stdout or to a file.
 
-*Example:*
+*Examples:*
+
+The following example demonstrates how to invoke `echo` to display a string in the console.
 
 ```
 $ echo "Hello World"
 Hello World
 ```
 
+The following example demonstrates how to invoke `echo` and save the output to a file named `data.txt`.
+
+```
+$ echo "Hello World" > data.txt
+```
+
 === top
+`top [options]`
 
 Displays information about the running Linux processes
 
@@ -95,6 +112,8 @@ d.   6260.8 avail Mem
 Displays all environment variables running on system
 
 === export
+
+`export <env var name>=<env var value>`
 
 Creates an environment variable with a value and then exports the environment variable/value pair to the system.
 
