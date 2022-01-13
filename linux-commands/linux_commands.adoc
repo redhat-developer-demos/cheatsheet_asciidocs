@@ -642,3 +642,16 @@ $ sudo restart
 == user management commands
 
 === whomai
+
+`whoami`
+
+Displays the userid.
+
+**Example:**
+
+The following example shows the invocation for a user with the login id of `jerryr`.
+
+```
+$ whoami
+jerryr
+```
