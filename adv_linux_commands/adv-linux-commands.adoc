@@ -132,7 +132,6 @@ The command `fsck` inspects and optionally repairs a disk mount represented by t
 
 === free
 
-
 **Example:**
 
 ```
@@ -205,7 +204,7 @@ newhostname.localdomain
 
 `hostnamectl [OPTIONS...] <command>`
 
-The command `hostnamectl` is similar to the command `hostname` but with come added capabilities. 
+The command `hostnamectl` is similar to the command `hostname` but with some added capabilities. 
 
 **Example:**
 
