@@ -75,13 +75,38 @@ type=CONFIG_CHANGE msg=audit(1641598972.761:6): op=set audit_backlog_limit=8192 
 
 == disk management
 
+== df
+
+`df [options] <file name>`
+
+The command `df`` shows the amount of disk space available on the file system containing each the file name that represents a particular disk device mount.   If no file name is given, the space available on all mounted file systems is displayed.
+
 **Example:**
+
+The following example shows the invocation and result of `df` displaying all mounted file systems. Disk space  is  shown in  1K blocks.
+
+```
+$ df
+Filesystem            1K-blocks    Used Available Use% Mounted on
+devtmpfs                3949180       0   3949180   0% /dev
+tmpfs                   3978636       0   3978636   0% /dev/shm
+tmpfs                   3978636    9464   3969172   1% /run
+tmpfs                   3978636       0   3978636   0% /sys/fs/cgroup
+/dev/mapper/rhel-root  50065528 5588744  44476784  12% /
+/dev/mapper/rhel-home  24445276  228104  24217172   1% /home
+/dev/sda1               1038336  262796    775540  26% /boot
+tmpfs                    795724      64    795660   1% /run/user/1000
+```
 
 === fdisk
 
 **Example:**
 
 === fsck
+
+`fsck [options] q<file system>`
+
+The command `fsck` inspects and optionally repairs a disk mount represented by the `file system` argument.
 
 **Example:**
 
@@ -93,31 +118,113 @@ type=CONFIG_CHANGE msg=audit(1641598972.761:6): op=set audit_backlog_limit=8192 
 
 === chmod
 
+`chmod [options] <file or directory>`
+
 **Example:**
 
 === chown
 
 **Example:**
 
+`chown [options] <file or directory>`
+
 == memory management commands
 
 === free
 
+
 **Example:**
+
+```
+$ free -w
+              total        used        free      shared     buffers       cache   available
+Mem:        7957276     1653404     4563456       35032        4320     1736096     5965440
+Swap:       8286204           0     8286204
+```
+
 
 == network commands
 
 === curl
 
-**Example:**
+`curl [options] <url>`
+
+Gets or posts a file to/from the internet according to a URL.
+
+**Examples:**
+
+The following example downloads a web page from the Red Hat Developer webs site and implements the `-o` option to save the page to the file `article.html`.
+
+```
+$ curl https://developers.redhat.com/articles/2022/01/11/5-design-principles-microservices -o article.html
+```
+
+The following example uses the `curl` command to upload a file named `data.txt` to the URL `https://example.com/api/data`.
+
+Notice the use of the `-X` option to tell `curl` to use the HTTP POST method, the `-H` option to set the content type header in the request and the `-d` option to define the file to upload.
+
+```
+$ curl -X POST -H "Content-Type: text/plain" -d "data.txt" https://example.com/api/data
+```
 
 === host
 
 **Example:**
 
+```
+$ host redhat.com
+redhat.com has address 209.132.183.105
+redhat.com mail is handled by 10 us-smtp-inbound-1.mimecast.com.
+redhat.com mail is handled by 10 us-smtp-inbound-2.mimecast.com.
+```
+
+=== hostname
+
+`hostname`
+
+Sets or gets the hostname of the computer or virtual machine
+
+**Examples:**
+
+The following example displays the current hostname of the machine
+
+```
+$ hostname
+localhost.localdomain
+```
+
+The following example renames the current hostname of the machine to `newhostname.localdomain` and then verifies the current hostname of the machine.
+
+```
+$ sudo hostname newhostname.localdomain
+$ hostname
+newhostname.localdomain
+```
+
 === hostnamectl
 
+`hostnamectl [OPTIONS...] <command>`
+
+The command `hostnamectl` is similar to the command `hostname` but with come added capabilities. 
+
 **Example:**
+
+The following example invokes and displays the result of the `hostnamectl status` command set to report hostname and additional information.
+
+```
+$ hostnamectl status
+   Static hostname: localhost.localdomain
+Transient hostname: tempvm.localdomain
+         Icon name: computer-vm
+           Chassis: vm
+        Machine ID: 7080e8d7b18547fa90aa06416ce6a1cf
+           Boot ID: 7d0c3ed3f773457a8045602e66e2581f
+    Virtualization: oracle
+  Operating System: Red Hat Enterprise Linux 8.5 (Ootpa)
+       CPE OS Name: cpe:/o:redhat:enterprise_linux:8::baseos
+            Kernel: Linux 4.18.0-348.el8.x86_64
+      Architecture: x86-64
+```
 
 === iptables
 
