@@ -11,7 +11,7 @@ The following is a sampling of advanced Linux commands typically used by develop
 
 `systemctl [options] <subcommand>`
 
-The command `systemctl` is used to introspect and control the state of the `systemd` suite of Linux system components.
+The command `systemctl` is used to inspect and control the state of the `systemd` suite of Linux system components.
 
 **Examples:**
 
