@@ -49,7 +49,7 @@ The following command installs `net-tools` application which has many handy util
 
 `ausearch [options] <application/process>`
 
- The `ausearch` command is a tool that can query the audit logs according to events defined by different search criteria.
+The `ausearch` command is a tool that can query the audit logs according to events defined by different search criteria.
 
 **Example:**
 
