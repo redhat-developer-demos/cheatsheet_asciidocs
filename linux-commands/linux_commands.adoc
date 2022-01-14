@@ -607,6 +607,12 @@ Removes a running process from memory.
 
 **Example:**
 
+The following example removes the process with id `10`. (`$` is the command prompt symbol.)
+
+```
+$ kill 10
+```
+
 === ps
 
 `ps [options]`

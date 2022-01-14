@@ -1,0 +1,204 @@
+= Advanced Linux Commands Cheat Sheet
+:experimental: true
+:product-name:
+:version: 1.0.0
+
+== application management commands
+
+=== systemctl
+
+`systemctl [options] <subcommand>`
+
+The command `systemctl` is used to introspect and control the state of the `systemd` suite of Linux system components.
+
+**Examples:**
+
+The following example shows the invocation and result of `systemctl status` command set that discovers the status of the Apache Web Server. (`$` is the command prompt symbol.)
+
+```
+$ systemctl status httpd
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; vendor preset: disable>
+   Active: inactive (dead)
+     Docs: man:httpd.service(8)
+```
+
+The following example shows the invocation `systemctl start` command set that start the `mariadb` database.
+
+`systemctl start mariadb`
+
+The following example shows the invocation `systemctl enable` command set to make it so that the particular application starts automatically when the computer reboots.
+
+`systemctl enable mariadb`
+
+
+=== yum
+
+`yum` is the application installation and removal tool for Fedora, Centos and RHEL.
+
+*Example:*
+
+The following command installs `net-tools` application which has many handy utilities such as `netstat`.
+
+`sudo yum -y install net-tools`
+
+
+== audit commands
+
+=== ausearch
+
+`ausearch [options] <application/process>`
+
+ The `ausearch` command is a tool that can query the audit logs according to events defined by different search criteria.
+
+**Example:**
+
+The following example shows how to use `ausearch` to get information about the user named `root` from the audit logs. The  option `-ui` indicates the the search should be conducted according to a particular userid, in this case `root`. The result is piped to the `more` command that has the option `-10` which indicates to show the first ten lines of output.
+
+The `ausearch` command must be invoked as `sudo` in order to access audit logs. (`$` is the command prompt symbol.)
+
+```
+$ sudo ausearch -ui root | more -10
+----
+time->Fri Jan  7 15:42:52 2022
+type=SERVICE_START msg=audit(1641598972.323:5): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=rpcbind comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+----
+time->Fri Jan  7 15:42:52 2022
+type=PROCTITLE msg=audit(1641598972.761:6): proctitle=2F7362696E2F617564697463746C002D52002F6574632F61756469742F61756469742E72756C6573
+type=SYSCALL msg=audit(1641598972.761:6): arch=c000003e syscall=44 success=yes exit=56 a0=3 a1=7fff0ba65240 a2=38 a3=0 items=0 ppid=843 pid=858 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm="auditctl" exe="/usr/sbin/auditctl" subj=system_u:system_r:unconfined_service_t:s0 key=(null)
+type=CONFIG_CHANGE msg=audit(1641598972.761:6): op=set audit_backlog_limit=8192 old=64 auid=4294967295 ses=4294967295 subj=system_u:system_r:unconfined_service_t:s0 res=1
+----
+--More--
+```
+
+== disk management
+
+**Example:**
+
+=== fdisk
+
+**Example:**
+
+=== fsck
+
+**Example:**
+
+=== mount
+
+**Example:**
+
+== file management commands
+
+=== chmod
+
+**Example:**
+
+=== chown
+
+**Example:**
+
+== memory management commands
+
+=== free
+
+**Example:**
+
+== network commands
+
+=== curl
+
+**Example:**
+
+=== host
+
+**Example:**
+
+=== hostnamectl
+
+**Example:**
+
+=== iptables
+
+**Example:**
+
+=== nmvcli
+
+**Example:**
+
+=== ss
+
+**Example:**
+
+== os management commands
+
+=== getenforce
+
+**Example:**
+
+=== getsebool
+
+**Example:**
+
+=== getsebool
+
+**Example:**
+
+=== restorecon
+
+**Example:**
+
+=== semanage
+
+**Example:**
+
+=== setsebool
+
+**Example:**
+
+=== subscription-manager
+
+**Example:**
+
+=== vmstat #
+
+**Example:**
+
+== process management commands
+
+=== bg
+
+**Example:**
+
+=== command && command
+
+**Example:**
+
+=== fg
+
+**Example:**
+
+=== iotop
+
+**Example:**
+
+=== jobs
+
+**Example:**
+
+=== ps
+
+**Example:**
+
+== system information
+
+=== lscpu
+
+**Example:**
+
+=== lshw
+
+**Example:**
+
+=== lshw
+
+**Example:**
