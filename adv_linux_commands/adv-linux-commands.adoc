@@ -79,7 +79,7 @@ type=CONFIG_CHANGE msg=audit(1641598972.761:6): op=set audit_backlog_limit=8192 
 
 `df [options] <file name>`
 
-The command `df`` shows the amount of disk space available on the file system containing each the file name that represents a particular disk device mount.   If no file name is given, the space available on all mounted file systems is displayed.
+The command `df`` shows the amount of disk space used and available according to the file system that represents a particular disk device mount.   If no file name is given, the space available on all mounted file systems is displayed.
 
 **Example:**
 
