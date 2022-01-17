@@ -7,7 +7,7 @@ This document is a list of command line executables that are frequently used by 
 
 == Application management commands
 
-The following commands pertain to working with a computer's applications and executables.  
+The following commands apply to working with a computer's applications and executables.  
 
 === which
 
@@ -38,7 +38,7 @@ The following command installs the `net-tools` application, which has many handy
 
 == Console and output management commands
 
-The following commands pertain to working with data send to stdout or displayed in a computer's terminal window. 
+The following commands apply to working with data send to stdout or displayed in a computer's terminal window. 
 
 === cat
 
@@ -127,7 +127,7 @@ MiB Swap:   8092.0 total,   8092.0 free,      0.0 used.   6205.6 avail Mem
 
 == Environment variables commands
 
-The following commands pertain to working with a Linux computer's environment variables.
+The following commands apply to working with a Linux computer's environment variables.
 
 === env
 
@@ -214,7 +214,7 @@ barry
 
 == File and directory management
 
-The following commands pertain to working with the files and directories on a Linux computers.
+The following commands apply to working with the files and directories on a Linux computers.
 
 === cd
 
@@ -520,7 +520,7 @@ $ tar -xvf docs.tar.gz -C  ./new-docs
 
 == Help commands
 
-The following command pertains to working the command line help documentation provided on a Linux  computer.
+The following command applies to working the command line help documentation provided on a Linux  computer.
 
 === man
 
@@ -538,7 +538,7 @@ $ man cp
 
 == Network commands
 
-The following commands pertain to working with networks on and from a Linux computer.
+The following commands apply to working with networks on and from a Linux computer.
 
 === curl
 
@@ -647,7 +647,7 @@ $ wget https://developers.redhat.com/articles/2022/01/11/5-design-principles-mic
 
 == Process management commands
 
-The following commands pertain to working with processes running on a Linux computer.
+The following commands apply to working with processes running on a Linux computer.
 
 === &&
 
@@ -705,7 +705,7 @@ root          11  0.0  0.0      0     0 ?        I    Jan07   0:01 [rcu_sched]
 
 == System control commands
 
-The following commands pertain to controlling the operation of a physical Linux computer.
+The following commands apply to controlling the operation of a physical Linux computer.
 
 === poweroff
 
@@ -737,7 +737,7 @@ $ sudo restart
 
 == User management commands
 
-The following command pertains to working users on a Linux computer.
+The following command applies to working users on a Linux computer.
 
 === whomai
 

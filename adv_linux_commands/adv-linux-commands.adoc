@@ -7,6 +7,8 @@ The following is a sampling of advanced Linux commands typically used by develop
 
 == application management commands
 
+The following commands pertain to working with a computer's applications and executables. 
+
 === systemctl
 
 `systemctl [options] <subcommand>`
@@ -46,6 +48,8 @@ The following command installs `net-tools` application which has many handy util
 
 
 == audit commands
+
+The following commands apply to working with a computer's applications and executables. 
 
 === ausearch
 
