@@ -3,7 +3,7 @@
 :product-name:
 :version: 1.0.0
 
-This document is a list of command line executables that are frequently used by all developers working on a computer running the Linux operating system. The commands are organized according to category.
+This document is a list of command line executables that are frequently used by developers working on a computer running the Linux operating system. The commands are organized according to category.
 
 == Application management commands
 
