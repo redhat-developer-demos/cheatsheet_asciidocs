@@ -3,43 +3,67 @@
 :product-name:
 :version: 1.0.0
 
-Easy to use Linux shortcuts for developers organized according to category
+This document is a list of command line executables that are frequently used by all developers working on a computer running the Linux operating system. The commands are organized according to category.
 
-== application management commands
+== Application management commands
+
+The following commands pertain to working with a computer's applications and executables.  
+
+=== which
+
+`which <command>`
+
+Describes the location of an application in the computers file system. If a application is not installed on the computer and its parent directory is not part of the system's `$PATH`, `which` will report an error.
+
+*Example:*
+
+The following example invokes the `which` command against the command `clear` and shows the result of the `which` command:
+
+```
+$ which clear
+/usr/bin/clear 
+```
 
 === yum
 
-`yum` is the application installation and removal tool for Fedora, Centos and RHEL.
+`yum`
+
+ The application installation and removal tool for Fedora, CentOS, and Red Hat Enterprise Linux (RHEL).
 
 *Example:*
 
-The following command installs `net-tools` application which has many handy utilities such as `netstat`.
+The following command installs the `net-tools` application, which has many handy utilities such as `netstat`:
 
 `sudo yum -y install net-tools`
 
-== console and output management commands
+== Console and output management commands
+
+The following commands pertain to working with data send to stdout or displayed in a computer's terminal window. 
 
 === cat
 
-`cat <path/to/filename>` Displays the contents of `<path/to/filename>` to standard out
+`cat <path/to/filename>` 
+
+Displays the contents of `<path/to/filename>` to standard out.
 
 *Example:*
 
-The following command displays the contents of the system-release file that the describes the version of RHEL, Centos or Fedora that's running.
+The following command displays the contents of the system-release file that describes the version of RHEL, CentOS, or Fedora that's running.
+
+(Note that `$` is the command-prompt symbol.)
 
 ```
 $ cat /etc/system-release
 Red Hat Enterprise Linux release 8.5 (Ootpa)
 ```
 
-
 === clear
 
-Clear the terminal screen.
+Clears the terminal screen.
 
 *Example:*
 
-(`$` is the command prompt symbol.)
+(Note that `$` is the command-prompt symbol.)
 
 ```
 $ clear
@@ -47,33 +71,33 @@ $ clear
 
 === echo
 
-`echo <string>`
+`echo <string>` 
 
 Displays a string to stdout or to a file.
 
 *Examples:*
 
-The following example demonstrates how to invoke `echo` to display a string in the console.
+This example demonstrates how to invoke `echo` to display a string in the console:
 
 ```
 $ echo "Hello World"
 Hello World
 ```
 
-The following example demonstrates how to invoke `echo` and save the output to a file named `data.txt`.
+This example demonstrates how to invoke `echo` and save the output to a file named `data.txt`:
 
 ```
 $ echo "Hello World" > data.txt
 ```
 
 === top
-`top [options]`
+`top [options]` 
 
-Displays information about the running Linux processes
+Displays information about the running Linux processes.
 
 *Example:*
 
-The following displays the `top` command with the result piped to the `more` command in order to view the first portion of the output.
+The following displays the `top` command with the result piped to the `more` command in order to view the first portion of the output:
 
 
 ```
@@ -101,21 +125,47 @@ MiB Swap:   8092.0 total,   8092.0 free,      0.0 used.   6205.6 avail Mem
 --More--
 ```
 
-== environment variables commands
+== Environment variables commands
+
+The following commands pertain to working with a Linux computer's environment variables.
 
 === env
 
-Displays all environment variables running on system
+`env`
 
-=== export
-
-`export <env var name>=<env var value>`
-
-Creates an environment variable with a value and then exports the environment variable/value pair to the system.
+Displays all environment variables running on system. 
 
 *Example:*
 
-The following command creates an environment variable named `WEB_PAGE` and sets the value to `https://www.redhat.com/en`. Then the `echo` command is used to confirm the value of the environment variable.
+The following example invokes `env` to get the environment variables on systems and then pipes the result the `more` command to show a portion of the environment variables.
+
+```
+$ env | more
+SSH_CONNECTION=192.168.86.20 54276 192.168.86.34 22
+LANG=en_US.UTF-8
+HISTCONTROL=ignoredups
+HOSTNAME=localhost.localdomain
+which_declare=declare -f
+XDG_SESSION_ID=11
+USER=reselbob
+SELINUX_ROLE_REQUESTED=
+PWD=/home/reselbob
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+HOME=/home/reselbob
+SSH_CLIENT=192.168.86.20 54276 22
+--More--
+```
+The environment variable LS_COLORS has been omitted because its value is quite lengthy.
+
+=== export
+
+`export <env var name>=<env var value>` 
+
+Creates an environment variable with a value and then exports the environment variable or value pair to the system.
+
+*Example:*
+
+The following command creates an environment variable named `WEB_PAGE` and sets the value to `https://www.redhat.com/en`. The `echo` command confirms the value of the environment variable:
 
 
 ```
@@ -124,17 +174,32 @@ $ echo $WEB_PAGE
 https://www.redhat.com/en
 ```
 
-=== source
+=== printenv
 
-`source </path/to/filename>`
+`printenv <environment_variable_name>`
 
-The `source` command executes commands stored in a file from within the current shell. The `source` command can be used to refresh environment variables.
-
-By default a new shell is launched to run a script, therefore changes to environment variables are not visible in the current shell.
+Prints a particular environment variable to the console
 
 *Example:*
 
-The following example uses the `cat` command to create a file named `new_vars.sh`. The file contains an `export` instruction set for the environment variable `ALT_USER=barry`. Then the `source` command is called to set the environment variable into the system. The `echo` command is called to verify that the environment variable `ALT_USER` is in force. (`$` indicates the command prompt.)
+The following example uses `printenv` to print the value of the environment variable `HOSTNAME` and then displays the result.
+
+```
+$ printenv HOSTNAME
+localhost.localdomain
+```
+
+=== source
+
+`source </path/to/filename>` 
+
+Executes commands stored in a file from within the current shell, and can also be used to refresh environment variables. 
+
+By default a new shell is launched to run a script. Therefore, changes to environment variables are not visible in the current shell.
+
+*Example:*
+
+The following example uses the `cat` command to create a file named `new_vars.sh`. The file contains an `export` instruction set for the environment variable `ALT_USER=barry`. Then, the `source` command is called to set the environment variable into the system. The  `echo` command verifies that the environment variable `ALT_USER` is in force:
 
 ```
 $ cat <<EOF > new_vars.sh
@@ -147,17 +212,19 @@ barry
 
 ```
 
-== file and directory management
+== File and directory management
+
+The following commands pertain to working with the files and directories on a Linux computers.
 
 === cd
 
 `cd </path/to/directory>`
 
-Change to another current directory
+Change to another current directory.
 
 *Example:*
 
-The following example change the current directory to the user's home directory
+The following example changes the current directory to the user's home directory:
 
 `cd ~/`
 
@@ -169,7 +236,7 @@ Copies the contents of the source directory or file to a target directory or fil
 
 *Example:*
 
-The following example copies the contents of the file `helloworld.txt` to the file named `helloworld.bak` and then executes the `cat` command to verify that the file and it's contents have been copied.
+The following example copies the contents of the file `helloworld.txt` to the file named `helloworld.bak`. It then executes the `cat` command to verify that the file and its contents have been copied:
 
 ```
 $ cp helloworld.txt helloworld.bak
@@ -181,11 +248,11 @@ Hello World!
 
 `sudo find <starting/directory> -name <file/directory name>`
 
-Finds a file or directory by name
+Finds a file or directory by name.
 
 *Example:*
 
-The following command finds a file named `hostname` starting from the root (`/`) directory of the computer's file system. The command starts with the `sudo` in order to access files restricted to the `root` user.
+The following command finds a file named `hostname` starting from the root (`/`) directory of the computer's file system. Note that the command starts with `sudo` in order to access files restricted to the `root` user:
 
 ```
 $ sudo find / -name hostname
@@ -205,11 +272,11 @@ $ sudo find / -name hostname
 
 `grep <search_expression> <input>`
 
-Searches plain-text input from a file or stdout according according to a regular expression
+Searches plain-text input from a file or stdout according according to a regular expression.
 
 *Example:*
 
-The following example searches the file `/etc/password` for lines that have the string `ftp`.
+The following example searches the file `/etc/password` for lines that have the string `ftp`:
 
 ```
 $ grep ftp /etc/passwd
@@ -220,11 +287,11 @@ ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
 
 `head </path/to/filename>`
 
-Outputs the first part of a file (first 10 lines)
+Outputs the first part of a file (the first 10 lines).
 
 *Example:*
 
-The following example uses the command `head` to output the first ten lines of the file `~/.bashrc`.
+The following example uses the command `head` to output the first 10 lines of the file `~/.bashrc`:
 
 ```
 $ head ~/.bashrc
@@ -244,7 +311,7 @@ then
 
 `less [options] </path/to/filename>`
 
-The `less` command allows you to view and navigate the contents of a plain text file or stdout in a controlled manner. Once you open a file using `less` you can navigate the file using the following keystrokes.
+Allows you to view and navigate the contents of a plain text file or stdout in a controlled manner. Once you open a file using `less`, you can navigate the file using the following keystrokes:
 
 * Scroll forward: `Ctrl-f`
 * Scroll backward: `Ctrl-b`
@@ -253,13 +320,13 @@ The `less` command allows you to view and navigate the contents of a plain text 
 
 *Example:*
 
-The following example uses the `less` command to open file `~/.bashrc` and to display the file with line numbers using the option `-N`.
+The following example uses the `less` command to open file `~/.bashrc`, and to display the file with line numbers using the option `-N`:
 
 ```
 $ less -N ~/.bashrc
 ```
 
-Result:
+Here's the result:
 
 ```
 1 # .bashrc
@@ -291,14 +358,14 @@ Lists the contents of a directory. Defaults to the current directory.
 
 *Examples:*
 
-List all the directories in the current directory.
+This example shows how to list all the directories in the current directory:
 
 ```
 $ ls 
 code  docs  images
 ```
 
-List all the files and directories in the current directory along using long listing option `-l`.
+This example lists all the files and directories in the current directory along using long listing option `-l`:
 
 ```
 $ ls -l
@@ -308,7 +375,7 @@ drwxrwxr-x. 2 guest guest 25 Jan 12 11:37 docs
 drwxrwxr-x. 2 guest guest  6 Jan 12 11:34 images
 ```
 
-List all the files and directories in the current directory along with the hidden files using long listing option `-l` and the show hidden files option `-a`.
+This example lists all the files and directories in the current directory along with the hidden files, using [the] long listing option `-l` and the show-hidden-files option `-a`:
 
 ```
 $ ls -la
@@ -321,7 +388,7 @@ drwxrwxr-x. 2 guest guest  6 Jan 12 11:34 images
 -rw-rw-r--. 1 guest guest 15 Jan 12 11:36 .secrets
 ```
 
-list all the files and directories in the subdirectory named `docs` using long listing option `-l`.
+This example lists all the files and directories in the subdirectory named `docs` using the long listing option `-l`:
 
 ```
 $ ls -l docs
@@ -335,11 +402,11 @@ drwxrwxr-x. 2 guest guest  6 Jan 12 11:44 drafts
 
 `cd <directory_name>`
 
-Creates a directory
+Creates a directory.
 
 *Example:*
 
-Creates a new directory named `documents` in the users home directory.
+Creates a new directory named `documents` in the user's home directory:
 
 `mkdir ~/documents`
 
@@ -347,11 +414,11 @@ Creates a new directory named `documents` in the users home directory.
 
 `more [options] </path/to/filename or stdout>`
 
-Allows a user to view and traverse the content of a file or stdout. The command `more` invokes in a process the displays a command line user interface. The exit the process users strike the `q` key.
+Allows a user to view and traverse the content of a file or stdout. The command `more` invokes itself within a distinct command-line user interface. To exit the process users strike the `q` key.
 
-**Examples:**
+*Examples:*
 
-The following example show using the `more` command to display the first 4 lines of the file `/etc/passwd `. Then users can traverse through the rest of the file a line at time by striking the `<ENTER>` key.
+This example uses the `more` command to display the first four lines of the file `/etc/passwd`. Users can then traverse the rest of the file one line at time by striking the `<ENTER>` key:
 
 ```
 $ more -4 /etc/passwd 
@@ -362,9 +429,7 @@ adm:x:3:4:adm:/var/adm:/sbin/nologin
 --More--(5%)
 ```
 
-The following example illustrates using the `more` command to process stdout data. The example pipes the result of running the `ls` against the directory `/etc`. The command `more` displays the first 4 lines of the output from stdout as declared in the option `-4`.
-
-Users can traverse through the rest of stdout a line at time by striking the `<ENTER>` key.
+This example illustrates using the `more` command to process stdout data. The example pipes the result of running `ls` against the directory `/etc`. The command `more` displays the first four lines of the output from stdout as declared in the option `-4`. Users can traverse through the rest of stdout a line at time by striking the `<ENTER>` key:
 
 ```
 $ ls /etc | more -4
@@ -381,13 +446,13 @@ alsa
 
 Moves a file or directory. The `mv` command transfers all the contents from the source file or directory to the new location.
 
-**Examples:**
+*Examples:*
 
-The following example moves the directory `documents` to the directory `docs-bak`. When `move` is invokes the source directory will be renamed `docs-bak`.
+This example moves the directory `documents` to the directory `docs-bak`. When `move` is [invoked], the source directory will be renamed `docs-bak`:
 
 `mv ./documents ./docs-bak`
 
-The following example moves the contents of the file `hithere.txt` in the directory `documents` to a file named `new_hithere.txt` in the same directory.
+This example moves the contents of the file `hithere.txt` in the directory `documents` to a file named `new_hithere.txt` in the same directory:
 
 `mv ./documents/hithere.txt ./documents/new_hithere.txt`
 
@@ -397,9 +462,9 @@ The following example moves the contents of the file `hithere.txt` in the direct
 
 Displays the name of the present working directory.
 
-**Example:**
+*Example:*
 
-The following example displays the invocation and result of using the command `pwd` in the `HOME` directory for a user named `guest`
+The following example displays the invocation and result of using the command `pwd` in the `HOME` directory for a user named `guest`:
 
 ```
 $ pwd
@@ -412,15 +477,15 @@ $ pwd
 
 Removes a file or directory.
 
-**Examples:**
+*Examples:*
 
-The following example removes the file named `hithere.txt` from the current directory. (`$` indicates the command line prompt.)
+This example removes the file named `hithere.txt` from the current directory (`$` indicates the command-line prompt):
 
 ```
 $ rm hithere.txt
 ```
 
-The following example removes the directory named `documents` along with all the files and subdirectories. The options `-rf` **f**orce the removal **r**ecursively. 
+This example removes the directory named `documents` along with all the files and subdirectories. The options `-rf` **f**orce the removal **r**ecursively:
 
 ```
 $ rm -rf ./documents
@@ -431,9 +496,9 @@ $ rm -rf ./documents
 
 Compresses and decompresses files or directories.
 
-**Examples:**
+*Examples:*
 
-The following example compresses a directory named `documents`, shows the output of the `tar` command and then invokes the `ls` command to list the contents of the current directory.
+This example compresses a directory named `documents`, shows the output of the `tar` command, and then invokes the `ls` command to list the contents of the current directory:
 
 ```
 $ tar cvzf docs.tar.gz documents/
@@ -447,47 +512,49 @@ $ ls
 docs.tar.gz  documents
 ```
 
-The following example extracts the contents of the compressed file `docs.tar.gz` in to an existing directory named `new-docs`.
+This example extracts the contents of the compressed file `docs.tar.gz` into an existing directory named `new-docs`:
 
 ```
 $ tar -xvf docs.tar.gz -C  ./new-docs
 ```
 
-== help commands
+== Help commands
+
+The following command pertains to working the command line help documentation provided on a Linux  computer.
 
 === man
 
 `man <path/to/command>`
 
-Display the internal help documentation for a given command.
+Displays the internal help documentation for a given command.
 
-**Example:**
+*Example:*
 
-The following example shows how to display the command line help documentation for the command `cp`;
+The following example shows how to display the command-line help documentation for the command `cp`:
 
 ```
 $ man cp
 ```
 
-== network commands
+== Network commands
+
+The following commands pertain to working with networks on and from a Linux computer.
 
 === curl
 
 `curl [options] <url>`
 
-Gets or posts a file to/from the internet according to a URL.
+Gets or posts a file to or from the Internet according to a URL.
 
-**Examples:**
+*Examples:*
 
-The following example downloads a web page from the Red Hat Developer webs site and implements the `-o` option to save the page to the file `article.html`.
+This example downloads a web page from the Red Hat Developer website and implements the `-o` option to save the page to the file `article.html`:
 
 ```
 $ curl https://developers.redhat.com/articles/2022/01/11/5-design-principles-microservices -o article.html
 ```
 
-The following example uses the `curl` command to upload a file named `data.txt` to the URL `https://example.com/api/data`.
-
-Notice the use of the `-X` option to tell `curl` to use the HTTP POST method, the `-H` option to set the content type header in the request and the `-d` option to define the file to upload.
+This example uses the `curl` command to upload a file named `data.txt` to the URL `https://example.com/api/data`. Notice the use of the `-X` option to tell `curl` to use the HTTP POST method, the `-H` option to set the content type header in the request, and the `-d` option to define the file to upload:
 
 ```
 $ curl -X POST -H "Content-Type: text/plain" -d "data.txt" https://example.com/api/data
@@ -499,9 +566,9 @@ $ curl -X POST -H "Content-Type: text/plain" -d "data.txt" https://example.com/a
 
 Gets the IP information for the physical or virtual machine.
 
-**Example:**
+*Example:*
 
-The following example returns the IP address information associated with network interfaces on the current machine.
+The following example returns the IP address information associated with network interfaces on the current machine:
 
 ```
 $ ip addr
@@ -531,9 +598,9 @@ $ ip addr
 
 Displays information about network connections, routing tables, interface statistics, masquerade connections, and multicast memberships.
 
-**Example:**
+*Example:*
 
-The following example uses `netstat` to lists the status of ports and the process using the particular port
+The following example uses `netstat` to list the status of ports and the process using the particular port:
 
 ```
 $ sudo netstat -anp | grep tcp
@@ -550,20 +617,15 @@ tcp6       0      0 :::9090                 :::*                    LISTEN      
          
 ```
 
-
 === ssh
 
 `ssh [options] <ip_address>`
 
-Secure shell, an encrypted network protocol allowing for remote login and command execution
+Secure shell is an encrypted network protocol that provides remote login and command execution capabilities. On Windows, you would use `PuTTY` and `WinSCP`. A `ssh.exe` is also available via Cygwin, as well as with a Git installation.
 
-On Windows: PuTTY and WinSCP
+*Example:*
 
-An “ssh.exe” is also available via Cygwin as well as with a Git installation.
-
-**Example:**
-
-The following example shows how to use `ssh` to login to a remote computer that has the ip address `192.168.86.11`
+The following example shows how to use `ssh` to log in to a remote computer that has the IP address `192.168.86.11`:
 
 ```
 $ ssh 192.168.86.11
@@ -573,27 +635,29 @@ $ ssh 192.168.86.11
 
 `wget [options] <url>`
 
-Downloads files from the internet. Supports HTTP, HTTPS, and FTP protocols. You can use wget as an alternative to `curl`.
+Downloads files from the Internet. Supports the HTTP, HTTPS, and FTP protocols. You can use `wget` as an alternative to `curl`.
 
-**Example:**
+*Example:*
 
-The following example uses the `wget` command to download a file from the URL `https://developers.redhat.com/articles/2022/01/11/5-design-principles-microservices` and uses the `-o` options to save the content to a file named `article.html`
+The following example uses the `wget` command to download a file from the URL `https://developers.redhat.com/articles/2022/01/11/5-design-principles-microservices,` then uses the `-o` option to save the content to a file named `article.html`:
 
 ```
 $ wget https://developers.redhat.com/articles/2022/01/11/5-design-principles-microservices -o article.html
 ```
 
-== process management commands
+== Process management commands
+
+The following commands pertain to working with processes running on a Linux computer.
 
 === &&
 
 `<command> && <command>`
 
-Executes command in a sequence
+Executes commands in a sequence.
 
-**Example:**
+*Example:*
 
-The following changes the current directory to `/etc` and then executes the command `ls` to list the contents of the directory.
+The following command changes the current directory to `/etc`, then executes the command `ls` to list the contents of the directory:
 
 ```
 $ cd /etc && ls
@@ -605,9 +669,9 @@ $ cd /etc && ls
 
 Removes a running process from memory.
 
-**Example:**
+*Example:*
 
-The following example removes the process with id `10`. (`$` is the command prompt symbol.)
+The following example removes the process with the ID of `10` (`$` is the command prompt symbol):
 
 ```
 $ kill 10
@@ -619,9 +683,9 @@ $ kill 10
 
 Displays the status of the current processes.
 
-The following example invokes the `ps command` with the options `aux` to display every process on the system. The result of the invocation is piped to the `more` command using the `-10` to display the first ten lines of results for stdout.
+*Example:*
 
-**Example:**
+The following example invokes the `ps command` with the options `aux` to display every process on the system. The result of the invocation is piped to the `more` command using the `-10` to display the first 10 lines of results for stdout.
 
 ```
 $ ps aux | more -10
@@ -638,30 +702,18 @@ root          11  0.0  0.0      0     0 ?        I    Jan07   0:01 [rcu_sched]
 --More--
 
 ```
-=== which
 
-`which <command>`
+== System control commands
 
-Describes the location of a command. If a command is not installed on the computer and its parent directory is not part of the system's `$PATH`, the command will report an error.
-
-**Example:**
-
-The following example invokes the `which` command against the command `clear` and shows the result of the `which` command.
-
-```
-$ which clear
-/usr/bin/clear 
-```
-
-== system control commands
+The following commands pertain to controlling the operation of a physical Linux computer.
 
 === poweroff
 
 `poweroff`
 
-Shuts down a computer. (Must be run as `sudo`.)
+Shuts down a computer. Must be run as `sudo`.
 
-**Example:**
+*Example:*
 
 (`$` indicates the command line prompt)
 
@@ -673,9 +725,9 @@ $ sudo poweroff
 
 `restart`
 
-Restarts a computer. (Must be run as `sudo`.)
+Restarts a computer. Must be run as `sudo`.
 
-**Example:**
+*Example:*
 
 (`$` indicates the command line prompt)
 
@@ -683,17 +735,19 @@ Restarts a computer. (Must be run as `sudo`.)
 $ sudo restart
 ```
 
-== user management commands
+== User management commands
+
+The following command pertains to working users on a Linux computer.
 
 === whomai
 
 `whoami`
 
-Displays the userid.
+Displays the user ID.
 
-**Example:**
+*Example:*
 
-The following example shows the invocation for a user with the login id of `jerryr`.
+The following example shows the invocation for a user with the login ID of `jerryr`:
 
 ```
 $ whoami
