@@ -334,15 +334,62 @@ Transient hostname: tempvm.localdomain
 
 === iptables
 
-**Example:**
+`iptables [options]`
 
-TO BE PROVIDED
+The command `iptables` sets and monitors network access to a given computer.
 
-=== nmvcli
+**Be advised!** The command `iptables` must be run with administrator permissions under `sudo`.
 
-**Example:**
+**Examples:**
 
-TO BE PROVIDED
+The following example allows incoming TCP traffic accessing the computer via port 22.
+
+```
+$ sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+```
+
+The following example rejects any network traffic coming in from a computer running from the IP address `192.168.86.11`
+
+```
+$ sudo iptables -A INPUT -s 192.168.86.11 -j DROP
+```
+
+=== nmcli
+
+`nmcli [options] <object> <command>`
+
+The application `nmcli` is the command line interface for working with the Linux NetworkManager.
+
+**Examples:**
+
+The following example uses `nmcli` to display the overall connection status of the computer using the `general` object and the `status` command.
+
+```
+$ nmcli general status
+STATE      CONNECTIVITY  WIFI-HW  WIFI     WWAN-HW  WWAN    
+connected  full          enabled  enabled  enabled  enabled 
+```
+
+The following example uses `nmcli` to display the connection status the network interface devices using the `device` object and the `status` command.
+
+```
+$ sudo nmcli device status
+DEVICE      TYPE      STATE                   CONNECTION 
+enp0s3      ethernet  connected               enp0s3 
+```
+
+The following example uses `nmcli` to display the connection profiles of network devices on a computer in a report-like format by using the option `-p` (pretty) against the `connection` object.
+
+```
+$ nmcli -p connection
+======================================
+  NetworkManager connection profiles
+======================================
+NAME    UUID                                  TYPE      DEVICE 
+------------------------------------------------------------------
+enp0s3  c68cddff-4883-4efb-bf7a-8b746fe6b26d  ethernet  enp0s3 
+virbr0  49bf2d57-cf45-41a8-85d2-cd43a59f0e1c  bridge    virbr0 
+```
 
 === ss
 
