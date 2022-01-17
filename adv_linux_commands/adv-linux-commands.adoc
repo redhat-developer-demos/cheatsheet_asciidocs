@@ -7,7 +7,7 @@ The following is a sampling of advanced Linux commands typically used by develop
 
 == application management commands
 
-The following commands pertain to working with a computer's applications and executables. 
+The following commands apply to working with a computer's applications and executables. 
 
 === systemctl
 
@@ -49,7 +49,7 @@ The following command installs `net-tools` application which has many handy util
 
 == audit commands
 
-The following commands apply to working with a computer's applications and executables. 
+The following command applies to working with the audit capabilities provided by the Linux operating system. 
 
 === ausearch
 
@@ -79,7 +79,9 @@ type=CONFIG_CHANGE msg=audit(1641598972.761:6): op=set audit_backlog_limit=8192 
 
 == disk management
 
-== df
+The following commands apply to working with disks, devices and volumes on a computer running the Linux operating system. 
+
+=== df
 
 `df [options] <file name>`
 
@@ -104,29 +106,130 @@ tmpfs                    795724      64    795660   1% /run/user/1000
 
 === fdisk
 
-**Example:**
+The command `fdisk` is used for working with disk partitions on a computer's hard drive. You can use `fdisk` to format a partition a new drive. Also, you can use `fdisk` to get information about existing drives/
 
-=== fsck
+**Examples:**
 
-`fsck [options] q<file system>`
+The following example invokes `fdisk` to display a print out of partition tables of all devices on the computer as listed in the `/proc/partitions` file:
 
-The command `fsck` inspects and optionally repairs a disk mount represented by the `file system` argument.
+```
+$ sudo fdisk -l
+Disk /dev/sda: 80 GiB, 85899345920 bytes, 167772160 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x565c4e2e
 
-**Example:**
+Device     Boot   Start       End   Sectors Size Id Type
+/dev/sda1  *       2048   2099199   2097152   1G 83 Linux
+/dev/sda2       2099200 167772159 165672960  79G 8e Linux LVM
+
+Disk /dev/mapper/rhel-root: 47.8 GiB, 51292143616 bytes, 100179968 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+Disk /dev/mapper/rhel-swap: 7.9 GiB, 8485076992 bytes, 16572416 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+Disk /dev/mapper/rhel-home: 23.3 GiB, 25044189184 bytes, 48914432 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+```
+
+The following examples uses `fdisk` to start the process of formatting and partitioning a drive at `/dev/sda1`. This invocation of `fdisk` will open a dialog in the terminal window that walks the developer through the formatting and partitioning process.
+
+```
+fdisk /dev/sda1
+```
+
+**Be advised!** Using `fdisk` in this manner erases all data on the disk.
 
 === mount
 
+===  xfs_repair
+
+`xfs_repair [options] <drive>`
+
+The command `xfs_repair` inspects and optionally repairs a hard drive on a computer running RHEL Linux.
+
+**Be advised!** You much unmount the drive using the `umount` command before invoking `xfs_repair`
+
 **Example:**
 
+The following example unmounts a hard drive a `/dev/sda1` and then runs the command `xfs_repair` against that drive. (Note that `$` is the command-prompt symbol.)
+
+```
+$ sudo umount /dev/sda1
+
+$ sudo xfs_repair /dev/sda1
+Phase 1 - find and verify superblock...
+Phase 2 - using internal log
+        - zero log...
+        - scan filesystem freespace and inode maps...
+        - found root inode chunk
+Phase 3 - for each AG...
+        - scan and clear agi unlinked lists...
+        - process known inodes and perform inode discovery...
+        - agno = 0
+        - agno = 1
+        - agno = 2
+        - agno = 3
+        - process newly discovered inodes...
+Phase 4 - check for duplicate blocks...
+        - setting up duplicate extent list...
+        - check for inodes claiming duplicate blocks...
+        - agno = 0
+        - agno = 1
+        - agno = 2
+        - agno = 3
+Phase 5 - rebuild AG headers and trees...
+        - reset superblock...
+Phase 6 - check inode connectivity...
+        - resetting contents of realtime bitmap and summary inodes
+        - traversing filesystem ...
+        - traversal finished ...
+        - moving disconnected inodes to lost+found ...
+Phase 7 - verify and correct link counts...
+done
+
+```
 == file management commands
+
+The following commands apply to working with file and directories on a computer running the Linux operating system.
 
 === chmod
 
 `chmod [options] <file or directory>`
 
-**Example:**
+Changes the permissions granted to a file or directory
 
+**Examples:**
+
+The following example applies read-only permissions for all users to the file named `sample.txt`. Then the command `ls -l` is executed for verify that the file is indeed read-only. The output is displayed too.
+
+```
+$ chmod a-w+r sample.txt
+$ ls -l sample.txt
+-r--r--r--. 1 guest guest 32 Jan 17 10:34 sample.txt
+```
+
+The following example applies read and write permissions for all users to the file named `sample.txt`. Then the command `ls -l` is executed for verify that the file is indeed read-only. The output is displayed too.
+
+```
+$ chmod a+w+r sample.txt
+$ ls -l sample.txt
+-rw-rw-rw-. 1 guest guest 32 Jan 17 10:34 sample.txt
+```
 === chown
+
+`chown [options] <owner><:<:<group>> <file>`
+
+Changes the owner and or group of a given file.
 
 **Example:**
 
@@ -233,13 +336,19 @@ Transient hostname: tempvm.localdomain
 
 **Example:**
 
+TO BE PROVIDED
+
 === nmvcli
 
 **Example:**
 
+TO BE PROVIDED
+
 === ss
 
 **Example:**
+
+TO BE PROVIDED
 
 == os management commands
 
@@ -247,17 +356,25 @@ Transient hostname: tempvm.localdomain
 
 **Example:**
 
-=== getsebool
-
-**Example:**
+TO BE PROVIDED
 
 === getsebool
 
 **Example:**
+
+TO BE PROVIDED
+
+=== getsebool
+
+**Example:**
+
+TO BE PROVIDED
 
 === restorecon
 
 **Example:**
+
+TO BE PROVIDED
 
 === semanage
 
@@ -267,13 +384,19 @@ Transient hostname: tempvm.localdomain
 
 **Example:**
 
+TO BE PROVIDED
+
 === subscription-manager
 
 **Example:**
 
+TO BE PROVIDED
+
 === vmstat #
 
 **Example:**
+
+TO BE PROVIDED
 
 == process management commands
 
@@ -281,25 +404,37 @@ Transient hostname: tempvm.localdomain
 
 **Example:**
 
+TO BE PROVIDED
+
 === command && command
 
 **Example:**
+
+TO BE PROVIDED
 
 === fg
 
 **Example:**
 
+TO BE PROVIDED
+
 === iotop
 
 **Example:**
+
+TO BE PROVIDED
 
 === jobs
 
 **Example:**
 
+TO BE PROVIDED
+
 === ps
 
 **Example:**
+
+TO BE PROVIDED
 
 == system information
 
@@ -307,10 +442,54 @@ Transient hostname: tempvm.localdomain
 
 **Example:**
 
-=== lshw
-
-**Example:**
+TO BE PROVIDED
 
 === lshw
 
 **Example:**
+
+TO BE PROVIDED
+
+=== lshw
+
+**Example:**
+
+TO BE PROVIDED
+
+== users and groups
+
+=== useradd
+
+`adduser [options] <username>`
+
+Adds a user to the computing environment
+
+**Example:**
+
+TO BE PROVIDED
+
+=== deluser
+
+`userdel [options] <username>`
+
+Deletes a user from the computer
+
+**Example:**
+
+TO BE PROVIDED
+
+=== groupadd
+
+`groupadd [options] <groupname>`
+
+Adds a group to the computer
+
+**Example:**
+
+TO BE PROVIDED
+
+=== groupdel
+
+`groupdel [options] <groupname>`
+
+Deletes a group from the computer
