@@ -3,17 +3,17 @@
 :product-name:
 :version: 1.0.0
 
-This document is a list of command line executables that are frequently used by developers working on a computer running the Linux operating system. The commands are organized according to category.
+This cheat sheet presents a list of command-line executables that are frequently used by developers working on a computer running the Linux operating system. The commands are organized by category.
 
 == Application management commands
 
-The following commands apply to working with a computer's applications and executables.  
+Commands in this section apply to working with a computer's applications and executables.  
 
 === which
 
 `which <command>`
 
-Describes the location of an application in the computers file system. If a application is not installed on the computer and its parent directory is not part of the system's `$PATH`, `which` will report an error.
+Describes the location of an application in the computer's file system. If an application is not installed on the computer and its parent directory is not part of the system's `$PATH`, `which` will report an error.
 
 *Example:*
 
@@ -28,7 +28,7 @@ $ which clear
 
 `yum`
 
- The application installation and removal tool for Fedora, CentOS, and Red Hat Enterprise Linux (RHEL).
+The application installation and removal tool for Fedora, CentOS, and Red Hat Enterprise Linux (RHEL).
 
 *Example:*
 
@@ -38,7 +38,7 @@ The following command installs the `net-tools` application, which has many handy
 
 == Console and output management commands
 
-The following commands apply to working with data send to stdout or displayed in a computer's terminal window. 
+Commands in this section apply to working with data sent to stdout or displayed in a computer's terminal window. 
 
 === cat
 
@@ -48,9 +48,7 @@ Displays the contents of `<path/to/filename>` to standard out.
 
 *Example:*
 
-The following command displays the contents of the system-release file that describes the version of RHEL, CentOS, or Fedora that's running.
-
-(Note that `$` is the command-prompt symbol.)
+The following command displays the contents of the system-release file that describes the version of RHEL, CentOS, or Fedora that's running (`$` is the command-prompt symbol):
 
 ```
 $ cat /etc/system-release
@@ -62,8 +60,6 @@ Red Hat Enterprise Linux release 8.5 (Ootpa)
 Clears the terminal screen.
 
 *Example:*
-
-(Note that `$` is the command-prompt symbol.)
 
 ```
 $ clear
@@ -97,7 +93,7 @@ Displays information about the running Linux processes.
 
 *Example:*
 
-The following displays the `top` command with the result piped to the `more` command in order to view the first portion of the output:
+The following command displays the `top` command with the result piped to the `more` command in order to view the first portion of the output:
 
 
 ```
@@ -127,7 +123,7 @@ MiB Swap:   8092.0 total,   8092.0 free,      0.0 used.   6205.6 avail Mem
 
 == Environment variables commands
 
-The following commands apply to working with a Linux computer's environment variables.
+Commands in this section apply to working with a Linux computer's environment variables.
 
 === env
 
@@ -137,7 +133,7 @@ Displays all environment variables running on system.
 
 *Example:*
 
-The following example invokes `env` to get the environment variables on systems and then pipes the result the `more` command to show a portion of the environment variables.
+The following example invokes `env` to get a system's environment variables and then pipes the result to the `more` command to show a portion of the environment variables (note that the environment variable LS_COLORS has been omitted because its value is quite lengthy):
 
 ```
 $ env | more
@@ -155,7 +151,6 @@ HOME=/home/reselbob
 SSH_CLIENT=192.168.86.20 54276 22
 --More--
 ```
-The environment variable LS_COLORS has been omitted because its value is quite lengthy.
 
 === export
 
@@ -178,11 +173,11 @@ https://www.redhat.com/en
 
 `printenv <environment_variable_name>`
 
-Prints a particular environment variable to the console
+Prints a particular environment variable to the console.
 
 *Example:*
 
-The following example uses `printenv` to print the value of the environment variable `HOSTNAME` and then displays the result.
+The following example uses `printenv` to print the value of the environment variable `HOSTNAME` and then displays the result:
 
 ```
 $ printenv HOSTNAME
@@ -214,7 +209,7 @@ barry
 
 == File and directory management
 
-The following commands apply to working with the files and directories on a Linux computers.
+Commands in this section apply to working with the files and directories on Linux computers.
 
 === cd
 
@@ -365,7 +360,7 @@ $ ls
 code  docs  images
 ```
 
-This example lists all the files and directories in the current directory along using long listing option `-l`:
+This example lists all the files and directories in the current directory using the option `-l` which denotes a long listing view of the output:
 
 ```
 $ ls -l
@@ -375,7 +370,7 @@ drwxrwxr-x. 2 guest guest 25 Jan 12 11:37 docs
 drwxrwxr-x. 2 guest guest  6 Jan 12 11:34 images
 ```
 
-This example lists all the files and directories in the current directory along with the hidden files, using [the] long listing option `-l` and the show-hidden-files option `-a`:
+This example lists all the files and directories in the current directory along with the hidden files, using the long listing option `-l` and the show-hidden-files option `-a`:
 
 ```
 $ ls -la
@@ -448,7 +443,7 @@ Moves a file or directory. The `mv` command transfers all the contents from the 
 
 *Examples:*
 
-This example moves the directory `documents` to the directory `docs-bak`. When `move` is [invoked], the source directory will be renamed `docs-bak`:
+This example moves the directory `documents` to the directory `docs-bak`. When `move` is invoked, the source directory will be renamed `docs-bak`:
 
 `mv ./documents ./docs-bak`
 
@@ -520,7 +515,7 @@ $ tar -xvf docs.tar.gz -C  ./new-docs
 
 == Help commands
 
-The following command applies to working the command line help documentation provided on a Linux  computer.
+The command in this section applies to working with the command-line help documentation provided on a Linux  computer.
 
 === man
 
@@ -538,7 +533,7 @@ $ man cp
 
 == Network commands
 
-The following commands apply to working with networks on and from a Linux computer.
+Commands in this section apply to working with networks on and from a Linux computer.
 
 === curl
 
@@ -639,7 +634,7 @@ Downloads files from the Internet. Supports the HTTP, HTTPS, and FTP protocols. 
 
 *Example:*
 
-The following example uses the `wget` command to download a file from the URL `https://developers.redhat.com/articles/2022/01/11/5-design-principles-microservices,` then uses the `-o` option to save the content to a file named `article.html`:
+The following example uses the `wget` command to download a file from the URL https://developers.redhat.com/articles/2022/01/11/5-design-principles-microservices, then uses the `-o` option to save the content to a file named `article.html`:
 
 ```
 $ wget https://developers.redhat.com/articles/2022/01/11/5-design-principles-microservices -o article.html
@@ -647,7 +642,7 @@ $ wget https://developers.redhat.com/articles/2022/01/11/5-design-principles-mic
 
 == Process management commands
 
-The following commands apply to working with processes running on a Linux computer.
+Commands in this section apply to working with processes running on a Linux computer.
 
 === &&
 
@@ -671,7 +666,7 @@ Removes a running process from memory.
 
 *Example:*
 
-The following example removes the process with the ID of `10` (`$` is the command prompt symbol):
+The following example removes the process with the ID of `10` (`$` is the command-line prompt symbol):
 
 ```
 $ kill 10
@@ -685,7 +680,7 @@ Displays the status of the current processes.
 
 *Example:*
 
-The following example invokes the `ps command` with the options `aux` to display every process on the system. The result of the invocation is piped to the `more` command using the `-10` to display the first 10 lines of results for stdout.
+The following example invokes the `ps` command with the options `aux` to display every process on the system. The result of the invocation is piped to the `more` command using the `-10` to display the first 10 lines of results for stdout:
 
 ```
 $ ps aux | more -10
@@ -705,7 +700,7 @@ root          11  0.0  0.0      0     0 ?        I    Jan07   0:01 [rcu_sched]
 
 == System control commands
 
-The following commands apply to controlling the operation of a physical Linux computer.
+Commands in this section apply to controlling the operation of a physical Linux computer.
 
 === poweroff
 
@@ -715,11 +710,10 @@ Shuts down a computer. Must be run as `sudo`.
 
 *Example:*
 
-(`$` indicates the command line prompt)
-
 ```
 $ sudo poweroff
 ```
+Note that `$` indicates the command-line prompt.
 
 === restart
 
@@ -729,15 +723,13 @@ Restarts a computer. Must be run as `sudo`.
 
 *Example:*
 
-(`$` indicates the command line prompt)
-
 ```
 $ sudo restart
 ```
 
 == User management commands
 
-The following command applies to working users on a Linux computer.
+The command in this section applies to working with users on a Linux computer.
 
 === whomai
 
