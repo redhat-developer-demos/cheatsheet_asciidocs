@@ -85,7 +85,7 @@ The following commands apply to working with disks, devices and volumes on a com
 
 `df [options] <file name>`
 
-The command `df`` shows the amount of disk space used and available according to the file system that represents a particular disk device mount.   If no file name is given, the space available on all mounted file systems is displayed.
+The command `df` shows the amount of disk space used and available according to the file system that represents a particular disk device mount.   If no file name is given, the space available on all mounted file systems is displayed.
 
 **Example:**
 
