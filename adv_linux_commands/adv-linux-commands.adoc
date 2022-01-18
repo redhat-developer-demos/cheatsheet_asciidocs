@@ -280,6 +280,8 @@ The following example creates a bash script named `demo.sh` that outputs the str
 
 Then the foreground job is stopped by striking the `,ctrl+Z` keys. The job is started again in the background using the `bg` command along with the job id `%1`.
 
+(`$` is the command-line prompt symbol.)
+
 ```
 $ echo "while true; do echo hi there; sleep 2; done" > demo.sh
 $ sh demo.sh
@@ -305,6 +307,8 @@ The following example creates a bash script named `demo.sh` that outputs the str
 
 Then the foreground job is stopped by striking the `ctrl+Z` keys. The job is started again in the foreground using the `fg` command along with the job id `%1`.
 
+(`$` is the command-line prompt symbol.)
+
 ```
 $ echo "while true; do echo hi there; sleep 2; done" > demo.sh
 $ sh demo.sh
@@ -327,6 +331,8 @@ Lists the jobs invoked from the process window
 The following example uses the `jobs` command to list all the jobs and the status of jobs that were started from the current terminal window.
 
 Notice that there are three jobs in force. All the jobs are running the same bash script named `demo.sh`. Jobs %1 and %3 are stopped. Job %2 is running in the background as denoted by the symbol. 
+
+(`$` is the command-line prompt symbol.)
 
 ```
 $ jobs -l
@@ -419,7 +425,7 @@ newhostname.localdomain
 
 === hostnamectl
 
-`hostnamectl [OPTIONS...] <command>`
+`hostnamectl [options] <command>`
 
 The command `hostnamectl` is similar to the command `hostname` but with some added capabilities. 
 
