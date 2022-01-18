@@ -603,7 +603,7 @@ The `semanage` command allows adminstrators to manage SELinux capabilities accor
 
 The command must be invoked as `sudo`.
 
-The `semanage` program does not ship with SELinux by default. You must install the policycoreutils-python package with yum to get the `semanage` command.
+The `semanage` program does not ship with SELinux by default. You must install the `policycoreutils-python` package with yum to get the `semanage` command.
 
 **Examples:**
 
