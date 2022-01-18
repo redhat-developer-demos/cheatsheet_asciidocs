@@ -660,7 +660,7 @@ The command `subscription-manager` will run as the root user, thus password prom
 
 **Example:**
 
-The following example uses the `subscription-manager facts` command set to get facts about the local computer. The command pipes the result the `more` command which in turn uses the `-15` option to display the first 15 lines of output.
+The following example uses the `subscription-manager facts` command set to get facts about the local computer. The command pipes the result to the `more` command which in turn uses the `-15` option to display the first 15 lines of output.
 ```
 $ sudo subscription-manager facts | more -15
 Password: You are attempting to run "subscription-manager" which requires administrative
