@@ -258,7 +258,7 @@ $ ls -l sample.txt
 
 `chown [options] <owner><:<:<group>> <file>`
 
-Changes the owner and or group of a given file.
+Changes the owner and/or group of a given file.
 
 **Example:**
 
