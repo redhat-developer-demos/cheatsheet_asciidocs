@@ -599,7 +599,7 @@ $ restorecon -FvR /var/www/html
 
 `semanage <object> [options]`
 
-The `semanage` command allows adminstrators to manage SELinux capabilities according to the particular object of interet. Each object will have its own set of options. Example of `semanage` objects are `user`, `login`, `port` and `fcontext` to name a few.
+The `semanage` command allows adminstrators to manage SELinux capabilities according to the particular object of interest. Each object will have its own set of options. Example of `semanage` objects are `user`, `login`, `port` and `fcontext` to name a few.
 
 The command must be invoked as `sudo`.
 
