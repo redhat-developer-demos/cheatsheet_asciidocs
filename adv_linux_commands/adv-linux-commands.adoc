@@ -607,7 +607,7 @@ The `semanage` program does not ship with SELinux by default. You must install t
 
 **Examples:**
 
-The following example uses `semanage` to get the security settings for the `user` objects. The `-l` option is used to list the information for all users. T
+The following example uses `semanage` to get the security settings for the `user` objects. The `-l` option is used to list the information for all users.
 
 ```
 $ sudo semanage user -l
