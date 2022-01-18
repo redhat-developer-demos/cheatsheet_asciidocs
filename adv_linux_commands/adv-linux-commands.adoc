@@ -266,7 +266,7 @@ Changes the owner and/or group of a given file.
 
 == job commands
 
-The following command apply to working with  jobs running under the Linux operating system.
+The following command apply to working with  jobs running under the Linux operating system. A job is a process that is invoked from the a terminal window process and is considered a child of the terminal window.
 
 === bg
 
