@@ -684,7 +684,7 @@ dmi.bios.release_date: 12/01/2006
 --More--
 ```
 
-=== vmstat #
+=== vmstat
 
 `vmstat [options]`
 
