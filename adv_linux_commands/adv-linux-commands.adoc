@@ -77,7 +77,7 @@ type=CONFIG_CHANGE msg=audit(1641598972.761:6): op=set audit_backlog_limit=8192 
 --More--
 ```
 
-== disk management
+== disk management commands
 
 The following commands apply to working with disks, devices and volumes on a computer running the Linux operating system. 
 
