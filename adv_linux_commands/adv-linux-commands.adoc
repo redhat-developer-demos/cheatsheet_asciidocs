@@ -262,7 +262,27 @@ Changes the owner and/or group of a given file.
 
 **Example:**
 
-`chown [options] <file or directory>`
+The following example lists the files in the current directory by using the `ls -l` command and option to display details about the files, including the  user: group pair that owns each file. Then the owner of the file `two.txt` is changed using the `chown` command, assigning the user named `lennonjohn` who is in the group `beatles` as the new file owner.
+
+The result of the change in file ownership is displayed using the command `ls` with the option `-l` again.
+
+```
+$ ls -l
+total 0
+-rw-rw-r--. 1 guest guest 0 Jan 19 10:17 one.txt
+-rw-rw-r--. 1 guest guest 0 Jan 19 10:18 three.txt
+-rw-rw-r--. 1 guest guest 0 Jan 19 10:17 two.txt
+
+$ sudo chown lennonjohn:beatles two.txt
+
+$ ls -l
+total 0
+-rw-rw-r--. 1 guest   guest 0 Jan 19 10:17 one.txt
+-rw-rw-r--. 1 guest   guest 0 Jan 19 10:18 three.txt
+-rw-rw-r--. 1 lennonjohn beatles  0 Jan 19 10:17 two.txt
+
+
+```
 
 == job commands
 
@@ -789,7 +809,7 @@ $ vmstat --stats
 ```
 
 
-== system information
+== system information commands
 
 The following commands provide memeory and hardward information about the computer in which the given command is being invoked.
 
@@ -913,7 +933,7 @@ Adds a user to the computing environment. The command must be run as `sudo` in o
 
 **Example:**
 
-The following adds a user with the login name `cooluser`. The `HOME` directory `home/cooluser` is created by default. Then the example users the command `passwd` to set a password for the new user.
+The following adds a user with the login name `cooluser`. The `HOME` directory `home/cooluser` is created by default. Then the example invokes the command `passwd` to set a password for the new user.
 
 ```
 $ sudo adduser cooluser
