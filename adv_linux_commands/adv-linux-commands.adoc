@@ -59,7 +59,7 @@ The `ausearch` command is a tool that can query the audit logs according to even
 
 **Example:**
 
-The following example shows how to use `ausearch` to get information about the user named `root` from the audit logs. The  option `-ui` indicates the the search should be conducted according to a particular userid, in this case `root`. The result is piped to the `more` command that has the option `-10` which indicates to show the first ten lines of output.
+The following example shows how to use `ausearch` to get information about the user named `root` from the audit logs. The  options `-ui` indicates the the search should be conducted according to a particular userid, in this case `root`. The result is piped to the `more` command that has the option `-10` which indicates to show the first ten lines of output.
 
 The `ausearch` command must be invoked as `sudo` in order to access audit logs. (`$` is the command-line prompt symbol.)
 
