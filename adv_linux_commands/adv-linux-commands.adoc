@@ -3,7 +3,7 @@
 :product-name:
 :version: 1.0.0
 
-The following is a sampling of advanced Linux commands typically used by developers. The commands are organized according to category
+The following is a sampling of advanced Linux commands typically used by developers. The commands are organized according to category.
 
 == application management commands
 
