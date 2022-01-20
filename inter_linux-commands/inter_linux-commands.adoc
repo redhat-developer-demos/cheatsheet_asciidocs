@@ -133,6 +133,8 @@ $ du /usr/bin
 
 == file and directory management commands
 
+The following commands apply to working with file and directories on a computer running the Linux operating system.
+
 === find
 
 `sudo find <starting/directory> -name <file/directory name>`
@@ -251,21 +253,77 @@ Files one.txt and three.txt are identical
 
 === sed
 
+`sed [options] <manipulation instructions> <path/to/filename or stduout>`
+
+The `sed` manipulates the content of a file or output sent to stdout.
+
 **Example:**
+
+The following example uses the `echo` command send the string `Bobby is cool` to the `sed` command. The command `sed` uses the `s` subcommand to substitute the name `Teddy` where the name `Bobby` occurs. The output of then displayed.
+
+(`$` is the command-line prompt symbol.)
+
+```
+$ echo Bobby is cool | sed 's/Bobby/Teddy/'
+Teddy is cool
+```
 
 == network commands
 
 === hostname
 
-**Example:**
+ `hostname`
+
+ Reports the hostname of the local computer.
+
+ **Example:**
+
+ $ hostname
+localhost.localdomain
+
 
 === nslookup
+
+`nslookup [options] <domain_name>`
+
+The program `nslookup`` queries for information about a particular Internet domain name.
+
+**Example:**
+
+```
+$ nslookup redhat.com
+Server:		192.168.86.1
+Address:	192.168.86.1#53
+
+Non-authoritative answer:
+Name:	redhat.com
+Address: 209.132.183.105
+
+```
 
 **Example:**
 
 === traceroute
 
+`traceroute [options] <target address or domain_name>`
+
+Reports the route the a packet takes in hops to move through the Internet to reach its destination.
+
+The program `traceroute` is not part of Red Hat Linux by default. It must be installed using `sudo yum install traceroute`.
+
 **Example:**
+
+The following example reports the route from the local machine to `redhat.com`. The `-m` option is used to limit the output to the first five hops.
+
+```
+$ traceroute -m 5 redhat.com
+traceroute to redhat.com (209.132.183.105), 5 hops max, 60 byte packets
+ 1  _gateway (192.168.86.1)  1.256 ms  1.144 ms  1.077 ms
+ 2  142-254-237-093.inf.spectrum.com (142.254.237.93)  10.406 ms  17.364 ms  17.237 ms
+ 3  agg53.lsaicaev01h.socal.rr.com (24.30.168.81)  18.990 ms  18.907 ms  18.823 ms
+ 4  72.129.19.14 (72.129.19.14)  17.659 ms  21.626 ms  17.556 ms
+ 5  agg26.lsancarc01r.socal.rr.com (72.129.17.0)  19.400 ms  19.341 ms  19.258 ms
+```
 
 == os management commands
 
@@ -275,7 +333,18 @@ Files one.txt and three.txt are identical
 
 === uname
 
+`uname [options]`
+
+The command `uname` reports system information about the local computer
+
 **Example:**
+
+The following example uses the `-a` option with `uname` to report all the information system information about the local computer.
+
+```
+$ uname -a
+Linux localhost.localdomain 4.18.0-348.el8.x86_64 #1 SMP Mon Oct 4 12:17:22 EDT 2021 x86_64 x86_64 x86_64 GNU/Linux
+```
 
 
 == users and groups commands
