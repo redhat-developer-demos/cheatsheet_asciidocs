@@ -121,6 +121,7 @@ tmpfs                    795724      64    795660   1% /run/user/1000
 === du
 
 `du [options] <starting directory or file>`
+
 **Example:**
 
 The following example shows the command `du` to report the amount of disk space used by the files in the directory `/etc/bin`. (`$` is the command-line prompt symbol.)
