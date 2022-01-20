@@ -1,0 +1,344 @@
+= Intermediate Linux Commands Cheat Sheet
+:experimental: true
+:product-name:
+:version: 1.0.0
+
+The following is a sampling of intermediate commands and executables typically used by developers who have a basic understanding of Linux. The commands are organized according to category.
+
+== console and output management commands
+
+=== history
+
+`history [options]`
+
+The `history` command displays a list of command executed on the system. Also, `history` can be used to manipulate the history list and display.
+
+**Example:**
+
+The following example uses the `history` command to show a list of command that have been executed on the system. The example pipes the result to the `more` command which shows the first fifteen lines of output using the `-15` option.
+
+```
+$ history | more -15
+   24  diag
+   25  ss
+   26  uname
+   27  lscpu
+   28  timedatectl
+   29  date
+   30  chronyc
+   31  lshw
+   32  sosreport
+   33  sos
+   34  tlog
+   35  fsck
+   36  fsck --help
+   37  fsck -A
+   38  sudo fsck -A
+--More--
+```
+
+=== more
+
+`more [options] </path/to/filename or stdout>`
+
+Allows a user to view and traverse the content of a file or stdout. The command `more` invokes itself within a distinct command-line user interface. To exit the process users strike the `q` key.
+
+*Examples:*
+
+This example uses the `more` command to display the first four lines of the file `/etc/passwd`. Users can then traverse the rest of the file one line at time by striking the `<ENTER>` key:
+
+```
+$ more -4 /etc/passwd 
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+--More--(5%)
+```
+
+=== top
+`top [options]` 
+
+Displays information about the running Linux processes.
+
+*Example:*
+
+The following command displays the `top` command with the result piped to the `more` command in order to view the first portion of the output:
+
+
+```
+$ top | more
+top - 12:02:29 up 5 days, 20:20,  2 users,  load average: 0.01, 0.02, 0.00
+Tasks: 201 total,   2 running, 199 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  6.2 sy,  0.0 ni,93.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :   7770.8 total,   5409.8 free,   1240.8 used,   1120.2 buff/cache
+MiB Swap:   8092.0 total,   8092.0 free,      0.0 used.   6205.6 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                 
+  82399 guest  20   0   65584   5120   4212 R   5.9   0.1   0:00.02 top                                      
+      1 root      20   0  175932  14212   8924 S   0.0   0.2   0:06.21 systemd                                
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.13 kthreadd                               
+      3 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_gp                                 
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_par_gp                             
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/0:0H-events_highpri            
+      9 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 mm_percpu_wq                           
+     10 root      20   0       0      0      0 S   0.0   0.0   0:02.73 ksoftirqd/0                            
+     11 root      20   0       0      0      0 R   0.0   0.0   0:01.10 rcu_sched                           
+     12 root      rt   0       0      0      0 S   0.0   0.0   0:00.00 migration/0                            
+     13 root      rt   0       0      0      0 S   0.0   0.0   0:00.04 watchdog/0                             
+     14 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/0                                
+     16 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kdevtmpfs                              
+    
+--More--
+```
+
+== disk management commands
+
+The following commands apply to working with disks, devices and volumes on a computer running the Linux operating system. 
+
+=== df
+
+`df [options] <file name>`
+
+The command `df` shows the amount of disk space used and available according to the file system that represents a particular disk device mount.   If no file name is given, the space available on all mounted file systems is displayed.
+
+**Example:**
+
+The following example shows the invocation and result of `df` displaying all mounted file systems. Disk space  is  shown in  1K blocks. (`$` is the command-line prompt symbol.)
+
+```
+$ df
+Filesystem            1K-blocks    Used Available Use% Mounted on
+devtmpfs                3949180       0   3949180   0% /dev
+tmpfs                   3978636       0   3978636   0% /dev/shm
+tmpfs                   3978636    9464   3969172   1% /run
+tmpfs                   3978636       0   3978636   0% /sys/fs/cgroup
+/dev/mapper/rhel-root  50065528 5588744  44476784  12% /
+/dev/mapper/rhel-home  24445276  228104  24217172   1% /home
+/dev/sda1               1038336  262796    775540  26% /boot
+tmpfs                    795724      64    795660   1% /run/user/1000
+```
+
+=== du
+
+`du [options] <starting directory or file>`
+**Example:**
+
+The following example shows the command `du` to report the amount of disk space used by the files in the directory `/etc/bin`. (`$` is the command-line prompt symbol.)
+
+```
+$ du /usr/bin
+365940	/usr/bin
+```
+
+== file and directory management commands
+
+=== find
+
+`sudo find <starting/directory> -name <file/directory name>`
+
+Finds a file or directory by name.
+
+*Example:*
+
+The following command finds a file named `hostname` starting from the root (`/`) directory of the computer's file system. Note that the command starts with `sudo` in order to access files restricted to the `root` user:
+
+```
+$ sudo find / -name hostname
+/proc/sys/kernel/hostname
+/etc/hostname
+/var/lib/selinux/targeted/active/modules/100/hostname
+/usr/bin/hostname
+/usr/lib64/gettext/hostname
+/usr/share/licenses/hostname
+/usr/share/doc/hostname
+/usr/share/bash-completion/completions/hostname
+/usr/share/selinux/targeted/default/active/modules/100/hostname
+/usr/libexec/hostname
+```
+
+=== pwd
+
+`pwd`
+
+Displays the name of the present working directory.
+
+*Example:*
+
+The following example displays the invocation and result of using the command `pwd` in the `HOME` directory for a user named `guest`:
+
+```
+$ pwd
+/home/guest
+```
+
+=== alias
+
+**Example:**
+
+=== awk
+
+**Example:**
+
+=== diff
+
+**Example:**
+
+=== sed
+
+**Example:**
+
+== network commands
+
+=== hostname
+
+**Example:**
+
+=== nslookup
+
+**Example:**
+
+=== traceroute
+
+**Example:**
+
+== os management commands
+
+=== sestatus
+
+**Example:**
+
+=== uname
+
+**Example:**
+
+
+== users and groups commands
+
+The following commands apply to working with users and groups as supported by the Linux operating system.
+
+=== users
+
+`users [options]`
+
+Displays the name of the users logged into the computer.
+
+**Example:**
+
+The following example uses the command `users` to list the users logged into the system.
+
+```
+$ users
+cooluser jaggermick lennonjohn
+
+```
+
+=== useradd
+
+`adduser [options] <username>`
+
+Adds a user to the computing environment. The command must be run as `sudo` in order to have adminstrator access.
+
+**Example:**
+
+The following adds a user with the login name `cooluser`. The `HOME` directory `home/cooluser` is created by default. Then the example invokes the command `passwd` to set a password for the new user.
+
+```
+$ sudo adduser cooluser
+
+$ sudo passwd cooluser
+Changing password for user cooluser.
+New password: 
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+```
+
+=== deluser
+
+`userdel [options] <username>`
+
+Deletes a user from the computer. The command must be run as `sudo` in order to have adminstrator access.
+
+**Example:**
+
+The following example uses the `userdel` command to remove the user with the login name `cooluser` from the system. The `-r` option indicates that the user's `HOME` directory is to be deleted too.
+
+```
+$ sudo userdel -r cooluser
+```
+
+=== usermod
+
+`usermod [options] <username>`
+
+The command `usermod` modifies user account information. The command can be used to add a user to a group. The command must be run as `sudo` in order to have adminstrator access.
+
+**Example:**
+
+The following example uses the command `usermod` to add a user with a login name `lennonjohn` to a group named `beatles`. Then the command `groups` is used to verify that the user `lennonjohn` is indeed assigned to the group `beatles`.
+
+```
+$ sudo usermod -a -G beatles lennonjohn
+
+$ groups lennonjohn
+lennonjohn : lennonjohn beatles
+```
+
+=== groups
+
+`groups [options] <username>`
+
+Lists the groups to which a user belongs.
+
+**Example:**
+
+The following example uses the command `groups` to list the groups to which the user with the username `lennonjohn` belongs.
+
+```
+$ groups lennonjohn
+lennonjohn : lennonjohn beatles
+```
+
+=== gpasswd
+
+`gpasswd [options] <group>`
+
+The command `gpasswd` is used to manage the configuration of a group under the Linux operating system. The command must be run as `sudo` in order to have adminstrator access.
+
+**Example:**
+
+The following example uses `gpasswd` remove a user from a group. The `-d` option followed by the username indicates that a user is to be deleted.
+
+```
+$ sudo gpasswd -d jaggermick beatles
+Removing user jaggermick from group beatles
+```
+
+=== groupadd
+
+`groupadd [options] <groupname>`
+
+Adds a group to the computer. The command must be run as `sudo` in order to have adminstrator access.
+
+**Example:**
+
+The following example uses the `groupadd command` to create a group named `beatles`.
+
+```
+$ sudo groupadd beatles
+```
+
+=== groupdel
+
+`groupdel [options] <groupname>`
+
+Deletes a group from the computer. The command must be run as `sudo` in order to have adminstrator access.
+
+
+**Example:**
+
+The following example uses the command `groupdel` to delete the group named `beatles` from the system.
+
+```
+$ sudo groupdel beatles
+```
+

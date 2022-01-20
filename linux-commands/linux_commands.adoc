@@ -129,7 +129,7 @@ Commands in this section apply to working with a Linux computer's environment va
 
 `env`
 
-Displays all environment variables running on system. 
+Displays all environment variables running on the system. 
 
 *Example:*
 
