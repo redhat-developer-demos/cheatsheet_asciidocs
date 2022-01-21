@@ -336,7 +336,7 @@ traceroute to redhat.com (209.132.183.105), 5 hops max, 60 byte packets
 
 == OS management commands
 
-The commands in this section apply to work with Red Hat Enterprise Linux operating system.
+The commands in this section apply to working with Red Hat Enterprise Linux operating system.
 
 === sestatus
 
