@@ -417,7 +417,7 @@ Retype new password:
 passwd: all authentication tokens updated successfully.
 ```
 
-=== deluser
+=== userdel
 
 `userdel [options] <username>`
 
