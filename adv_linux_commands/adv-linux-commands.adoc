@@ -610,7 +610,6 @@ root          11  0.0  0.0      0     0 ?        I    Jan07   0:01 [rcu_sched]
 --More--
 
 ```
-AO: I edited below. Is it accurate to say that SELinux "provides an additional layer of system security on top of the Linux kernel"? 
 
 == SELinux management commands
 Commands in this section apply to working with Red Hat's Security-Enhanced Linux (SELinux), which provides an additional layer of system security. SELinux fundamentally answers the question: "May <subject> do <action> to <object>." For example: "May a web server access files in users' home directories?"
