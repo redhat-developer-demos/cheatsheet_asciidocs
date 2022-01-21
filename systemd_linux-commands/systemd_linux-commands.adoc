@@ -11,19 +11,53 @@ Systemd is found in Red Hat Enterprise Linux as well as other Linux distribution
 
 === systemctl enable
 
+*Example:*
+
 === systemctl restart
+
+*Example:*
 
 === systemctl start
 
+*Example:*
+
 === systemctl status
 
+*Example:*
+
 === systemctl stop
+
+*Example:*
 
 == Computer control commands
 
 === systemctl poweroff
 
+`systemctl [options] poweroff`
+
+Shuts down the computer or virtual machine.
+
+The command requires that user invoking it have administrator permission. Thus the command must be invoked using `sudo`. If `sudo` in not used, `systemctl` prompts for the user's password.
+
+*Example:*
+
+```
+sudo systemctl poweroff
+```
+
 === systemctl reboot
+
+`systemctl [options] reboot`
+
+*Example:*
+
+The following example reboots the computer or virtual machine using the `-i` option to ignore users logged in and open inhibitors .
+
+The command requires that user invoking it have administrator permission. Thus the command must be invoked using `sudo`. If `sudo` in not used, `systemctl` prompts for the user's password.
+
+```
+sudo systemctl -i reboot
+```
 
 == System information commands
 
@@ -31,11 +65,27 @@ Systemd is found in Red Hat Enterprise Linux as well as other Linux distribution
 
 === systemctl list-sockets
 
+`systemctl [options] list-sockets`
+
+*Example:*
+
 === systemctl list-units
+
+`systemctl [options] list-units`
+
+*Example:*
 
 === systemctl list-unit-files
 
+`systemctl [options] list-unit-files`
+
+*Example:*
+
 === systemctl status
+
+`systemctl [options] status`
+
+*Example:*
 
 
 
