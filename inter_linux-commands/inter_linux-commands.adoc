@@ -335,12 +335,13 @@ traceroute to redhat.com (209.132.183.105), 5 hops max, 60 byte packets
 
 == OS management commands
 
+The commands in this section apply to work with Red Hat Enterprise Linux operating system.
+
 === sestatus
 
 `sestatus [options]`
 
 This program is used to report status information about a computer or virtual machine running SELinux.
-
 
 **Example:**
 
@@ -360,7 +361,6 @@ Memory protection checking:     actual (secure)
 Max kernel policy version:      33
 ```
 
-
 === uname
 
 `uname [options]`
@@ -375,7 +375,6 @@ The following example uses the `-a` option with `uname` to report all the inform
 $ uname -a
 Linux localhost.localdomain 4.18.0-348.el8.x86_64 #1 SMP Mon Oct 4 12:17:22 EDT 2021 x86_64 x86_64 x86_64 GNU/Linux
 ```
-
 
 == Users and groups commands
 
