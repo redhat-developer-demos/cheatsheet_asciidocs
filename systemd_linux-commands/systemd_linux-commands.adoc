@@ -5,7 +5,7 @@
 
 This cheat sheet presents a list of command-line executables that are used for working with systemd. The purpose of systemd to consolidate service configuration and application behavior under a common executable.
 
-Systemd provides system components for the Linux operating system. Systemd is found in Red Hat Enterprise Linux as well as other Linux distributions. 
+Systemd is found in Red Hat Enterprise Linux as well as other Linux distributions. 
 
 == Application management commands
 
