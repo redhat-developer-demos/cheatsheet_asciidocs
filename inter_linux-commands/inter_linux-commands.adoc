@@ -5,13 +5,15 @@
 
 The following is a sampling of intermediate commands and executables typically used by developers who have a basic understanding of Linux. The commands are organized according to category.
 
-== console and output management commands
+== Console and output management commands
+
+Commands in this section apply to working a terminal window on and console output from a computer or virtual machine running the Linux operating system.
 
 === history
 
 `history [options]`
 
-The `history` command displays a list of command executed on the system. Also, `history` can be used to manipulate the history list and display.
+The `history` command displays a list of commands executed on the system. Also, `history` can be used to manipulate the history list and the way information is displayed.
 
 **Example:**
 
@@ -57,6 +59,7 @@ adm:x:3:4:adm:/var/adm:/sbin/nologin
 ```
 
 === top
+
 `top [options]` 
 
 Displays information about the running Linux processes.
@@ -91,7 +94,7 @@ MiB Swap:   8092.0 total,   8092.0 free,      0.0 used.   6205.6 avail Mem
 --More--
 ```
 
-== disk management commands
+== Disk management commands
 
 The following commands apply to working with disks, devices and volumes on a computer running the Linux operating system. 
 
@@ -99,7 +102,7 @@ The following commands apply to working with disks, devices and volumes on a com
 
 `df [options] <file name>`
 
-The command `df` shows the amount of disk space used and available according to the file system that represents a particular disk device mount.   If no file name is given, the space available on all mounted file systems is displayed.
+This command shows the amount of disk space used and available according to the file system that represents a particular disk device mount.   If no file name is given, the space available on all mounted file systems is displayed.
 
 **Example:**
 
@@ -122,6 +125,8 @@ tmpfs                    795724      64    795660   1% /run/user/1000
 
 `du [options] <starting directory or file>`
 
+This command reports information about disk usage on the local computer or virtual machine
+
 **Example:**
 
 The following uses shows the command `du` to report the amount of disk space used by the files in the directory `/etc/bin`. (`$` is the command-line prompt symbol.)
@@ -131,7 +136,7 @@ $ du /usr/bin
 365940	/usr/bin
 ```
 
-== file and directory management commands
+== File and directory management commands
 
 The following commands apply to working with file and directories on a computer running the Linux operating system.
 
@@ -188,8 +193,7 @@ The following example creates a temporary alias for the `clear` command. The ali
 
 === awk
 
-
-The `awk` command finds, filters or replaces text in a file or from stduot.
+The `awk` command finds, filters or replaces text in a file or from stdout.
 
 **Examples:**
 
@@ -253,7 +257,7 @@ Files one.txt and three.txt are identical
 
 === sed
 
-`sed [options] <manipulation instructions> <path/to/filename or stduout>`
+`sed [options] <manipulation instructions> <path/to/filename or stdout>`
 
 The `sed` manipulates the content of a file or output sent to stdout.
 
@@ -268,7 +272,9 @@ $ echo Bobby is cool | sed 's/Bobby/Teddy/'
 Teddy is cool
 ```
 
-== network commands
+== Network commands
+
+Commands in this section apply to working with networks on and from a Linux computer.
 
 === hostname
 
@@ -290,6 +296,8 @@ The program `nslookup`` queries for information about a particular Internet doma
 
 **Example:**
 
+The following example invokes `nslookup` against the domain name `redhat.com`.
+
 ```
 $ nslookup redhat.com
 Server:		192.168.86.1
@@ -309,7 +317,7 @@ Address: 209.132.183.105
 
 Reports the route the a packet takes in hops to move through the Internet to reach its destination.
 
-The program `traceroute` is not part of Red Hat Linux by default. It must be installed using `sudo yum install traceroute`.
+The program `traceroute` is not part of Red Hat Enterprise Linux by default. It must be installed using `sudo yum install traceroute`.
 
 **Example:**
 
@@ -325,11 +333,33 @@ traceroute to redhat.com (209.132.183.105), 5 hops max, 60 byte packets
  5  agg26.lsancarc01r.socal.rr.com (72.129.17.0)  19.400 ms  19.341 ms  19.258 ms
 ```
 
-== os management commands
+== OS management commands
 
 === sestatus
 
+`sestatus [options]`
+
+This program is used to report status information about a computer or virtual machine running SELinux.
+
+
 **Example:**
+
+The following example invokes the program `sestatus` and displays the default response.
+
+```
+$ sestatus
+SELinux status:                 enabled
+SELinuxfs mount:                /sys/fs/selinux
+SELinux root directory:         /etc/selinux
+Loaded policy name:             targeted
+Current mode:                   enforcing
+Mode from config file:          enforcing
+Policy MLS status:              enabled
+Policy deny_unknown status:     allowed
+Memory protection checking:     actual (secure)
+Max kernel policy version:      33
+```
+
 
 === uname
 
@@ -347,7 +377,7 @@ Linux localhost.localdomain 4.18.0-348.el8.x86_64 #1 SMP Mon Oct 4 12:17:22 EDT 
 ```
 
 
-== users and groups commands
+== Users and groups commands
 
 The following commands apply to working with users and groups as supported by the Linux operating system.
 
@@ -467,7 +497,6 @@ $ sudo groupadd beatles
 `groupdel [options] <groupname>`
 
 Deletes a group from the computer. The command must be run as `sudo` in order to have adminstrator access.
-
 
 **Example:**
 
