@@ -297,8 +297,6 @@ Commands in this section apply to working with  jobs running under the Linux ope
 
 Sends a job to the background.
 
-AO: Did you intend to place a comma here? "`,ctrl+Z`" (I removed it based on later examples.)
-
 *Example:*
 
 The following example creates a bash script named `demo.sh` that outputs the string `hi there` to the console and then sleeps for two seconds. The bash script is invoked as a foreground job.
