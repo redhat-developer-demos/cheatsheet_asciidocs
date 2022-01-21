@@ -59,7 +59,7 @@ Used to query the audit logs according to events defined by different search cri
 
 *Example:*
 
-The following example shows how to use `ausearch` to get information about the user named `root` from the audit logs. The  option `-ui` indicates the the search should be conducted according to a particular user ID, in this case `root`. The result is piped to the `more` command that uses the option `-10`, which indicates to show the first 10 lines of output.
+The following example shows how to use `ausearch` to get information about the user named `root` from the audit logs. The  option `-ui` indicates that the search should be conducted according to a particular user ID, in this case `root`. The result is piped to the `more` command that uses the option `-10`, which indicates to show the first 10 lines of output.
 
 Note that the `ausearch` command must be invoked as `sudo` in order to access audit logs:
 
@@ -187,7 +187,6 @@ $ sudo mount /dev/sda1
 Inspects and optionally repairs a hard drive on a computer running RHEL Linux.
 
 
-
 *Note:* You must unmount the drive using the `umount` command before invoking `xfs_repair`.
 
 *Example:*
@@ -231,7 +230,7 @@ done
 ```
 == File management commands
 
-Commands in this section apply to working with file and directories on a computer running the Linux operating system.
+Commands in this section apply to working with files and directories on a computer running the Linux operating system.
 
 === chmod
 
@@ -241,7 +240,7 @@ Changes the permissions granted to a file or directory.
 
 *Examples:*
 
-This example applies read-only permissions for all users to the file named `sample.txt`. Then, the command `ls -l` is executed for verify that the file is indeed read-only. The output is also displayed:
+This example applies read-only permissions for all users to the file named `sample.txt`. Then, the command `ls -l` is executed to verify that the file is indeed read-only. The output is also displayed:
 
 ```
 $ chmod a-w+r sample.txt
@@ -249,7 +248,7 @@ $ ls -l sample.txt
 -r--r--r--. 1 guest guest 32 Jan 17 10:34 sample.txt
 ```
 
-This example applies read and write permissions for all users to the file named `sample.txt`. Then, the command `ls -l` is executed for verify that the file is indeed read-only. The output is also displayed:
+This example applies read and write permissions for all users to the file named `sample.txt`. Then, the command `ls -l` is executed to verify that the file is indeed read-only. The output is also displayed:
 
 ```
 $ chmod a+w+r sample.txt
@@ -289,7 +288,7 @@ total 0
 == Job commands
 
 
-Commands in this section apply to working with  jobs running under the Linux operating system. A _job_ is a process that is invoked from a terminal window process and is considered a child of the terminal window.
+Commands in this section apply to working with jobs running under the Linux operating system. A _job_ is a process that is invoked from a terminal window process and is considered a child of the terminal window.
 
 === bg
 
@@ -362,11 +361,11 @@ The following command applies to working with memory on a computer running the L
 
 === free
 
-This command reports information about memory status on the local computer or virtual machine
+This command reports information about memory status on the local computer or virtual machine.
 
 *Example:*
 
-The following example invokes the `free` command with the `-w` option. The `-w` option reports addition information about memory status.
+The following example invokes the `free` command with the `-w` option. The `-w` option reports additional information about memory status:
 
 ```
 $ free -w
@@ -387,15 +386,13 @@ Gets or posts a file to or from the Internet according to a URL.
 
 *Examples:*
 
-This example downloads a web page from the Red Hat Developer website implementing the `-o` option to save the page to the file named `article.html`.
+This example downloads a web page from the Red Hat Developer website implementing the `-o` option to save the page to the file named `article.html`:
 
 ```
 $ curl https://developers.redhat.com/articles/2022/01/11/5-design-principles-microservices -o article.html
 ```
 
-This example uses the `curl` command to upload a file named `data.txt` to the URL `https://example.com/api/data`.
-
-Notice the use of the `-X` option to tell `curl` to use the HTTP POST method, the `-H` option to set the content type header in the request, and the `-d` option to define the file to upload:
+This example uses the `curl` command to upload a file named `data.txt` to the URL `https://example.com/api/data`. Notice the use of the `-X` option to tell `curl` to use the HTTP POST method, the `-H` option to set the content type header in the request, and the `-d` option to define the file to upload:
 
 ```
 $ curl -X POST -H "Content-Type: text/plain" -d "data.txt" https://example.com/api/data
@@ -445,7 +442,7 @@ newhostname.localdomain
 
 `hostnamectl [options] <command>`
 
-The command `hostnamectl` is similar to the command `hostname` but with some added capabilities. 
+The command `hostnamectl` is similar to the command `hostname` but with added capabilities. 
 
 *Example:*
 
@@ -612,6 +609,7 @@ root          11  0.0  0.0      0     0 ?        I    Jan07   0:01 [rcu_sched]
 ```
 
 == SELinux management commands
+
 Commands in this section apply to working with Red Hat's Security-Enhanced Linux (SELinux), which provides an additional layer of system security. SELinux fundamentally answers the question: "May <subject> do <action> to <object>." For example: "May a web server access files in users' home directories?"
 
 === getenforce
@@ -633,7 +631,7 @@ Enforcing
 
 `getsebool [-a] <boolean_value>`
 
-Reports whether an applicable SELinux setting is `on` or `off`. Use the `-a` option to show the boolean values of all setting.
+Reports whether an applicable SELinux setting is `on` or `off`. Use the `-a` option to show the boolean value of all settings.
 
 *Examples:*
 
@@ -644,7 +642,7 @@ $ getsebool virt_use_xserver
 virt_use_xserver --> off
 ```
 
-This example use `getsebool` along with piping the result to the `grep` and then `more` commands to show all SELinux settings that have the value `on`. The `more` command uses the `-10` option to show the first ten lines of output:
+This example use `getsebool` along with piping the result to the `grep` and then `more` commands to show all SELinux settings that have the value `on`. The `more` command uses the `-10` option to show the first 10 lines of output:
 
 ```
 $ getsebool -a | grep "on$" | more -10
@@ -679,7 +677,7 @@ $ restorecon -FvR /var/www/html
 
 `semanage <object> [options]`
 
-Allows administrators to manage SELinux capabilities according to the particular object of interest. Each object will have its own set of options. Example of `semanage` objects are `user`, `login`, `port`, and `fcontext`, to name a few.
+Allows administrators to manage SELinux capabilities according to the particular object of interest. Each object will have its own set of options. Examples of `semanage` objects are `user`, `login`, `port`, and `fcontext`, to name a few.
 
 Note that this command must be invoked as `sudo`.
 
@@ -734,7 +732,7 @@ $ setsebool httpd_can_network_connect_db 1
 
 `subscription-manager <command> [options]`
 
-The `subscription-manager` is the command-line version of the graphical Red Hat Enterprise Linux (RHEL) Subscription Manager. The Subscription Manager is a service that keeps track of the Red Hat products and subscriptions installed on a local computer. Subscription Manager communicates with the subscription service on the backend. Typically, backend settings are managed via the Customer Portal or an on-premise server such as Subscription Asset Manager. The Subscription Managed works with content management tools such as `yum`.
+The `subscription-manager` is the command-line version of the graphical Red Hat Enterprise Linux Subscription Manager. Subscription Manager is a service that keeps track of the Red Hat products and subscriptions installed on a local computer. Subscription Manager communicates with the subscription service on the backend. Typically, backend settings are managed via the Customer Portal or an on-premise server such as Subscription Asset Manager. Subscription Manager works with content management tools such as `yum`.
 
 The command `subscription-manager` will run as the root user; thus, a password prompt will be presented upon invocation.
 
@@ -816,7 +814,7 @@ Commands in this section provide memory and hardware information about the compu
 
 Displays information about the CPU architecture on the given machine.
 
-When `lscpu` is run on a virtual machine, the CPU architecture information reported reflects the configuration of the  guest  operating system, which is typically different from operating system on the host computer.
+When `lscpu` is run on a virtual machine, the CPU architecture information reported reflects the configuration of the guest  operating system, which is typically different from the operating system on the host computer.
 
 This command is part of the `util-linux` package, which you can install using the command: `sudo yum install -y util-linux`. In some cases, the package is part of the operating system's default installation.
 
@@ -911,11 +909,11 @@ Commands in this section apply to working with users and groups as supported by 
 
 `users [options]`
 
-Displays the name of the users logged into the computer.
+Displays the name of the users logged in to the computer.
 
 *Example:*
 
-The following example uses the command `users` to list the users logged into the system:
+The following example uses the command `users` to list the users logged in to the system:
 
 ```
 $ users
@@ -1009,7 +1007,7 @@ Removing user jaggermick from group beatles
 
 `groupadd [options] <groupname>`
 
-Adds a group to the computer running the Linux operating system. The command must be run as `sudo` in order to have administrator access.
+Adds a group to a computer running the Linux operating system. The command must be run as `sudo` in order to have administrator access.
 
 *Example:*
 
