@@ -278,15 +278,16 @@ Commands in this section apply to working with networks on and from a Linux comp
 
 === hostname
 
- `hostname`
+`hostname`
 
- Reports the hostname of the local computer.
+Reports the hostname of the local computer.
 
- **Example:**
+**Example:**
 
- $ hostname
+```
+$ hostname
 localhost.localdomain
-
+```
 
 === nslookup
 
