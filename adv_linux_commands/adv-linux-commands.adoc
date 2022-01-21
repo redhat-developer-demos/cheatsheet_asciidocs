@@ -3,21 +3,21 @@
 :product-name:
 :version: 1.0.0
 
-The following is a sampling of advanced Linux commands typically used by developers. The commands are organized according to category.
+This cheat sheet presents a collection of Linux commands and shows how they are used by developers in advanced programming scenarios. The commands are organized by category.
 
-== application management commands
+== Application management commands
 
-The following commands apply to working with a computer's applications and executables. 
+Commands in this section apply to advanced operations when working with a computer's applications and executables. 
 
 === systemctl
 
 `systemctl [options] <subcommand>`
 
-The command `systemctl` is used to inspect and control the state of the `systemd` suite of Linux system components.
+Used to inspect and control the state of the `systemd` suite of Linux system components.
 
-**Examples:**
+*Examples:*
 
-The following example shows the invocation and result of `systemctl status` command set that discovers the status of the Apache Web Server. (`$` is the command-line prompt symbol.)
+This example shows the invocation and result of a `systemctl status` command set that discovers the status of the Apache web server (note that `$` is the command-line prompt symbol):
 
 ```
 $ systemctl status httpd
@@ -27,41 +27,41 @@ $ systemctl status httpd
      Docs: man:httpd.service(8)
 ```
 
-The following example shows the invocation `systemctl start` command set that start the `mariadb` database.
+This example shows the invocation of the `systemctl start` command set that starts the `mariadb` database:
 
 `systemctl start mariadb`
 
-The following example shows the invocation `systemctl enable` command set to make it so that the particular application starts automatically when the computer reboots.
+This example shows the invocation of the `systemctl enable` command set so that an application starts automatically when the computer reboots:
 
 `systemctl enable mariadb`
 
 
 === yum
 
-`yum` is the application installation and removal tool for Fedora, Centos and RHEL.
+The application installation and removal tool for Fedora, CentOS, and RHEL.
 
 *Example:*
 
-The following command installs `net-tools` application which has many handy utilities such as `netstat`.
+The following command installs the `net-tools` application, which has many handy utilities such as `netstat`:
 
 `sudo yum -y install net-tools`
 
 
-== audit commands
+== Audit commands
 
-The following command applies to working with the audit capabilities provided by the Linux operating system. 
+The commands in this section are used to work with the audit capabilities provided by the Linux operating system. 
 
 === ausearch
 
 `ausearch [options] <application/process>`
 
-The `ausearch` command is a tool that can query the audit logs according to events defined by different search criteria.
+Used to query the audit logs according to events defined by different search criteria.
 
-**Example:**
+*Example:*
 
-The following example shows how to use `ausearch` to get information about the user named `root` from the audit logs. The  options `-ui` indicates the the search should be conducted according to a particular userid, in this case `root`. The result is piped to the `more` command that has the option `-10` which indicates to show the first ten lines of output.
+The following example shows how to use `ausearch` to get information about the user named `root` from the audit logs. The  option `-ui` indicates the the search should be conducted according to a particular user ID, in this case `root`. The result is piped to the `more` command that uses the option `-10`, which indicates to show the first 10 lines of output.
 
-The `ausearch` command must be invoked as `sudo` in order to access audit logs. (`$` is the command-line prompt symbol.)
+Note that the `ausearch` command must be invoked as `sudo` in order to access audit logs:
 
 ```
 $ sudo ausearch -ui root | more -10
@@ -77,19 +77,19 @@ type=CONFIG_CHANGE msg=audit(1641598972.761:6): op=set audit_backlog_limit=8192 
 --More--
 ```
 
-== disk management commands
+== Disk management commands
 
-The following commands apply to working with disks, devices and volumes on a computer running the Linux operating system. 
+Commands in this section apply to working with disks, devices, and volumes on a computer running the Linux operating system. 
 
 === df
 
 `df [options] <file name>`
 
-The command `df` shows the amount of disk space used and available according to the file system that represents a particular disk device mount.   If no file name is given, the space available on all mounted file systems is displayed.
+Shows the amount of disk space used and available according to the file system that represents a particular disk device mount. If no file name is given, the space available on all mounted file systems is displayed.
 
-**Example:**
+*Example:*
 
-The following example shows the invocation and result of `df` displaying all mounted file systems. Disk space  is  shown in  1K blocks. (`$` is the command-line prompt symbol.)
+The following example shows the invocation and result of `df` displaying all mounted file systems. Disk space  is  shown in  1K blocks:
 
 ```
 $ df
@@ -106,11 +106,11 @@ tmpfs                    795724      64    795660   1% /run/user/1000
 
 === fdisk
 
-The command `fdisk` is used for working with disk partitions on a computer's hard drive. You can use `fdisk` to format a partition a new drive. Also, you can use `fdisk` to get information about existing drives/
+Used for working with disk partitions on a computer's hard drive. You can use `fdisk` to format and partition a new drive. Also, you can use `fdisk` to get information about existing drives.
 
-**Examples:**
+*Examples:*
 
-The following example invokes `fdisk` to display a print out of partition tables of all devices on the computer as listed in the `/proc/partitions` file:
+This example invokes `fdisk` to display a print out of partition tables of all devices on the computer, as listed in the `/proc/partitions` file:
 
 ```
 $ sudo fdisk -l
@@ -141,23 +141,23 @@ Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 ```
 
-The following examples uses `fdisk` to start the process of formatting and partitioning a drive at `/dev/sda1`. This invocation of `fdisk` will open a dialog in the terminal window that walks the developer through the formatting and partitioning process.
+This example uses `fdisk` to start the process of formatting and partitioning a drive at `/dev/sda1`. This invocation of `fdisk` will open a dialog in the terminal window that walks the developer through the formatting and partitioning process:
 
 ```
 fdisk /dev/sda1
 ```
 
-**Be advised!** Using `fdisk` in this manner erases all data on the disk.
+*Note:* Using `fdisk` in this manner erases all data on the disk.
 
 === mount
 
 `mount [options] <device_directory>``
 
-The `mount` command shows or attaches a devices filesystem to a Linux operating system's master file tree.
+Shows or attaches a device filesystem to a Linux operating system's master file tree.
 
-**Examples:**
+*Examples:*
 
-The following example shows the `mount` command using the `-l` option to list all mounted file systems. The result of `mount` is piped to the `more` command. The `more` command using the `-10` option to display the first ten lines of output. (`$` is the command-line prompt symbol.)
+This example shows the `mount` command using the `-l` option to list all mounted file systems. The result of `mount` is piped to the `more` command. The `more` command uses the `-10` option to display the first 10 lines of output:
 
 ```
 $ mount -l | more -10
@@ -174,7 +174,7 @@ ent,name=systemd)
 --More--
 ```
 
-The following example uses the `mount` command to mount the file system for a hard drive that is represented as `/dev/sda1`. (`$` is the command-line prompt symbol.)
+This example uses the `mount` command to mount the file system for a hard drive that is represented as `/dev/sda1`:
 
 ```
 $ sudo mount /dev/sda1
@@ -184,13 +184,15 @@ $ sudo mount /dev/sda1
 
 `xfs_repair [options] <drive>`
 
-The command `xfs_repair` inspects and optionally repairs a hard drive on a computer running RHEL Linux.
+Inspects and optionally repairs a hard drive on a computer running RHEL Linux.
 
-**Be advised!** You much unmount the drive using the `umount` command before invoking `xfs_repair`
 
-**Example:**
 
-The following example unmounts a hard drive a `/dev/sda1` and then runs the command `xfs_repair` against that drive. (Note that `$` is the command-prompt symbol.)
+*Note:* You must unmount the drive using the `umount` command before invoking `xfs_repair`.
+
+*Example:*
+
+The following example unmounts a hard drive at `/dev/sda1` and then runs the command `xfs_repair` against that drive:
 
 ```
 $ sudo umount /dev/sda1
@@ -227,19 +229,19 @@ Phase 7 - verify and correct link counts...
 done
 
 ```
-== file management commands
+== File management commands
 
-The following commands apply to working with file and directories on a computer running the Linux operating system.
+Commands in this section apply to working with file and directories on a computer running the Linux operating system.
 
 === chmod
 
 `chmod [options] <file or directory>`
 
-Changes the permissions granted to a file or directory
+Changes the permissions granted to a file or directory.
 
-**Examples:**
+*Examples:*
 
-The following example applies read-only permissions for all users to the file named `sample.txt`. Then the command `ls -l` is executed for verify that the file is indeed read-only. The output is displayed too.
+This example applies read-only permissions for all users to the file named `sample.txt`. Then, the command `ls -l` is executed for verify that the file is indeed read-only. The output is also displayed:
 
 ```
 $ chmod a-w+r sample.txt
@@ -247,7 +249,7 @@ $ ls -l sample.txt
 -r--r--r--. 1 guest guest 32 Jan 17 10:34 sample.txt
 ```
 
-The following example applies read and write permissions for all users to the file named `sample.txt`. Then the command `ls -l` is executed for verify that the file is indeed read-only. The output is displayed too.
+This example applies read and write permissions for all users to the file named `sample.txt`. Then, the command `ls -l` is executed for verify that the file is indeed read-only. The output is also displayed:
 
 ```
 $ chmod a+w+r sample.txt
@@ -258,13 +260,13 @@ $ ls -l sample.txt
 
 `chown [options] <owner><:<:<group>> <file>`
 
-Changes the owner of a file according to user and/or group..
+Changes the owner of a file according to user and/or group.
 
-**Example:**
+*Example:*
 
-The following example lists the files in the current directory by using the `ls -l` command and option to display details about the files, including the  user: group pair that owns each file. Then the owner of the file `two.txt` is changed using the `chown` command, assigning the user named `lennonjohn` who is in the group `beatles` as the new file owner.
+This example lists the files in the current directory by using the `ls -l` command and option to display details about the files, including the  user: group pair that owns each file. Then, the owner of the file `two.txt` is changed using the `chown` command, assigning the user named `lennonjohn` who is in the group `beatles` as the new file owner.
 
-The result of the change in file ownership is displayed using the command `ls` with the option `-l` again.
+The result of the change in file ownership is displayed using the command `ls` with the option `-l` again:
 
 ```
 $ ls -l
@@ -284,23 +286,25 @@ total 0
 
 ```
 
-== job commands
+== Job commands
 
-The following command apply to working with  jobs running under the Linux operating system. A job is a process that is invoked from the a terminal window process and is considered a child of the terminal window.
+
+Commands in this section apply to working with  jobs running under the Linux operating system. A _job_ is a process that is invoked from a terminal window process and is considered a child of the terminal window.
 
 === bg
 
 `bg<job_id>`
 
-The `bg` command sends a job to the background.
+Sends a job to the background.
 
-**Example:**
+AO: Did you intend to place a comma here? "`,ctrl+Z`" (I removed it based on later examples.)
 
-The following example creates a bash script named `demo.sh` that outputs the string `hi there` to the console and then sleeps for 2 seconds. The bash script is invoked as a foreground job.
+*Example:*
 
-Then the foreground job is stopped by striking the `,ctrl+Z` keys. The job is started again in the background using the `bg` command along with the job id `%1`.
+The following example creates a bash script named `demo.sh` that outputs the string `hi there` to the console and then sleeps for two seconds. The bash script is invoked as a foreground job.
 
-(`$` is the command-line prompt symbol.)
+Then, the foreground job is stopped by striking the `ctrl+Z` keys. The job is started again in the background using the `bg` command along with the job id `%1`:
+
 
 ```
 $ echo "while true; do echo hi there; sleep 2; done" > demo.sh
@@ -318,16 +322,13 @@ $ bg %1
 
 `fg <job_id>`
 
-The `fg` command sends a job to the foreground.
+Sends a job to the foreground.
 
+*Example:*
 
-**Example:**
+The following example creates a bash script named `demo.sh` that outputs the string `hi there` to the console and then sleeps for two seconds. The script is invoked as a job.
 
-The following example creates a bash script named `demo.sh` that outputs the string `hi there` to the console and then sleeps for 2 seconds. The script invoked as a job.
-
-Then the foreground job is stopped by striking the `ctrl+Z` keys. The job is started again in the foreground using the `fg` command along with the job id `%1`.
-
-(`$` is the command-line prompt symbol.)
+Then, the foreground job is stopped by striking the `ctrl+Z` keys. The job is started again in the foreground using the `fg` command, along with the job id `%1`:
 
 ```
 $ echo "while true; do echo hi there; sleep 2; done" > demo.sh
@@ -346,13 +347,9 @@ sh demo.sh
 
 Lists the jobs invoked from the process window
 
-**Example:**
+*Example:*
 
-The following example uses the `jobs` command to list all the jobs and the status of jobs that were started from the current terminal window.
-
-Notice that there are three jobs in force. All the jobs are running the same bash script named `demo.sh`. Jobs %1 and %3 are stopped. Job %2 is running in the background as denoted by the symbol. 
-
-(`$` is the command-line prompt symbol.)
+The following example uses the `jobs` command to list all the jobs and the status of jobs that were started from the current terminal window. Notice that there are three jobs in force. All the jobs are running the same bash script named `demo.sh`. Jobs %1 and %3 are stopped. Job %2 is running in the background, as denoted by the symbol `&`:
 
 ```
 $ jobs -l
@@ -361,14 +358,17 @@ $ jobs -l
 [3]+  6265 Stopped                 sh demo.sh
 ```
 
-
-== memory management commands
+== Memory management commands
 
 The following command applies to working with memory on a computer running the Linux operating system.
 
 === free
 
-**Example:**
+This command reports information about memory status on the local computer or virtual machine
+
+*Example:*
+
+The following example invokes the `free` command with the `-w` option. The `-w` option reports addition information about memory status.
 
 ```
 $ free -w
@@ -377,27 +377,27 @@ Mem:        7957276     1653404     4563456       35032        4320     1736096 
 Swap:       8286204           0     8286204
 ```
 
-== network commands
+== Network commands
 
-The following is a list of commands that apply to working with with or on a network.
+Commands in this section apply to working with or on a network.
 
 === curl
 
 `curl [options] <url>`
 
-Gets or posts a file to/from the internet according to a URL.
+Gets or posts a file to or from the Internet according to a URL.
 
-**Examples:**
+*Examples:*
 
-The following example downloads a web page from the Red Hat Developer webs site and implements the `-o` option to save the page to the file `article.html`.
+This example downloads a web page from the Red Hat Developer website implementing the `-o` option to save the page to the file named `article.html`.
 
 ```
 $ curl https://developers.redhat.com/articles/2022/01/11/5-design-principles-microservices -o article.html
 ```
 
-The following example uses the `curl` command to upload a file named `data.txt` to the URL `https://example.com/api/data`.
+This example uses the `curl` command to upload a file named `data.txt` to the URL `https://example.com/api/data`.
 
-Notice the use of the `-X` option to tell `curl` to use the HTTP POST method, the `-H` option to set the content type header in the request and the `-d` option to define the file to upload.
+Notice the use of the `-X` option to tell `curl` to use the HTTP POST method, the `-H` option to set the content type header in the request, and the `-d` option to define the file to upload:
 
 ```
 $ curl -X POST -H "Content-Type: text/plain" -d "data.txt" https://example.com/api/data
@@ -407,11 +407,11 @@ $ curl -X POST -H "Content-Type: text/plain" -d "data.txt" https://example.com/a
 
 `host [options] <domain_name>`
 
-The `host` command reports information about a given domain name.
+Reports information about a given domain name.
 
-**Example:**
+*Example:*
 
-The following example uses `host` to report the default information about the domain name `redhat.com`.
+The following example uses `host` to report the default information about the domain name `redhat.com`:
 
 ```
 $ host redhat.com
@@ -424,18 +424,18 @@ redhat.com mail is handled by 10 us-smtp-inbound-2.mimecast.com.
 
 `hostname`
 
-Sets or gets the hostname of the computer or virtual machine
+Sets or gets the hostname of the computer or virtual machine.
 
-**Examples:**
+*Examples:*
 
-The following example displays the current hostname of the machine
+This example displays the current hostname of the machine:
 
 ```
 $ hostname
 localhost.localdomain
 ```
 
-The following example renames the current hostname of the machine to `newhostname.localdomain` and then verifies the current hostname of the machine.
+This example renames the current hostname of the machine to `newhostname.localdomain` and then verifies the current hostname of the machine:
 
 ```
 $ sudo hostname newhostname.localdomain
@@ -449,9 +449,9 @@ newhostname.localdomain
 
 The command `hostnamectl` is similar to the command `hostname` but with some added capabilities. 
 
-**Example:**
+*Example:*
 
-The following example invokes and displays the result of the `hostnamectl status` command set to report hostname and additional information.
+The following example invokes and displays the result of the `hostnamectl status` command set to report the hostname and additional information:
 
 ```
 $ hostnamectl status
@@ -472,19 +472,19 @@ Transient hostname: tempvm.localdomain
 
 `iptables [options]`
 
-The command `iptables` sets and monitors network access to a given computer.
+Sets and monitors network access to a given computer.
 
-**Be advised!** The command `iptables` must be run with administrator permissions under `sudo`.
+*Note:* The command `iptables` must be run with administrator permissions under `sudo`.
 
-**Examples:**
+*Examples:*
 
-The following example allows incoming TCP traffic accessing the computer via port 22.
+This example allows incoming TCP traffic accessing the computer via port 22:
 
 ```
 $ sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 ```
 
-The following example rejects any network traffic coming in from a computer running from the IP address `192.168.86.11`
+This example rejects any network traffic coming in from a computer running from the IP address `192.168.86.11`:
 
 ```
 $ sudo iptables -A INPUT -s 192.168.86.11 -j DROP
@@ -494,11 +494,11 @@ $ sudo iptables -A INPUT -s 192.168.86.11 -j DROP
 
 `nmcli [options] <object> <command>`
 
-The application `nmcli` is the command line interface for working with the Linux NetworkManager.
+The application `nmcli` is the command-line interface for working with the Linux NetworkManager.
 
-**Examples:**
+*Examples:*
 
-The following example uses `nmcli` to display the overall connection status of the computer using the `general` object and the `status` command.
+This example uses `nmcli` to display the overall connection status of the computer using the `general` object and the `status` command:
 
 ```
 $ nmcli general status
@@ -506,7 +506,7 @@ STATE      CONNECTIVITY  WIFI-HW  WIFI     WWAN-HW  WWAN
 connected  full          enabled  enabled  enabled  enabled 
 ```
 
-The following example uses `nmcli` to display the connection status the network interface devices using the `device` object and the `status` command.
+This example uses `nmcli` to display the connection status of the network interface devices using the `device` object and the `status` command:
 
 ```
 $ sudo nmcli device status
@@ -514,7 +514,7 @@ DEVICE      TYPE      STATE                   CONNECTION
 enp0s3      ethernet  connected               enp0s3 
 ```
 
-The following example uses `nmcli` to display the connection profiles of network devices on a computer in a report-like format by using the option `-p` (pretty) against the `connection` object.
+This example uses `nmcli` to display the connection profiles of network devices on a computer in a report-like format by using the option `-p` (pretty) against the `connection` object:
 
 ```
 $ nmcli -p connection
@@ -527,9 +527,9 @@ enp0s3  c68cddff-4883-4efb-bf7a-8b746fe6b26d  ethernet  enp0s3
 virbr0  49bf2d57-cf45-41a8-85d2-cd43a59f0e1c  bridge    virbr0 
 ```
 
-== process commands
+== Process commands
 
-The following commands apply to working with Linux process from the command line.
+Commands in this section apply to working with Linux processes from the command line.
 
 === &&
 
@@ -549,13 +549,13 @@ $ cd /etc && ls
 
 `iotop [options]`
 
-`iotop` is a system monitoring program. It does not ship by default with Red Hat Linux and must must be installed using the command set `sudo yum install itop`.
+`iotop` is a system monitoring program. It does not ship by default with Red Hat Enterprise Linux and must must be installed using the command set `sudo yum install itop`.
 
-The command requires adminstrator access and must be invoked as `sudo`.
+Note that this command requires administrator access and must be invoked as `sudo`.
 
-**Example:**
+*Example:*
 
-The following example shows how to invoke `iotop` to read system IO. A portion of the output is displayed.
+The following example shows how to invoke `iotop` to read system IO. A portion of the output is displayed:
 
 ```
 $ sudo iotop
@@ -591,7 +591,7 @@ Actual DISK READ:	0.00 B/s | Actual DISK WRITE:       0.00 B/s
 
 `ps [options]`
 
-Displays the status of the current processes.
+Displays the status of current processes.
 
 *Example:*
 
@@ -612,20 +612,20 @@ root          11  0.0  0.0      0     0 ?        I    Jan07   0:01 [rcu_sched]
 --More--
 
 ```
-
+AO: I edited below. Is it accurate to say that SELinux "provides an additional layer of system security on top of the Linux kernel"? 
 
 == SELinux management commands
-The following commands apply to working RedHat's Security Enhanced Linux (SELinux). SELinux provides an additional layer of system security. SELinux fundamentally answers the question: "May <subject> do <action> to <object>", for example: "May a web server access files in users' home directories?".
+Commands in this section apply to working with Red Hat's Security-Enhanced Linux (SELinux), which provides an additional layer of system security. SELinux fundamentally answers the question: "May <subject> do <action> to <object>." For example: "May a web server access files in users' home directories?"
 
 === getenforce
 
 `getenforce`
 
-The command `getenforce` reports the current mode of SELinux rules enforcement. The modes are `Enforcing`, `Permissive` or `Disabled`
+Reports the current mode of SELinux rules enforcement. The modes are `Enforcing`, `Permissive`, or `Disabled`.
 
-**Example:**
+*Example:*
 
-The following example invokes the command `getenforce` along with the results. (`$` is the command-line prompt symbol.)
+The following example invokes the command `getenforce` along with the results:
 
 ```
 $ getenforce
@@ -636,18 +636,18 @@ Enforcing
 
 `getsebool [-a] <boolean_value>`
 
-The command `getsebool` reports whether applicable SELinux setting is `on` or `off` Use `-a` option to show the boolean values of all setting.
+Reports whether an applicable SELinux setting is `on` or `off`. Use the `-a` option to show the boolean values of all setting.
 
-**Examples:**
+*Examples:*
 
-The following example use `getsebool` to show the value of the SELinux setting `virt_use_xserver`.
+This example use `getsebool` to show the value of the SELinux setting `virt_use_xserver`:
 
 ```
 $ getsebool virt_use_xserver
 virt_use_xserver --> off
 ```
 
-The following example use `getsebool` along with piping the result to the `grep` and then `more` commands to show all SELinux settings that have the value `on`. The `more` command uses the `-10` option to show the first ten lines of output. 
+This example use `getsebool` along with piping the result to the `grep` and then `more` commands to show all SELinux settings that have the value `on`. The `more` command uses the `-10` option to show the first ten lines of output:
 
 ```
 $ getsebool -a | grep "on$" | more -10
@@ -668,12 +668,11 @@ guest_exec_content --> on
 
 `restorecon [options] </path/to/dirctory_or_filename>`
 
-The command `restorecon` is  used to set the security context (extended SELinux file labels) on one or more files to the default setting.
+Used to set the security context (extended SELinux file labels) on one or more files to the default setting.
 
+*Example:*
 
-**Example:**
-
-The following example uses `restorecon` to restore the default labels on all files under the directory `/var/www/html`. The option `-F` is used to force a change. The option `v` will show changes in a file's lables. The option `-R` implements execution of the command recursively through all subordinate directories and files from the directory where the command invoked.
+The following example uses `restorecon` to restore the default labels on all files under the directory `/var/www/html`. The option `-F` is used to force a change. The option `v` will show changes in a file's labels. The option `-R` implements execution of the command recursively through all subordinate directories and files from the directory where the command is invoked:
 
 ```
 $ restorecon -FvR /var/www/html
@@ -683,15 +682,15 @@ $ restorecon -FvR /var/www/html
 
 `semanage <object> [options]`
 
-The `semanage` command allows adminstrators to manage SELinux capabilities according to the particular object of interest. Each object will have its own set of options. Example of `semanage` objects are `user`, `login`, `port` and `fcontext` to name a few.
+Allows administrators to manage SELinux capabilities according to the particular object of interest. Each object will have its own set of options. Example of `semanage` objects are `user`, `login`, `port`, and `fcontext`, to name a few.
 
-The command must be invoked as `sudo`.
+Note that this command must be invoked as `sudo`.
 
-The `semanage` program does not ship with SELinux by default. You must install the `policycoreutils-python` package with yum to get the `semanage` command.
+Also note that the `semanage` program does not ship with SELinux by default: You must install the `policycoreutils-python` package with `yum` to get the `semanage` command.
 
-**Examples:**
+*Examples:*
 
-The following example uses `semanage` to get the security settings for the `user` objects. The `-l` option is used to list the information for all users.
+This example uses `semanage` to get the security settings for the `user` objects. The `-l` option is used to list the information for all users:
 
 ```
 $ sudo semanage user -l
@@ -709,7 +708,7 @@ user_u          user       s0         s0                             user_r
 xguest_u        user       s0         s0                             xguest_r
 ```
 
-The following example uses `semanage` to view a list login information.
+This example uses `semanage` to view a list of login information:
 
 ```
 $ sudo semanage login -l
@@ -724,11 +723,11 @@ root                 unconfined_u         s0-s0:c0.c1023       *
 
 `setsebool <setting> <value>`
 
-The `setsebool` applies a boolean value to an SELinux setting.
+Applies a boolean value to an SELinux setting.
 
-**Example:**
+*Example:*
 
-The following example uses `setsebool` to apply the value `1` (`true`) to the SELinux setting `httpd_can_network_connect_db`.
+The following example uses `setsebool` to apply the value `1` (`true`) to the SELinux setting `httpd_can_network_connect_db`:
 
 ```
 $ setsebool httpd_can_network_connect_db 1
@@ -738,13 +737,14 @@ $ setsebool httpd_can_network_connect_db 1
 
 `subscription-manager <command> [options]`
 
-The `subscription-manager` is the command line version of the graphical RHEL Subscription Manager. The Subscription Manager is a service that keeps track of the Red Hat products and subscriptions installed on the local computer. Subscription Manager communicates with the subscription service on the backend. Typically backend settings are managed via the Customer Portal or an on-premise server such as Subscription Asset Manager.  The Subscription Managed works with content management tools such as `yum`.
+The `subscription-manager` is the command-line version of the graphical Red Hat Enterprise Linux (RHEL) Subscription Manager. The Subscription Manager is a service that keeps track of the Red Hat products and subscriptions installed on a local computer. Subscription Manager communicates with the subscription service on the backend. Typically, backend settings are managed via the Customer Portal or an on-premise server such as Subscription Asset Manager. The Subscription Managed works with content management tools such as `yum`.
 
-The command `subscription-manager` will run as the root user, thus password prompt will be presented upon invocation.
+The command `subscription-manager` will run as the root user; thus, a password prompt will be presented upon invocation.
 
-**Example:**
+*Example:*
 
-The following example uses the `subscription-manager facts` command set to get facts about the local computer. The command pipes the result to the `more` command which in turn uses the `-15` option to display the first 15 lines of output.
+The following example uses the `subscription-manager facts` command set to get facts about the local computer. The command pipes the result to the `more` command, which in turn uses the `-15` option to display the first 15 lines of output.
+
 ```
 $ sudo subscription-manager facts | more -15
 Password: You are attempting to run "subscription-manager" which requires administrative
@@ -772,11 +772,11 @@ dmi.bios.release_date: 12/01/2006
 
 `vmstat [options]`
 
-The command `vmstat` reports information about virtual memory usage as well as other relevant system data.
+Reports information about virtual memory usage as well as other relevant system data.
 
-**Example:**
+*Example:*
 
-The following command invokes the `vmstat` command with the `--stats` option to display virtual memory and system information for the local virtual machine.
+The following command invokes `vmstat` with the `--stats` option to display virtual memory and system information for the local virtual machine:
 
 ```
 $ vmstat --stats
@@ -809,23 +809,23 @@ $ vmstat --stats
 ```
 
 
-== system information commands
+== System information commands
 
-The following commands provide memeory and hardward information about the computer in which the given command is being invoked.
+Commands in this section provide memory and hardware information about the computer in which the given command is invoked.
 
 === lscpu
 
 `lscpu [options]`
 
-Display information about the CPU architecture on the given machine.
+Displays information about the CPU architecture on the given machine.
 
-When `lscpu` is run on a virtual machine, the CPU architecture information reported reflects the configuration of the  guest  operating  system  which  is typically different from opearting system on the host computer.
+When `lscpu` is run on a virtual machine, the CPU architecture information reported reflects the configuration of the  guest  operating system, which is typically different from operating system on the host computer.
 
-This command is part of the `util-linux` package which you can install using the following command: `sudo apt-get install -y util-linux`. In some cases the package is part of the default installation of the operating system.
+This command is part of the `util-linux` package, which you can install using the command: `sudo yum install -y util-linux`. In some cases, the package is part of the operating system's default installation.
 
-**Example:**
+*Example:*
 
-The following example uses `lscpu` with the `--json` option to display CPU architecture information about a virtual machine in JSON format.
+The following example uses `lscpu` with the `--json` option to display CPU architecture information about a virtual machine in JSON format:
 
 ```
 $ lscpu --json
@@ -863,11 +863,11 @@ $ lscpu --json
 
 `lshw [options]`
 
-The command `lshw` displays information about a system's hardware. The command needs to be run as `sudo` in order to get all hardware information.
+Displays information about a system's hardware. The command needs to be run as `sudo` in order to get all hardware information.
 
-**Example:**
+*Example:*
 
-The following example uses the `lshw` command along the the `-short` option to get an abbreviated list of system information.
+The following example uses the `lshw` command along with the `-short` option to get an abbreviated list of system information:
 
 ```
 $ sudo lshw -short
@@ -905,9 +905,10 @@ H/W path          Device      Class       Description
 /5                input6      input       Video Bus
 /6                input7      input       PC Speaker
 ```
-== users and groups commands
 
-The following commands apply to working with users and groups as supported by the Linux operating system.
+== Users and groups commands
+
+Commands in this section apply to working with users and groups as supported by the Linux operating system.
 
 === users
 
@@ -915,9 +916,9 @@ The following commands apply to working with users and groups as supported by th
 
 Displays the name of the users logged into the computer.
 
-**Example:**
+*Example:*
 
-The following example uses the command `users` to list the users logged into the system.
+The following example uses the command `users` to list the users logged into the system:
 
 ```
 $ users
@@ -929,11 +930,11 @@ cooluser jaggermick lennonjohn
 
 `adduser [options] <username>`
 
-Adds a user to the computing environment. The command must be run as `sudo` in order to have adminstrator access.
+Adds a user to the computing environment. The command must be run as `sudo` in order to have administrator access.
 
-**Example:**
+*Example:*
 
-The following adds a user with the login name `cooluser`. The `HOME` directory `home/cooluser` is created by default. Then the example invokes the command `passwd` to set a password for the new user.
+The following example adds a user with the login name `cooluser`. The `HOME` directory `home/cooluser` is created by default. Then, the example invokes the command `passwd` to set a password for the new user:
 
 ```
 $ sudo adduser cooluser
@@ -950,11 +951,11 @@ passwd: all authentication tokens updated successfully.
 
 `userdel [options] <username>`
 
-Deletes a user from the computer. The command must be run as `sudo` in order to have adminstrator access.
+Deletes a user from the computer. The command must be run as `sudo` in order to have administrator access.
 
-**Example:**
+*Example:*
 
-The following example uses the `userdel` command to remove the user with the login name `cooluser` from the system. The `-r` option indicates that the user's `HOME` directory is to be deleted too.
+The following example uses the `userdel` command to remove the user with the login name `cooluser` from the system. The `-r` option indicates that the user's `HOME` directory should also be deleted:
 
 ```
 $ sudo userdel -r cooluser
@@ -964,11 +965,11 @@ $ sudo userdel -r cooluser
 
 `usermod [options] <username>`
 
-The command `usermod` modifies user account information. The command can be used to add a user to a group. The command must be run as `sudo` in order to have adminstrator access.
+Modifies user account information. The command can be used to add a user to a group. The command must be run as `sudo` in order to have administrator access.
 
-**Example:**
+*Example:*
 
-The following example uses the command `usermod` to add a user with a login name `lennonjohn` to a group named `beatles`. Then the command `groups` is used to verify that the user `lennonjohn` is indeed assigned to the group `beatles`.
+The following example uses the command `usermod` to add a user with a login name `lennonjohn` to a group named `beatles`. Then, the command `groups` is used to verify that the user `lennonjohn` is indeed assigned to the group `beatles`:
 
 ```
 $ sudo usermod -a -G beatles lennonjohn
@@ -983,9 +984,9 @@ lennonjohn : lennonjohn beatles
 
 Lists the groups to which a user belongs.
 
-**Example:**
+*Example:*
 
-The following example uses the command `groups` to list the groups to which the user with the username `lennonjohn` belongs.
+The following example uses the command `groups` to list the groups to which the user with the username `lennonjohn` belongs:
 
 ```
 $ groups lennonjohn
@@ -996,11 +997,11 @@ lennonjohn : lennonjohn beatles
 
 `gpasswd [options] <group>`
 
-The command `gpasswd` is used to manage the configuration of a group under the Linux operating system. The command must be run as `sudo` in order to have adminstrator access.
+Used to manage the configuration of a group under the Linux operating system. The command must be run as `sudo` in order to have administrator access.
 
-**Example:**
+*Example:*
 
-The following example uses `gpasswd` remove a user from a group. The `-d` option followed by the username indicates that a user is to be deleted.
+The following example uses `gpasswd` to remove a user from a group. The `-d` option followed by the username indicates that a user should be deleted:
 
 ```
 $ sudo gpasswd -d jaggermick beatles
@@ -1011,11 +1012,11 @@ Removing user jaggermick from group beatles
 
 `groupadd [options] <groupname>`
 
-Adds a group to the computer. The command must be run as `sudo` in order to have adminstrator access.
+Adds a group to the computer running the Linux operating system. The command must be run as `sudo` in order to have administrator access.
 
-**Example:**
+*Example:*
 
-The following example uses the `groupadd command` to create a group named `beatles`.
+The following example uses the `groupadd command` to create a group named `beatles`:
 
 ```
 $ sudo groupadd beatles
@@ -1025,14 +1026,12 @@ $ sudo groupadd beatles
 
 `groupdel [options] <groupname>`
 
-Deletes a group from the computer. The command must be run as `sudo` in order to have adminstrator access.
+Deletes a group from the computer. The command must be run as `sudo` in order to have administrator access.
 
+*Example:*
 
-**Example:**
-
-The following example uses the command `groupdel` to delete the group named `beatles` from the system.
+The following example uses the command `groupdel` to delete the group named `beatles` from the system:
 
 ```
 $ sudo groupdel beatles
 ```
-
