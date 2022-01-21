@@ -408,7 +408,7 @@ Adds a user to the computing environment. The command must be run as `sudo` in o
 The following adds a user with the login name `cooluser`. The `HOME` directory `home/cooluser` is created by default. Then the example invokes the command `passwd` to set a password for the new user.
 
 ```
-$ sudo adduser cooluser
+$ sudo adduser  cooluser
 
 $ sudo passwd cooluser
 Changing password for user cooluser.
