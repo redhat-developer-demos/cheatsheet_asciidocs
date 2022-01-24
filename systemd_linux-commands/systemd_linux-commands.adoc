@@ -256,7 +256,7 @@ A unit refers to any resource that systemd knows how to operate on and manage.
 
 *Example:*
 
-The following example uses the `systemctl list-units` command set to list units in memory. The pattern `sys-k*` is applied so that the list only shows unit names that start characters `sy-k`.
+The following example uses the `systemctl list-units` command set to list units in memory. The pattern `sys-k*` is applied so that the list only shows unit names that start characters `sys-k`.
 
 ```
 $ systemctl list-units 'sys-k*'
