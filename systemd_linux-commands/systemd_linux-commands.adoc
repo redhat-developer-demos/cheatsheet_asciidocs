@@ -186,6 +186,8 @@ sudo systemctl -i reboot
 
 == System information commands
 
+The following shows how to use the `journalctl` and`` systemctl` programs to get information about services running under `systemd.`
+
 === journalctl
 
 `journalctl [options]`
