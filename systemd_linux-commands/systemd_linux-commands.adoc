@@ -43,7 +43,7 @@ The `systemctl restart` command set requires administrator permissions to execut
 The following example uses the `systemctl restart` command set to restart the `httpd` web server.
 
 ```
-sudo systemctl restart httpd
+$ sudo systemctl restart httpd
 ```
 
 === systemctl start
