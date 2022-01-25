@@ -15,7 +15,7 @@ Systemd is found in Red Hat Enterprise Linux as well as other Linux distribution
 
 `systemctl [options] enable <service_name>`
 
-Enables a service. Enabling a service makes it so the service will startup upon reboot or whenever a computer starts up.
+Enables a service. Enabling a service makes it so the service will startup upon reboot or whenever a computer starts up. The `enable` does not start the particular service. However, the service will restart upon reboot. To start a service using `systemctl` use the command set `systemctl start`.
 
 *Example:*
 
@@ -91,7 +91,7 @@ Reports status information about a service.
 
 *Example:*
 
-The following example uses the `systemctl status` to report status information about the `sshd` service. `systemctl status` also displays log information about the service's activities.
+The following example uses the `systemctl status` to report status information about the `sshd` service. `systemctl status` also displays log information about the service's activities via log entries that follow the status information.
 
 ```
 $ systemctl status sshd
@@ -125,11 +125,11 @@ Stops a service. The `systemctl stop` command set requires administrator permiss
 
 *Example:*
 
-The following example uses the `systemctl stop` command set to stop the `httpd` service. Then the `systemctl status httpd` is called to report the status. Notice that the line
+The following example uses the `systemctl stop` command set to stop the `httpd` service. Then the `systemctl status httpd` is called to report the status. Notice that the line:
 
 `Active: inactive (dead) since Mon 2022-01-24 09:56:53 PST; 3s ago`
 
-in the status output reports that `httpd` service is inactive.
+in the status output reports that the `httpd` service is inactive.
 
 ```
 $ systemctl stop httpd
@@ -186,13 +186,13 @@ sudo systemctl -i reboot
 
 == System information commands
 
-The following shows how to use the `journalctl` and`` systemctl` programs to get information about services running under `systemd.`
+The following shows how to use the `journalctl` and `systemctl` programs to get information about services running under `systemd.`
 
 === journalctl
 
 `journalctl [options]`
 
-`journalctl`  is the tool used to work with systemd logging capabilities. Under `systemd` the system, boot, and kernel log files are stored and managed in a central location, in a binary format.  `journalctl` presents information in the central logging system in human readable text.
+`journalctl`  is the tool used to work with systemd logging capabilities. `systemd` stores the system, boot, and kernel log files in a central location, in a binary format.  `journalctl` presents information in the central logging system in human readable text.
 
 *Example:*
 
@@ -213,38 +213,31 @@ Jan 24 10:03:35 localhost.localdomain systemd[1]: Started dnf makecache.
 
 === systemctl list-sockets
 
-`systemctl [options] list-sockets`
+`systemctl [options] list-sockets <unit_name_pattern>`
+
+Lists the sockets in memory available for inter-process communication (IPC).
 
 *Example:*
 
+The following example lists the sockets in memory using the pattern `systemd*` to show only those sockets that have a unit name that begins with the characters `systemd`. Also, the option `--show-types` is used to display the `TYPE` column in the output.
+
 ```
-$ systemctl list-sockets
-LISTEN                                UNIT                            ACTIVATES
-/run/avahi-daemon/socket              avahi-daemon.socket             avahi-daemon.service
-/run/dbus/system_bus_socket           dbus.socket                     dbus.service
-/run/dmeventd-client                  dm-event.socket                 dm-event.service
-/run/dmeventd-server                  dm-event.socket                 dm-event.service
-/run/initctl                          systemd-initctl.socket          systemd-initctl.service
-/run/libvirt/libvirt-admin-sock       libvirtd-admin.socket           libvirtd.service
-/run/libvirt/libvirt-sock             libvirtd.socket                 libvirtd.service
-/run/libvirt/libvirt-sock-ro          libvirtd-ro.socket              libvirtd.service
-/run/libvirt/virtlockd-sock           virtlockd.socket                virtlockd.service
-/run/libvirt/virtlogd-sock            virtlogd.socket                 virtlogd.service
-/run/lvm/lvmpolld.socket              lvm2-lvmpolld.socket            lvm2-lvmpolld.service
-/run/rpcbind.sock                     rpcbind.socket                  rpcbind.service
-/run/systemd/coredump                 systemd-coredump.socket         systemd-coredump@0.service
-/run/systemd/journal/dev-log          systemd-journald-dev-log.socket systemd-journald.service
-/run/systemd/journal/socket           systemd-journald.socket         systemd-journald.service
-/run/systemd/journal/stdout           systemd-journald.socket         systemd-journald.service
-/run/udev/control                     systemd-udevd-control.socket    systemd-udevd.service
-/var/run/.heim_org.h5l.kcm-socket     sssd-kcm.socket                 sssd-kcm.service
-.
-.
-.
+$ systemctl --show-types list-sockets 'systemd*' 
+LISTEN                       TYPE             UNIT                            ACTIVATES
+/run/initctl                 FIFO             systemd-initctl.socket          systemd-initctl.service
+/run/systemd/coredump        SequentialPacket systemd-coredump.socket         systemd-coredump@0.service
+/run/systemd/journal/dev-log Datagram         systemd-journald-dev-log.socket systemd-journald.service
+/run/systemd/journal/socket  Datagram         systemd-journald.socket         systemd-journald.service
+/run/systemd/journal/stdout  Stream           systemd-journald.socket         systemd-journald.service
+/run/udev/control            SequentialPacket systemd-udevd-control.socket    systemd-udevd.service
+kobject-uevent 1             Netlink          systemd-udevd-kernel.socket     systemd-udevd.service
+
+7 sockets listed.
+Pass --all to see loaded but inactive sockets, too.
 ```
 === systemctl list-units
 
-`systemctl [options] list-units <pattern> `
+`systemctl [options] list-units <pattern>`
 
 List units that `systemd` has in memory. Units are listed with the following columns:
 
