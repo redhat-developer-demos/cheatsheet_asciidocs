@@ -91,7 +91,7 @@ Reports status information about a service.
 
 *Example:*
 
-The following example uses the `systemctl status` to report status information about the `sshd` service. `systemctl status` also displays log information about the service's activities via log entries that follow the status information.
+The following example uses the `systemctl status` to report status information about the `sshd` service. `systemctl status` also displays information about the service's activities via log entries that follow the status information.
 
 ```
 $ systemctl status sshd
