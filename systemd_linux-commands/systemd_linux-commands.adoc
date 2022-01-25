@@ -196,6 +196,8 @@ The following shows how to use the `journalctl` and `systemctl` programs to get 
 
 *Example:*
 
+The following example uses the `journalctl` command to display log information stored under systemd in binary format. The `--follow` option is used to only the most recent journal entries.
+
 ```
 $ journalctl --follow
 -- Logs begin at Mon 2022-01-24 09:31:39 PST. --
