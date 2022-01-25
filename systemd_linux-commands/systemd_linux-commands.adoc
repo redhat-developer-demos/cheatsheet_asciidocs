@@ -1,11 +1,11 @@
-= Systemd Commands Cheat Sheet
+= systemd Commands Cheat Sheet
 :experimental: true
 :product-name:
 :version: 1.0.0
 
-This cheat sheet presents a list of command-line executables that are used for working with systemd. The purpose of systemd to consolidate service configuration and application behavior under a common executable.
+This cheat sheet presents a list of command-line executables that are used for working with `systemd``. The purpose of `systemd`` is to consolidate service configuration and application behavior.
 
-Systemd is found in Red Hat Enterprise Linux as well as other Linux distributions. 
+`systemd`` is found in Red Hat Enterprise Linux as well as other Linux distributions. 
 
 == Application management systemctl commands
 
