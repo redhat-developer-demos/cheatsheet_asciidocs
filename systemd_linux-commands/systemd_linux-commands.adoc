@@ -7,7 +7,7 @@ This cheat sheet presents a list of command-line executables that are used for w
 
 `systemd` is found in Red Hat Enterprise Linux as well as other Linux distributions. 
 
-== Application management systemctl commands
+== Application management using systemctl commands
 
 `systemctl` is the application that interacts with systemd from the command line. The following commands demonstrate how to use various `systemctl` subcommands to control the behavior of a particular services running on a computer. 
 
