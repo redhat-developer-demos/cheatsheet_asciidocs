@@ -1,0 +1,198 @@
+= RHEL 8 Commands Cheat Sheet
+:experimental: true
+:product-name:
+:version: 1.0.0
+
+INTRODUCTION TO BE PROVIDED
+
+== Definition of Terms
+
+=== Application Stream
+
+TO BE PROVIDED
+
+=== dnf
+
+TO BE PROVIDED
+
+=== Module
+
+TO BE PROVIDED
+
+=== Module Stream
+
+TO BE PROVIDED
+
+=== yum
+
+TO BE PROVIDED
+
+== Module Exploration Commands
+
+TO BE PROVIDED
+
+=== dnf module list
+
+*Example:*
+
+=== dnf module list installed
+
+*Example:*
+
+=== dnf module provides package
+
+*Example:*
+
+=== dnf module info module
+
+*Example:*
+
+=== dnf module info --profile module:stream
+
+*Example:*
+
+=== dnf module list
+
+`dnf module list <module_name>`
+
+*Example:*
+
+== General dnf Commands
+
+TO BE PROVIDED
+
+=== dnf search 
+
+`dnf search <string>`
+
+*Example:*
+
+=== dnf install
+
+`dnf install <package_name>`
+
+*Example:*
+
+=== dnf update
+
+`dnf update <package_name>`
+
+=== dnf remove
+
+`dnf remove <package_name>`
+
+*Example:*
+
+=== dnf history undo last
+
+`sudo dnf history undo last`
+
+*Example:*
+
+=== dnf list all
+
+*Example:*
+
+=== dnf list installed
+
+*Example:*
+
+=== dnf repolist
+
+*Example:*
+
+== Subscription Commands
+
+TO BE PROVIDED
+
+=== subscription-manager repos --enable repository
+
+*Example:*
+
+=== subscription-manager repos --disable repository
+
+*Example:*
+
+== General Module Commands
+
+=== dnf module enable module:stream
+
+*Example:*
+
+=== dnf module install module:stream/profile
+
+*Example:*
+
+=== dnf module remove module
+
+*Example:*
+
+=== dnf module disable module
+
+*Example:*
+
+== Application Stream Commands
+
+=== sudo dnf install
+
+*Examples:*
+
+The following are application and module specific examples of using the command `dnf install`. Notice that the commands are run with adminsitrator privileges using the `sudo` command.
+
+`sudo dnf install ant`
+
+`sudo dnf install buildah podman`
+
+`sudo dnf install llvm-toolset`
+
+`sudo dnf group install "Development Tools"`
+
+`sudo dnf install go-toolset`
+
+`sudo dnf install httpd`
+
+`sudo dnf install mariadb`
+
+`sudo dnf install maven`
+
+`sudo dnf install mysql`
+
+`sudo dnf install nginx`
+
+`sudo dnf install nodejs`
+
+`sudo dnf install java-11-openjdk-devel`
+
+`sudo dnf install java-1.8.0-openjdk-devel`
+
+`sudo dnf install pcp-zeroconf`
+
+`sudo dnf install perl`
+
+`sudo dnf install php`
+
+`sudo dnf install postgresql`
+
+`sudo dnf module install postgresql:9.6`
+
+`sudo dnf install python2 or dnf module install python27`
+
+`sudo dnf install python3 or dnf module install python36`
+
+`sudo dnf install redis`
+
+`sudo dnf install ruby`
+
+`sudo dnf install rust-toolset`
+
+`sudo dnf install scala`
+
+`sudo dnf install subversion`
+
+`sudo dnf install swig`
+
+`sudo dnf install systemtap`
+
+`sudo dnf install valgrind`
+
+`sudo dnf install varnish`
