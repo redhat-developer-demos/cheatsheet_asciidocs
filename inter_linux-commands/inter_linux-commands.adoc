@@ -3,21 +3,24 @@
 :product-name:
 :version: 1.0.0
 
-The following is a sampling of intermediate commands and executables typically used by developers who have a basic understanding of Linux. The commands are organized according to category.
+This cheat sheet presents a collection of Linux commands and executables typically used by developers who want to move beyond the basics of working with the Linux operating system. Some examples of basic operations are creating and deleting directories and files, navigating around the file system and installing applications. Examples of intermediate use involves managing processes, users and groups on a particular machine running under Linux as well as monitoring disk and network usage.
+
+The commands are organized according to category.
 
 == Console and output management commands
 
-Commands in this section apply to working a terminal window on and console output from a computer or virtual machine running the Linux operating system.
+
+Commands in this section apply to working in a terminal window console and output from a computer or virtual machine running the Linux operating system.
 
 === history
 
 `history [options]`
 
-The `history` command displays a list of commands executed on the system. Also, `history` can be used to manipulate the history list and the way information is displayed.
+Displays a list of commands executed on the system. The `history` command can also be used to manipulate the history list and the way that history information is displayed.
 
-**Example:**
+*Example:*
 
-The following example uses the `history` command to show a list of command that have been executed on the system. The example pipes the result to the `more` command which shows the first fifteen lines of output using the `-15` option.
+The following example uses the `history` command to show a list of command that have been executed on the system. The example pipes the result to the `more` command, which shows the first 15 lines of output using the `-15` option:
 
 ```
 $ history | more -15
@@ -43,11 +46,11 @@ $ history | more -15
 
 `more [options] </path/to/filename or stdout>`
 
-Allows a user to view and traverse the content of a file or stdout. The command `more` invokes itself within a distinct command-line user interface. To exit the process users strike the `q` key.
+Allows a user to view and traverse the contents of a file or stdout. The `more` command invokes within a distinct command-line user interface. To exit the process, users strike the `q` key.
 
 *Examples:*
 
-This example uses the `more` command to display the first four lines of the file `/etc/passwd`. Users can then traverse the rest of the file one line at time by striking the `<ENTER>` key:
+This example uses the `more` command to display the first four lines of the file `/etc/passwd`. Users can then traverse the remainder of the file one line at a time by striking the `<ENTER>` key:
 
 ```
 $ more -4 /etc/passwd 
@@ -67,7 +70,6 @@ Displays information about the running Linux processes.
 *Example:*
 
 The following command displays the `top` command with the result piped to the `more` command in order to view the first portion of the output:
-
 
 ```
 $ top | more
@@ -96,17 +98,17 @@ MiB Swap:   8092.0 total,   8092.0 free,      0.0 used.   6205.6 avail Mem
 
 == Disk management commands
 
-The following commands apply to working with disks, devices and volumes on a computer running the Linux operating system. 
+Commands in this section apply to working with disks, devices, and volumes on a computer running the Linux operating system. 
 
 === df
 
 `df [options] <file name>`
 
-This command shows the amount of disk space used and available according to the file system that represents a particular disk device mount.   If no file name is given, the space available on all mounted file systems is displayed.
+Shows the amount of disk space used and available according to the file system that represents a particular disk device mount. If no file name is given, the space available on all mounted file systems is displayed.
 
-**Example:**
+*Example:*
 
-The following example shows the invocation and result of `df` displaying all mounted file systems. Disk space  is  shown in  1K blocks. (`$` is the command-line prompt symbol.)
+The following example shows the invocation and result of `df` displaying all mounted file systems. Disk space is shown in 1K blocks (note that `$` is the command-line prompt symbol):
 
 ```
 $ df
@@ -125,11 +127,11 @@ tmpfs                    795724      64    795660   1% /run/user/1000
 
 `du [options] <starting directory or file>`
 
-This command reports information about disk usage on the local computer or virtual machine
+Reports information about disk usage on the local computer or virtual machine.
 
-**Example:**
+*Example:*
 
-The following uses shows the command `du` to report the amount of disk space used by the files in the directory `/etc/bin`. (`$` is the command-line prompt symbol.)
+The following example uses the command `du` to report the amount of disk space used by the files in the directory `/etc/bin`:
 
 ```
 $ du /usr/bin
@@ -138,7 +140,7 @@ $ du /usr/bin
 
 == File and directory management commands
 
-The following commands apply to working with file and directories on a computer running the Linux operating system.
+Commands in this section apply to working with files and directories on a computer running the Linux operating system.
 
 === find
 
@@ -183,32 +185,30 @@ $ pwd
 
 `alias [options] <shortcut=command>`
 
-The command `alias` assigns a shortcut name to an existing command or executable.
+Assigns a shortcut name to an existing command or executable.
 
-**Example:**
+*Example:*
 
-The following example creates a temporary alias for the `clear` command. The alias is named `cls`. The `clear` command clears the terminal window. Once created, `cls` will also clear the terminal window.
+The following example creates a temporary alias for the `clear` command. The alias is named `cls`. The `clear` command clears the terminal window. Once created, `cls` will also clear the terminal window:
 
 `$ alias cls='clear'`
 
 === awk
 
-The `awk` command finds, filters or replaces text in a file or from stdout.
+Finds, filters, or replaces text in a file or from stdout.
 
-**Examples:**
+*Examples:*
 
-The following example pipes the string "Bobby is cool" to the `awk` command. The `awk` command invokes the subcommand named `sub` to find any occurrence of "Bobby" and change the string to "Teddy". Then, the subcommand `print` outputs the result of the substitution.
+This example pipes the string "Bobby is cool" to the `awk` command. The `awk` command invokes the subcommand named `sub` to find any occurrence of "Bobby" and change the string to "Teddy". Then, the subcommand `print` outputs the result of the substitution:
 
 ```
 $ echo "Bobby is cool" | awk '{sub("Bobby","Teddy"); print}'
 Teddy is cool
 ```
 
-The following example uses `awk` to filter output according to field position. First, the example shows the output of the `who` command which lists the current users logged into the computer. The  `who` command displays four fields (columns). The fields are username, the terminal line number, the login time and the machine from where access originates.
+This example uses `awk` to filter output according to field position. First, the example shows the output of the `who` command, which lists the current users logged in to the computer. The `who` command displays four fields (columns). The fields are username, the terminal line number, the login time, and the machine from which access originated.
 
-The second execution of `who` pipes the result to `awk`. Then, `awk` uses the `print %1` subcommand set to show only the first field name. The third execution of `who` pipes the result to `awk` which then filters input to print the values in the second field.
-
-(`$` is the command-line prompt symbol.)
+The second execution of `who` pipes the result to `awk`. Then, `awk` uses the `print %1` subcommand set to show only the first field name. The third execution of `who` pipes the result to `awk`, which then filters input to print the values in the second field:
 
 ```
 $ who
@@ -229,17 +229,17 @@ pts/1
 
 `diff [options] file1 file2`
 
-The `diff` command displays the difference in the content between two files.
+Displays the difference in content between two files.
 
-**Example:**
+*Example:*
 
 The following example uses the `printf` command to create three files named `one.txt`, `two.txt`, and `three.txt`. Each file contains a list of names. The files named `one.txt` and `three.txt` have identical content. The file `two.txt` has an additional name.
 
 The first invocation of `diff` compares the files `one.txt` and `two.txt`. The second invocation compares files `one.txt` to `three.txt`. 
 
-The first invocation reports that there is difference in `two.txt` and that the 4th line from the file `two.text` should be added (`a`) to the third line in `one.txt`. The value of the 4th line in `two.txt` is `Shemp`.
+The first invocation reports that there is difference in `two.txt` and that the fourth line from the file `two.text` should be added (`a`) to the third line in `one.txt`. The value of the fourth line in `two.txt` is `Shemp`.
 
-The second invocation of `diff` uses the `-s` option to display the report that both the file `one.txt` and `three.txt` are identical. If the `-s` option was not used, there would be no output to the console. (By default, identical files are not reported in stdout.)
+The second invocation uses the `-s` option to display the report that indicates the files `one.txt` and `three.txt` are identical. If the `-s` option was not used, there would be no output to the console (by default, identical files are not reported in stdout):
 
 ```
 $ printf  "Moe\nLarry\nCurly\n" > one.txt
@@ -259,11 +259,11 @@ Files one.txt and three.txt are identical
 
 `sed [options] <manipulation instructions> <path/to/filename or stdout>`
 
-The `sed` manipulates the content of a file or output sent to stdout.
+Manipulates the content of a file or output sent to stdout.
 
-**Example:**
+*Example:*
 
-The following example uses the `echo` command send the string `Bobby is cool` to the `sed` command. The command `sed` uses the `s` subcommand to substitute the name `Teddy` where the name `Bobby` occurs. The output of then displayed.
+The following example uses the `echo` command to send the string `Bobby is cool` to the `sed` command. The command `sed` uses the `s` subcommand to substitute the name `Teddy` where the name `Bobby` occurs. The output is then displayed:
 
 (`$` is the command-line prompt symbol.)
 
@@ -282,7 +282,7 @@ Commands in this section apply to working with networks on and from a Linux comp
 
 Reports the hostname of the local computer.
 
-**Example:**
+*Example:*
 
 ```
 $ hostname
@@ -293,50 +293,58 @@ localhost.localdomain
 
 `nslookup [options] <domain_name>`
 
-The program `nslookup`` queries for information about a particular Internet domain name.
+A program that queries for information about a particular Internet domain name.
 
-**Example:**
+*Example:*
 
-The following example invokes `nslookup` against the domain name `redhat.com`.
+
+The following example invokes `nslookup` against the domain name `developers.redhat.com`:
 
 ```
-$ nslookup redhat.com
+$ nslookup developers.redhat.com
 Server:		192.168.86.1
 Address:	192.168.86.1#53
 
 Non-authoritative answer:
-Name:	redhat.com
-Address: 209.132.183.105
-
+developers.redhat.com	canonical name = developers.redhat.com2.edgekey.net.
+developers.redhat.com2.edgekey.net	canonical name = developers.redhat.com2.edgekey.net.globalredir.akadns.net.
+developers.redhat.com2.edgekey.net.globalredir.akadns.net	canonical name = e40408.dsca.akamaiedge.net.
+Name:	e40408.dsca.akamaiedge.net
+Address: 23.199.47.87
+Name:	e40408.dsca.akamaiedge.net
+Address: 23.199.47.85
+Name:	e40408.dsca.akamaiedge.net
+Address: 2600:1406:3400::6862:7512
+Name:	e40408.dsca.akamaiedge.net
+Address: 2600:1406:3400::6862:7543
 ```
 
-**Example:**
 
 === traceroute
 
 `traceroute [options] <target address or domain_name>`
 
-Reports the route the a packet takes in hops to move through the Internet to reach its destination.
+Reports the route that a packet takes in hops to move through the Internet to reach its destination.
 
-The program `traceroute` is not part of Red Hat Enterprise Linux by default. It must be installed using `sudo yum install traceroute`.
+The program `traceroute` is not part of Red Hat Enterprise Linux (RHEL) by default. It must be installed using `sudo dnf install traceroute`.
 
-**Example:**
+*Example:*
 
-The following example reports the route from the local machine to `redhat.com`. The `-m` option is used to limit the output to the first five hops.
+The following example reports the route from the local machine to `redhat.com`. The `-m` option is used to limit the output to the first five hops:
 
 ```
-$ traceroute -m 5 redhat.com
-traceroute to redhat.com (209.132.183.105), 5 hops max, 60 byte packets
- 1  _gateway (192.168.86.1)  1.256 ms  1.144 ms  1.077 ms
- 2  142-254-237-093.inf.spectrum.com (142.254.237.93)  10.406 ms  17.364 ms  17.237 ms
- 3  agg53.lsaicaev01h.socal.rr.com (24.30.168.81)  18.990 ms  18.907 ms  18.823 ms
- 4  72.129.19.14 (72.129.19.14)  17.659 ms  21.626 ms  17.556 ms
- 5  agg26.lsancarc01r.socal.rr.com (72.129.17.0)  19.400 ms  19.341 ms  19.258 ms
+$ traceroute -m 5 developers.redhat.com
+traceroute to developers.redhat.com (23.199.47.85), 5 hops max, 60 byte packets
+ 1  _gateway (192.168.86.1)  0.599 ms  0.514 ms  0.656 ms
+ 2  142-254-237-093.inf.spectrum.com (142.254.237.93)  11.974 ms  11.874 ms  17.793 ms
+ 3  agg53.lsaicaev02h.socal.rr.com (24.30.168.85)  19.294 ms  20.242 ms  19.224 ms
+ 4  72.129.19.22 (72.129.19.22)  18.984 ms  19.888 ms  19.969 ms
+ 5  agg26.tustcaft01r.socal.rr.com (72.129.17.2)  13.575 ms  19.673 ms  13.579 ms
 ```
 
-== OS management commands
+== RHEL management commands
 
-The commands in this section apply to working with Red Hat Enterprise Linux operating system.
+The commands in this section apply to working with the Red Hat Enterprise Linux operating system.
 
 === sestatus
 
@@ -344,9 +352,9 @@ The commands in this section apply to working with Red Hat Enterprise Linux oper
 
 This program is used to report status information about a computer or virtual machine running SELinux.
 
-**Example:**
+*Example:*
 
-The following example invokes the program `sestatus` and displays the default response.
+The following example invokes the program `sestatus` and displays the default response:
 
 ```
 $ sestatus
@@ -366,11 +374,11 @@ Max kernel policy version:      33
 
 `uname [options]`
 
-The command `uname` reports system information about the local computer
+The command `uname` reports system information about the local computer.
 
-**Example:**
+*Example:*
 
-The following example uses the `-a` option with `uname` to report all the information system information about the local computer.
+The following example uses the `-a` option with `uname` to report all the system information about the local computer:
 
 ```
 $ uname -a
@@ -385,27 +393,26 @@ The following commands apply to working with users and groups as supported by th
 
 `users [options]`
 
-Displays the name of the users logged into the computer.
+Displays the names of users logged into the computer.
 
-**Example:**
+*Example:*
 
-The following example uses the command `users` to list the users logged into the system.
+The following example uses the command `users` to list all users logged into the system:
 
 ```
 $ users
 cooluser jaggermick lennonjohn
-
 ```
 
 === useradd
 
 `adduser [options] <username>`
 
-Adds a user to the computing environment. The command must be run as `sudo` in order to have adminstrator access.
+Adds a user to the computing environment. The command must be run as `sudo` for administrator access.
 
-**Example:**
+*Example:*
 
-The following adds a user with the login name `cooluser`. The `HOME` directory `home/cooluser` is created by default. Then the example invokes the command `passwd` to set a password for the new user.
+The following example adds a user with the login name `cooluser`. The `HOME` directory `home/cooluser` is created by default. Then, the example invokes the command `passwd` to set a password for the new user:
 
 ```
 $ sudo adduser  cooluser
@@ -421,11 +428,11 @@ passwd: all authentication tokens updated successfully.
 
 `userdel [options] <username>`
 
-Deletes a user from the computer. The command must be run as `sudo` in order to have adminstrator access.
+Deletes a user from the computer. The command must be run as `sudo` for administrator access.
 
-**Example:**
+*Example:*
 
-The following example uses the `userdel` command to remove the user with the login name `cooluser` from the system. The `-r` option indicates that the user's `HOME` directory is to be deleted too.
+The following example uses the `userdel` command to remove the user with the login name `cooluser` from the system. The `-r` option indicates that the user's `HOME` directory is also to be deleted:
 
 ```
 $ sudo userdel -r cooluser
@@ -435,11 +442,11 @@ $ sudo userdel -r cooluser
 
 `usermod [options] <username>`
 
-The command `usermod` modifies user account information. The command can be used to add a user to a group. The command must be run as `sudo` in order to have adminstrator access.
+Modifies user account information and can be used to add a user to a group. The command must be run as `sudo` for administrator access.
 
-**Example:**
+*Example:*
 
-The following example uses the command `usermod` to add a user with a login name `lennonjohn` to a group named `beatles`. Then the command `groups` is used to verify that the user `lennonjohn` is indeed assigned to the group `beatles`.
+The following example uses the command `usermod` to add a user with the login name `lennonjohn` to a group named `beatles`. Then, the command `groups` is used to verify that the user `lennonjohn` is indeed assigned to the group `beatles`:
 
 ```
 $ sudo usermod -a -G beatles lennonjohn
@@ -454,9 +461,9 @@ lennonjohn : lennonjohn beatles
 
 Lists the groups to which a user belongs.
 
-**Example:**
+*Example:*
 
-The following example uses the command `groups` to list the groups to which the user with the username `lennonjohn` belongs.
+The following example uses the command `groups` to list the groups to which the user with the username `lennonjohn` belongs:
 
 ```
 $ groups lennonjohn
@@ -467,11 +474,11 @@ lennonjohn : lennonjohn beatles
 
 `gpasswd [options] <group>`
 
-The command `gpasswd` is used to manage the configuration of a group under the Linux operating system. The command must be run as `sudo` in order to have adminstrator access.
+The command `gpasswd` is used to manage the configuration of a group under the Linux operating system. The command must be run as `sudo` for administrator access.
 
-**Example:**
+*Example:*
 
-The following example uses `gpasswd` remove a user from a group. The `-d` option followed by the username indicates that a user is to be deleted.
+The following example uses `gpasswd` to remove a user from a group. The `-d` option followed by the username indicates that the user is to be deleted:
 
 ```
 $ sudo gpasswd -d jaggermick beatles
@@ -482,11 +489,11 @@ Removing user jaggermick from group beatles
 
 `groupadd [options] <groupname>`
 
-Adds a group to the computer. The command must be run as `sudo` in order to have adminstrator access.
+Adds a group to the computer. The command must be run as `sudo` for administrator access.
 
-**Example:**
+*Example:*
 
-The following example uses the `groupadd command` to create a group named `beatles`.
+The following example uses the `groupadd` command to create a group named `beatles`.
 
 ```
 $ sudo groupadd beatles
@@ -496,13 +503,12 @@ $ sudo groupadd beatles
 
 `groupdel [options] <groupname>`
 
-Deletes a group from the computer. The command must be run as `sudo` in order to have adminstrator access.
+Deletes a group from the computer. The command must be run as `sudo` for administrator access.
 
-**Example:**
+*Example:*
 
 The following example uses the command `groupdel` to delete the group named `beatles` from the system.
 
 ```
 $ sudo groupdel beatles
 ```
-
