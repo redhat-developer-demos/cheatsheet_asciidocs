@@ -3,7 +3,7 @@
 :product-name:
 :version: 1.0.0
 
-This cheat sheet presents a collection of Linux commands and executables typically used by developers who want to move beyond the basics of working with the Linux operating system. Some examples of basic operations are creating and deleting directories and files, navigating around the file system and installing applications. Examples of intermediate use involves managing processes, users and groups on a particular machine running under Linux as well as monitoring disk and network usage.
+This cheat sheet presents a collection of Linux commands and executables typically used by developers who want to move beyond the basics of working with the Linux operating system. Some examples of basic operations are creating and deleting directories and files, navigating around the file system and installing applications. Examples of intermediate use involves managing processes, users and groups on a particular machine running under Linux as well as monitoring disk and network usage, to name a few.
 
 The commands are organized according to category.
 
