@@ -3,62 +3,72 @@
 :product-name:
 :version: 1.0.0
 
-This cheat sheet presents a list of command-line executables that are used for working with `systemd`. The purpose of `systemd` is to consolidate service configuration and application behavior.
+This cheat sheet presents command-line executables that are used for working with `systemd`. The `systemd` service runs on https://developers.redhat.com/topics/linux[Linux] to consolidate service configuration and application behavior. `systemd` is found in https://developers.redhat.com/products/rhel[Red Hat Enterprise Linux] as well as other Linux distributions. 
 
-`systemd` is found in Red Hat Enterprise Linux as well as other Linux distributions. 
+`systemctl` is the application that interacts with systemd from the command line. This cheat sheet demonstrates how to use various `systemctl` subcommands to control the behavior of particular services running on a computer. The `journalctl` command, which displays information about `systemd` activities from its logs, is also introduced.
 
 == Application management using systemctl commands
 
-`systemctl` is the application that interacts with systemd from the command line. The following commands demonstrate how to use various `systemctl` subcommands to control the behavior of a particular services running on a computer. 
+The subcommands in this section control the behavior of particular applications, usually services (daemons) that run in the background.
 
 === systemctl enable
 
-`systemctl [options] enable <service_name>`
+----
+systemctl [options] enable <service_name>
+----
 
-Enables a service. Enabling a service makes it so the service will startup upon reboot or whenever a computer starts up. The `enable` does not start the particular service. However, the service will restart upon reboot. To start a service using `systemctl` use the command set `systemctl start`.
+Enables a service. Enabling a service causes the system to start the service upon reboot or whenever a computer starts up. The `enable` subcommand does not start the particular service immediately. To start a service immediately using `systemctl`, use the `systemctl start` command, described later.
 
 *Example:*
 
-The following example invokes the `systemctl enable` to configure the `sshd` secure shell service to invoke at system startup. Then, the command set `systemctl is-enabled` is invoked to verify that the `sshd` services is enabled.
+The `systemctl enable` command in this example configures the system to invoke the `sshd` secure shell service at system startup. This command can be useful to ensure that users can securely log in from remote systems at any time when the local system is running.
 
-The `systemctl enable` command set requires administrator permissions to execute. The command set can be run as `sudo`. If `sudo` is not used, the `systemctl enable` command set will prompt for the administrator password.
+The `systemctl is-enabled` command that follows verifies that the `sshd` services is enabled.
 
-```
-sudo systemctl enable sshd
+The `systemctl enable` command requires administrator permissions to execute. The command can be run as a subcommand to `sudo`. If `sudo` is not used, `systemctl enable` prompts for the administrator password. Calling `systemctl is-enabled` does not require administrator permissions.
+
+----
+$ sudo systemctl enable sshd
 
 $ systemctl is-enabled sshd
 enabled
-```
+----
 
 === systemctl restart
 
-`systemctl [options] restart <service_name>`
+----
+systemctl [options] restart <service_name>
+----
 
 Restarts a service.
 
-The `systemctl restart` command set requires administrator permissions to execute. The command set can be run as `sudo`. If `sudo` is not used, the `systemctl restart` command set will prompt for the administrator password.
+The `systemctl restart` command requires administrator permissions to execute. The command can be run as a subcommand to `sudo`. If `sudo` is not used, `systemctl restart` prompts for the administrator password.
 
 *Example:*
 
-The following example uses the `systemctl restart` command set to restart the `httpd` web server.
+The `systemctl restart` command in this example restarts the `httpd` web server. This command can be useful after making configuration changes to the web server, so that the changes take effect for subsequent incoming requests.
 
-```
+----
 $ sudo systemctl restart httpd
-```
+----
 
 === systemctl start
 
-`systemctl [options] start <service_name>`
+----
+systemctl [options] start <service_name>
+----
 
 Starts a service.
 
-The `systemctl start` command set requires administrator permissions to execute. The command set can be run as `sudo`. If `sudo` is not used, the `systemctl start` command set will prompt for the administrator password.
+The `systemctl start` command requires administrator permissions to execute. The command can be run as a subcommand to `sudo`. If `sudo` is not used, `systemctl start` prompts for the administrator password.
 
 *Example:*
 
-The following example uses the `systemctl start` command set to start the `httpd` web server. Then, the command set `systemctl status httpd` is called to verify that the `httpd` service is running. Notice that calling `systemctl status` does not require administrator permissions.
+The `systemctl start` command in this example starts the `httpd` web server. This can be useful to run a service that is not normally running. `systemctl start` does not cause the service to restart after the system restarts.
 
-```
+The `systemctl status httpd` command that follows verifies that the `httpd` service is running. Calling `systemctl status` does not require administrator permissions.
+
+----
 $ sudo systemctl start httpd
 
 $ systemctl status httpd
@@ -81,19 +91,21 @@ Jan 24 09:31:09 localhost.localdomain systemd[1]: Starting The Apache HTTP Serve
 Jan 24 09:31:10 localhost.localdomain httpd[41263]: AH00558: httpd: Could not reliably determine the server's fully qualified domain name, us>
 Jan 24 09:31:10 localhost.localdomain systemd[1]: Started The Apache HTTP Server.
 Jan 24 09:31:10 localhost.localdomain httpd[41263]: Server configured, listening on: port 80
-```
+----
 
 === systemctl status
 
-`systemctl [options] status <service_name>`
+----
+systemctl [options] status <service_name>
+----
 
 Reports status information about a service.
 
 *Example:*
 
-The following example uses the `systemctl status` to report status information about the `sshd` service. `systemctl status` also displays information about the service's activities via log entries that follow the status information.
+The `systemctl status` command in this example reports status information about the `sshd` service. `systemctl status` also displays information about the service's activities via log entries that follow the status information. Earlier examples in this cheat sheet show reasons to use this command.
 
-```
+----
 $ systemctl status sshd
 ● sshd.service - OpenSSH server daemon
    Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor preset: enabled)
@@ -115,23 +127,21 @@ Jan 21 10:23:25 localhost.localdomain sshd[2136]: pam_unix(sshd:session): sessio
 Jan 24 08:42:43 localhost.localdomain sshd[40279]: Accepted password for reselbob from 192.168.86.20 port 61945 ssh2
 Jan 24 08:42:43 localhost.localdomain sshd[40279]: pam_unix(sshd:session): session opened for user reselbob by (uid=0)
 lines 1-19/19 (END)
-```
+----
 
 === systemctl stop
 
-`systemctl [options] stop <service_name>`
+----
+systemctl [options] stop <service_name>
+----
 
-Stops a service. The `systemctl stop` command set requires administrator permissions to execute. The command set can be run as `sudo`. If `sudo` is not used, the `systemctl stop` command set will prompt for the administrator password.
+Stops a service. The `systemctl stop` command requires administrator permissions to execute. The command can be run as a subcommand to `sudo`. If `sudo` is not used, `systemctl stop` prompts for the administrator password.
 
 *Example:*
 
-The following example uses the `systemctl stop` command set to stop the `httpd` service. Then the `systemctl status httpd` is called to report the status. Notice that the line:
+The `systemctl stop` command in this example stops the `httpd` service. This command can be useful if you have to stop a service in order to backup its data, because you think it is being attacked by a malicious intruder, or for any other reason. The `systemctl status httpd` command that follows reports the status. 
 
-`Active: inactive (dead) since Mon 2022-01-24 09:56:53 PST; 3s ago`
-
-in the status output reports that the `httpd` service is inactive.
-
-```
+----
 $ systemctl stop httpd
 
 $ systemctl status httpd
@@ -150,39 +160,53 @@ Jan 24 09:41:29 localhost.localdomain httpd[1262]: Server configured, listening 
 Jan 24 09:56:52 localhost.localdomain systemd[1]: Stopping The Apache HTTP Server...
 Jan 24 09:56:53 localhost.localdomain systemd[1]: httpd.service: Succeeded.
 Jan 24 09:56:53 localhost.localdomain systemd[1]: Stopped The Apache HTTP Server.
-```
+----
+
+Note the following line in the status output, which shows that the `httpd` service is inactive:
+
+----
+Active: inactive (dead) since Mon 2022-01-24 09:56:53 PST; 3s ago
+----
 
 == Computer control commands
 
-The following commands use the `systemctl` subcommands to reboot and shutdown a computer.
+The subcommands in this section reboot and shut down a computer.
 
 === systemctl poweroff
 
-`systemctl [options] poweroff`
+----
+systemctl [options] poweroff
+----
 
 Shuts down the computer or virtual machine.
 
-The command requires that user invoking it have administrator permission. Thus the command must be invoked using `sudo`. If `sudo` in not used, `systemctl` prompts for the user's password.
+The `systemctl poweroff` command requires administrator permissions to execute.The command can be run as a subcommand to `sudo`. If `sudo` in not used, `systemctl poweroff` prompts for the  administrator password.
 
 *Example:*
 
-```
+The `systemctl poweroff` command in this example shuts down the computer or virtual machine.
+
+----
 sudo systemctl poweroff
-```
+----
 
 === systemctl reboot
 
-`systemctl [options] reboot`
+----
+systemctl [options] reboot
+----
+
+Shuts down the computer or virtual machine and immediately restarts it.
 
 *Example:*
 
-The following example reboots the computer or virtual machine using the `-i` option to ignore users logged in and open inhibitors .
+The `systemctl reboot` command in this example reboots the computer or virtual machine. The `-i` option ensures a shutdown by ignoring logged-in users and inhibitors (programs that prevent a shutdown in order to complete some long-running activity).
 
-The command requires that user invoking it have administrator permission. Thus the command must be invoked using `sudo`. If `sudo` in not used, `systemctl` prompts for the user's password.
+The `systemctl reboot` command requires administrator permissions to execute. The command can be run as a subcommand to `sudo`. If `sudo` is not used, `systemctl reboot` prompts for the administrator password.
 
-```
+----
 sudo systemctl -i reboot
-```
+----
 
 == System information commands
 
@@ -190,15 +214,17 @@ The following shows how to use the `journalctl` and `systemctl` programs to get 
 
 === journalctl
 
-`journalctl [options]`
+----
+journalctl [options]
+----
 
-`journalctl`  is the tool used to work with systemd logging capabilities. `systemd` stores the system, boot, and kernel log files in a central location, in a binary format.  `journalctl` presents information in the central logging system in human readable text.
+`journalctl` works with systemd's logging capabilities. `systemd` stores the system, boot, and kernel log files in a central location in a binary format.  `journalctl` presents information in the central logging system as human-readable text.
 
 *Example:*
 
-The following example uses the `journalctl` command to display log information stored under systemd in binary format. The `--follow` option is used to only the most recent journal entries.
+The `journalctl` command in this example displays everything stored recently in the log by `systemd`. The `--follow` option causes only the most recent journal entries to be displayed.
 
-```
+----
 $ journalctl --follow
 -- Logs begin at Mon 2022-01-24 09:31:39 PST. --
 Jan 24 10:01:20 localhost.localdomain systemd[1]: Starting The Apache HTTP Server...
@@ -211,19 +237,21 @@ Jan 24 10:03:34 localhost.localdomain dnf[3052]: Updating Subscription Managemen
 Jan 24 10:03:35 localhost.localdomain dnf[3052]: Metadata cache refreshed recently.
 Jan 24 10:03:35 localhost.localdomain systemd[1]: dnf-makecache.service: Succeeded.
 Jan 24 10:03:35 localhost.localdomain systemd[1]: Started dnf makecache.
-```
+----
 
 === systemctl list-sockets
 
-`systemctl [options] list-sockets <unit_name_pattern>`
+----
+systemctl [options] list-sockets <unit_name_pattern>
+----
 
-Lists the sockets in memory available for inter-process communication (IPC).
+Lists the sockets in memory available for interprocess communication (IPC).
 
 *Example:*
 
-The following example lists the sockets in memory using the pattern `systemd*` to show only those sockets that have a unit name that begins with the characters `systemd`. Also, the option `--show-types` is used to display the `TYPE` column in the output.
+The `systemctl list-sockets` command in this example lists the sockets in memory. By providing the pattern `systemd*`, the command shows only sockets that have a unit name beginning with the characters `systemd`. Also, the option `--show-types` is used to display the `TYPE` column in the output.
 
-```
+----
 $ systemctl --show-types list-sockets 'systemd*' 
 LISTEN                       TYPE             UNIT                            ACTIVATES
 /run/initctl                 FIFO             systemd-initctl.socket          systemd-initctl.service
@@ -236,26 +264,26 @@ kobject-uevent 1             Netlink          systemd-udevd-kernel.socket     sy
 
 7 sockets listed.
 Pass --all to see loaded but inactive sockets, too.
-```
+----
 === systemctl list-units
 
-`systemctl [options] list-units <pattern>`
+----
+systemctl [options] list-units <pattern>
+----
 
-List units that `systemd` has in memory. Units are listed with the following columns:
+Lists units that `systemd` has in memory. A _unit_ refers to any resource that `systemd` knows how to operate on and manage. Units are listed with the following columns:
 
-*  `UNIT` – the name of the unit
-* `LOAD` – indicates if the unit is loaded or not
-* `ACTIVE` – indicates if the unit is active or not
-* `SUB` – indicates low-level activation state, for example: `mounted` or `running`
-* `DESCRIPTION` – describes the service or unit
-
-A unit refers to any resource that systemd knows how to operate on and manage.
+* `UNIT`: Name of the unit
+* `LOAD`: Indicates whether the unit is loaded
+* `ACTIVE`: Indicates whether the unit is active
+* `SUB`: Indicates low-level activation state; for example: `mounted` or `running`
+* `DESCRIPTION`: Describes the service or unit
 
 *Example:*
 
-The following example uses the `systemctl list-units` command set to list units in memory. The pattern `sys-k*` is applied so that the list only shows unit names that start characters `sys-k`.
+The `systemctl list-units` command in this example lists units in memory, using the pattern `sys-k*` to show only units whose names begin with the characters `sys-k`.
 
-```
+----
 $ systemctl list-units 'sys-k*'
 UNIT                     LOAD   ACTIVE SUB     DESCRIPTION                     
 sys-kernel-config.mount  loaded active mounted Kernel Configuration File System
@@ -268,24 +296,24 @@ SUB    = The low-level unit activation state, values depend on unit type.
 
 3 loaded units listed.
 To show all installed unit files use 'systemctl list-unit-files'.
-```
+----
 
 === systemctl list-unit-files
 
-`systemctl [options] list-unit-files <pattern>`
+----
+systemctl [options] list-unit-files <pattern>
+----
 
-Lists a unit's associated file. Unit files are listed with the following columns:
+Lists a unit's associated file, which describes how `systemd` starts and runs a unit. Unit files are listed with the following columns:
 
-* `UNIT FILE` – the name of a the file
-* `STATE` – the state of the file. Value can be `static`, `generated` or `disabled`
-
-A unit file describes how a systemd will start and run a unit.
+`UNIT FILE`: Name of a the file
+`STATE`: State of the file. The state can be `static`, `generated` or `disabled`.
 
 *Example:*
 
-The following example lists unit files using the filer `sys-*` to show only those file names that begin with the characters `sys-`.
+The `systemctl list-unit-files` command in this example lists unit files, using the pattern `sys-*` to show only filenames that begin with the characters `sys-`.
 
-```
+----
 $ systemctl list-unit-files 'sys-*'
 UNIT FILE                     STATE 
 sys-fs-fuse-connections.mount static
@@ -293,6 +321,4 @@ sys-kernel-config.mount       static
 sys-kernel-debug.mount        static
 
 3 unit files listed.
-```
-
-
+----
