@@ -3,13 +3,27 @@
 :product-name:
 :version: 1.0.0
 
-INTRODUCTION TO BE PROVIDED
+The cheat sheet describes the various ways the command `dnf` can be used to install and inspect applications running on the Red Hat Enterprise Linux operating system. The term `dnf` is an abbreviation for *Dandified yum*. You can think of `dnf` as the next generation of the yum package manager.
+
+The general usage for `dnf` is
+
+---
+dnf [options] <command> <subcommand>
+---
 
 == Module Exploration Commands
 
-TO BE PROVIDED
+The following shows how to use `dnf module` to get information about various RHEL modules.
 
 === dnf module list
+
+---
+dnf [options] module list
+---
+
+This command reports the status of RHEL modules available from a remote RHEL repository or downloaded to the local computer. A module can have one or more of the following status: default (`d)`, enabled (`e`), disabled (`x`) or installed (`i`).
+
+When the command is run as `sudo` the repository reference on the local machine will be updated.
 
 *Example:*
 
@@ -17,9 +31,49 @@ TO BE PROVIDED
 
 *Example:*
 
-=== dnf module provides package
+---
+$ dnf module list | more -20
+Not root, Subscription Management repositories not updated
+Last metadata expiration check: 0:28:18 ago on Thu 27 Jan 2022 10:14:08 AM PST.
+Extra Packages for Enterprise Linux Modular 8 - x86_64
+Name                 Stream           Profiles                                 Summary                                                                                                                                   
+                                                                                       
+389-directory-server next             default, minimal                         389 Directory Server                                                                                                                      
+                                                                                       
+389-directory-server stable           default [d], legacy, minimal             389 Directory Server                                                                                                                      
+                                                                                       
+389-directory-server testing          default [d], legacy, minimal             389 Directory Server                                                                                                                      
+                                                                                       
+avocado              latest           default, minimal                         Framework with tools and libraries for Automated Testing                                                                                  
+                                                                                       
+avocado              82lts            default, minimal                         Framework with tools and libraries for Automated Testing                                                                                  
+                                                                                       
+avocado-vt           latest           default                                  Avocado Virt Test Plugin                                                                                                                  
+                                                                                       
+cobbler              3                default [d]                              Versatile Linux deployment server                                                                                                         
+                                                                                       
+cri-o                1.21             default [d]                              Kubernetes Container Runtime Interface for OCI-based containers                                                                           
+--More--
+---
+
+=== dnf module provides
+
+---
+dnf module provides <package_name>
+---
 
 *Example:*
+
+---
+$ sudo dnf module provides cobbler
+Updating Subscription Management repositories.
+Last metadata expiration check: 1:59:10 ago on Thu 27 Jan 2022 08:48:07 AM PST.
+cobbler-3.2.2-6.module_el8+13609+df89ec4a.noarch
+Module   : cobbler:3:820220106021107:9edba152:x86_64
+Profiles : default
+Repo     : epel-modular
+Summary  : Versatile Linux deployment server
+---
 
 === dnf module info module
 
