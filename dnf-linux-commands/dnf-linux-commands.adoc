@@ -31,6 +31,102 @@ When the command is run as `sudo` the repository reference on the local machine 
 
 *Example:*
 
+
+
+=== dnf module provides
+
+---
+dnf module provides <module_name>
+---
+
+*Example:*
+
+---
+$ sudo dnf module provides cobbler
+Updating Subscription Management repositories.
+Last metadata expiration check: 1:59:10 ago on Thu 27 Jan 2022 08:48:07 AM PST.
+cobbler-3.2.2-6.module_el8+13609+df89ec4a.noarch
+Module   : cobbler:3:820220106021107:9edba152:x86_64
+Profiles : default
+Repo     : epel-modular
+Summary  : Versatile Linux deployment server
+---
+
+=== dnf module info
+
+---
+dnf module info <module_name>
+---
+
+*Example:*
+
+---
+$ dnf module info cri-o
+Not root, Subscription Management repositories not updated
+Last metadata expiration check: 0:00:16 ago on Thu 27 Jan 2022 11:24:52 AM PST.
+Name             : cri-o
+Stream           : 1.21
+Version          : 820210916195922
+Context          : 9edba152
+Architecture     : x86_64
+Profiles         : default [d]
+Default profiles : default
+Repo             : epel-modular
+Summary          : Kubernetes Container Runtime Interface for OCI-based containers
+Description      : CRI-O is the Kubernetes Container Runtime Interface for OCI-based containers.
+Requires         : platform:[el8]
+Artifacts        : cri-o-0:1.21.3-1.module_el8+12969+ebff6d46.src
+                 : cri-o-0:1.21.3-1.module_el8+12969+ebff6d46.x86_64
+                 : cri-o-debuginfo-0:1.21.3-1.module_el8+12969+ebff6d46.x86_64
+                 : cri-o-debugsource-0:1.21.3-1.module_el8+12969+ebff6d46.x86_64
+                 : cri-tools-0:1.19.0-1.module_el8+12969+ebff6d46.src
+                 : cri-tools-0:1.19.0-1.module_el8+12969+ebff6d46.x86_64
+                 : cri-tools-debuginfo-0:1.19.0-1.module_el8+12969+ebff6d46.x86_64
+                 : cri-tools-debugsource-0:1.19.0-1.module_el8+12969+ebff6d46.x86_64
+
+Hint: [d]efault, [e]nabled, [x]disabled, [i]nstalled, [a]ctive
+---
+
+=== dnf module info --profile module:stream
+
+*Example:*
+
+---
+$ dnf module info info --profile ruby:2.6 -v
+Loaded plugins: builddep, changelog, config-manager, copr, debug, debuginfo-install, download, generate_completion_cache, groups-manager, kpatch, needs-restarting, playground, product-id, repoclosure, repodiff, repograph, repomanage, reposync, subscription-manager, uploadprofile
+Not root, Subscription Management repositories not updated
+DNF version: 4.7.0
+cachedir: /var/tmp/dnf-reselbob-ovrcuzk9
+User-Agent: constructed: 'libdnf (Red Hat Enterprise Linux 8.5; generic; Linux.x86_64)'
+repo: using cache for: epel
+epel: using metadata from Wed 26 Jan 2022 10:00:39 AM PST.
+repo: using cache for: epel-modular
+epel-modular: using metadata from Tue 25 Jan 2022 04:15:30 PM PST.
+repo: using cache for: rhel-8-for-x86_64-baseos-rpms
+rhel-8-for-x86_64-baseos-rpms: using metadata from Tue 25 Jan 2022 11:34:54 AM PST.
+repo: using cache for: rhel-8-for-x86_64-appstream-rpms
+rhel-8-for-x86_64-appstream-rpms: using metadata from Thu 27 Jan 2022 06:01:31 AM PST.
+Last metadata expiration check: 0:03:07 ago on Thu 27 Jan 2022 11:24:52 AM PST.
+Unable to resolve argument info
+---
+document: modulemd
+version: 2
+data:
+  name: ruby
+  stream: "2.6"
+  version: 8010020190711095715
+  context: cdc1202b
+.
+.
+.
+---
+
+=== dnf module list
+
+`dnf module [options] list <module_name>`
+
+*Example:*
+
 ---
 $ dnf module list | more -20
 Not root, Subscription Management repositories not updated
@@ -56,39 +152,6 @@ cri-o                1.21             default [d]                              K
 --More--
 ---
 
-=== dnf module provides
-
----
-dnf module provides <package_name>
----
-
-*Example:*
-
----
-$ sudo dnf module provides cobbler
-Updating Subscription Management repositories.
-Last metadata expiration check: 1:59:10 ago on Thu 27 Jan 2022 08:48:07 AM PST.
-cobbler-3.2.2-6.module_el8+13609+df89ec4a.noarch
-Module   : cobbler:3:820220106021107:9edba152:x86_64
-Profiles : default
-Repo     : epel-modular
-Summary  : Versatile Linux deployment server
----
-
-=== dnf module info module
-
-*Example:*
-
-=== dnf module info --profile module:stream
-
-*Example:*
-
-=== dnf module list
-
-`dnf module list <module_name>`
-
-*Example:*
-
 == General dnf Commands
 
 TO BE PROVIDED
@@ -99,27 +162,100 @@ TO BE PROVIDED
 
 *Example:*
 
+---
+$ dnf search nodejs
+Not root, Subscription Management repositories not updated
+Last metadata expiration check: 0:07:20 ago on Thu 27 Jan 2022 11:24:52 AM PST.
+============= Name Exactly Matched: nodejs =============
+nodejs.x86_64 : JavaScript runtime
+============= Name & Summary Matched: nodejs =============
+nodejs-GeographicLib.noarch : NodeJS implementation of GeographicLib
+============= Name Matched: nodejs =============
+nodejs-codemirror.noarch : A versatile JS text editor
+nodejs-devel.x86_64 : JavaScript runtime - development headers
+nodejs-docs.noarch : Node.js API documentation
+nodejs-full-i18n.x86_64 : Non-English locale data for Node.js
+nodejs-marked.noarch : A markdown parser for JavaScript built for speed
+nodejs-nodemon.noarch : Simple monitor script for use during development of a node.js app
+nodejs-packaging.noarch : RPM Macros and Utilities for Node.js Packaging
+============= Summary Matched: nodejs =============
+cjdns-tools.noarch : Nodejs tools for cjdns
+---
+
 === dnf install
 
-`dnf install <package_name>`
+---
+dnf install [options] <package_name>
+---
+
+Installs an application package on the local machine.
 
 *Example:*
+
+The following installs the`perl` programming language from the local computer. The command uses the `-y` option to suppress the prompt asking the user for permission to proceed.
+
+The command produces too much screen output to show. 
+
+---
+sudo dnf install -y perl
+---
 
 === dnf update
 
-`dnf update <package_name>`
+---
+dnf update [options] <package_name>
+---
+
+Updates an application package on the local machine.
+
+*Example:*
+
+The following installs the`perl` programming language from the local computer. The command uses the `-y` option to suppress the prompt asking the user for permission to proceed.
+
+---
+$ sudo dnf update -y perl
+Updating Subscription Management repositories.
+Last metadata expiration check: 2:58:35 ago on Thu 27 Jan 2022 08:48:07 AM PST.
+Dependencies resolved.
+Nothing to do.
+Complete!
+---
+
+---
+sudo dnf update -y perl
+---
 
 === dnf remove
 
-`dnf remove <package_name>`
+---
+dnf remove <package_name>
+---
+
+Removes an application package on the local machine.
 
 *Example:*
 
-=== dnf history undo last
+The following removes the previously installed `perl` programming language from the local computer. The command produces too much screen output to show. 
 
-`sudo dnf history undo last`
+---
+sudo dnf update -y perl
+---
 
-*Example:*
+=== dnf history
+
+---
+dnf [options] history <subcommand> <subcommand> ....
+---
+
+*Examples:*
+
+---
+$ dnf history
+---
+
+---
+$ sudo dnf history undo last
+---
 
 === dnf list all
 
@@ -131,7 +267,21 @@ TO BE PROVIDED
 
 === dnf repolist
 
+---
+sudo dnf repolist
+---
+
 *Example:*
+
+---
+$ dnf repolist
+Not root, Subscription Management repositories not updated
+repo id                                                                                          repo name
+epel                                                                                             Extra Packages for Enterprise Linux 8 - x86_64
+epel-modular                                                                                     Extra Packages for Enterprise Linux Modular 8 - x86_64
+rhel-8-for-x86_64-appstream-rpms                                                                 Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs)
+rhel-8-for-x86_64-baseos-rpms 
+---
 
 == Subscription Commands
 
@@ -171,60 +321,118 @@ TO BE PROVIDED
 
 The following are application and module specific examples of using the command `dnf install`. Notice that the commands are run with administrator privileges using the `sudo` command.
 
-`sudo dnf install ant`
+---
+sudo dnf install ant
+---
 
-`sudo dnf install buildah podman`
+---
+sudo dnf install buildah podman
+---
 
-`sudo dnf install llvm-toolset`
+---
+sudo dnf install llvm-toolset
+---
 
-`sudo dnf group install "Development Tools"`
+---
+sudo dnf group install "Development Tools"
+---
 
-`sudo dnf install go-toolset`
+---
+sudo dnf install go-toolset
+---
 
-`sudo dnf install httpd`
+---
+sudo dnf install httpd
+---
 
-`sudo dnf install mariadb`
+---
+sudo dnf install mariadb
+---
 
-`sudo dnf install maven`
+---
+sudo dnf install maven
+---
 
-`sudo dnf install mysql`
+---
+sudo dnf install mysql
+---
 
-`sudo dnf install nginx`
+---
+sudo dnf install nginx
+---
 
-`sudo dnf install nodejs`
+---
+sudo dnf install nodejs
+---
 
-`sudo dnf install java-11-openjdk-devel`
+---
+sudo dnf install java-11-openjdk-devel
+---
 
-`sudo dnf install java-1.8.0-openjdk-devel`
+---
+sudo dnf install java-1.8.0-openjdk-devel
+---
 
-`sudo dnf install pcp-zeroconf`
+---
+sudo dnf install pcp-zeroconf
+---
 
-`sudo dnf install perl`
+---
+sudo dnf install perl
+---
 
-`sudo dnf install php`
+---
+sudo dnf install php
+---
 
-`sudo dnf install postgresql`
+---
+sudo dnf install postgresql
+---
 
-`sudo dnf module install postgresql:9.6`
+---
+sudo dnf module install postgresql:9.6
+---
 
-`sudo dnf install python2 or dnf module install python27`
+---
+sudo dnf install python2 or dnf module install python27
+---
 
-`sudo dnf install python3 or dnf module install python36`
+---
+sudo dnf install python3 or dnf module install python36
+---
 
-`sudo dnf install redis`
+---
+sudo dnf install redis
+---
 
-`sudo dnf install ruby`
+---
+sudo dnf install ruby
+---
 
-`sudo dnf install rust-toolset`
+---
+sudo dnf install rust-toolset
+---
 
-`sudo dnf install scala`
+---
+sudo dnf install scala
+---
 
-`sudo dnf install subversion`
+---
+sudo dnf install subversion
+---
 
-`sudo dnf install swig`
+---
+sudo dnf install swig
+---
 
-`sudo dnf install systemtap`
+---
+sudo dnf install systemtap
+---
 
-`sudo dnf install valgrind`
+---
+sudo dnf install valgrind
+---
 
-`sudo dnf install varnish`
+---
+sudo dnf install varnish
+---
