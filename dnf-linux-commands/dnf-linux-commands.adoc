@@ -15,50 +15,13 @@ dnf [options] <command> <subcommand>
 
 The following shows how to use `dnf module` to get information about various RHEL modules.
 
-=== dnf module list
-
----
-dnf [options] module list
----
-
-This command reports the status of RHEL modules available from a remote RHEL repository or downloaded to the local computer. A module can have one or more of the following status: default (`d)`, enabled (`e`), disabled (`x`) or installed (`i`).
-
-When the command is run as `sudo` the repository reference on the local machine will be updated.
-
-*Example:*
-
-=== dnf module list installed
-
-*Example:*
-
-
-
-=== dnf module provides
-
----
-dnf module provides <module_name>
----
-
-*Example:*
-
----
-$ sudo dnf module provides cobbler
-Updating Subscription Management repositories.
-Last metadata expiration check: 1:59:10 ago on Thu 27 Jan 2022 08:48:07 AM PST.
-cobbler-3.2.2-6.module_el8+13609+df89ec4a.noarch
-Module   : cobbler:3:820220106021107:9edba152:x86_64
-Profiles : default
-Repo     : epel-modular
-Summary  : Versatile Linux deployment server
----
-
 === dnf module info
 
 ---
 dnf module info <module_name>
 ---
 
-*Example:*
+*Examples:*
 
 ---
 $ dnf module info cri-o
@@ -87,12 +50,9 @@ Artifacts        : cri-o-0:1.21.3-1.module_el8+12969+ebff6d46.src
 Hint: [d]efault, [e]nabled, [x]disabled, [i]nstalled, [a]ctive
 ---
 
-=== dnf module info --profile module:stream
-
-*Example:*
 
 ---
-$ dnf module info info --profile ruby:2.6 -v
+$ dnf module info --profile ruby:2.6 -v
 Loaded plugins: builddep, changelog, config-manager, copr, debug, debuginfo-install, download, generate_completion_cache, groups-manager, kpatch, needs-restarting, playground, product-id, repoclosure, repodiff, repograph, repomanage, reposync, subscription-manager, uploadprofile
 Not root, Subscription Management repositories not updated
 DNF version: 4.7.0
@@ -125,7 +85,11 @@ data:
 
 `dnf module [options] list <module_name>`
 
-*Example:*
+This command reports the status of RHEL modules available from a remote RHEL repository or downloaded to the local computer. A module can have one or more of the following status: default (`d)`, enabled (`e`), disabled (`x`) or installed (`i`).
+
+When the command is run as `sudo` the repository reference on the local machine will be updated.
+
+*Examples:*
 
 ---
 $ dnf module list | more -20
@@ -150,6 +114,45 @@ cobbler              3                default [d]                              V
                                                                                        
 cri-o                1.21             default [d]                              Kubernetes Container Runtime Interface for OCI-based containers                                                                           
 --More--
+---
+
+---
+$ sudo dnf list installed | more -15
+Updating Subscription Management repositories.
+Installed Packages
+GConf2.x86_64                                      3.2.6-22.el8                                   @AppStream                       
+ModemManager.x86_64                                1.10.8-4.el8                                   @anaconda                        
+ModemManager-glib.x86_64                           1.10.8-4.el8                                   @anaconda                        
+NetworkManager.x86_64                              1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-adsl.x86_64                         1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-bluetooth.x86_64                    1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-config-server.noarch                1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-libnm.x86_64                        1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-team.x86_64                         1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-tui.x86_64                          1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-wifi.x86_64                         1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-wwan.x86_64                         1:1.32.10-4.el8                                @anaconda                        
+PackageKit.x86_64                                  1.1.12-6.el8                                   @AppStream                       
+--More--
+---
+
+=== dnf module provides
+
+---
+dnf module provides <module_name>
+---
+
+*Example:*
+
+---
+$ sudo dnf module provides cobbler
+Updating Subscription Management repositories.
+Last metadata expiration check: 1:59:10 ago on Thu 27 Jan 2022 08:48:07 AM PST.
+cobbler-3.2.2-6.module_el8+13609+df89ec4a.noarch
+Module   : cobbler:3:820220106021107:9edba152:x86_64
+Profiles : default
+Repo     : epel-modular
+Summary  : Versatile Linux deployment server
 ---
 
 == General dnf Commands
@@ -283,27 +286,166 @@ rhel-8-for-x86_64-appstream-rpms                                                
 rhel-8-for-x86_64-baseos-rpms 
 ---
 
-== Subscription Commands
+== Subscription Manager Commands
 
-TO BE PROVIDED
+---
+subscription-manager command [options]
+---
+
+The command is a client-side program that provides a command line interface to the RHEL Subscription Management service. The Service Manager coordinates accessing, monitoring and getting information about RHEL applications and modules.
 
 === subscription-manager repos --enable repository
 
-*Example:*
+*Examples:*
 
-=== subscription-manager repos --disable repository
+The following example uses the `repos` command to list the various artifact repository available via the Subscription Manager. The `repos` command requires root access. The command will problem for the root password if it is not executed as root.
 
-*Example:*
+The example belows shows only a portion of the full output.
+
+---
+$ subscription-manager repos
+You are attempting to run "subscription-manager" which requires administrative
+privileges, but more information is needed in order to do so.
+Authenticating as "root"
+Password: 
++----------------------------------------------------------+
+    Available Repositories in /etc/yum.repos.d/redhat.repo
++----------------------------------------------------------+
+Repo ID:   rhel-8-for-x86_64-sap-solutions-e4s-rpms
+Repo Name: Red Hat Enterprise Linux 8 for x86_64 - SAP Solutions - Update Services for SAP Solutions (RPMs)
+Repo URL:  https://cdn.redhat.com/content/e4s/rhel8/$releasever/x86_64/sap-solutions/os
+Enabled:   0
+
+Repo ID:   jpp-textonly-1-for-middleware-rpms
+Repo Name: Red Hat JBoss Portal Text-Only Advisories
+Repo URL:  https://cdn.redhat.com/content/dist/middleware/jpp/1.0/$basearch/os
+Enabled:   0
+
+Repo ID:   jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms
+Repo Name: Red Hat JBoss Data Grid 8.1 (RHEL 8) (Source RPMs)
+Repo URL:  https://cdn.redhat.com/content/dist/layered/rhel8/x86_64/jdg/8.1/source/SRPMS
+Enabled:   0
+
+Repo ID:   jb-datagrid-8.1-for-rhel-8-x86_64-debug-rpms
+Repo Name: Red Hat JBoss Data Grid 8.1 (RHEL 8) (Debug RPMs)
+Repo URL:  https://cdn.redhat.com/content/dist/layered/rhel8/x86_64/jdg/8.1/debug
+Enabled:   0
+.
+.
+.
+---
+
+The following example enables the client computer to access the repository `jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms`.
+
+---
+$ subscription-manager repos --enable jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms
+You are attempting to run "subscription-manager" which requires administrative
+privileges, but more information is needed in order to do so.
+Authenticating as "root"
+Password: 
+Repository 'jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms' is enabled for this system.
+---
+
+The following example disables the client computer from accessing the repository `jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms`.
+
+---
+$ subscription-manager repos --disable jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms
+You are attempting to run "subscription-manager" which requires administrative
+privileges, but more information is needed in order to do so.
+Authenticating as "root"
+Password: 
+Repository 'jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms' is disabled for this system.
+---
 
 == General Module Commands
 
-=== dnf module enable module:stream
+The following shows the various ways the command `dnf module` can be used to enable, install, and remove modules.
+
+=== dnf module list
+
+---
+`dnf module [options] list`
+---
+
+Lists the modules available according to repositories registered with Subscription Manager
+
 
 *Example:*
+
+The follow shows a portions of the modules listed using the command `dnf module list`.
+
+
+---
+$ dnf module list
+Not root, Subscription Management repositories not updated
+Red Hat Enterprise Linux 8 for x86_64 - BaseOS (RPMs)      10 kB/s | 4.1 kB     00:00    
+Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs)   13 kB/s | 4.5 kB     00:00    
+Extra Packages for Enterprise Linux Modular 8 - x86_64
+Name                 Stream           Profiles Summary                                                                                                                                                                   
+389-directory-server next             default, 389 Directory Server                                                                                                                                                      
+                                       minimal 
+389-directory-server stable           default  389 Directory Server                                                                                                                                                      
+                                      [d], leg 
+                                      acy, min 
+                                      imal     
+389-directory-server testing          default  389 Directory Server                                                                                                                                                      
+                                      [d], leg 
+                                      acy, min 
+                                      imal     
+avocado              latest           default, Framework with tools and libraries for Automated Testing                                                                                                                  
+                                       minimal 
+avocado              82lts            default, Framework with tools and libraries for Automated Testing                                                                                                                  
+                                       minimal 
+avocado-vt           latest           default  Avocado Virt Test Plugin                                                                                                                                                  
+cobbler              3                default  Versatile Linux deployment server                                                                                                                                         
+                                      [d]      
+cri-o                1.21             default  Kubernetes Container Runtime Interface for OCI-based containers                                                                                                           
+                                      [d]      
+dwm                  latest           default, Dynamic window manager for X                                                                                                                                              
+                                       user    
+ghc                  8.2              default  Haskell GHC 8.2                                                                                                                                                           
+                                      [d], min 
+                                      imal, sm 
+                                      all      
+ghc                  8.4              default  Haskell GHC 8.4                                                                                                                                                           
+                                      [d], min 
+                                      imal, sm 
+                                      all      
+---
+
+
+=== dnf module enable module:stream
+
+---
+`dnf module [options] enable <module:stream>`
+---
+
+Enables a module.
+
+*Example:*
+
+---
+$ sudo dnf module enable scala:2.10
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:18:54 ago on Fri 28 Jan 2022 11:32:49 AM PST.
+Dependencies resolved.
+================================================================================================
+ Package                                             Architecture  Version   Repository  Size
+================================================================================================
+Enabling module streams:
+ scala                                                              2.10                                                                                                            
+
+Transaction Summary
+================================================================================================
+
+Is this ok [y/N]: 
+Complete!
+---
 
 === dnf module install module:stream/profile
 
 *Example:*
+
 
 === dnf module remove module
 
