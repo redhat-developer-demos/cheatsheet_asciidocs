@@ -264,8 +264,6 @@ Manipulates the content of a file or output sent to stdout.
 
 The following example uses the `echo` command to send the string `Bobby is cool` to the `sed` command. The command `sed` uses the `s` subcommand to substitute the name `Teddy` where the name `Bobby` occurs. The output is then displayed:
 
-(`$` is the command-line prompt symbol.)
-
 ```
 $ echo Bobby is cool | sed 's/Bobby/Teddy/'
 Teddy is cool
