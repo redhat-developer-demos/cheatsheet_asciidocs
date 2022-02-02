@@ -699,18 +699,24 @@ Complete!
 
 == Module Installation Commands
 
+---
+sudo dnf install [options] <package_name>
+---
+
+Installs an application or package on the local system.
+
 The following are application and module specific examples of using the command `dnf install`. Notice that the commands are run with administrator privileges using the `sudo` command.
 
-Installs the Ant build tool
+Installs the Ant build tool. Uses the `--nodocs` option to not install the package documentation.
 
 ----
-sudo dnf install ant
+sudo dnf install --nodocs ant
 ----
 
-Installs the `buildah` tools which is used to create Linux container images. Also installs the `podman` container manager.
+Installs the `buildah` tools which is used to create Linux container images. Also installs the `podman` container manager. Uses the `--best` option to isntall the best version of the package.
 
 ----
-sudo dnf install buildah podman
+sudo dnf install --best  buildah podman
 ----
 
 Installs the llvm-toolset which includes the LLVM compiler infrastructure framework, the Clang compiler for the C and C++ languages, the LLDB debugger, and related tools for code analysis.
