@@ -11,7 +11,7 @@ The general usage for `dnf` is
 dnf [options] <command> <subcommand>
 ----
 
-== Module Exploration Commands
+== Module exploration commands
 
 The following sections show how to use `dnf module` to get information about various RHEL modules.
 
@@ -147,7 +147,7 @@ Matched from:
 Filename    : /usr/bin/gzip.
 ----
 
-== General dnf Commands
+== General dnf commands
 
 The following sections show dnf command that can be used to search for modules, learn the details about a module, or install a module.
 
@@ -446,7 +446,7 @@ rhel-8-for-x86_64-appstream-rpms                Red Hat Enterprise Linux 8 for x
 rhel-8-for-x86_64-baseos-rpms                   Red Hat Enterprise Linux 8 for x86_64 - BaseOS (RPMs)
 ----
 
-== Subscription Manager Commands
+== Subscription Manager commands
 
 ----
 subscription-manager command [options]
@@ -519,7 +519,7 @@ Password:
 Repository 'jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms' is disabled for this system.
 ----
 
-== General Module Commands
+== General module commands
 
 The following shows the various ways the command `dnf module` can be used to enable, install, and remove modules.
 
@@ -697,7 +697,7 @@ Is this ok [y/N]: y
 Complete!
 ----
 
-== Module Installation Commands
+== Module installation commands
 
 ----
 sudo dnf install [options] <package_name>
