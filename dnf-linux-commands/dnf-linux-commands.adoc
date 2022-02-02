@@ -13,7 +13,7 @@ dnf [options] <command> <subcommand>
 
 == Module Exploration Commands
 
-The following shows how to use `dnf module` to get information about various RHEL modules.
+The following sections show how to use `dnf module` to get information about various RHEL modules.
 
 === dnf module info
 
@@ -21,7 +21,11 @@ The following shows how to use `dnf module` to get information about various RHE
 dnf module info <module_name>
 ----
 
-*Examples:*
+Gets the details about a module
+
+*Example:*
+
+The following example shows the details of the module `cri-o` which is a Linux container manager.
 
 ----
 $ dnf module info cri-o
@@ -50,52 +54,31 @@ Artifacts        : cri-o-0:1.21.3-1.module_el8+12969+ebff6d46.src
 Hint: [d]efault, [e]nabled, [x]disabled, [i]nstalled, [a]ctive
 ----
 
-TO BE PROVIDED
-
-----
-$ dnf module info --profile ruby:2.6 -v
-Loaded plugins: builddep, changelog, config-manager, copr, debug, debuginfo-install, download, generate_completion_cache, groups-manager, kpatch, needs-restarting, playground, product-id, repoclosure, repodiff, repograph, repomanage, reposync, subscription-manager, uploadprofile
-Not root, Subscription Management repositories not updated
-DNF version: 4.7.0
-cachedir: /var/tmp/dnf-reselbob-ovrcuzk9
-User-Agent: constructed: 'libdnf (Red Hat Enterprise Linux 8.5; generic; Linux.x86_64)'
-repo: using cache for: epel
-epel: using metadata from Wed 26 Jan 2022 10:00:39 AM PST.
-repo: using cache for: epel-modular
-epel-modular: using metadata from Tue 25 Jan 2022 04:15:30 PM PST.
-repo: using cache for: rhel-8-for-x86_64-baseos-rpms
-rhel-8-for-x86_64-baseos-rpms: using metadata from Tue 25 Jan 2022 11:34:54 AM PST.
-repo: using cache for: rhel-8-for-x86_64-appstream-rpms
-rhel-8-for-x86_64-appstream-rpms: using metadata from Thu 27 Jan 2022 06:01:31 AM PST.
-Last metadata expiration check: 0:03:07 ago on Thu 27 Jan 2022 11:24:52 AM PST.
-Unable to resolve argument info
-
-document: modulemd
-version: 2
-data:
-  name: ruby
-  stream: "2.6"
-  version: 8010020190711095715
-  context: cdc1202b
-.
-.
-.
-----
-
 === dnf module list
 
 `dnf module [options] list <module_name>`
 
-This command reports the status of RHEL modules available from a remote RHEL repository or downloaded to the local computer. A module can have one or more of the following status: default (`d)`, enabled (`e`), disabled (`x`) or installed (`i`).
+Reports the status of RHEL modules available from a remote RHEL repository or downloaded to the local computer. The command is used with the following options filter the list accordingly:app-name: 
+
+* `--all` Lists all packages, present on the system, in a repository or both
+* `--installed` Lists packages installed on the system.
+* `--available` Lists available packages.
+* `--extras` Lists extras, that is packages installed on the system that are not available in any known repository.
+* `--obsoletes` Lists packages installed on the system that are deemed obsolete in any known repository.
+* `--recent` Lists packages recently added into the repositories.
+* `--upgrades` Lists upgrades available for the installed packages.
+* `--autoremove` Lists packages which will be removed when the command `dnf autoremove` is run.
 
 When the command is run as `sudo` the repository reference on the local machine will be updated.
 
-*Examples:*
+*Example:*
+
+The following example uses the `dnf module list` with the --all option to show all modules remote and local. The list is long, thus the result is piped to the `more` command to abbreviate the output. The `more` command uses the `-30` option to initially show the first 30 lines of output.
 
 ----
-$ dnf module list | more -20
-Not root, Subscription Management repositories not updated
-Last metadata expiration check: 0:28:18 ago on Thu 27 Jan 2022 10:14:08 AM PST.
+$ sudo dnf module list --all | more -30
+Updating Subscription Management repositories.
+Last metadata expiration check: 4:15:49 ago on Wed 02 Feb 2022 05:08:48 AM PST.
 Extra Packages for Enterprise Linux Modular 8 - x86_64
 Name                 Stream           Profiles                                 Summary                                                                                                                                   
                                                                                        
@@ -114,79 +97,89 @@ avocado-vt           latest           default                                  A
 cobbler              3                default [d]                              Versatile Linux deployment server                                                                                                         
                                                                                        
 cri-o                1.21             default [d]                              Kubernetes Container Runtime Interface for OCI-based containers                                                                           
---More--
-
-----
-
-TO BE PROVIDED
-
-----
-$ sudo dnf list installed | more -15
-Updating Subscription Management repositories.
-Installed Packages
-GConf2.x86_64                                      3.2.6-22.el8                                   @AppStream                       
-ModemManager.x86_64                                1.10.8-4.el8                                   @anaconda                        
-ModemManager-glib.x86_64                           1.10.8-4.el8                                   @anaconda                        
-NetworkManager.x86_64                              1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-adsl.x86_64                         1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-bluetooth.x86_64                    1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-config-server.noarch                1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-libnm.x86_64                        1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-team.x86_64                         1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-tui.x86_64                          1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-wifi.x86_64                         1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-wwan.x86_64                         1:1.32.10-4.el8                                @anaconda                        
-PackageKit.x86_64                                  1.1.12-6.el8                                   @AppStream                       
+                                                                                       
+dwm                  latest           default, user                            Dynamic window manager for X                                                                                                              
+                                                                                       
+ghc                  8.2              default [d], minimal, small              Haskell GHC 8.2                                                                                                                           
+                                                                                       
+ghc                  8.4              default [d], minimal, small              Haskell GHC 8.4                                                                                                                           
+                                                                                       
+libuv                epel8-buildroot  devel [d]                                libuv-devel for EPEL 8                                                                                                                    
+                                                                                       
+nextcloud            nextcloud-stable default, testing                         A private file sync and share server - Stable branch                                                                                      
 --More--
 ----
 
 === dnf module provides
 
 ----
-dnf module provides <module_name>
+dnf module provides <provide-spec>
 ----
+
+Describes the repository(s) that provides a module according to the `provide-spec`. The `provide-spec` can specify a module name, a module's filepath or a module according to version.
 
 *Example:*
 
+The following example uses the `dnf provides` to discover which repositories – local and remote – provide the module `gzip`.
+
 ----
-$ sudo dnf module provides cobbler
+$ sudo dnf provides /usr/bin/gzip
 Updating Subscription Management repositories.
-Last metadata expiration check: 1:59:10 ago on Thu 27 Jan 2022 08:48:07 AM PST.
-cobbler-3.2.2-6.module_el8+13609+df89ec4a.noarch
-Module   : cobbler:3:820220106021107:9edba152:x86_64
-Profiles : default
-Repo     : epel-modular
-Summary  : Versatile Linux deployment server
+Last metadata expiration check: 3:20:01 ago on Wed 02 Feb 2022 05:08:48 AM PST.
+gzip-1.9-4.el8.x86_64 : The GNU data compression program
+Repo        : rhel-8-for-x86_64-baseos-rpms
+Matched from:
+Filename    : /usr/bin/gzip
+
+gzip-1.9-9.el8.x86_64 : The GNU data compression program
+Repo        : rhel-8-for-x86_64-baseos-rpms
+Matched from:
+Filename    : /usr/bin/gzip
+
+gzip-1.9-12.el8.x86_64 : The GNU data compression program
+Repo        : @System
+Matched from:
+Filename    : /usr/bin/gzip
+
+gzip-1.9-12.el8.x86_64 : The GNU data compression program
+Repo        : rhel-8-for-x86_64-baseos-rpms
+Matched from:
+Filename    : /usr/bin/gzip.
 ----
 
 == General dnf Commands
 
-TO BE PROVIDED
+The following sections show dnf command that can be used to search for modules, learn the details about a module, or install a module.
 
 === dnf search 
 
-`dnf search <string>`
+----
+dnf [options] search <search_string>
+----
+
+Searches for package according to the `search_string`
 
 *Example:*
 
+The following exampls uses the `dnf search` to search for packages according to the search string criteria `perl-MAIL`.
+
 ----
-$ dnf search nodejs
-Not root, Subscription Management repositories not updated
-Last metadata expiration check: 0:07:20 ago on Thu 27 Jan 2022 11:24:52 AM PST.
-============= Name Exactly Matched: nodejs =============
-nodejs.x86_64 : JavaScript runtime
-============= Name & Summary Matched: nodejs =============
-nodejs-GeographicLib.noarch : NodeJS implementation of GeographicLib
-============= Name Matched: nodejs =============
-nodejs-codemirror.noarch : A versatile JS text editor
-nodejs-devel.x86_64 : JavaScript runtime - development headers
-nodejs-docs.noarch : Node.js API documentation
-nodejs-full-i18n.x86_64 : Non-English locale data for Node.js
-nodejs-marked.noarch : A markdown parser for JavaScript built for speed
-nodejs-nodemon.noarch : Simple monitor script for use during development of a node.js app
-nodejs-packaging.noarch : RPM Macros and Utilities for Node.js Packaging
-============= Summary Matched: nodejs =============
-cjdns-tools.noarch : Nodejs tools for cjdns
+$ sudo dnf search perl-MAIL
+Updating Subscription Management repositories.
+Last metadata expiration check: 3:35:27 ago on Wed 02 Feb 2022 05:08:48 AM PST.
+========================== Name Matched: perl-MAIL ==============================
+perl-Mail-Box.noarch : Manage a mailbox, a folder with messages
+perl-Mail-DKIM.noarch : Sign and verify Internet mail with DKIM/DomainKey signatures
+perl-Mail-IMAPClient.noarch : An IMAP Client API
+perl-Mail-Message.noarch : MIME message handling
+perl-Mail-RFC822-Address.noarch : Perl extension for validating email addresses according to RFC822
+perl-Mail-SPF.noarch : Object-oriented implementation of Sender Policy Framework
+perl-Mail-SPF_XS.x86_64 : An XS implementation of Mail::SPF
+perl-Mail-Sender.noarch : Module for sending mails with attachments through an SMTP server
+perl-Mail-Sendmail.noarch : Simple platform independent mailer for Perl
+perl-Mail-Transport.noarch : Email message exchange
+perl-MailTools.noarch : Various ancient mail-related perl modules
+$ 
 ----
 
 === dnf info 
@@ -294,30 +287,114 @@ sudo dnf update -y perl
 dnf [options] history <subcommand> <subcommand> ....
 ----
 
+Shows the history of dnf module transactions (commands) executed on a system.
+
 *Examples:*
 
-TO BE PROVIDED
+The following command uses the `dnf history` to report module actions
 
 ----
-$ dnf history
+$ sudo dnf history
+Updating Subscription Management repositories.
+ID     | Command line                        | Date and time    | Action(s)      | Altered
+-----------------------------------------------------------------------------------------
+    14 | install dotnet                      | 2022-02-01 09:54 | Install        |   12   
+    13 | remove ant                          | 2022-02-01 09:37 | Removed        |    6   
+    12 | install ant                         | 2022-02-01 09:36 | Install        |    6   
+    11 | module install scala:2.10           | 2022-02-01 09:24 | Install        |   11   
+    10 | remove -y perl                      | 2022-01-27 11:47 | Removed        |  113   
+     9 | install perl                        | 2022-01-27 11:42 | Install        |  113   
+     8 | history undo last                   | 2022-01-26 09:23 | Removed        |   12   
+     7 | install dotnet                      | 2022-01-26 08:34 | Install        |   12   
+     6 | install ufw                         | 2022-01-24 09:15 | Install        |    1   
+     5 | install https://dl.fedoraproj...    | 2022-01-24 09:15 | Install        |    1   
+     4 | install traceroute                  | 2022-01-20 11:51 | Install        |    1   
+     3 | install iotop                       | 2022-01-19 09:57 | Install        |    1   
+     2 | -y install httpd mariadb-server     | 2022-01-14 10:04 | Install        |   19   
+     1 |       
 ----
 
-TO BE PROVIDED
+The following example uses the `sudo dnf history undo last` command to undo the last module action which in this case is the undoing of the installation of the `dotnet` module. The example shows a portion of the screen output.
 
 ----
 $ sudo dnf history undo last
+Updating Subscription Management repositories.
+Last metadata expiration check: 3:47:28 ago on Wed 02 Feb 2022 05:08:48 AM PST.
+Dependencies resolved.
+===========================================================================================================================
+ Package                            Architecture       Version             Repository                          Size
+===========================================================================================================================
+Removing:
+ dotnet                              x86_64            6.0.101-2.el8_5     @rhel-8-for-x86_64-appstream-rpms   0  
+Removing dependent packages:
+ aspnetcore-runtime-6.0              x86_64        6.0.1-2.el8_5           @rhel-8-for-x86_64-appstream-rpms   21 M
+ aspnetcore-targeting-pack-6.0       x86_64        6.0.1-2.el8_5           @rhel-8-for-x86_64-appstream-rpms   13 M
+ dotnet-apphost-pack-6.0             x86_64        6.0.1-2.el8_5           @rhel-8-for-x86_64-appstream-rpms   11 M
+ dotnet-host                         x86_64        6.0.1-2.el8_5           @rhel-8-for-x86_64-appstream-rpms   200 k
+ dotnet-hostfxr-6.0                  x86_64        6.0.1-2.el8_5           @rhel-8-for-x86_64-appstream-rpms   345 k
+ dotnet-runtime-6.0                  x86_64        6.0.1-2.el8_5           @rhel-8-for-x86_64-appstream-rpms   65 M
+ dotnet-sdk-6.0                      x86_64        6.0.101-2.el8_5         @rhel-8-for-x86_64-appstream-rpms   268 M
+ dotnet-targeting-pack-6.0           x86_64        6.0.1-2.el8_5           @rhel-8-for-x86_64-appstream-rpms   26 M
+ dotnet-templates-6.0                x86_64        6.0.101-2.el8_5         @rhel-8-for-x86_64-appstream-rpms   6.2 M
+ lttng-ust                           x86_64        2.8.1-11.el8            @rhel-8-for-x86_64-appstream-rpms   1.1 M
+ netstandard-targeting-pack-2.1      x86_64        6.0.101-2.el8_5         @rhel-8-for-x86_64-appstream-rpms   18 M
+
+Transaction Summary
+===========================================================================================================================
+
+Freed space: 430 M
+Is this ok [y/N]:
+.
+.
+.
 ----
 
 === dnf list all
 
 ----
-dnf list all
+$ sudo dnf list  --installed | more -15
+Updating Subscription Management repositories.
+Installed Packages
+GConf2.x86_64                                      3.2.6-22.el8                                   @AppStream                       
+ModemManager.x86_64                                1.10.8-4.el8                                   @anaconda                        
+ModemManager-glib.x86_64                           1.10.8-4.el8                                   @anaconda                        
+NetworkManager.x86_64                              1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-adsl.x86_64                         1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-bluetooth.x86_64                    1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-config-server.noarch                1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-libnm.x86_64                        1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-team.x86_64                         1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-tui.x86_64                          1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-wifi.x86_64                         1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-wwan.x86_64                         1:1.32.10-4.el8                                @anaconda                        
+PackageKit.x86_64                                  1.1.12-6.el8                                   @AppStream                       
+--More--
 ----
-TO BE PROVIDED
+
 
 *Example:*
 
-TO BE PROVIDED
+The following example list all modules. The output is very long. The `more` command uses the `-15` option to initially show the first 15 lines of output.
+
+----
+$ sudo dnf list all | more -15
+Updating Subscription Management repositories.
+Last metadata expiration check: 4:00:42 ago on Wed 02 Feb 2022 05:08:48 AM PST.
+Installed Packages
+GConf2.x86_64                                3.2.6-22.el8                            @AppStream                       
+ModemManager.x86_64                          1.10.8-4.el8                            @anaconda                        
+ModemManager-glib.x86_64                     1.10.8-4.el8                            @anaconda                        
+NetworkManager.x86_64                        1:1.32.10-4.el8                         @anaconda                        
+NetworkManager-adsl.x86_64                   1:1.32.10-4.el8                         @anaconda                        
+NetworkManager-bluetooth.x86_64              1:1.32.10-4.el8                         @anaconda                        
+NetworkManager-config-server.noarch          1:1.32.10-4.el8                         @anaconda                        
+NetworkManager-libnm.x86_64                  1:1.32.10-4.el8                         @anaconda                        
+NetworkManager-team.x86_64                   1:1.32.10-4.el8                         @anaconda                        
+NetworkManager-tui.x86_64                    1:1.32.10-4.el8                         @anaconda                        
+NetworkManager-wifi.x86_64                   1:1.32.10-4.el8                         @anaconda                        
+NetworkManager-wwan.x86_64                   1:1.32.10-4.el8                         @anaconda                        
+--More--
+----
 
 === dnf list installed
 
@@ -325,11 +402,27 @@ TO BE PROVIDED
 dnf list installed
 ----
 
-TO BE PROVIDED
+The following example uses the command `dnf list installed` to list the packets installed on the system. The output is very long. The `more` command uses the `-15` option to initially show the first 15 lines of output.
 
-*Example:*
-
-TO BE PROVIDED
+----
+$ sudo dnf list installed | more -15
+Updating Subscription Management repositories.
+Installed Packages
+GConf2.x86_64                                      3.2.6-22.el8                                   @AppStream                       
+ModemManager.x86_64                                1.10.8-4.el8                                   @anaconda                        
+ModemManager-glib.x86_64                           1.10.8-4.el8                                   @anaconda                        
+NetworkManager.x86_64                              1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-adsl.x86_64                         1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-bluetooth.x86_64                    1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-config-server.noarch                1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-libnm.x86_64                        1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-team.x86_64                         1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-tui.x86_64                          1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-wifi.x86_64                         1:1.32.10-4.el8                                @anaconda                        
+NetworkManager-wwan.x86_64                         1:1.32.10-4.el8                                @anaconda                        
+PackageKit.x86_64                                  1.1.12-6.el8                                   @AppStream                       
+--More--
+----
 
 === dnf repolist
 
@@ -337,20 +430,20 @@ TO BE PROVIDED
 sudo dnf repolist
 ----
 
-TO BE PROVIDED
+Lists the remote package repositories registered on the local machines.
 
 *Example:*
 
-TO BE PROVIDED
+The following example uses the `dnf repolist` to list the remote package repositories registered on the local machines.
 
 ----
-$ dnf repolist
-Not root, Subscription Management repositories not updated
-repo id                                                                                          repo name
-epel                                                                                             Extra Packages for Enterprise Linux 8 - x86_64
-epel-modular                                                                                     Extra Packages for Enterprise Linux Modular 8 - x86_64
-rhel-8-for-x86_64-appstream-rpms                                                                 Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs)
-rhel-8-for-x86_64-baseos-rpms 
+$ sudo dnf repolist
+Updating Subscription Management repositories.
+repo id                                         repo name
+epel                                            Extra Packages for Enterprise Linux 8 - x86_64
+epel-modular                                    Extra Packages for Enterprise Linux Modular 8 - x86_64
+rhel-8-for-x86_64-appstream-rpms                Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs)
+rhel-8-for-x86_64-baseos-rpms                   Red Hat Enterprise Linux 8 for x86_64 - BaseOS (RPMs)
 ----
 
 == Subscription Manager Commands
@@ -363,7 +456,7 @@ The command is a client-side program that provides a command line interface to t
 
 === subscription-manager repos --enable repository
 
-TO BE PROVIDED
+Enables access to a remote package repository via the Subscription Manager
 
 *Examples:*
 
@@ -490,7 +583,7 @@ Enables a module.
 
 *Example:*
 
-TO BE PROVIDED
+The following example enables the module `scala:2.10`.
 
 ----
 $ sudo dnf module enable scala:2.10
