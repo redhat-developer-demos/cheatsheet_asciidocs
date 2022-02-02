@@ -50,6 +50,7 @@ Artifacts        : cri-o-0:1.21.3-1.module_el8+12969+ebff6d46.src
 Hint: [d]efault, [e]nabled, [x]disabled, [i]nstalled, [a]ctive
 ----
 
+TO BE PROVIDED
 
 ----
 $ dnf module info --profile ruby:2.6 -v
@@ -68,7 +69,7 @@ repo: using cache for: rhel-8-for-x86_64-appstream-rpms
 rhel-8-for-x86_64-appstream-rpms: using metadata from Thu 27 Jan 2022 06:01:31 AM PST.
 Last metadata expiration check: 0:03:07 ago on Thu 27 Jan 2022 11:24:52 AM PST.
 Unable to resolve argument info
-----
+
 document: modulemd
 version: 2
 data:
@@ -114,7 +115,10 @@ cobbler              3                default [d]                              V
                                                                                        
 cri-o                1.21             default [d]                              Kubernetes Container Runtime Interface for OCI-based containers                                                                           
 --More--
+
 ----
+
+TO BE PROVIDED
 
 ----
 $ sudo dnf list installed | more -15
@@ -191,6 +195,7 @@ Displays details about a module
 
 ----
 dnf info <module-name>
+----
 
 *Example:*
 
@@ -291,9 +296,13 @@ dnf [options] history <subcommand> <subcommand> ....
 
 *Examples:*
 
+TO BE PROVIDED
+
 ----
 $ dnf history
 ----
+
+TO BE PROVIDED
 
 ----
 $ sudo dnf history undo last
@@ -301,11 +310,26 @@ $ sudo dnf history undo last
 
 === dnf list all
 
+----
+dnf list all
+----
+TO BE PROVIDED
+
 *Example:*
+
+TO BE PROVIDED
 
 === dnf list installed
 
+----
+dnf list installed
+----
+
+TO BE PROVIDED
+
 *Example:*
+
+TO BE PROVIDED
 
 === dnf repolist
 
@@ -313,7 +337,11 @@ $ sudo dnf history undo last
 sudo dnf repolist
 ----
 
+TO BE PROVIDED
+
 *Example:*
+
+TO BE PROVIDED
 
 ----
 $ dnf repolist
@@ -334,6 +362,8 @@ subscription-manager command [options]
 The command is a client-side program that provides a command line interface to the RHEL Subscription Management service. The Service Manager coordinates accessing, monitoring and getting information about RHEL applications and modules.
 
 === subscription-manager repos --enable repository
+
+TO BE PROVIDED
 
 *Examples:*
 
@@ -408,11 +438,9 @@ The following shows the various ways the command `dnf module` can be used to ena
 
 Lists the modules available according to repositories registered with Subscription Manager
 
-
 *Example:*
 
 The follow shows a portions of the modules listed using the command `dnf module list`.
-
 
 ----
 $ dnf module list
@@ -462,6 +490,8 @@ Enables a module.
 
 *Example:*
 
+TO BE PROVIDED
+
 ----
 $ sudo dnf module enable scala:2.10
 Updating Subscription Management repositories.
@@ -496,9 +526,9 @@ The following example removes the module `ant` from the local environment
 $ sudo dnf remove ant
 Updating Subscription Management repositories.
 Dependencies resolved.
-============================================================================================================================================================
+==================================================================
  Package                            Architecture                Version                                Repository                               Size
-============================================================================================================================================================
+==================================================================
 Removing:
  ant                                noarch                       1.10.5-1.module+el8+2438+c99a8a1e      @rhel-8-for-x86_64-appstream-rpms       451 k
 Removing unused dependencies:
@@ -509,7 +539,7 @@ Removing unused dependencies:
  xorg-x11-fonts-Type1               noarch                       7.5-19.el8                             @rhel-8-for-x86_64-appstream-rpms       863 k
 
 Transaction Summary
-===============================================================================================================================================================
+==================================================================
 
 Freed space: 45 M
 Is this ok [y/N]: y
