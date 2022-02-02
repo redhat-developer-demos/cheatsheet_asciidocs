@@ -701,117 +701,176 @@ Complete!
 
 The following are application and module specific examples of using the command `dnf install`. Notice that the commands are run with administrator privileges using the `sudo` command.
 
+Installs the Ant build tool
+
 ----
 sudo dnf install ant
 ----
+
+Installs the `buildah` tools which is used to create Linux container images. Also installs the `podman` container manager.
 
 ----
 sudo dnf install buildah podman
 ----
 
+Installs the llvm-toolset which includes the LLVM compiler infrastructure framework, the Clang compiler for the C and C++ languages, the LLDB debugger, and related tools for code analysis.
+
 ----
 sudo dnf install llvm-toolset
 ----
 
+Installs a group of packages associated with those tools typically used by programmers and software developers. Packages include `Python`, `Perl`, `gcc` and `make`, to name a few.
 ----
 sudo dnf group install "Development Tools"
 ----
+
+Installs the Go programming language along with associated tools and libraries.
 
 ----
 sudo dnf install go-toolset
 ----
 
+Installs the Apache HTTP Web Server
+
 ----
 sudo dnf install httpd
 ----
+
+Installs the MariaDB database server
 
 ----
 sudo dnf install mariadb
 ----
 
+Installs the Apache Maven framework for programming and managing Java applications
+
 ----
 sudo dnf install maven
 ----
+
+Installs the MySql database server
 
 ----
 sudo dnf install mysql
 ----
 
+Installs the nginx web server
+
 ----
 sudo dnf install nginx
 ----
+
+Installs the Node.js programming environment
 
 ----
 sudo dnf install nodejs
 ----
 
+Installs version 11 of the Java Development Kit
+
 ----
 sudo dnf install java-11-openjdk-devel
 ----
+
+Installs version 8 of the Java Development Kit
 
 ----
 sudo dnf install java-1.8.0-openjdk-devel
 ----
 
-----
-sudo dnf install pcp-zeroconf
-----
+Installs the Perl programming language and associated tools and libraries.
 
 ----
 sudo dnf install perl
 ----
 
+Installs the PHP programming language and associated tools and libraries.
+
 ----
 sudo dnf install php
 ----
+
+Installs the Postgres database server
 
 ----
 sudo dnf install postgresql
 ----
 
+Installs the Postgres database server using the module:stream syntax
+
 ----
 sudo dnf module install postgresql:9.6
 ----
 
+Installs the Python 2 programming language and associated tools and libraries.
+
 ----
-sudo dnf install python2 or dnf module install python27
+sudo dnf install python2
 ----
 
 ----
-sudo dnf install python3 or dnf module install python36
+sudo dnf module install python27
 ----
+
+Installs the Python 3 programming language and associated tools and libraries.
+
+----
+sudo dnf install python3
+----
+
+----
+sudo dnf module install python36
+----
+
+Installs the Redis database and message broker
 
 ----
 sudo dnf install redis
 ----
 
+Installs the Ruby programming language and associated tools and libraries.
+
 ----
 sudo dnf install ruby
 ----
+
+Installs the Rust programming language and associated tools and libraries.
 
 ----
 sudo dnf install rust-toolset
 ----
 
+Installs the Scala programming language and associated tools and libraries.
+
 ----
 sudo dnf install scala
 ----
+
+Installs the Subversion source control management system
 
 ----
 sudo dnf install subversion
 ----
 
+Installs the SWIG interface compiler that connects programs written in C and C++ with scripting languages such as Perl, Python, Ruby, and Tcl.
+
 ----
 sudo dnf install swig
 ----
+
+Installs the SystemTap tool that allows users to study and monitor the activities of the operating system (particularly, the kernel) in fine detail.
 
 ----
 sudo dnf install systemtap
 ----
 
+Installs the Valgrind tool for debugging and profiling Linux programs.
+
 ----
 sudo dnf install valgrind
 ----
+
+Installs the Varnish web application accelerator which can also be used as a caching HTTP reverse proxy
 
 ----
 sudo dnf install varnish
