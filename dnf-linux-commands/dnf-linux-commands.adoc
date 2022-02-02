@@ -699,9 +699,9 @@ Complete!
 
 == Module Installation Commands
 
----
+----
 sudo dnf install [options] <package_name>
----
+----
 
 Installs an application or package on the local system.
 
