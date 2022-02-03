@@ -179,7 +179,6 @@ perl-Mail-Sender.noarch : Module for sending mails with attachments through an S
 perl-Mail-Sendmail.noarch : Simple platform independent mailer for Perl
 perl-Mail-Transport.noarch : Email message exchange
 perl-MailTools.noarch : Various ancient mail-related perl modules
-$ 
 ----
 
 === dnf info 
