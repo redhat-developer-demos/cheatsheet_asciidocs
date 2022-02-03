@@ -3,7 +3,7 @@
 :product-name:
 :version: 1.0.0
 
-The cheat sheet describes the various ways the command `dnf` can be used to install and inspect applications running on the Red Hat Enterprise Linux operating system. The term `dnf` is an abbreviation for *Dandified yum*. You can think of `dnf` as the next generation of the yum package manager.
+The cheat sheet describes the various ways the command `dnf` can be used to install and inspect applications running on the Red Hat Enterprise Linux, CentOS and Fedora operating systems. The term `dnf` is an abbreviation for *Dandified yum*. You can think of `dnf` as the next generation of the yum package manager.
 
 The general usage for `dnf` is
 
@@ -713,7 +713,7 @@ Installs the Ant build tool. Uses the `--nodocs` option to not install the packa
 sudo dnf install --nodocs ant
 ----
 
-Installs the `buildah` tools which is used to create Linux container images. Also installs the `podman` container manager. Uses the `--best` option to isntall the best version of the package.
+Installs the `buildah` tools which is used to create container images for Red Hat Enterprise Linux. Also installs the `podman` container manager. Uses the `--best` option to isntall the best version of the package.
 
 ----
 sudo dnf install --best  buildah podman
