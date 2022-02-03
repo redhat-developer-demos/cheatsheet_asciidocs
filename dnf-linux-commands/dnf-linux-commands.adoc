@@ -567,7 +567,7 @@ The following shows the various ways the command `dnf module` can be used to ena
 === dnf module list
 
 ----
-`dnf module [options] list`
+dnf module [options] list
 ----
 
 Lists the modules available according to repositories registered with Subscription Manager
