@@ -1,0 +1,82 @@
+= git Cheat Sheet
+:experimental: true
+:product-name:
+:version: 1.0.0
+
+== File management overview
+
+----
+[Working Directory]  [Staging]  [Local Repo]  [Remote Repo]
+----
+
+
+== Creating a repository
+
+=== git clone
+
+=== git init
+
+== Managing a repository
+
+=== git remote
+
+=== git remote add
+
+=== git status
+
+=== git diff
+
+=== git add
+
+=== git commit
+
+=== git reset
+
+=== git revert
+
+=== git fetch
+
+=== git push
+
+=== git pull
+
+== Merging and rebasing files
+
+=== git merge
+
+=== git mergetool
+
+=== git rebase
+
+== Viewing history of files in a repository
+
+=== git log
+
+=== git blame
+
+== Branch, commit and tag management
+
+=== git branch
+
+=== git checkout
+
+=== git tag
+
+== Merging and rebasing
+
+=== git merge
+
+=== git mergetool
+
+=== git rebase
+
+== Conflict resolution
+
+
+
+
+
+
+
+
+
