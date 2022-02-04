@@ -3,7 +3,7 @@
 :product-name:
 :version: 1.0.0
 
-== File management overview
+== Git operational overview
 
 ----
 [Working Directory]  [Staging]  [Local Repo]  [Remote Repo]
