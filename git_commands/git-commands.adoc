@@ -230,7 +230,7 @@ $  git branch -a
 
 === git checkout
 
-`EXPLANATION TO BE PROVIDED`
+Checks out files from a branch in the local repository.
 
 *Example:*
 
