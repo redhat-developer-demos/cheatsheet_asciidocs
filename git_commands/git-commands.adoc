@@ -5,73 +5,265 @@
 
 == Git operational overview
 
+`INTRODUCTION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
 
 {empty}[Working Directory] → (add) → [Staging] → (commit) → [Local Repo] → (push) → [Remote Repo]
 
+=== Creating and updating content
+
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
+=== Adding content to Staging
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
+=== Committing content to the local repository
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
+=== Pushing content to the remote repository
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
 
 == Creating a repository
 
+`INTRODUCTION TO BE PROVIDED`
+
 === git clone
+
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
+Downloads content from a remote repository for local operations
 
 === git init
 
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
+Creates a local repository
+
 == Managing a repository
+
+`INTRODUCTION TO BE PROVIDED`
 
 === git remote
 
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
 === git remote add
+
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
 
 === git status
 
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
 === git diff
+
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
 
 === git add
 
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
 === git commit
+
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
 
 === git reset
 
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
 === git revert
+
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
 
 === git fetch
 
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
 === git push
+
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
 
 === git pull
 
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
 == Merging and rebasing files
+
+`INTRODUCTION TO BE PROVIDED`
 
 === git merge
 
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
 === git mergetool
 
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
 === git rebase
+
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
 
 == Viewing history of files in a repository
 
+`INTRODUCTION TO BE PROVIDED`
+
 === git log
+
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
 
 === git blame
 
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
 == Branch, commit and tag management
+
+`INTRODUCTION TO BE PROVIDED`
 
 === git branch
 
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
 === git checkout
+
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
 
 === git tag
 
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
 == Merging and rebasing
 
+`INTRODUCTION TO BE PROVIDED`
+
 === git merge
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
 
 === git mergetool
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
 
 === git rebase
+`EXPLANATION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
 
 == Conflict resolution
 
-CONFLIC RESOLUTION SUBHEADS TO BE PROVIDED
+`INTRODUCTION TO BE PROVIDED`
+
+CONFLICT RESOLUTION SUBHEADS TO BE PROVIDED
 
 
 
