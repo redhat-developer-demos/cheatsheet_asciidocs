@@ -48,23 +48,20 @@
 
 === git clone
 
-`EXPLANATION TO BE PROVIDED`
+Downloads content from a remote repository for local operations
 
 *Example:*
 
 `EXAMPLE TO BE PROVIDED`
-
-Downloads content from a remote repository for local operations
 
 === git init
 
-`EXPLANATION TO BE PROVIDED`
+Creates a local repository
 
 *Example:*
 
 `EXAMPLE TO BE PROVIDED`
 
-Creates a local repository
 
 == Managing a repository
 
