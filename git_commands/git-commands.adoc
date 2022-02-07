@@ -6,7 +6,7 @@
 == Git operational overview
 
 
-\[Working Directory] → (add) → [Staging] → (commit) → [Local Repo] → (push) → [Remote Repo]
+{empty}[Working Directory] → (add) → [Staging] → (commit) → [Local Repo] → (push) → [Remote Repo]
 
 
 == Creating a repository
