@@ -209,11 +209,24 @@ Creates a local repository
 
 === git branch
 
-`EXPLANATION TO BE PROVIDED`
+Displays the various branches within a repository
+
+----
+git branch [options]
+----
 
 *Example:*
 
-`EXAMPLE TO BE PROVIDED`
+The following example uses the `-a` to list the all the branches in the local repository and shows the result. (`$` is the symbol for the command line prompt.)
+----
+$  git branch -a
+* main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/feature/add_autocomplete
+  remotes/origin/feature/add_help
+  remotes/origin/main
+----
+
 
 === git checkout
 
@@ -221,7 +234,13 @@ Creates a local repository
 
 *Example:*
 
-`EXAMPLE TO BE PROVIDED`
+The following example checks out the files in the branch `feature/add_help` from the local repository and makes those files available in the working branch.
+
+----
+$ git checkout feature/add_help
+Branch 'feature/add_help' set up to track remote branch 'feature/add_help' from 'origin'.
+Switched to a new branch 'feature/add_help'
+----
 
 === git tag
 
