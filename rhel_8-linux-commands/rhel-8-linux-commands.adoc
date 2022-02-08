@@ -353,13 +353,10 @@ rhel-8-for-x86_64-baseos-rpms                   Red Hat Enterprise Linux 8 for x
 ----
 
 == Working with Subscription Manager
-----
-subscription-manager command [options]
-----
 
-The command is a client-side program that provides a command line interface to the RHEL Subscription Management service. The Service Manager coordinates accessing, monitoring and getting information about RHEL applications and modules.
+The Subscription Manager is a client-side program that provides a command line interface to the RHEL Subscription Management service. The Subscription Manager coordinates accessing, monitoring and getting information about RHEL applications and modules. The following sections describe the various commands available for working with the Subscription Manager command line tool.
 
-=== subscription-manager repos --enable repository
+=== subscription-manager repos
 
 Enables access to a remote package repository via the Subscription Manager
 
