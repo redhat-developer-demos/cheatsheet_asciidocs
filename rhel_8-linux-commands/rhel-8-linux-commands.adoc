@@ -13,131 +13,6 @@ This cheat sheet covers the basic `dnf` commands as well as providing an introdu
 
 == Basic dnf commands
 
-== Working with Subscription Manager
-
-== Working with Application Streams Manager
-
-The following sections show how to use `dnf module` to get information about various RHEL modules available in the repositories supported by the RHEL Subscription Manager.
-
-=== dnf module info
-
-----
-dnf module info [options] <module_name>:<version_number>
-----
-
-Gets the details about a module
-
-*Examples:*
-
-The following example shows how to use `dnf module info` to get a listing of all modules associated with the Redis database/message broker using the `--profile` option.
-
-----
-$ sudo dnf module info --profile redis
-Updating Subscription Management repositories.
-Last metadata expiration check: 4:22:55 ago on Tue 08 Feb 2022 05:00:14 AM PST.
-Name   : redis:5:8000020190711140130:f8e95b4e:x86_64
-common : redis
-
-Name   : redis:5:8040020211011074037:522a0ee4:x86_64
-common : redis
-
-Name   : redis:5:820181217094919:9edba152:x86_64
-common : redis
-
-Name   : redis:6:8040020201124072123:9f9e2e7e:x86_64
-common : redis
-
-Name   : redis:6:8040020210512055424:522a0ee4:x86_64
-common : redis
-
-Name   : redis:6:8040020211011082941:522a0ee4:x86_64
-common : redis
-----
-
-The following example shows how to use `dnf module info` to get the details of the module `Redis` version `redis:5:820181217094919:9edba152:x86_64`
-
-----
-$ sudo dnf module info redis:5:820181217094919:9edba152:x86_64
-Updating Subscription Management repositories.
-Last metadata expiration check: 0:10:55 ago on Tue 08 Feb 2022 09:25:36 AM PST.
-Name             : redis
-Stream           : 5 [d][a]
-Version          : 820181217094919
-Context          : 9edba152
-Architecture     : x86_64
-Profiles         : common [d]
-Default profiles : common
-Repo             : rhel-8-for-x86_64-appstream-rpms
-Summary          : Redis persistent key-value database
-Description      : redis 5 module
-Requires         : platform:[el8]
-Artifacts        : redis-0:5.0.3-1.module+el8+2566+19ca22c8.x86_64
-                 : redis-devel-0:5.0.3-1.module+el8+2566+19ca22c8.x86_64
-                 : redis-doc-0:5.0.3-1.module+el8+2566+19ca22c8.noarch
-
-Hint: [d]efault, [e]nabled, [x]disabled, [i]nstalled, [a]ctive
-----
-
-=== dnf module list
-
-`dnf module [options] list <module_name>`
-
-Reports the status of RHEL modules available from a remote RHEL repository or downloaded to the local computer. The command is used with the following options filter the list accordingly:app-name: 
-
-* `--all` Lists all packages, present on the system, in a repository or both
-* `--installed` Lists packages installed on the system.
-* `--available` Lists available packages.
-* `--obsoletes` Lists packages installed on the system that are deemed obsolete in any known repository.
-
-When the command is run as `sudo` the repository reference on the local machine will be updated.
-
-*Example:*
-
-The following example uses the `dnf module list` with the `--installed` option to show the modules that are presently running on the local computer.
-
-----
-
-----
-
-=== dnf module provides
-
-----
-dnf module provides <provide-spec>
-----
-
-Describes the repository(s) that provides a module according to the `provide-spec`. The `provide-spec` can specify a module name, a module's filepath or a module according to version.
-
-*Example:*
-
-The following example uses the `dnf provides` to discover which repositories – local and remote – provide the module `gzip`.
-
-----
-$ sudo dnf provides /usr/bin/gzip
-Updating Subscription Management repositories.
-Last metadata expiration check: 3:20:01 ago on Wed 02 Feb 2022 05:08:48 AM PST.
-gzip-1.9-4.el8.x86_64 : The GNU data compression program
-Repo        : rhel-8-for-x86_64-baseos-rpms
-Matched from:
-Filename    : /usr/bin/gzip
-
-gzip-1.9-9.el8.x86_64 : The GNU data compression program
-Repo        : rhel-8-for-x86_64-baseos-rpms
-Matched from:
-Filename    : /usr/bin/gzip
-
-gzip-1.9-12.el8.x86_64 : The GNU data compression program
-Repo        : @System
-Matched from:
-Filename    : /usr/bin/gzip
-
-gzip-1.9-12.el8.x86_64 : The GNU data compression program
-Repo        : rhel-8-for-x86_64-baseos-rpms
-Matched from:
-Filename    : /usr/bin/gzip.
-----
-
-== General dnf commands
-
 The following sections show dnf command that can be used to search for modules, learn the details about a module, or install a module.
 
 === dnf search 
@@ -209,7 +84,6 @@ Description  : .NET is a fast, lightweight and modular platform for creating
              : application to drive everything.
 ----
 
-
 === dnf install
 
 ----
@@ -247,10 +121,6 @@ Last metadata expiration check: 2:58:35 ago on Thu 27 Jan 2022 08:48:07 AM PST.
 Dependencies resolved.
 Nothing to do.
 Complete!
-----
-
-----
-sudo dnf update -y perl
 ----
 
 === dnf remove
@@ -476,8 +346,7 @@ rhel-8-for-x86_64-appstream-rpms                Red Hat Enterprise Linux 8 for x
 rhel-8-for-x86_64-baseos-rpms                   Red Hat Enterprise Linux 8 for x86_64 - BaseOS (RPMs)
 ----
 
-== Subscription Manager commands
-
+== Working with Subscription Manager
 ----
 subscription-manager command [options]
 ----
@@ -548,6 +417,128 @@ Authenticating as "root"
 Password: 
 Repository 'jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms' is disabled for this system.
 ----
+
+== Working with Application Streams Manager
+
+The following sections show how to use `dnf module` to get information about various RHEL modules available in the repositories supported by the RHEL Subscription Manager.
+
+=== dnf module info
+
+----
+dnf module info [options] <module_name>:<version_number>
+----
+
+Gets the details about a module
+
+*Examples:*
+
+The following example shows how to use `dnf module info` to get a listing of all modules associated with the Redis database/message broker using the `--profile` option.
+
+----
+$ sudo dnf module info --profile redis
+Updating Subscription Management repositories.
+Last metadata expiration check: 4:22:55 ago on Tue 08 Feb 2022 05:00:14 AM PST.
+Name   : redis:5:8000020190711140130:f8e95b4e:x86_64
+common : redis
+
+Name   : redis:5:8040020211011074037:522a0ee4:x86_64
+common : redis
+
+Name   : redis:5:820181217094919:9edba152:x86_64
+common : redis
+
+Name   : redis:6:8040020201124072123:9f9e2e7e:x86_64
+common : redis
+
+Name   : redis:6:8040020210512055424:522a0ee4:x86_64
+common : redis
+
+Name   : redis:6:8040020211011082941:522a0ee4:x86_64
+common : redis
+----
+
+The following example shows how to use `dnf module info` to get the details of the module `Redis` version `redis:5:820181217094919:9edba152:x86_64`
+
+----
+$ sudo dnf module info redis:5:820181217094919:9edba152:x86_64
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:10:55 ago on Tue 08 Feb 2022 09:25:36 AM PST.
+Name             : redis
+Stream           : 5 [d][a]
+Version          : 820181217094919
+Context          : 9edba152
+Architecture     : x86_64
+Profiles         : common [d]
+Default profiles : common
+Repo             : rhel-8-for-x86_64-appstream-rpms
+Summary          : Redis persistent key-value database
+Description      : redis 5 module
+Requires         : platform:[el8]
+Artifacts        : redis-0:5.0.3-1.module+el8+2566+19ca22c8.x86_64
+                 : redis-devel-0:5.0.3-1.module+el8+2566+19ca22c8.x86_64
+                 : redis-doc-0:5.0.3-1.module+el8+2566+19ca22c8.noarch
+
+Hint: [d]efault, [e]nabled, [x]disabled, [i]nstalled, [a]ctive
+----
+
+=== dnf module list
+
+`dnf module [options] list <module_name>`
+
+Reports the status of RHEL modules available from a remote RHEL repository or downloaded to the local computer. The command is used with the following options filter the list accordingly:app-name: 
+
+* `--all` Lists all packages, present on the system, in a repository or both
+* `--installed` Lists packages installed on the system.
+* `--available` Lists available packages.
+* `--obsoletes` Lists packages installed on the system that are deemed obsolete in any known repository.
+
+When the command is run as `sudo` the repository reference on the local machine will be updated.
+
+*Example:*
+
+The following example uses the `dnf module list` with the `--installed` option to show the modules that are presently running on the local computer.
+
+----
+
+----
+
+=== dnf module provides
+
+----
+dnf module provides <provide-spec>
+----
+
+Describes the repository(s) that provides a module according to the `provide-spec`. The `provide-spec` can specify a module name, a module's filepath or a module according to version.
+
+*Example:*
+
+The following example uses the `dnf provides` to discover which repositories – local and remote – provide the module `gzip`.
+
+----
+$ sudo dnf provides /usr/bin/gzip
+Updating Subscription Management repositories.
+Last metadata expiration check: 3:20:01 ago on Wed 02 Feb 2022 05:08:48 AM PST.
+gzip-1.9-4.el8.x86_64 : The GNU data compression program
+Repo        : rhel-8-for-x86_64-baseos-rpms
+Matched from:
+Filename    : /usr/bin/gzip
+
+gzip-1.9-9.el8.x86_64 : The GNU data compression program
+Repo        : rhel-8-for-x86_64-baseos-rpms
+Matched from:
+Filename    : /usr/bin/gzip
+
+gzip-1.9-12.el8.x86_64 : The GNU data compression program
+Repo        : @System
+Matched from:
+Filename    : /usr/bin/gzip
+
+gzip-1.9-12.el8.x86_64 : The GNU data compression program
+Repo        : rhel-8-for-x86_64-baseos-rpms
+Matched from:
+Filename    : /usr/bin/gzip.
+----
+
 
 == General module commands
 
