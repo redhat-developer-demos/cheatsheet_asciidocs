@@ -570,7 +570,7 @@ ghc                  8.4              default  Haskell GHC 8.4
                                       all      
 ----
 
-=== dnf module enable module:stream
+=== dnf module enable
 
 ----
 dnf module [options] enable <module:stream>
