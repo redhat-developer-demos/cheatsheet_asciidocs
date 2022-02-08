@@ -302,33 +302,6 @@ NetworkManager-wwan.x86_64                   1:1.32.10-4.el8                    
 --More--
 ----
 
-=== dnf list installed
-
-----
-dnf list installed
-----
-
-The following example uses the command `dnf list installed` to list the packets installed on the system. The output is very long. The `more` command uses the `-15` option to initially show the first 15 lines of output.
-
-----
-$ sudo dnf list installed | more -15
-Updating Subscription Management repositories.
-Installed Packages
-GConf2.x86_64                                      3.2.6-22.el8                                   @AppStream                       
-ModemManager.x86_64                                1.10.8-4.el8                                   @anaconda                        
-ModemManager-glib.x86_64                           1.10.8-4.el8                                   @anaconda                        
-NetworkManager.x86_64                              1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-adsl.x86_64                         1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-bluetooth.x86_64                    1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-config-server.noarch                1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-libnm.x86_64                        1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-team.x86_64                         1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-tui.x86_64                          1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-wifi.x86_64                         1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-wwan.x86_64                         1:1.32.10-4.el8                                @anaconda                        
-PackageKit.x86_64                                  1.1.12-6.el8                                   @AppStream                       
---More--
-----
 
 === dnf repolist
 
