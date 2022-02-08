@@ -627,7 +627,7 @@ Is this ok [y/N]:
 Complete!
 ----
 
-=== dnf module remove module
+=== dnf module remove
 
 ----
 dnf module remove <module_name:stream>
