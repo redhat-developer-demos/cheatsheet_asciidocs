@@ -691,7 +691,7 @@ Removed:
 Complete!
 ----
 
-=== dnf module disable module
+=== dnf module disable
 
 ----
 dnf module disable <module_name:stream>
