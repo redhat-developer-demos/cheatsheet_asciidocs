@@ -47,10 +47,10 @@ perl-MailTools.noarch : Various ancient mail-related perl modules
 
 === dnf info 
 
-Displays details about a module
+Displays details about a module_name
 
 ----
-dnf info <module-name>
+dnf info <module_name>
 ----
 
 *Example:*
@@ -613,7 +613,7 @@ Removes a module from the local environment
 The following example removes the module `ant` from the local environment
 
 ----
-$ sudo dnf remove ant
+$ sudo dnf module remove ant
 Updating Subscription Management repositories.
 Dependencies resolved.
 ==================================================================
