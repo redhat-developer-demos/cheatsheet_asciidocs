@@ -702,7 +702,7 @@ Instead of using `dnf module switch-to` use the  `dnf module reset` command alon
 
 *Example:*
 
-The following uses `dnf module reset` along with `dnf module install` to install the module `nodjs:16` over an existing, older version of Node.js. The results are shown in abbreviated portions in order to economize on displaying screen output.
+The following uses `dnf module reset` along with `dnf module install` to install the module `nodjs:16` over an existing, older version of Node.js. The results show the before and after calls to `node --version`. Also, the result is shown in abbreviated portions in order to economize on displaying screen output.
 
 ----
 $ node --version
