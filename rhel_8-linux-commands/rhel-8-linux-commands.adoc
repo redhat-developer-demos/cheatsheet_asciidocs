@@ -87,10 +87,10 @@ Description  : .NET is a fast, lightweight and modular platform for creating
 === dnf install
 
 ----
-dnf install [options] <package_name>
+dnf install [options] <module_name>
 ----
 
-Installs an application package on the local machine.
+Installs a module on the local machine.
 
 *Example:*
 
@@ -105,14 +105,14 @@ sudo dnf install -y perl
 === dnf update
 
 ----
-dnf update [options] <package_name>
+dnf update [options] <module_name>
 ----
 
-Updates an application package on the local machine.
+Updates a module on the local machine.
 
 *Example:*
 
-The following installs the`perl` programming language from the local computer. The command uses the `-y` option to suppress the prompt asking the user for permission to proceed.
+The following updates the`perl` programming language on the local computer. The command uses the `-y` option to suppress the prompt asking the user for permission to proceed.
 
 ----
 $ sudo dnf update -y perl
@@ -126,10 +126,10 @@ Complete!
 === dnf remove
 
 ----
-dnf remove [options] <package_name>
+dnf remove [options] <module_name>
 ----
 
-Removes an application package on the local machine.
+Removes a module on the local machine.
 
 *Example:*
 
@@ -394,9 +394,11 @@ Password:
 Repository 'jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms' is disabled for this system.
 ----
 
-== Working with Application Streams Manager
+== Working with Application Streams
 
-The following sections show how to use `dnf module` to get information about various RHEL modules available in the repositories supported by the RHEL Subscription Manager.
+RHEL 8 supports application streams. Application streaming is a type of on-demand software distribution in which a variety of version of a particular application or module are installed on a computer. Application streams allow user to switch between versions of an application or module to meet the particular need at hand.
+
+The base command for working with application streams is `dnf module`. Particular actions are executed using a subcommand. The sections that follow show how to use the various subcommands associated with `dnf module`.
 
 === dnf module info
 
