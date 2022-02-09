@@ -527,59 +527,6 @@ Filename    : /usr/bin/gzip.
 ----
 
 
-== General module commands
-
-The following shows the various ways the command `dnf module` can be used to enable, install, and remove modules.
-
-=== dnf module list
-
-----
-dnf module [options] list
-----
-
-Lists the modules available according to repositories registered with Subscription Manager
-
-*Example:*
-
-The follow shows a portions of the modules listed using the command `dnf module list`.
-
-----
-$ dnf module list
-Not root, Subscription Management repositories not updated
-Red Hat Enterprise Linux 8 for x86_64 - BaseOS (RPMs)      10 kB/s | 4.1 kB     00:00    
-Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs)   13 kB/s | 4.5 kB     00:00    
-Extra Packages for Enterprise Linux Modular 8 - x86_64
-Name                 Stream           Profiles Summary                                                                                                                                                                   
-389-directory-server next             default, 389 Directory Server                                                                                                                                                      
-                                       minimal 
-389-directory-server stable           default  389 Directory Server                                                                                                                                                      
-                                      [d], leg 
-                                      acy, min 
-                                      imal     
-389-directory-server testing          default  389 Directory Server                                                                                                                                                      
-                                      [d], leg 
-                                      acy, min 
-                                      imal     
-avocado              latest           default, Framework with tools and libraries for Automated Testing                                                                                                                  
-                                       minimal 
-avocado              82lts            default, Framework with tools and libraries for Automated Testing                                                                                                                  
-                                       minimal 
-avocado-vt           latest           default  Avocado Virt Test Plugin                                                                                                                                                  
-cobbler              3                default  Versatile Linux deployment server                                                                                                                                         
-                                      [d]      
-cri-o                1.21             default  Kubernetes Container Runtime Interface for OCI-based containers                                                                                                           
-                                      [d]      
-dwm                  latest           default, Dynamic window manager for X                                                                                                                                              
-                                       user    
-ghc                  8.2              default  Haskell GHC 8.2                                                                                                                                                           
-                                      [d], min 
-                                      imal, sm 
-                                      all      
-ghc                  8.4              default  Haskell GHC 8.4                                                                                                                                                           
-                                      [d], min 
-                                      imal, sm 
-                                      all      
-----
 
 === dnf module enable
 
@@ -587,7 +534,7 @@ ghc                  8.4              default  Haskell GHC 8.4
 dnf module [options] enable <module:stream>
 ----
 
-Enables a module.
+Enables a module.  Enabling a module provides system access to the repository packages that are contained in that module stream.
 
 *Example:*
 
