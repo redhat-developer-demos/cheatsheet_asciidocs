@@ -492,10 +492,10 @@ Hint: [d]efault, [e]nabled, [x]disabled, [i]nstalled
 === dnf module provides
 
 ----
-dnf module provides <provide-spec>
+dnf module provides <provide_spec>
 ----
 
-Describes the repository(s) that provides a module according to the `provide-spec`. The `provide-spec` can specify a module name, a module's filepath or a module according to version.
+Describes the repository(s) that provides a module according to the `provide_spec`. The `provide_spec` can specify a module name, a module's filepath or a module according to version.
 
 *Example:*
 
