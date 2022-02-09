@@ -652,6 +652,48 @@ Is this ok [y/N]: y
 Complete!
 ----
 
+=== dnf module switch-to
+
+----
+
+sudo dnf module [options] switch-to <module:stream>
+----
+
+Switches the current installed module to the one defined by the argument `<module:stream>`. If the version a newer than the one presently installed the switch will be deemed `Upgraded`. If the version is older than the one presently installed the switch will be deemed `Downgraded`.
+
+*Example:*
+
+The following example switches the installed version of Node.js to version 16. The command uses the `-y` option to allow installation to proceed without user confirmation. The result displays portions of the start of the switch-to process and the end of the process
+
+----
+$ sudo dnf module switch-to nodejs:16 -y
+Updating Subscription Management repositories.
+Last metadata expiration check: 2:14:26 ago on Wed 09 Feb 2022 08:06:21 AM PST.
+Dependencies resolved.
+==========================================================================================================================================================
+ Package                     Architecture          Version                                                 Repository                           Size
+==========================================================================================================================================================
+Upgrading:
+ nodejs                      x86_64                 1:16.13.1-3.module+el8.5.0+13548+45d748af              rhel-8-for-x86_64-appstream-rpms      12 M
+ nodejs-docs                 noarch                 1:16.13.1-3.module+el8.5.0+13548+45d748af              rhel-8-for-x86_64-appstream-rpms     8.7 M
+ nodejs-full-i18n            x86_64                 1:16.13.1-3.module+el8.5.0+13548+45d748af              rhel-8-for-x86_64-appstream-rpms     7.6 M
+ npm                         x86_64                 1:8.1.2-1.16.13.1.3.module+el8.5.0+13548+45d748af      rhel-8-for-x86_64-appstream-rpms     1.9 M
+Switching module streams:
+ nodejs     10 -> 16 
+.
+.
+.                                                                                                                                          
+Installed products updated.
+
+Upgraded:
+  nodejs-1:16.13.1-3.module+el8.5.0+13548+45d748af.x86_64  nodejs-docs-1:16.13.1-3.module+el8.5.0+13548+45d748af.noarch   nodejs-full-i18n-1:16.13.1-3.module+el8.5.0+13548+45d748af.x86_64             
+  npm-1:8.1.2-1.16.13.1.3.module+el8.5.0+13548+45d748af.x86_64             
+
+Complete!
+----
+
+=== dnf module reset
+
 == Module installation commands
 
 ----
