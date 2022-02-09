@@ -9,7 +9,7 @@ Also REHL 8 ships with two useful features. One is Subscription Manager. Subscri
 
 The second feature is Application Streams. Application Streams provide the capability to run multiple versions of a given program on a local machine while allowing a developer to switch between different version on demand without having to manage the details that go with upgrading or downgrading an application/module. For example, a developer can be install Node.js version 10 and then later on upgrade to Node.js version 16 by just executing a single command. The developer can run Node.js to meet a special need and then switch over the Node.js version 16 when that version is needed.
 
-This cheat sheet covers the basic `dnf` commands as well as providing an introduction to Subscription Manager and Application Streams.
+This cheat sheet covers the basic `dnf` commands as well as providing an introduction to Subscription Manager and Application Streams. In addition, the commands for installing for many popular modules, applications and programming languages are shown at the end of the cheat sheet.
 
 == Basic dnf commands
 
@@ -25,7 +25,7 @@ Searches for package according to the `search_string`
 
 *Example:*
 
-The following exampls uses the `dnf search` to search for packages according to the search string criteria `perl-MAIL`.
+The following examples uses the `dnf search` to search for packages according to the search string criteria `perl-MAIL`.
 
 ----
 $ sudo dnf search perl-MAIL
