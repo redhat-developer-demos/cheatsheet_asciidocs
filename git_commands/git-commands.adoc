@@ -111,8 +111,8 @@ Displays the branches on the remote repository
 
 ----
 $ git branch -r
-  origin/HEAD -> origin/master
-  origin/master
+  origin/HEAD -> origin/main
+  origin/main
 ----
 
 === Viewing all branches
@@ -129,8 +129,8 @@ The following example displays all branches, local and remote, for the repositor
 $ git branch -a
   dev
 * main
-  remotes/origin/HEAD -> origin/master
-  remotes/origin/master
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
 ----
 
 === Creating a branch in the local repository
@@ -165,7 +165,7 @@ Switched to branch 'dev'
 
 $ git branch 
 * dev
-  master
+  main
 ----
 
 == Working with content
