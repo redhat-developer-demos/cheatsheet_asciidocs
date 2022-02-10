@@ -31,7 +31,7 @@ The local repository is updated from the remote repository using the `git pull` 
 
 === Remote repository
 
-The remote repository is the `git` repository on the network that is the single source of truth for all content being managed under `git`. Developers use the `git push` to upload content from the local repository to a remote repository.
+The remote repository is the `git` repository on the network that is the single source of truth for all content being managed under a particular `git` repository. Developers use the `git push` to upload content from the local repository to a remote repository.
 
 Content in the remote repository can be versioned using branches. The root branch is typically named `main`.
 
