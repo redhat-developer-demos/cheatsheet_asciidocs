@@ -5,13 +5,44 @@
 
 == Git operational overview
 
-`INTRODUCTION TO BE PROVIDED`
+Working with `git` source control management requires understanding conceptual structures for managing content flow to and from a `git` repository. According to `git` the source of truth is the independent remote `git` repository. A remote repository can be hosted on a private network or by a public service such as GitHub or BitBucket.
+
+Moving content to and from the remote repository happens in a formal manner. Under `git` there are four locations in which source control activities take place. These locations are
+
+* Working directory
+* Staging environment
+* Local repository
+* Remote repository
+
+The sections that follow describe the purpose and use of the location/
+
+=== Working directory
+
+The working directory is the location in the file system of the local computer a file named `.git` is stored. You can think of the `.git` file as a database the stores all content and metadata about file management and versioning activities. Operationally, the  `.git` file represents the local repository. Developer make changes to code in the working directory.
+
+=== Staging environment
+
+The Staging environment is an area the is special to `git`. Developers usd the `git add` command to add files to the Staging environment. You can think of Staging as the temporary area where file are stored before being committed to the local repository.
+
+=== Local repository
+The local repository is the instance of the git repository stored on the local computer. The physical representation of the local repository is the `.git` file. Once content has been added to the Staging environment, developers use the `git commit` to store new and updated content in the local repository. 
+
+The local repository is updated from the remote repository using the `git pull` command.
+
+=== Remote repository
+
+The remote repository is the `git` repository on the network that is the single source of truth for all content being managed under `git`. Developers use the `git push` to upload content from the local repository to a remote repository.
+
+Content in the remote repository can be versioned using branches. The root branch is typically named `main`.
+
 
 *Example:*
 
-`EXAMPLE TO BE PROVIDED`
+The following example shows the Working Directory, Staging, Local Repository areas along with the `git` commands to move data to and from each area. Once content has been pulled from a remote repository to a local repository, that content is available in the local filesystem according to branch.
 
 {empty}[Working Directory] → (add) → [Staging] → (commit) → [Local Repo] → (push) → [Remote Repo]
+                                                              ↑  ←  ←   ←  (pull)   ←    ←   ↲ 
+
 
 == Working with repositories
 
@@ -91,7 +122,7 @@ git branch -a
 Displays all branches both on the local and remote repositories
 
 *Example:*
-The following example displays all branches, local and remote, for the repository associated with the current working directory. Notice that the symbol `*` indicates the current working branch, in this case `* main`.
+The following example displays all branches, local and remote, for the repository associated with the current working directory. Notice that the symbol `*` indicates the current working branch, in this case `* main`. (`$` is the command-prompt symbol)
 
 ----
 $ git branch -a
@@ -135,6 +166,30 @@ $ git branch
 ----
 
 == Working with content
+
+=== Determining the status of the local filesystem
+
+----
+git status [options] <directory_or_filename>
+----
+
+Reports the status of the current filesystem associated with the local repository. The parameter `<directory_or_filename>` is optional. If no `<directory_or_filename>` is provided, status is reported according to the present working directory (`pwd0`).
+
+*Example:*
+
+The following example uses `git status` to report the status of file and directories in the present working directory in comparison the state of the local repository.
+
+----
+$ git status
+On branch dev
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   git_cheat_sheet/readme.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+----
+
 
 === Adding new or updated content to Staging
 ----
@@ -189,6 +244,10 @@ git push
 ----
 
 === Rolling back to a previous version
+
+----
+git restore
+----
 
 ----
 git reset
