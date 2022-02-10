@@ -22,10 +22,10 @@ The working directory is the location in the file system of the local computer i
 
 === Staging environment
 
-The Staging environment is an area the is special to `git`. Developers usd the `git add` command to add files to the Staging environment. You can think of Staging as the temporary area where file are stored before being committed to the local repository.
+The Staging environment is an area that is special to `git`. Developers use the `git add` and `get reset` commands to add files to and remove files from the Staging environment. You can think of Staging as the temporary area where file are stored before being committed to the local repository.
 
 === Local repository
-The local repository is the instance of the git repository stored on the local computer. The physical representation of the local repository is the `.git` file. Once content has been added to the Staging environment, developers use the `git commit` to store new and updated content in the local repository. 
+The local repository is the instance of the git repository stored on the local computer. The physical representation of the local repository is the `.git` file. Once content has been added to the Staging environment, developers use the `git commit` to store new and updated content to the local repository. 
 
 The local repository is updated from the remote repository using the `git pull` command.
 
