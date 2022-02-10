@@ -38,7 +38,7 @@ Content in the remote repository can be versioned using branches. The root branc
 
 *Example:*
 
-The following example shows the Working Directory, Staging Environment, Local Repository and Remote Repository areas along with the `git` commands to move data to and from each area. Once content has been pulled from a remote repository to a local repository, that content is available in the local filesystem according to the given branch.
+The following example shows the Working Directory, Staging Environment, Local Repository and Remote Repository locations along with the `git` commands to move data to and from each location. Once content has been pulled from a remote repository to a local repository, that content is available in the local filesystem according to the given branch.
 
 ----
 [Working Directory] → (add) → [Staging] → (commit) → [Local Repo] → (push) → [Remote Repo]
