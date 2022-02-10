@@ -136,8 +136,10 @@ $ git branch -a
 === Creating a branch in the local repository
 
 ----
-git branch <new_branch_name> <existing_tag_name>
+git branch <new_branch_name> <existing_branch_name>
 ----
+
+Creates a new branch. If the optional parameter `<existing_branch_name>` is not provided, the new branch is derived from the current working branch.
 
 *Example:*
 
