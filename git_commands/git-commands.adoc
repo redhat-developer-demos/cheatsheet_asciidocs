@@ -132,7 +132,6 @@ Switched to branch 'dev'
 $ git branch 
 * dev
   master
-$ 
 ----
 
 == Working with content
