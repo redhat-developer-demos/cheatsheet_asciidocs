@@ -18,7 +18,7 @@ The sections that follow describe the purpose and use of each location.
 
 === Working directory
 
-The working directory is the location in the file system of the local computer a file named `.git` is stored. You can think of the `.git` file as a database the stores all content and metadata about file management and versioning activities. Operationally, the  `.git` file represents the local repository. Developer make changes to code in the working directory.
+The working directory is the location in the file system of the local computer in which the `.git` file is stored. The `.git` file is the physical representation of the local repository. Developer make changes to code in the working directory.
 
 === Staging environment
 
