@@ -42,7 +42,7 @@ The following example shows the Working Directory, Staging, Local Repository are
 
 {empty}[Working Directory] → (add) → [Staging] → (commit) → [Local Repo] → (push) → [Remote Repo]
 
-                                                              ↑  ←  ←   ←  (pull)   ←    ←   ↲ 
+{empty}                                                            ↑  ←  ←   ←  (pull)   ←    ←   ↲ 
 
 
 == Working with repositories
