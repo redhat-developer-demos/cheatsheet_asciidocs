@@ -13,36 +13,7 @@
 
 {empty}[Working Directory] → (add) → [Staging] → (commit) → [Local Repo] → (push) → [Remote Repo]
 
-=== Creating and updating content
-
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-=== Adding content to Staging
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-=== Committing content to the local repository
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-=== Pushing content to the remote repository
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-== Creating a repository
+== Working with repositories
 
 `INTRODUCTION TO BE PROVIDED`
 
@@ -62,70 +33,19 @@ Creates a local repository
 
 `EXAMPLE TO BE PROVIDED`
 
+----
+git init
+----
 
-== Managing a repository
+=== git pull
+
+Downloads the latest, current assets from the remote repository
+
+----
+git pull [options] <repository>
+----
 
 `INTRODUCTION TO BE PROVIDED`
-
-=== git remote
-
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-=== git remote add
-
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-=== git status
-
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-=== git diff
-
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-=== git add
-
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-=== git commit
-
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-=== git reset
-
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-=== git revert
-
-`EXPLANATION TO BE PROVIDED`
 
 *Example:*
 
@@ -133,31 +53,157 @@ Creates a local repository
 
 === git fetch
 
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-=== git push
-
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-=== git pull
-
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-== Merging and rebasing files
+----
+git fetch options] <repository>
+----
 
 `INTRODUCTION TO BE PROVIDED`
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
+== Working with branches
+
+`INTRODUCTION TO BE PROVIDED`
+
+=== Viewing existing remote branches
+
+----
+git branch -r
+----
+
+Displays the branches on the remote repository
+
+*Example:*
+
+----
+$ git branch -r
+  origin/HEAD -> origin/master
+  origin/master
+----
+
+=== Viewing all branches
+----
+git branch -a
+----
+
+Displays all branches both on the local and remote repositories
+
+*Example:*
+The following example displays all branches, local and remote, for the repository associated with the current working directory. Notice that the symbol `*` indicates the current working branch, in this case `* main`.
+
+----
+$ git branch -a
+  dev
+* main
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/master
+----
+
+=== Creating a branch in the local repository
+
+----
+git branch <new_branch_name> <existing_tag_name>
+----
+
+*Example:*
+
+The following example creates the a branch named `dev` that has the directories and files from the existing branch named `main`.
+
+----
+git branch dev main
+----
+
+=== Changing branches
+
+----
+git checkout <branch_name>
+----
+
+*Example:*
+
+The following example changes the current working branch to the branch named `dev`. Then the command `git branch` is called to verify the branch change. Notice that the symbol `*` indicates the current working branch, in this case `* dev`.
+
+----
+$ git checkout dev
+Switched to branch 'dev'
+
+$ git branch 
+* dev
+  master
+$ 
+----
+
+== Working with content
+
+=== Adding new or updated content to Staging
+----
+git add [options] <files or directories>
+----
+
+Adds content to the Staging area according to the current branch in the local repository.
+
+*Example:*
+
+The following example creates a directory named `git_cheat_sheet` in the current branch. Then a file named `readme.md` is added to directory named `git_cheat_sheet`. Finally the `git add` command is used to add the local git Staging environment.
+
+----
+$ mkdir git_cheat_sheet
+$ touch ./git_cheat_sheet/readme.md
+$ git add ./git_cheat_sheet/
+----
+
+=== Committing new or updated content to the local repository
+
+----
+git commit [options] <files or directories>
+----
+
+Commits content to the local repository
+
+*Example:*
+
+The  following example uses the `git commit` command to commit the file `./git_cheat_sheet/readme.md` to the local repository along with a descriptive message: `adding new file for git-cheat-sheet`.
+
+----
+$ git commit -m "adding new file for git-cheat-sheet" ./git_cheat_sheet/readme.md
+[dev 0c0fb31] adding content for git-cheat-sheet
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 git_cheat_sheet/readme.md
+----
+
+=== Pushing new or updated content to the remote repository
+
+----
+git push [options] <remote_repository>
+----
+
+Uploads content from the local repository to the remote repository. The parameter `<remote_repository>` is optional. If no remote repository is defined, content is pushed to the repository associated with the current working directory.
+
+*Example:*
+
+The following example uploads all content committed to the local repository up the default remote repository associated with the current working directory.
+
+----
+git push
+----
+
+=== Rolling back to a previous version
+
+----
+git reset
+----
+
+----
+git reverts
+----
+
+*Example:*
+
+`EXAMPLE TO BE PROVIDED`
+
+== Merging content between branches
 
 === git merge
 
