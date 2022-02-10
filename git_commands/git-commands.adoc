@@ -14,7 +14,7 @@ Moving content to and from the remote repository happens in a formal manner. Und
 * Local repository
 * Remote repository
 
-The sections that follow describe the purpose and use of the location/
+The sections that follow describe the purpose and use of each location.
 
 === Working directory
 
