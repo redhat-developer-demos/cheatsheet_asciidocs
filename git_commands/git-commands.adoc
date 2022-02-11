@@ -60,7 +60,7 @@ Creates a local repository as represented by the file `.git`. If the optional pa
 
 *Example:*
 
-The following example uses the `git init` command to create a local repository in the `/home` directory of the user `lennonjohn`. The example creates `coolcode` as the directory in which the repository `.git` file is stored.
+The following example uses the `git init` command to create a local repository in the `/home` directory of the user `lennonjohn`. The example creates the directory `coolcode` as the repository directory in which the repository `.git` file is stored.
 
 ----
 $ git init ./coolcode
