@@ -103,14 +103,20 @@ Already up to date.
 === git fetch
 
 ----
-git fetch options] <repository>
+git fetch [options] <repository>
 ----
 
-`INTRODUCTION TO BE PROVIDED`
+Downloads code and assets from the remote repository to the local machine without overwriting the existing local code and assets in the current branch.
 
 *Example:*
 
-`EXAMPLE TO BE PROVIDED`
+`EXPLANATION TO BE PROVIDED`
+
+----
+git fetch
+----
+
+
 
 == Working with branches
 
