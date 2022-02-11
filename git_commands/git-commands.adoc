@@ -222,7 +222,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 git add [options] <files or directories>
 ----
 
-Adds content to the Staging area according to the current branch in the local repository.
+Adds content to the Staging environment according to the current branch in the local repository.
 
 *Example:*
 
