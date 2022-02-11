@@ -47,41 +47,58 @@ The following example shows the Working Directory, Staging Environment, Local Re
 
 == Working with repositories
 
-`INTRODUCTION TO BE PROVIDED`
-
-=== git clone
-
-Downloads content from a remote repository for local operations
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
+The following sections describe `git` commands to create a local repository, download (clone) a remote repository to a local machine, and update a local repository with changes from a remote repository.
 
 === git init
 
-Creates a local repository
+----
+git [options] init <repo_directory>
+----
+
+Creates a local repository as represented by the file `.git`. If the optional parameter `<repo_directory>` the `.git` file is created in the current directory. If the parameter `<repo_directory>` is provided, a directory is created and the `.git` file is created in that directory.
+
 
 *Example:*
 
-`EXAMPLE TO BE PROVIDED`
+The following example uses the `git init` command to create a local repository in the `/home` directory of the user `lennonjohn`. The example creates `coolcode` as the directory in which the repository `.git` file is stored.
 
 ----
-git init
+$ git init ./coolcode
+Initialized empty Git repository in /home/lennonjohn/coolcode/.git/
+----
+
+=== git clone
+
+----
+git clone [options] <remote_repo_url> <target_directory>
+----
+
+Downloads content from a remote repository for local operations. If the parameter `<target_directory>` is provided, the repository contents will be downloaded into that directory. (That directory must be empty.) Otherwise, `git` will create a directory based on the remote repository name.
+ 
+*Example:*
+
+The following example uses the command `git clone` to download the content of the remote repository found at `https://github.com/redhat-developer/developers.redhat.com` into the local directory `./rh`.
+
+----
+git clone https://github.com/redhat-developer/developers.redhat.com.git ./rh
 ----
 
 === git pull
 
-Downloads the latest, current assets from the remote repository
+Calling the `git pull` from a directory of a local repository downloads the latest, current assets from the associated remote repository.
 
 ----
-git pull [options] <repository>
+git pull [options]
 ----
-
-`INTRODUCTION TO BE PROVIDED`
 
 *Example:*
 
-`EXAMPLE TO BE PROVIDED`
+The following example uses `git pull` to download files from the associated remote repository. Since contents in the remote repository and local repository are the same, the command responds with a message `Already up to date.`.
+
+----
+$ git pull
+Already up to date.
+----
 
 === git fetch
 
