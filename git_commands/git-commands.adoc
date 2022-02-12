@@ -323,7 +323,30 @@ git reverts
 
 *Example:*
 
-`EXAMPLE TO BE PROVIDED`
+----
+$ git log
+commit 156c828587ec5cdae2e293f75f08cc54dd94e9b2 (HEAD -> my_feature, dev)
+Author: John Lennon <lennonjohn@localhost.localdomain>
+Date:   Thu Feb 10 11:54:56 2022 -0800
+
+    updating dev
+
+commit 0c0fb31fca3cb2994c2f7785f49739863d7c2770
+Author: John Lennon <lennonjohn@localhost.localdomain>
+Date:   Thu Feb 10 10:05:55 2022 -0800
+
+    adding content for git-cheat-sheet
+
+commit 665ecf10bc4f5b98c21042eeb77f46128dab54c7 (origin/your-feature, origin/master, origin/HEAD, master)
+Author: John Lennon <john@lennonjohn.com>
+Date:   Tue Feb 8 11:01:24 2022 -0800
+
+    reorganizing repo structure
+
+commit c9b791ceba268f3bdd0caf36e44e891270a330ba
+Author: John Lennon <john@lennonjohn.com>
+Date:   Tue Feb 8 11:00:30 2022 -0800
+----
 
 === git blame
 
