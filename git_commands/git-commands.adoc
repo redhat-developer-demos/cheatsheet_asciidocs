@@ -106,36 +106,57 @@ Already up to date.
 git fetch [options] <repository>
 ----
 
-Downloads code and assets from the remote repository to the local machine without overwriting the existing local code and assets in the current branch.
+Downloads code and assets from the remote repository to the local machine without overwriting the existing local code and assets in the current branch. If the optional `<repository>` is not provided, `git fetch` is executed against the `git` repository associated with the present working directory.
 
 *Example:*
 
-`EXPLANATION TO BE PROVIDED`
+The following example uses the `git fetch` command to downloaded updated assets from the corresponding remote repository, but will not merge the deltas in the branches on the local repository.
 
 ----
-git fetch
+$ git fetch
 ----
-
 
 
 == Working with branches
 
-`INTRODUCTION TO BE PROVIDED`
+The following sections describe the various `git branch` command expressions you can use to work with branches in a repository
 
-=== Viewing existing remote branches
+=== Getting the current branch name
+
+----
+git branch
+----
+
+Gets the name of the current branch that is checkout out from the local repository.
+
+*Example:*
+
+The following example reports the current branch that is being worked on in the local repository. In this case the current branch is `my_feature` and is indicated by the asterisk before the branch name.
+----
+$ git branch
+  dev
+  master
+* my_feature
+----
+
+=== Viewing remote branches
 
 ----
 git branch -r
 ----
 
-Displays the branches on the remote repository
+Displays all the branches on the remote repository
 
 *Example:*
+
+The following example uses the `git branch` command along with the option `-r` to display the names of all branches on the remote repository.
 
 ----
 $ git branch -r
   origin/HEAD -> origin/main
   origin/main
+  origin/my_feature
+  origin/your-feature
 ----
 
 === Viewing all branches
@@ -146,14 +167,17 @@ git branch -a
 Displays all branches both on the local and remote repositories
 
 *Example:*
-The following example displays all branches, local and remote, for the repository associated with the current working directory. Notice that the symbol `\*` indicates the current working branch, in this case `* main`. (`$` is the command-prompt symbol)
+The following example displays all branches, local and remote, for the repository associated with the current working directory. Notice that the symbol `\*` indicates the current working branch, in this case `my_feature`. (`$` is the command-prompt symbol)
 
 ----
 $ git branch -a
   dev
-* main
+  main
+* my_feature
   remotes/origin/HEAD -> origin/main
   remotes/origin/main
+  remotes/origin/my_feature
+  remotes/origin/your-feature
 ----
 
 === Creating a branch in the local repository
@@ -178,6 +202,8 @@ git branch dev main
 git checkout <branch_name>
 ----
 
+Get the files from a branch in a local repository according to the value of the parameter `<branch_name>`.
+
 *Example:*
 
 The following example changes the current working branch to the branch named `dev`. Then the command `git branch` is called to verify the branch change. Notice that the symbol `*` indicates the current working branch, in this case `* dev`.
@@ -186,12 +212,15 @@ The following example changes the current working branch to the branch named `de
 $ git checkout dev
 Switched to branch 'dev'
 
-$ git branch 
+$ git branch
 * dev
   main
+  my_feature
 ----
 
 == Working with content
+
+The following sections describe the various `git` command you can use to inspect and manage files in a local repository.
 
 === Determining the status of the local filesystem
 
@@ -216,8 +245,8 @@ Changes not staged for commit:
 no changes added to commit (use "git add" and/or "git commit -a")
 ----
 
-
 === Adding new or updated content to Staging
+
 ----
 git add [options] <files or directories>
 ----
@@ -269,15 +298,68 @@ The following example uploads all content committed to the local repository up t
 git push
 ----
 
-=== Rolling back to a previous version
+=== Rolling a file back from Staging
 
 ----
-git restore
+git restore [options] <filename>
 ----
 
+Rolls back a file to its previous state under version control.
+
+*Example:*
+
+The following example uses `git add` to add a file named `config.json` to staging and then uses `git status` to inspect the state of the file, which is now in Staging and awaiting a commit.
+
+Then, the command `git restore` is used with the `--staged` option to remove the file `config.json` from Staging. The command `git status` is called again to reveal that the file `config.json` needs to be set to Staging using the command `git add`.
+
 ----
-git reset
+$ git add config.json
+
+$ git status
+On branch dev
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+
+$ git restore --staged config.json
+
+$ git status
+On branch dev
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   config.json
+
+no changes added to commit (use "git add" and/or "git commit -a")
 ----
+
+=== Removing files added but not staged 
+
+----
+git clean [options] <filename>
+----
+
+Rolls a file or files back to particular state according to particular context with the repository – local or remote, for example rolling back to the last commit.
+
+*Example:*
+
+----
+$ ls -1
+readme.md
+
+$ echo "{"isCool": 1}" > config.json
+
+$ ls -1
+config.json
+readme.md
+
+$ git git clean -f
+config.json
+
+$ ls -1
+readme.md
+----
+
+== Rolling back to a previous version while updating logs
 
 ----
 git reverts
@@ -319,7 +401,7 @@ git reverts
 
 === git log
 
-`EXPLANATION TO BE PROVIDED`
+Displays the git log file that contains a history of all transactions in the repository.
 
 *Example:*
 
