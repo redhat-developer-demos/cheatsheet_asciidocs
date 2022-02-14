@@ -397,7 +397,7 @@ git reverts
 
 == Viewing history of files in a repository
 
-`INTRODUCTION TO BE PROVIDED`
+The following sections 
 
 === git log
 
@@ -430,6 +430,8 @@ Author: John Lennon <john@lennonjohn.com>
 Date:   Tue Feb 8 11:00:30 2022 -0800
 ----
 
+== Change control
+
 === git blame
 
 `EXPLANATION TO BE PROVIDED`
@@ -437,45 +439,6 @@ Date:   Tue Feb 8 11:00:30 2022 -0800
 *Example:*
 
 `EXAMPLE TO BE PROVIDED`
-
-== Branch, commit and tag management
-
-`INTRODUCTION TO BE PROVIDED`
-
-=== git branch
-
-Displays the various branches within a repository
-
-----
-git branch [options]
-----
-
-*Example:*
-
-The following example uses the `-a` to list the all the branches in the local repository and shows the result. (`$` is the symbol for the command line prompt.)
-----
-$  git branch -a
-* main
-  remotes/origin/HEAD -> origin/main
-  remotes/origin/feature/add_autocomplete
-  remotes/origin/feature/add_help
-  remotes/origin/main
-----
-
-
-=== git checkout
-
-Checks out files from a branch in the local repository.
-
-*Example:*
-
-The following example checks out the files in the branch `feature/add_help` from the local repository and makes those files available in the working branch.
-
-----
-$ git checkout feature/add_help
-Branch 'feature/add_help' set up to track remote branch 'feature/add_help' from 'origin'.
-Switched to a new branch 'feature/add_help'
-----
 
 === git tag
 
