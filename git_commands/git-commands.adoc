@@ -355,7 +355,7 @@ config.json
 readme.md
 
 $ git clean -f
-config.json
+Removing config.json
 
 $ ls -1
 readme.md
