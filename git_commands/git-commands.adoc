@@ -55,7 +55,7 @@ The following sections describe `git` commands to create a local repository, dow
 git [options] init <repo_directory>
 ----
 
-Creates a local repository as represented by the file `.git`. If the optional parameter `<repo_directory>` is not provided, the `.git` file is created in the current directory. If the parameter `<repo_directory>` is provided, that directory is created and the `.git` file is created in that directory.
+Creates a local repository that will be represented by the file named `.git`. If the optional parameter `<repo_directory>` is not provided, the `.git` file is created in the current directory. If the parameter `<repo_directory>` is provided, that directory is created and the `.git` file is created in that directory.
 
 
 *Example:*
