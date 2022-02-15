@@ -361,15 +361,57 @@ $ ls -1
 readme.md
 ----
 
-== Rolling back to a previous version while updating logs
+== Rolling back to the last commit
 
 ----
-git reverts
+git revert [options] <commit_uuid>
 ----
+
+Reverts the filesystem associated with a local `git` repository to a previous state while also updating changes to the local `git` log.
 
 *Example:*
 
-`EXAMPLE TO BE PROVIDED`
+The following example displays the files the directory associated with a local repository. Then, a new file named `newfile.txt` is added to the directory as well as committed to the local repository. The contents of the directory are listed again. The command `git log` is called to show the latest git activity.
+
+Then, `git revert 98d7128 --no-edit` is called with reverts the state of the directory to the point before the commit `98d7128` was executed. The contents of the reverted directory is displayed. The reversion activity has been captured and is displayed by calling `git log`.
+
+----
+$ ls -1
+config.json
+readme.md
+
+$ touch newfile.txt
+$ git add .
+$ git commit -m "adding a file named newfile.txt"
+
+$ ls -1
+config.json
+newfile.txt
+readme.md
+
+$ git log --oneline
+98d7128 (HEAD -> master) adding a file named newfile.txt
+e5cf841 adding configuration file
+665ecf1 (origin/your-feature, origin/master, origin/dev, origin/HEAD) reorganizing repo structure
+
+$ git revert 98d7128 --no-edit
+Removing newfile.txt
+[master 3f10573] Revert "adding a file named newfile.txt"
+ Date: Tue Feb 15 09:13:06 2022 -0800
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ delete mode 100644 newfile.txt
+
+$ ls
+config.json
+readme.md
+
+$ git log --oneline
+3f10573 (HEAD -> master) Revert "adding a file named newfile.txt"
+98d7128 adding a file named newfile.txt
+e5cf841 adding configuration file
+665ecf1 (origin/your-feature, origin/master, origin/dev, origin/HEAD) reorganizing repo structure
+
+----
 
 == Merging content between branches
 
