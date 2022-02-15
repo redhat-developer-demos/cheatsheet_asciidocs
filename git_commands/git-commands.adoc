@@ -373,7 +373,7 @@ Reverts the filesystem associated with a local `git` repository to a previous st
 
 The following example displays the files the directory associated with a local repository. Then, a new file named `newfile.txt` is added to the directory as well as committed to the local repository. The contents of the directory are listed again. The command `git log` is called to show the latest git activity.
 
-Then, `git revert 98d7128 --no-edit` is called with reverts the state of the directory to the point before the commit `98d7128` was executed. The contents of the reverted directory is displayed. The reversion activity has been captured and is displayed by calling `git log`.
+Then, `git revert 98d7128 --no-edit` is called which reverts the state of the directory to the point before the commit `98d7128` was executed. The contents of the reverted directory are displayed. The reversion activity has been captured and is displayed by calling `git log`.
 
 ----
 $ ls -1
