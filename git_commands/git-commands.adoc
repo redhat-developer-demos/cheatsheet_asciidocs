@@ -116,6 +116,37 @@ The following example uses the `git fetch` command to downloaded updated assets 
 $ git fetch
 ----
 
+=== git log
+
+----
+git log [options]
+----
+
+Displays the git log file that contains a history of all transactions in the repository.
+
+*Example:*
+
+The following example uses `git log` with the `--oneline` option to show all activities in the repository in an abbreviated format.
+
+----
+$ git log --oneline
+80f6259 (HEAD -> main) adding newfile.txt to main
+665ecf1 (origin/your-feature, origin/main, origin/dev, origin/HEAD) reorganizing repo structure
+c9b791c reorganizing repo structure
+af0f400 Update eapxp-quickstarts.yaml
+28d8577 Update README.md
+f8be8a1 Update README.md
+456b537 Update README.md
+415ce57 Update eapxp-quickstarts.yaml
+70233e6 Update README.md
+9263b26 Update README.md
+886f7c1 Update README.md
+3a0f42d Update README.md
+1768b69 Example YAML: Develop MicroProfile app on JBoss EAP 7.3
+10b9670 Added directions on how to create an asset inventory in the README
+41e85e1 Initial commit
+----
+
 
 == Working with branches
 
@@ -135,7 +166,7 @@ The following example reports the current branch that is being worked on in the 
 ----
 $ git branch
   dev
-  master
+  main
 * my_feature
 ----
 
@@ -390,13 +421,13 @@ newfile.txt
 readme.md
 
 $ git log --oneline
-98d7128 (HEAD -> master) adding a file named newfile.txt
+98d7128 (HEAD -> main) adding a file named newfile.txt
 e5cf841 adding configuration file
-665ecf1 (origin/your-feature, origin/master, origin/dev, origin/HEAD) reorganizing repo structure
+665ecf1 (origin/your-feature, origin/main, origin/dev, origin/HEAD) reorganizing repo structure
 
 $ git revert 98d7128 --no-edit
 Removing newfile.txt
-[master 3f10573] Revert "adding a file named newfile.txt"
+[main 3f10573] Revert "adding a file named newfile.txt"
  Date: Tue Feb 15 09:13:06 2022 -0800
  1 file changed, 0 insertions(+), 0 deletions(-)
  delete mode 100644 newfile.txt
@@ -406,14 +437,16 @@ config.json
 readme.md
 
 $ git log --oneline
-3f10573 (HEAD -> master) Revert "adding a file named newfile.txt"
+3f10573 (HEAD -> main) Revert "adding a file named newfile.txt"
 98d7128 adding a file named newfile.txt
 e5cf841 adding configuration file
-665ecf1 (origin/your-feature, origin/master, origin/dev, origin/HEAD) reorganizing repo structure
+665ecf1 (origin/your-feature, origin/main, origin/dev, origin/HEAD) reorganizing repo structure
 
 ----
 
 == Merging content between branches
+
+The following sections describe how to merge files between branches, rebase files between ranches and how to invoke the a diff tool when merge conflicts occur. 
 
 === git merge
 
@@ -454,21 +487,40 @@ newfile.txt
 readme.md
 ----
 
-=== git mergetool
+=== git rebase
 
 `EXPLANATION TO BE PROVIDED`
 
 *Example:*
 
+`EXAMPLE TO BE PROVIDED`
+
+=== git mergetool
+
 ----
-$git config merge.tool vimdiff
+git mergetool <tool>
+----
+
+Invokes an editing tool to resolve merge conflicts between files. If no `<tool>` parameter is provided `mergetool` will used the globally configured merge editor. You can register a merge editor using the following command which in this case registers the tool `vimdiff`.
+
+`git config --global merge.tool vimdiff`
+
+You also use an alterative merge editor by using the `--tool` option.
+
+*Example:*
+
+The following example creates a merge conflict and then invokes `mergetool` using the `--tool` option to run merge editor `vimdiff`. **Note:** The tool `vimdiff` has been installed on the computer prior to using it with `mergetool`. The output that follows is an emulation of the command line UI for `vimdiff`.
+
+
+
+----
 
 $ git merge dev
 Auto-merging newfile.txt
 CONFLICT (content): Merge conflict in newfile.txt
 Automatic merge failed; fix conflicts and then commit the result
 
-$ git mergetool
+$ git mergetool --tool=vimdiff
 
 Hit return to start merge resolution tool (vimdiff): 
 +-----------------------------------------------------+
@@ -483,49 +535,6 @@ Hit return to start merge resolution tool (vimdiff):
 
 ----
 
-=== git rebase
-
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-== Viewing history of files in a repository
-
-The following sections 
-
-=== git log
-
-Displays the git log file that contains a history of all transactions in the repository.
-
-*Example:*
-
-----
-$ git log
-commit 156c828587ec5cdae2e293f75f08cc54dd94e9b2 (HEAD -> my_feature, dev)
-Author: John Lennon <lennonjohn@localhost.localdomain>
-Date:   Thu Feb 10 11:54:56 2022 -0800
-
-    updating dev
-
-commit 0c0fb31fca3cb2994c2f7785f49739863d7c2770
-Author: John Lennon <lennonjohn@localhost.localdomain>
-Date:   Thu Feb 10 10:05:55 2022 -0800
-
-    adding content for git-cheat-sheet
-
-commit 665ecf10bc4f5b98c21042eeb77f46128dab54c7 (origin/your-feature, origin/master, origin/HEAD, master)
-Author: John Lennon <john@lennonjohn.com>
-Date:   Tue Feb 8 11:01:24 2022 -0800
-
-    reorganizing repo structure
-
-commit c9b791ceba268f3bdd0caf36e44e891270a330ba
-Author: John Lennon <john@lennonjohn.com>
-Date:   Tue Feb 8 11:00:30 2022 -0800
-----
-
 == Change control
 
 === git blame
@@ -538,31 +547,6 @@ Date:   Tue Feb 8 11:00:30 2022 -0800
 
 === git tag
 
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-== Merging and rebasing
-
-`INTRODUCTION TO BE PROVIDED`
-
-=== git merge
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-=== git mergetool
-`EXPLANATION TO BE PROVIDED`
-
-*Example:*
-
-`EXAMPLE TO BE PROVIDED`
-
-=== git rebase
 `EXPLANATION TO BE PROVIDED`
 
 *Example:*
