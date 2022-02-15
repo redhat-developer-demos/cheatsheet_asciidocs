@@ -417,11 +417,42 @@ e5cf841 adding configuration file
 
 === git merge
 
-`EXPLANATION TO BE PROVIDED`
+----
+git merge [options] <branch_to_merge_from>
+----
+
+Merges the files and directories in `<branch_to_merge_from>` into the current branch.
 
 *Example:*
 
-`EXAMPLE TO BE PROVIDED`
+The following example shows the current branch as well as the files in that branch. The `dev` branch has two files, `newfile.txt` and `readme.md`.
+
+Then the branch is changed to `main`. The `main` branch has one file, `readme.md`. The command `git merge dev --no-edit` merges the files from the `dev` branch into the the current `main` branch. The option `--no-edit` is used to avoid having to write a message describing the merge. Finally, the contents of the merge into `main` is shown using the command `ls -1`.
+
+----
+$ git branch
+* dev
+  main
+
+$ ls -1
+newfile.txt
+readme.md
+
+$ git checkout main
+
+$ ls -1
+readme.md
+
+$ git merge dev --no-edit
+Merge made by the 'recursive' strategy.
+ newfile.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 newfile.txt
+
+$ ls -1
+newfile.txt
+readme.md
+----
 
 === git mergetool
 
@@ -429,7 +460,28 @@ e5cf841 adding configuration file
 
 *Example:*
 
-`EXAMPLE TO BE PROVIDED`
+----
+$git config merge.tool vimdiff
+
+$ git merge dev
+Auto-merging newfile.txt
+CONFLICT (content): Merge conflict in newfile.txt
+Automatic merge failed; fix conflicts and then commit the result
+
+$ git mergetool
+
+Hit return to start merge resolution tool (vimdiff): 
++-----------------------------------------------------+
+| MAIN            | BASE         | DEV                |
++-----------------|--------------|--------------------+
+| I am cool       | <<<<<<< HEAD | He was cool        |
+|                 |  I am cool   |                    |
+|                 |=======       |                    |
+|                 |I was cool    |                    |
+|                 |>>>>>>> dev   |                    |
++-----------------------------------------------------+
+
+----
 
 === git rebase
 
