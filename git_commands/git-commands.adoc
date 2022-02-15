@@ -342,6 +342,8 @@ Rolls a file or files back to particular state according to particular context w
 
 *Example:*
 
+The following example displays the files the directory associated with a local repository. Then, a new file named `config.json` is added to the directory. Finally the command `git clean` is called with the `-f` option to reset the directory to the original state of the local repository removing the added file. 
+
 ----
 $ ls -1
 readme.md
@@ -352,7 +354,7 @@ $ ls -1
 config.json
 readme.md
 
-$ git git clean -f
+$ git clean -f
 config.json
 
 $ ls -1
