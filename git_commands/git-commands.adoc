@@ -451,10 +451,10 @@ The following sections describe how to merge files between branches, rebase file
 === git merge
 
 ----
-git merge [options] <branch_to_merge_from>
+git merge [options] <target_branch> <branch_to_merge_from> 
 ----
 
-Merges the files and directories in `<branch_to_merge_from>` into the current branch.
+Merges the files and directories from `<branch_to_merge_from>` into the `<target_branch>`. If the `<target_branch>` parameter is not provided, the files and directories in the `<branch_to_merge_from>` will be merged into the current branch.
 
 *Example:*
 
@@ -511,8 +511,6 @@ You also use an alterative merge editor by using the `--tool` option.
 
 The following example creates a merge conflict and then invokes `mergetool` using the `--tool` option to run merge editor `vimdiff`. **Note:** The tool `vimdiff` has been installed on the computer prior to using it with `mergetool`. The output that follows is an emulation of the command line UI for `vimdiff`.
 
-
-
 ----
 
 $ git merge dev
@@ -539,19 +537,48 @@ Hit return to start merge resolution tool (vimdiff):
 
 === git blame
 
-`EXPLANATION TO BE PROVIDED`
+----
+git blame [options] <file_of_interest>
+----
+
+Displays of list of last commits on a file by to committer according to changes in the file. By default each list item container the commit uuid, the committer, date of commit, locale and the actual content added according to line number.
 
 *Example:*
 
-`EXAMPLE TO BE PROVIDED`
+The following example uses `git blame` to list the last commits on the file `readme.md`. Notice that `Line 3` was the last line changed indicated by the timestamp `2022-02-16 08:41:07`
+
+----
+$ git blame readme.md
+c9b791ce (John Lennon 2022-02-08 11:00:30 -0800 1) # RHEL 8 Cheat Sheet: Additional Resources
+c9b791ce (John Lennon 2022-02-08 11:00:30 -0800 2) 
+2a86f76f (Mick Jagger 2022-02-16 08:41:07 -0800 3) Contains a list of additional resources.
+4dfb6c37 (Mick Jagger 2022-02-16 08:32:12 -0800 4) 
+4dfb6c37 (Mick Jagger 2022-02-16 08:32:12 -0800 5) It is still a work in progress.
+4dfb6c37 (Mick Jagger 2022-02-16 08:32:12 -0800 6) 
+----
 
 === git tag
 
-`EXPLANATION TO BE PROVIDED`
+----
+git tag [options] <tag_name>
+----
 
-*Example:*
+Tags repository, typically used to indicate a release. If the <tag_name> parameter is not provided, the command will display a list of existing tags.
 
-`EXAMPLE TO BE PROVIDED`
+*Examples:*
+
+The following example used `git tag` to declare a tag with the value `v1.0 `. The option `-m` is used to apply a message to the tag.
+
+----
+$ git tag v1.0 -m "first release of project"
+----
+
+The following example uses `git tag` to display a list of existing tags on the repository. The `-n` option is used to show the user defined message associated with each tag.
+
+----
+$ git tag -n
+v1.0            first release of project
+----
 
 == Conflict resolution
 
