@@ -592,12 +592,6 @@ $ git tag -n
 v1.0            first release of project
 ----
 
-== Conflict resolution
-
-`INTRODUCTION TO BE PROVIDED`
-
-CONFLICT RESOLUTION SUBHEADS TO BE PROVIDED
-
 
 
 
