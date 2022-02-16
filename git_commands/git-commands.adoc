@@ -493,7 +493,7 @@ readme.md
 git rebase <other_branch>
 ----
 
-Merges one repository onto another while also transferring the commits from merge-from branch onto the merge-to branch. Operationally, `git`` is deleting commits from one branch and adding them onto another.
+Merges one repository onto another while also transferring the commits from merge-from branch onto the merge-to branch. Operationally, `git` is deleting commits from one branch and adding them onto another.
 
 *Example:*
 
