@@ -489,11 +489,23 @@ readme.md
 
 === git rebase
 
-`EXPLANATION TO BE PROVIDED`
+----
+git rebase <other_branch>
+----
+
+Merges one repository onto another while also transferring the commits from merge-from branch onto the merge-to branch. Operationally, `git`` is deleting commits from one branch and adding them onto another.
 
 *Example:*
 
-`EXAMPLE TO BE PROVIDED`
+The following example checks out the branch `new_feature` and then rebases the updates made in the branch `dev` onto the branch `new_feature`.
+
+----
+$ git checkout new_feature 
+Switched to branch 'new_feature'
+
+$ git rebase dev
+Successfully rebased and updated refs/heads/new_feature.
+----
 
 === git mergetool
 
