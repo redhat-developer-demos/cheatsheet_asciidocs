@@ -513,7 +513,7 @@ Successfully rebased and updated refs/heads/dev.
 git mergetool <tool>
 ----
 
-Invokes an editing tool to resolve merge conflicts between files. If no `<tool>` parameter is provided `mergetool` will used the globally configured merge editor. You can register a merge editor using the following command which in this case registers the tool `vimdiff`.
+Invokes an editing tool to resolve merge conflicts between files. If no `<tool>` parameter is provided `mergetool` will used the globally configured merge editor. You can register a merge editor using the following command. In this case, the tool `vimdiff` is registered.
 
 `git config --global merge.tool vimdiff`
 
