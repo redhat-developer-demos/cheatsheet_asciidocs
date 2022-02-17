@@ -7,7 +7,7 @@
 
 Working with `git` source control management requires understanding the phases and conceptual structures that go with managing content flow to and from a `git` repository. Under`git` the source of truth is the remote `git` repository. A remote repository can be hosted on a private network or by a public service provider such as GitHub or BitBucket.
 
-Moving content to and from the remote repository happens in a formal manner. Under `git` there are four locations in which source control activities take place. These locations are
+Moving content to and from the remote repository happens in a formal manner. Under `git` there are four phases to that code goes through before finally being stored in the remote repository. Each of these four phases has an associated location in which code is stored. These locations in which source control activities take place. These locations are
 
 * Working directory
 * Staging environment
@@ -18,7 +18,7 @@ The sections that follow describe the purpose and use of each location.
 
 === Working directory
 
-The working directory is the location in the file system of the local computer in which the `.git` file is stored. The `.git` file is the physical representation of the local repository. Developer make changes to code in the working directory.
+The working directory is the location in the file system of the local computer in which the code is stored. The working directory will have a hidden file named `.git`. The `.git` file is the physical representation of the local repository. Developers make changes to code in the working directory.
 
 === Staging environment
 
