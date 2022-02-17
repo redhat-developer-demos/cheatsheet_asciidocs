@@ -198,7 +198,7 @@ git branch -a
 Displays all branches both on the local and remote repositories
 
 *Example:*
-The following example displays all branches, local and remote, for the repository associated with the current working directory. Notice that the symbol `\*` indicates the current working branch, in this case `my_feature`. (`$` is the command-prompt symbol)
+The following example displays all branches, local and remote, for the repository associated with the current working directory. Notice that the symbol `*` indicates the current working branch, in this case `my_feature`. (`$` is the command-prompt symbol)
 
 ----
 $ git branch -a
