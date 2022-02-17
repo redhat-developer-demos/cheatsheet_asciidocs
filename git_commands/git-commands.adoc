@@ -251,7 +251,7 @@ $ git branch
 
 == Working with content
 
-The following sections describe the various `git` command you can use to inspect and manage files in a local repository.
+The following sections describe the various `git` commands you can use to inspect and manage files in a local repository.
 
 === Determining the status of the local filesystem
 
@@ -373,7 +373,7 @@ Rolls a file or files back to particular state according to particular context w
 
 *Example:*
 
-The following example displays the files the directory associated with a local repository. Then, a new file named `config.json` is added to the directory. Finally the command `git clean` is called with the `-f` option to reset the directory to the original state of the local repository removing the added file. 
+The following example displays the files in the working directory associated with a local repository. Then, a new file named `config.json` is added to the directory. Finally the command `git clean` is called with the `-f` option to reset the directory to the original state of the local repository removing the added file. 
 
 ----
 $ ls -1
