@@ -373,7 +373,7 @@ Rolls a file or files back to particular state according to particular context w
 
 *Example:*
 
-The following example displays the files in the working directory associated with a local repository. Then, a new file named `config.json` is added to the directory. Finally the command `git clean` is called with the `-f` option to reset the directory to the original state of the local repository removing the added file. 
+The following example displays the files in the working directory associated with a local repository. Then, a new file named `config.json` is added to the directory. Finally the command `git clean` is called with the `-f` option to reset the directory to the original state of the local repository removing the added file. The command `ls -1` is called again to show that the file `config.json` has been removed from the working directory.
 
 ----
 $ ls -1
