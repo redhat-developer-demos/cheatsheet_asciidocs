@@ -162,7 +162,7 @@ Gets the name of the current branch that is checkout out from the local reposito
 
 *Example:*
 
-The following example reports the current branch that is being worked on in the local repository. In this case the current branch is `my_feature` and is indicated by the asterisk before the branch name. (`$` is the command-prompt symbol)
+The following example reports the current branch that is being worked on in the local repository. In this case the current branch is `my_feature` and is indicated by the asterisk before the branch name. (`$` is the command-prompt symbol.)
 ----
 $ git branch
   dev
@@ -180,7 +180,7 @@ Displays all the branches on the remote repository
 
 *Example:*
 
-The following example uses the `git branch` command along with the option `-r` to display the names of all branches on the remote repository. (`$` is the command-prompt symbol)
+The following example uses the `git branch` command along with the option `-r` to display the names of all branches on the remote repository. (`$` is the command-prompt symbol.)
 
 ----
 $ git branch -r
@@ -198,7 +198,7 @@ git branch -a
 Displays all branches both on the local and remote repositories
 
 *Example:*
-The following example displays all branches, local and remote, for the repository associated with the current working directory. Notice that the symbol `*` indicates the current working branch, in this case `my_feature`. (`$` is the command-prompt symbol)
+The following example displays all branches, local and remote, for the repository associated with the current working directory. Notice that the symbol `*` indicates the current working branch, in this case `my_feature`. (`$` is the command-prompt symbol.)
 
 ----
 $ git branch -a
@@ -221,10 +221,10 @@ Creates a new branch. If the optional parameter `<existing_branch_name>` is not 
 
 *Example:*
 
-The following example creates the a branch named `dev` that has the directories and files from the existing branch named `main`.
+The following example creates the a branch named `dev` that has the directories and files from the existing branch named `main`. (`$` is the command-prompt symbol.)
 
 ----
-git branch dev main
+$ git branch dev main
 ----
 
 === Changing branches
