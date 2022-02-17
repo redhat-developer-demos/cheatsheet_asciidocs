@@ -5,7 +5,7 @@
 
 == Git operational overview
 
-Working with `git` source control management requires understanding conceptual structures for managing content flow to and from a `git` repository. According to `git` the source of truth is the independent remote `git` repository. A remote repository can be hosted on a private network or by a public service such as GitHub or BitBucket.
+Working with `git` source control management requires understanding the phases and conceptual structures that go with managing content flow to and from a `git` repository. Under`git` the source of truth is the remote `git` repository. A remote repository can be hosted on a private network or by a public service provider such as GitHub or BitBucket.
 
 Moving content to and from the remote repository happens in a formal manner. Under `git` there are four locations in which source control activities take place. These locations are
 
