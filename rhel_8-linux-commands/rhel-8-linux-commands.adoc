@@ -3,29 +3,33 @@
 :product-name:
 :version: 1.0.0
 
-RHEL 8 provides an upgraded package manager that replaces the classic `yum` application. This new package manager is named `dnf` which is a acronym for _Dandified yum_.
+Version 8 of Red Hat Enterprise Linux (RHEL) provides an upgraded package manager that replaces the classic `yum` application. This new package manager is named `dnf`, which is an abbreviation for _Dandified yum_.
 
-Also REHL 8 ships with two useful features. One is Subscription Manager. Subscription Manager keeps track of the various remote repositories that host application packages. Thus, developers don't need to do the work of binding to a repository, the Subscription Manager does that work.
+REHL 8 also ships with two related useful features:
 
-The second feature is Application Streams. Application Streams provide the capability to run multiple versions of a given program on a local machine while allowing a developer to switch between different version on demand without having to manage the details that go with upgrading or downgrading an application/module. For example, a developer can be install Node.js version 10 and then later on upgrade to Node.js version 16 by just executing a single command. The developer can run Node.js to meet a special need and then switch over the Node.js version 16 when that version is needed.
+Subscription Manager::
+This keeps track of the various remote repositories that host application packages. The Subscription Manager does the work of binding to a repository, so developers don't have to write code to do the binding.
 
-This cheat sheet covers the basic `dnf` commands as well as providing an introduction to Subscription Manager and Application Streams. In addition, the commands for installing for many popular modules, applications and programming languages are shown at the end of the cheat sheet.
+Application Streams::
+This provides the capability of running multiple versions of a given program or module on a local machine, allowing a developer to switch between different versions on demand. The developer doesn't have to manage the details of upgrading or downgrading an application or module. For example, a developer can install Node.js version 10 and then later upgrade to Node.js version 16, leaving both versions available in different streams. The developer can run version 10 of Node.js to meet a special need for an old application, and quickly switch to version 16 when that version is needed.
+
+This cheat sheet covers the basic `dnf` commands along with an introduction to Subscription Manager and Application Streams. In addition, the commands for installing many popular modules, applications, and programming languages are shown at the end of the cheat sheet.
 
 == Basic dnf commands
 
-The following sections show dnf command that can be used to search for modules, learn the details about a module, or install a module.
+The following sections show `dnf` command that can be used to search for modules, learn the details about a module, and install a module.
 
-=== dnf search 
+=== dnf search
 
 ----
 dnf [options] search <search_string>
 ----
 
-Searches for package according to the `search_string`
+Searches for packages whose names or summaries contain `<search_string>`
 
 *Example:*
 
-The following examples uses the `dnf search` to search for packages according to the search string criteria `perl-MAIL`.
+The following command uses `dnf search` to search for packages according to the search string criteria `perl-MAIL`:
 
 ----
 $ sudo dnf search perl-MAIL
@@ -45,17 +49,17 @@ perl-Mail-Transport.noarch : Email message exchange
 perl-MailTools.noarch : Various ancient mail-related perl modules
 ----
 
-=== dnf info 
-
-Displays details about a module_name
+=== dnf info
 
 ----
 dnf info <module_name>
 ----
 
+Displays details about the named module.
+
 *Example:*
 
-The following example uses the command `dnf info` to display the details about the `dotnet`  module.
+The following command uses `dnf info` to display the details about the `dotnet`  module:
 
 ----
 $ dnf info dotnet
@@ -66,7 +70,7 @@ Name         : dotnet
 Version      : 6.0.101
 Release      : 2.el8_5
 Architecture : x86_64
-Size         : 0.0  
+Size         : 0.0
 Source       : dotnet6.0-6.0.101-2.el8_5.src.rpm
 Repository   : @System
 From repo    : rhel-8-for-x86_64-appstream-rpms
@@ -75,10 +79,10 @@ URL          : https://github.com/dotnet/
 License      : MIT and ASL 2.0 and BSD and LGPLv2+ and CC-BY and CC0 and MS-PL and EPL-1.0 and GPL+ and GPLv2 and ISC and OFL and zlib
 Description  : .NET is a fast, lightweight and modular platform for creating
              : cross platform applications that work on Linux, macOS and Windows.
-             : 
+             :
              : It particularly focuses on creating console applications, web
              : applications and micro-services.
-             : 
+             :
              : .NET contains a runtime conforming to .NET Standards a set of
              : framework libraries, an SDK containing compilers and a 'dotnet'
              : application to drive everything.
@@ -94,13 +98,13 @@ Installs a module on the local machine.
 
 *Example:*
 
-The following installs the`perl` programming language from the local computer. The command uses the `-y` option to suppress the prompt asking the user for permission to proceed.
-
-The command produces too much screen output to show. 
+The following command installs the`perl` programming language on the local computer. The command uses the `-y` option to suppress the prompt asking the user for permission to proceed:
 
 ----
 sudo dnf install -y perl
 ----
+
+The command produces too much screen output to show here.
 
 === dnf update
 
@@ -112,7 +116,7 @@ Updates a module on the local machine.
 
 *Example:*
 
-The following updates the`perl` programming language on the local computer. The command uses the `-y` option to suppress the prompt asking the user for permission to proceed.
+The following command updates the `perl` programming language on the local computer. The command uses the `-y` option to suppress the prompt asking the user for permission to proceed:
 
 ----
 $ sudo dnf update -y perl
@@ -129,11 +133,11 @@ Complete!
 dnf remove [options] <module_name>
 ----
 
-Removes a module on the local machine.
+Removes a module from the local machine.
 
 *Example:*
 
-The following removes the application `podman` the local computer. The command uses the `-y` option to allow installation to proceed without user confirmation.
+The following command removes the `podman` application from the local computer. The command uses the `-y` option to allow installation to proceed without user confirmation:
 
 ----
 $ sudo dnf remove  -y podman
@@ -160,23 +164,23 @@ Transaction check succeeded.
 Running transaction test
 Transaction test succeeded.
 Running transaction
-  Preparing        :                                                                        1/1 
-  Running scriptlet: cockpit-podman-33-1.module+el8.5.0+12582+56d94c81.noarch               1/1 
-  Erasing          : cockpit-podman-33-1.module+el8.5.0+12582+56d94c81.noarch               1/4 
-  Erasing          : podman-1:3.4.2-9.module+el8.5.0+13852+150547f7.x86_64                  2/4 
-  Running scriptlet: podman-1:3.4.2-9.module+el8.5.0+13852+150547f7.x86_64                  2/4 
-  Erasing          : podman-catatonit-1:3.4.2-9.module+el8.5.0+13852+150547f7.x86_64        3/4 
-  Erasing          : conmon-2:2.0.29-1.module+el8.5.0+12582+56d94c81.x86_64                 4/4 
-  Running scriptlet: conmon-2:2.0.29-1.module+el8.5.0+12582+56d94c81.x86_64                 4/4 
-  Verifying        : cockpit-podman-33-1.module+el8.5.0+12582+56d94c81.noarch               1/4 
-  Verifying        : conmon-2:2.0.29-1.module+el8.5.0+12582+56d94c81.x86_64                 2/4 
-  Verifying        : podman-1:3.4.2-9.module+el8.5.0+13852+150547f7.x86_64                  3/4 
-  Verifying        : podman-catatonit-1:3.4.2-9.module+el8.5.0+13852+150547f7.x86_64        4/4 
+  Preparing        :                                                                        1/1
+  Running scriptlet: cockpit-podman-33-1.module+el8.5.0+12582+56d94c81.noarch               1/1
+  Erasing          : cockpit-podman-33-1.module+el8.5.0+12582+56d94c81.noarch               1/4
+  Erasing          : podman-1:3.4.2-9.module+el8.5.0+13852+150547f7.x86_64                  2/4
+  Running scriptlet: podman-1:3.4.2-9.module+el8.5.0+13852+150547f7.x86_64                  2/4
+  Erasing          : podman-catatonit-1:3.4.2-9.module+el8.5.0+13852+150547f7.x86_64        3/4
+  Erasing          : conmon-2:2.0.29-1.module+el8.5.0+12582+56d94c81.x86_64                 4/4
+  Running scriptlet: conmon-2:2.0.29-1.module+el8.5.0+12582+56d94c81.x86_64                 4/4
+  Verifying        : cockpit-podman-33-1.module+el8.5.0+12582+56d94c81.noarch               1/4
+  Verifying        : conmon-2:2.0.29-1.module+el8.5.0+12582+56d94c81.x86_64                 2/4
+  Verifying        : podman-1:3.4.2-9.module+el8.5.0+13852+150547f7.x86_64                  3/4
+  Verifying        : podman-catatonit-1:3.4.2-9.module+el8.5.0+13852+150547f7.x86_64        4/4
 Installed products updated.
 
 Removed:
   cockpit-podman-33-1.module+el8.5.0+12582+56d94c81.noarch conmon-2:2.0.29-1.module+el8.5.0+12582+56d94c81.x86_64
-  podman-1:3.4.2-9.module+el8.5.0+13852+150547f7.x86_64  podman-catatonit-1:3.4.2-9.module+el8.5.0+13852+150547f7.x86_64              
+  podman-1:3.4.2-9.module+el8.5.0+13852+150547f7.x86_64  podman-catatonit-1:3.4.2-9.module+el8.5.0+13852+150547f7.x86_64
 
 Complete!
 ----
@@ -187,34 +191,34 @@ Complete!
 dnf [options] history <subcommand> <subcommand> ....
 ----
 
-Shows the history of dnf module transactions (commands) executed on a system.
+Shows or changes the actions taken by previous `dnf` commands executed on a system.
 
 *Examples:*
 
-The following command uses the `dnf history` to report module actions
+The following command uses `dnf history` to report the most recent actions taken by the developer through `dnf`:
 
 ----
 $ sudo dnf history
 Updating Subscription Management repositories.
 ID     | Command line                        | Date and time    | Action(s)      | Altered
 -----------------------------------------------------------------------------------------
-    14 | install dotnet                      | 2022-02-01 09:54 | Install        |   12   
-    13 | remove ant                          | 2022-02-01 09:37 | Removed        |    6   
-    12 | install ant                         | 2022-02-01 09:36 | Install        |    6   
-    11 | module install scala:2.10           | 2022-02-01 09:24 | Install        |   11   
-    10 | remove -y perl                      | 2022-01-27 11:47 | Removed        |  113   
-     9 | install perl                        | 2022-01-27 11:42 | Install        |  113   
-     8 | history undo last                   | 2022-01-26 09:23 | Removed        |   12   
-     7 | install dotnet                      | 2022-01-26 08:34 | Install        |   12   
-     6 | install ufw                         | 2022-01-24 09:15 | Install        |    1   
-     5 | install https://dl.fedoraproj...    | 2022-01-24 09:15 | Install        |    1   
-     4 | install traceroute                  | 2022-01-20 11:51 | Install        |    1   
-     3 | install iotop                       | 2022-01-19 09:57 | Install        |    1   
-     2 | -y install httpd mariadb-server     | 2022-01-14 10:04 | Install        |   19   
-     1 |       
+    14 | install dotnet                      | 2022-02-01 09:54 | Install        |   12
+    13 | remove ant                          | 2022-02-01 09:37 | Removed        |    6
+    12 | install ant                         | 2022-02-01 09:36 | Install        |    6
+    11 | module install scala:2.10           | 2022-02-01 09:24 | Install        |   11
+    10 | remove -y perl                      | 2022-01-27 11:47 | Removed        |  113
+     9 | install perl                        | 2022-01-27 11:42 | Install        |  113
+     8 | history undo last                   | 2022-01-26 09:23 | Removed        |   12
+     7 | install dotnet                      | 2022-01-26 08:34 | Install        |   12
+     6 | install ufw                         | 2022-01-24 09:15 | Install        |    1
+     5 | install https://dl.fedoraproj...    | 2022-01-24 09:15 | Install        |    1
+     4 | install traceroute                  | 2022-01-20 11:51 | Install        |    1
+     3 | install iotop                       | 2022-01-19 09:57 | Install        |    1
+     2 | -y install httpd mariadb-server     | 2022-01-14 10:04 | Install        |   19
+     1 |
 ----
 
-The following example uses the `sudo dnf history undo last` command to undo the last module action which in this case is the undoing of the installation of the `dotnet` module. The example shows a portion of the screen output.
+The following command uses `sudo dnf history undo last` to undo the most recent action, which in this case is the installation of the `dotnet` module. The example shows a portion of the screen output:
 
 ----
 $ sudo dnf history undo last
@@ -225,7 +229,7 @@ Dependencies resolved.
  Package                            Architecture       Version             Repository                          Size
 ===========================================================================================================================
 Removing:
- dotnet                              x86_64            6.0.101-2.el8_5     @rhel-8-for-x86_64-appstream-rpms   0  
+ dotnet                              x86_64        6.0.101-2.el8_5     @rhel-8-for-x86_64-appstream-rpms   0
 Removing dependent packages:
  aspnetcore-runtime-6.0              x86_64        6.0.1-2.el8_5           @rhel-8-for-x86_64-appstream-rpms   21 M
  aspnetcore-targeting-pack-6.0       x86_64        6.0.1-2.el8_5           @rhel-8-for-x86_64-appstream-rpms   13 M
@@ -251,69 +255,69 @@ Is this ok [y/N]:
 
 === dnf list
 
-Lists modules
-
 ----
 dnf list <subcommand> [options]
 ----
 
+Lists modules on the system.
+
 *Examples:*
 
-The following example uses the `installed` subcommand to list installed modules. The result is piped to the `more` command which shows the first 15 lines of output using the `-15` option.
+The following command uses the `installed` subcommand to list installed modules. The result is piped to the `more` command, which shows the first 15 lines of output using the `-15` option:
+
 ----
 $ sudo dnf list installed | more -15
 Updating Subscription Management repositories.
 Installed Packages
-GConf2.x86_64                                      3.2.6-22.el8                                   @AppStream                       
-ModemManager.x86_64                                1.10.8-4.el8                                   @anaconda                        
-ModemManager-glib.x86_64                           1.10.8-4.el8                                   @anaconda                        
-NetworkManager.x86_64                              1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-adsl.x86_64                         1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-bluetooth.x86_64                    1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-config-server.noarch                1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-libnm.x86_64                        1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-team.x86_64                         1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-tui.x86_64                          1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-wifi.x86_64                         1:1.32.10-4.el8                                @anaconda                        
-NetworkManager-wwan.x86_64                         1:1.32.10-4.el8                                @anaconda                        
-PackageKit.x86_64                                  1.1.12-6.el8                                   @AppStream                       
+GConf2.x86_64                                      3.2.6-22.el8                                   @AppStream
+ModemManager.x86_64                                1.10.8-4.el8                                   @anaconda
+ModemManager-glib.x86_64                           1.10.8-4.el8                                   @anaconda
+NetworkManager.x86_64                              1:1.32.10-4.el8                                @anaconda
+NetworkManager-adsl.x86_64                         1:1.32.10-4.el8                                @anaconda
+NetworkManager-bluetooth.x86_64                    1:1.32.10-4.el8                                @anaconda
+NetworkManager-config-server.noarch                1:1.32.10-4.el8                                @anaconda
+NetworkManager-libnm.x86_64                        1:1.32.10-4.el8                                @anaconda
+NetworkManager-team.x86_64                         1:1.32.10-4.el8                                @anaconda
+NetworkManager-tui.x86_64                          1:1.32.10-4.el8                                @anaconda
+NetworkManager-wifi.x86_64                         1:1.32.10-4.el8                                @anaconda
+NetworkManager-wwan.x86_64                         1:1.32.10-4.el8                                @anaconda
+PackageKit.x86_64                                  1.1.12-6.el8                                   @AppStream
 --More--
 ----
 
-The following example uses the `all` subcommand to show all modules. The result is piped to the `more` command that uses the `-15` option to initially show the first 15 lines of output.
+The following command uses the `all` subcommand to show all modules. The result is piped to the `more` command, which uses the `-15` option to show the first 15 lines of output:
 
 ----
 $ sudo dnf list all | more -15
 Updating Subscription Management repositories.
 Last metadata expiration check: 4:00:42 ago on Wed 02 Feb 2022 05:08:48 AM PST.
 Installed Packages
-GConf2.x86_64                                3.2.6-22.el8                            @AppStream                       
-ModemManager.x86_64                          1.10.8-4.el8                            @anaconda                        
-ModemManager-glib.x86_64                     1.10.8-4.el8                            @anaconda                        
-NetworkManager.x86_64                        1:1.32.10-4.el8                         @anaconda                        
-NetworkManager-adsl.x86_64                   1:1.32.10-4.el8                         @anaconda                        
-NetworkManager-bluetooth.x86_64              1:1.32.10-4.el8                         @anaconda                        
-NetworkManager-config-server.noarch          1:1.32.10-4.el8                         @anaconda                        
-NetworkManager-libnm.x86_64                  1:1.32.10-4.el8                         @anaconda                        
-NetworkManager-team.x86_64                   1:1.32.10-4.el8                         @anaconda                        
-NetworkManager-tui.x86_64                    1:1.32.10-4.el8                         @anaconda                        
-NetworkManager-wifi.x86_64                   1:1.32.10-4.el8                         @anaconda                        
-NetworkManager-wwan.x86_64                   1:1.32.10-4.el8                         @anaconda                        
+GConf2.x86_64                                3.2.6-22.el8                            @AppStream
+ModemManager.x86_64                          1.10.8-4.el8                            @anaconda
+ModemManager-glib.x86_64                     1.10.8-4.el8                            @anaconda
+NetworkManager.x86_64                        1:1.32.10-4.el8                         @anaconda
+NetworkManager-adsl.x86_64                   1:1.32.10-4.el8                         @anaconda
+NetworkManager-bluetooth.x86_64              1:1.32.10-4.el8                         @anaconda
+NetworkManager-config-server.noarch          1:1.32.10-4.el8                         @anaconda
+NetworkManager-libnm.x86_64                  1:1.32.10-4.el8                         @anaconda
+NetworkManager-team.x86_64                   1:1.32.10-4.el8                         @anaconda
+NetworkManager-tui.x86_64                    1:1.32.10-4.el8                         @anaconda
+NetworkManager-wifi.x86_64                   1:1.32.10-4.el8                         @anaconda
+NetworkManager-wwan.x86_64                   1:1.32.10-4.el8                         @anaconda
 --More--
 ----
-
 
 === dnf repolist
 
 ----
-sudo dnf repolist
+dnf repolist
 ----
 
-Lists the remote package repositories registered on the local machines.
+Lists the remote package repositories registered on the local machines. Must be entered as root (superuser).
 
 *Example:*
 
-The following example uses the `dnf repolist` to list the remote package repositories registered on the local machines.
+The following command uses `dnf repolist` to list the remote package repositories registered on the local machines:
 
 ----
 $ sudo dnf repolist
@@ -327,24 +331,24 @@ rhel-8-for-x86_64-baseos-rpms                   Red Hat Enterprise Linux 8 for x
 
 == Working with Subscription Manager
 
-The Subscription Manager is a client-side program that provides a command line interface to the RHEL Subscription Management service. The Subscription Manager coordinates accessing, monitoring and getting information about RHEL applications and modules. The following sections describe the various commands available for working with the Subscription Manager command line tool.
+The Subscription Manager is a client-side program that provides a command-line interface (CLI) to the RHEL Subscription Management service. The Subscription Manager coordinates access, monitoring, and getting information about RHEL applications and modules. The following sections describe the various commands available through the Subscription Manager command.
 
 === subscription-manager repos
 
-Enables access to a remote package repository via the Subscription Manager
+Enables access to a remote package repository via the Subscription Manager.
 
 *Examples:*
 
-The following example uses the `repos` command to list the various artifact repository available via the Subscription Manager. The `repos` command requires root access. The command will problem for the root password if it is not executed as root.
+The following command uses the `repos` subcommand to list the various artifact repositories available via the Subscription Manager. The `repos` subcommand requires root access. The command prompts for the root password if it is not executed as root:
 
-The example belows shows only a portion of the full output.
+The following belows shows only a portion of the full output:
 
 ----
 $ subscription-manager repos
 You are attempting to run "subscription-manager" which requires administrative
 privileges, but more information is needed in order to do so.
 Authenticating as "root"
-Password: 
+Password:
 +----------------------------------------------------------+
     Available Repositories in /etc/yum.repos.d/redhat.repo
 +----------------------------------------------------------+
@@ -372,33 +376,33 @@ Enabled:   0
 .
 ----
 
-The following example enables the client computer to access the repository `jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms`.
+The following command enables access from the local computer to the repository `jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms`:
 
 ----
 $ subscription-manager repos --enable jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms
 You are attempting to run "subscription-manager" which requires administrative
 privileges, but more information is needed in order to do so.
 Authenticating as "root"
-Password: 
+Password:
 Repository 'jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms' is enabled for this system.
 ----
 
-The following example disables the client computer from accessing the repository `jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms`.
+The following command disables access from the local computer to the repository `jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms`:
 
 ----
 $ subscription-manager repos --disable jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms
 You are attempting to run "subscription-manager" which requires administrative
 privileges, but more information is needed in order to do so.
 Authenticating as "root"
-Password: 
+Password:
 Repository 'jb-datagrid-8.1-for-rhel-8-x86_64-source-rpms' is disabled for this system.
 ----
 
 == Working with Application Streams
 
-RHEL 8 supports application streams. Application streaming is a type of on-demand software distribution in which a variety of version of a particular application or module are installed on a computer. Application streams allow user to switch between versions of an application or module to meet the particular need at hand.
+Red Hat Enterprise Linux 8 supports application streams. Application streaming is a type of on-demand software distribution allowing easy access to several versions of a particular application or module on a computer. Application streams allow the user to switch between versions of an application or module to meet the particular need at hand.
 
-The base command for working with application streams is `dnf module`. Particular actions are executed using a subcommand. The sections that follow show how to use the various subcommands associated with `dnf module`.
+The base command for working with application streams is `dnf module`. Particular actions are executed using subcommands. The sections that follow show how to use the various subcommands associated with `dnf module`.
 
 === dnf module info
 
@@ -406,11 +410,11 @@ The base command for working with application streams is `dnf module`. Particula
 dnf module info [options] <module_name>:<version_number>
 ----
 
-Gets the details about a module
+Displays the details about a module.
 
 *Examples:*
 
-The following example shows how to use `dnf module info` to get a listing of all modules associated with the Redis database/message broker using the `--profile` option.
+The following command uses the `--profile` option to get a listing of all modules associated with the Redis database/message broker:
 
 ----
 $ sudo dnf module info --profile redis
@@ -435,7 +439,7 @@ Name   : redis:6:8040020211011082941:522a0ee4:x86_64
 common : redis
 ----
 
-The following example shows how to use `dnf module info` to get the details of the module `Redis` version `redis:5:820181217094919:9edba152:x86_64`
+The following command uses `dnf module info` to get the details of the `Redis` module, version `redis:5:820181217094919:9edba152:x86_64`:
 
 ----
 $ sudo dnf module info redis:5:820181217094919:9edba152:x86_64
@@ -463,27 +467,34 @@ Hint: [d]efault, [e]nabled, [x]disabled, [i]nstalled, [a]ctive
 
 `dnf module [options] list <module_name>`
 
-Reports the status of RHEL modules available from a remote RHEL repository or downloaded to the local computer. The command is used with the following options to filter the list accordingly.
+Reports the status of modules that are available from a remote Red Hat Enterprise Linux repository or downloaded to the local computer. The command is used with the following options to filter the list:
 
-* `--all` Lists all packages, present on the system, in a repository or both
-* `--installed` Lists packages installed on the system.
-* `--available` Lists available packages.
-* `--obsoletes` Lists packages installed on the system that are deemed obsolete in any known repository.
+`--all`::
+Lists all packages present on the system, in a repository, or both.
 
-When the command is run as `sudo` the repository reference on the local machine will be updated.
+`--installed`::
+Lists packages installed on the system..
+
+`--available`::
+Lists available packages..
+
+`--obsoletes`::
+Lists packages installed on the system that are deemed obsolete in any known repository..
+
+Run the command as root to update the repository reference on the local machine.
 
 *Example:*
 
-The following example uses the `dnf module list` with the `--installed` option to show the modules that are presently running on the local computer.
+The following command uses the `--installed` option to show the modules that are presently running on the local computer, and ensures they are up to date:
 
 ----
 $ sudo dnf module list --installed
 Updating Subscription Management repositories.
 Last metadata expiration check: 1:46:30 ago on Wed 09 Feb 2022 08:06:21 AM PST.
 Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs)
-Name         Stream      Profiles                                   Summary                                                              
-nodejs       12 [e]      common [d] [i], development, minimal, s2i  Javascript runtime                                                   
-redis        6 [e]       common [d] [i]                             Redis persistent key-value database                                  
+Name         Stream      Profiles                                   Summary
+nodejs       12 [e]      common [d] [i], development, minimal, s2i  Javascript runtime
+redis        6 [e]       common [d] [i]                             Redis persistent key-value database
 
 Hint: [d]efault, [e]nabled, [x]disabled, [i]nstalled
 
@@ -495,11 +506,11 @@ Hint: [d]efault, [e]nabled, [x]disabled, [i]nstalled
 dnf module provides <provide_spec>
 ----
 
-Describes the repository(s) that provides a module according to the `provide_spec`. The `provide_spec` can specify a module name, a module's filepath or a module according to version.
+Describes the repositories that provide a module according to the `<provide_spec>`. `<provide_spec>` can specify a module name, a module's filepath, or a particular version of a module.
 
 *Example:*
 
-The following example uses the `dnf provides` to discover which repositories – local and remote – provide the module `gzip`.
+The following command uses `dnf provides` to discover which repositories–local and remote–provide the `gzip` module:
 
 ----
 $ sudo dnf provides /usr/bin/gzip
@@ -526,19 +537,17 @@ Matched from:
 Filename    : /usr/bin/gzip.
 ----
 
-
-
 === dnf module enable
 
 ----
-dnf module [options] enable <module:stream>
+dnf module [options] enable <module>:<stream>
 ----
 
-Enables a module.  Enabling a module provides system access to the repository packages that are contained in that module stream.
+Enables a particular stream of a module. Enabling a module provides system access to the repository packages in that module stream.
 
 *Example:*
 
-The following example enables the module `scala:2.10`.
+The following command enables stream 2.10 of the `scala` module:
 
 ----
 $ sudo dnf module enable scala:2.10
@@ -549,12 +558,12 @@ Dependencies resolved.
  Package                                             Architecture  Version   Repository  Size
 ================================================================================================
 Enabling module streams:
- scala                                                              2.10                                                                                                            
+ scala                                                              2.10
 
 Transaction Summary
 ================================================================================================
 
-Is this ok [y/N]: 
+Is this ok [y/N]:
 Complete!
 ----
 
@@ -564,11 +573,11 @@ Complete!
 dnf module remove <module_name:stream>
 ----
 
-Removes a module from the local environment
+Removes a module from the local computer.
 
 *Example:*
 
-The following example removes the module `ant` from the local environment
+The following command removes the `ant` module from the local computer:
 
 ----
 $ sudo dnf module remove ant
@@ -596,28 +605,28 @@ Transaction check succeeded.
 Running transaction test
 Transaction test succeeded.
 Running transaction
-  Preparing        :                                                                                              1/1 
-  Erasing          : ant-1.10.5-1.module+el8+2438+c99a8a1e.noarch                                                 1/6 
-  Erasing          : java-1.8.0-openjdk-devel-1:1.8.0.322.b06-2.el8_5.x86_64                                      2/6 
-  Running scriptlet: java-1.8.0-openjdk-devel-1:1.8.0.322.b06-2.el8_5.x86_64                                      2/6 
-  Erasing          : ant-lib-1.10.5-1.module+el8+2438+c99a8a1e.noarch                                             3/6 
-  Erasing          : java-1.8.0-openjdk-1:1.8.0.322.b06-2.el8_5.x86_64                                            4/6 
-  Running scriptlet: java-1.8.0-openjdk-1:1.8.0.322.b06-2.el8_5.x86_64                                            4/6 
-  Erasing          : xorg-x11-fonts-Type1-7.5-19.el8.noarch                                                       5/6 
-  Running scriptlet: xorg-x11-fonts-Type1-7.5-19.el8.noarch                                                       5/6 
-  Erasing          : ttmkfdir-3.0.9-54.el8.x86_64                                                                 6/6 
-  Running scriptlet: ttmkfdir-3.0.9-54.el8.x86_64                                                                 6/6 
-  Verifying        : ant-1.10.5-1.module+el8+2438+c99a8a1e.noarch                                                 1/6 
-  Verifying        : ant-lib-1.10.5-1.module+el8+2438+c99a8a1e.noarch                                             2/6 
-  Verifying        : java-1.8.0-openjdk-1:1.8.0.322.b06-2.el8_5.x86_64                                            3/6 
-  Verifying        : java-1.8.0-openjdk-devel-1:1.8.0.322.b06-2.el8_5.x86_64                                      4/6 
-  Verifying        : ttmkfdir-3.0.9-54.el8.x86_64                                                                 5/6 
-  Verifying        : xorg-x11-fonts-Type1-7.5-19.el8.noarch                                                       6/6 
+  Preparing        :                                                                                              1/1
+  Erasing          : ant-1.10.5-1.module+el8+2438+c99a8a1e.noarch                                                 1/6
+  Erasing          : java-1.8.0-openjdk-devel-1:1.8.0.322.b06-2.el8_5.x86_64                                      2/6
+  Running scriptlet: java-1.8.0-openjdk-devel-1:1.8.0.322.b06-2.el8_5.x86_64                                      2/6
+  Erasing          : ant-lib-1.10.5-1.module+el8+2438+c99a8a1e.noarch                                             3/6
+  Erasing          : java-1.8.0-openjdk-1:1.8.0.322.b06-2.el8_5.x86_64                                            4/6
+  Running scriptlet: java-1.8.0-openjdk-1:1.8.0.322.b06-2.el8_5.x86_64                                            4/6
+  Erasing          : xorg-x11-fonts-Type1-7.5-19.el8.noarch                                                       5/6
+  Running scriptlet: xorg-x11-fonts-Type1-7.5-19.el8.noarch                                                       5/6
+  Erasing          : ttmkfdir-3.0.9-54.el8.x86_64                                                                 6/6
+  Running scriptlet: ttmkfdir-3.0.9-54.el8.x86_64                                                                 6/6
+  Verifying        : ant-1.10.5-1.module+el8+2438+c99a8a1e.noarch                                                 1/6
+  Verifying        : ant-lib-1.10.5-1.module+el8+2438+c99a8a1e.noarch                                             2/6
+  Verifying        : java-1.8.0-openjdk-1:1.8.0.322.b06-2.el8_5.x86_64                                            3/6
+  Verifying        : java-1.8.0-openjdk-devel-1:1.8.0.322.b06-2.el8_5.x86_64                                      4/6
+  Verifying        : ttmkfdir-3.0.9-54.el8.x86_64                                                                 5/6
+  Verifying        : xorg-x11-fonts-Type1-7.5-19.el8.noarch                                                       6/6
 Installed products updated.
 
 Removed:
   ant-1.10.5-1.module+el8+2438+c99a8a1e.noarch     ant-lib-1.10.5-1.module+el8+2438+c99a8a1e.noarch     java-1.8.0-openjdk-1:1.8.0.322.b06-2.el8_5.x86_64
-  java-1.8.0-openjdk-devel-1:1.8.0.322.b06-2.el8_5.x86_64     ttmkfdir-3.0.9-54.el8.x86_64   xorg-x11-fonts-Type1-7.5-19.el8.noarch              
+  java-1.8.0-openjdk-devel-1:1.8.0.322.b06-2.el8_5.x86_64     ttmkfdir-3.0.9-54.el8.x86_64   xorg-x11-fonts-Type1-7.5-19.el8.noarch
 
 Complete!
 ----
@@ -628,9 +637,11 @@ Complete!
 dnf module disable <module_name:stream>
 ----
 
+Disables a particular stream of a module. Disabling a module removes the previously enabled access to the repository packages in that module stream.
+
 *Example:*
 
-The following example disables them module `scala` for stream `2.10`.
+The following command disables stream `2.10` of the `scala` module:
 
 ----
 $ sudo dnf module disable  scala:2.10
@@ -642,9 +653,9 @@ Dependencies resolved.
  Package                      Architecture        Version    Repository   Size
 =====================================================================================
 Disabling module profiles:
- scala/common                                                                                                                                                                                                           
+ scala/common
 Disabling modules:
- scala                                                                                                                                                                                                                  
+ scala
 
 Transaction Summary
 ======================================================================================
@@ -656,38 +667,38 @@ Complete!
 
 ----
 
-sudo dnf module [options] switch-to <module:stream>
+sudo dnf module [options] switch-to <module>:<stream>
 ----
 
-Switches the current installed module to the one defined by the argument `<module:stream>`. If the version a newer than the one presently installed the switch will be deemed `Upgraded`. If the version is older than the one presently installed the switch will be deemed `Downgraded`.
+Switches the current installed module to the one defined by `<module>:<stream>`. If the version is newer than the one presently installed, the switch is deemed `Upgraded`. If the version is older than the one presently installed, the switch is deemed `Downgraded`.
 
 *Example:*
 
-The following example switches the installed version of Node.js to version 16. The command uses the `-y` option to allow installation to proceed without user confirmation. The result displays portions of the start of the switch-to process and the end of the process
+The following command switches the installed version of Node.js to version 16. The command uses the `-y` option to allow installation to proceed without user confirmation. The result displays portions of the start of the switch-to process and the end of the process:
 
 ----
 $ sudo dnf module switch-to nodejs:16 -y
 Updating Subscription Management repositories.
 Last metadata expiration check: 2:14:26 ago on Wed 09 Feb 2022 08:06:21 AM PST.
 Dependencies resolved.
-==========================================================================================================================================================
- Package                     Architecture          Version                                                 Repository                           Size
-==========================================================================================================================================================
+========================================================================================================================================================
+ Package                     Architecture        Version                                                 Repository                           Size
+========================================================================================================================================================
 Upgrading:
- nodejs                      x86_64                 1:16.13.1-3.module+el8.5.0+13548+45d748af              rhel-8-for-x86_64-appstream-rpms      12 M
- nodejs-docs                 noarch                 1:16.13.1-3.module+el8.5.0+13548+45d748af              rhel-8-for-x86_64-appstream-rpms     8.7 M
- nodejs-full-i18n            x86_64                 1:16.13.1-3.module+el8.5.0+13548+45d748af              rhel-8-for-x86_64-appstream-rpms     7.6 M
- npm                         x86_64                 1:8.1.2-1.16.13.1.3.module+el8.5.0+13548+45d748af      rhel-8-for-x86_64-appstream-rpms     1.9 M
+ nodejs                      x86_64               1:16.13.1-3.module+el8.5.0+13548+45d748af              rhel-8-for-x86_64-appstream-rpms      12 M
+ nodejs-docs                 noarch               1:16.13.1-3.module+el8.5.0+13548+45d748af              rhel-8-for-x86_64-appstream-rpms     8.7 M
+ nodejs-full-i18n            x86_64               1:16.13.1-3.module+el8.5.0+13548+45d748af              rhel-8-for-x86_64-appstream-rpms     7.6 M
+ npm                         x86_64               1:8.1.2-1.16.13.1.3.module+el8.5.0+13548+45d748af      rhel-8-for-x86_64-appstream-rpms     1.9 M
 Switching module streams:
- nodejs     10 -> 16 
+ nodejs     10 -> 16
 .
 .
-.                                                                                                                                          
+.
 Installed products updated.
 
 Upgraded:
-  nodejs-1:16.13.1-3.module+el8.5.0+13548+45d748af.x86_64  nodejs-docs-1:16.13.1-3.module+el8.5.0+13548+45d748af.noarch   nodejs-full-i18n-1:16.13.1-3.module+el8.5.0+13548+45d748af.x86_64             
-  npm-1:8.1.2-1.16.13.1.3.module+el8.5.0+13548+45d748af.x86_64             
+  nodejs-1:16.13.1-3.module+el8.5.0+13548+45d748af.x86_64  nodejs-docs-1:16.13.1-3.module+el8.5.0+13548+45d748af.noarch   nodejs-full-i18n-1:16.13.1-3.module+el8.5.0+13548+45d748af.x86_64
+  npm-1:8.1.2-1.16.13.1.3.module+el8.5.0+13548+45d748af.x86_64
 
 Complete!
 ----
@@ -698,11 +709,11 @@ Complete!
 dnf module reset [options] <module_name>
 ----
 
-Instead of using `dnf module switch-to` use the  `dnf module reset` command along with `dnf module install` to install an alternative module version on the local computer.
+Instead of using `dnf module switch-to`, you can use  `dnf module reset` along with `dnf module install` to install an alternative module version on the local computer.
 
 *Example:*
 
-The following uses `dnf module reset` along with `dnf module install` to install the module `nodjs:16` over an existing, older version of Node.js. The results show the before and after calls to `node --version`. Also, the result is shown in abbreviated portions in order to economize on displaying screen output.
+The following uses `dnf module reset` along with `dnf module install` to install the module `nodjs:16` over an existing, older version of Node.js. The results show the before and after calls to `node --version`. Also, the result is shown in abbreviated portions in order to economize on displaying screen output:
 
 ----
 $ node --version
@@ -713,9 +724,9 @@ $ sudo dnf module reset nodejs -y
 .
 .
 Disabling module profiles:
- nodejs/common                                                                                                                                                                                                                      
+ nodejs/common
 Resetting modules:
- nodejs                                                                                                                                                                                                                          
+ nodejs
 
 Transaction Summary
 ==================================
@@ -731,8 +742,8 @@ Last metadata expiration check: 2:34:13 ago on Wed 09 Feb 2022 08:06:21 AM PST.
 Installed products updated.
 
 Upgraded:
-  nodejs-1:16.13.1-3.module+el8.5.0+13548+45d748af.x86_64                   nodejs-docs-1:16.13.1-3.module+el8.5.0+13548+45d748af.noarch              nodejs-full-i18n-1:16.13.1-3.module+el8.5.0+13548+45d748af.x86_64             
-  npm-1:8.1.2-1.16.13.1.3.module+el8.5.0+13548+45d748af.x86_64             
+  nodejs-1:16.13.1-3.module+el8.5.0+13548+45d748af.x86_64                   nodejs-docs-1:16.13.1-3.module+el8.5.0+13548+45d748af.noarch              nodejs-full-i18n-1:16.13.1-3.module+el8.5.0+13548+45d748af.x86_64
+  npm-1:8.1.2-1.16.13.1.3.module+el8.5.0+13548+45d748af.x86_64
 
 Complete!
 
@@ -746,180 +757,165 @@ v16.13.1
 sudo dnf install [options] <package_name>
 ----
 
-Installs an application or package on the local system.
+Installs an application or package on the local system. Must be entered as root.
 
-The following are application and module specific examples of using the command `dnf install`. Notice that the commands are run with administrator privileges using the `sudo` command.
-
-Installs the Ant build tool. Uses the `--nodocs` option to not install the package documentation.
+The following command installs the Ant build tool. The `--nodocs` option installs the package without its documentation:
 
 ----
 sudo dnf install --nodocs ant
 ----
 
-Installs the `buildah` tools which is used to create container images for Red Hat Enterprise Linux. Also installs the `podman` container manager. Uses the `--best` option to isntall the best version of the package.
+The following command installs `buildah`, which is used to create container images for Red Hat Enterprise Linux. The command also installs the `podman` container manager. The `--best` option installs the best versions of the packages, not necessarily the most recent versions:
 
 ----
-sudo dnf install --best  buildah podman
+sudo dnf install --best buildah podman
 ----
 
-Installs the llvm-toolset which includes the LLVM compiler infrastructure framework, the Clang compiler for the C and C++ languages, the LLDB debugger, and related tools for code analysis.
+The following command installs the `llvm-toolset` package, which includes the LLVM compiler infrastructure framework, the Clang compiler for the C and C++ languages, the LLDB debugger, and related tools for code analysis:
 
 ----
 sudo dnf install llvm-toolset
 ----
 
-Installs a group of packages associated with those tools typically used by programmers and software developers. Packages include `Python`, `Perl`, `gcc` and `make`, to name a few.
+The following command installs a group of packages associated with tools typically used by programmers and software developers. The packages include Python, Perl, `gcc`, and `make`, to name a few:
+
 ----
 sudo dnf group install "Development Tools"
 ----
 
-Installs the Go programming language along with associated tools and libraries.
+The following command installs the Go programming language along with associated tools and libraries:
 
 ----
 sudo dnf install go-toolset
 ----
 
-Installs the Apache HTTP Web Server
+The following command installs the Apache HTTP web server:
 
 ----
 sudo dnf install httpd
 ----
 
-Installs the MariaDB database server
-
-----
-sudo dnf install mariadb
-----
-
-Installs the Apache Maven framework for programming and managing Java applications
-
-----
-sudo dnf install maven
-----
-
-Installs the MySql database server
-
-----
-sudo dnf install mysql
-----
-
-Installs the nginx web server
+The following command installs the nginx web server;
 
 ----
 sudo dnf install nginx
 ----
 
-Installs the Node.js programming environment
+The following command installs the MariaDB database server:
 
 ----
-sudo dnf install nodejs
+sudo dnf install mariadb
 ----
 
-Installs version 11 of the Java Development Kit
+The following command installs the MySQL database server:
 
 ----
-sudo dnf install java-11-openjdk-devel
+sudo dnf install mysql
 ----
 
-Installs version 8 of the Java Development Kit
-
-----
-sudo dnf install java-1.8.0-openjdk-devel
-----
-
-Installs the Perl programming language and associated tools and libraries.
-
-----
-sudo dnf install perl
-----
-
-Installs the PHP programming language and associated tools and libraries.
-
-----
-sudo dnf install php
-----
-
-Installs the Postgres database server
+The following command installs the Postgres database server:
 
 ----
 sudo dnf install postgresql
 ----
 
-Installs the Postgres database server using the module:stream syntax
+The following command installs the Postgres database server using the `<module>:<stream>` syntax:
 
 ----
 sudo dnf module install postgresql:9.6
 ----
 
-Installs the Python 2 programming language and associated tools and libraries.
+The following command installs the Apache Maven framework for programming and managing Java applications:
+
+----
+sudo dnf install maven
+----
+
+The following command installs the Node.js programming environment:
+
+----
+sudo dnf install nodejs
+----
+
+The following command installs version 11 of the Java Development Kit:
+
+----
+sudo dnf install java-11-openjdk-devel
+----
+
+The following command installs version 8 of the Java Development Kit:
+
+----
+sudo dnf install java-1.8.0-openjdk-devel
+----
+
+The following command installs the Perl programming language and associated tools and libraries:
+
+----
+sudo dnf install perl
+----
+
+The following command installs the PHP programming language and associated tools and libraries:
+
+----
+sudo dnf install php
+----
+
+The following command installs the Python 2 programming language and associated tools and libraries:
 
 ----
 sudo dnf install python2
 ----
 
-----
-sudo dnf module install python27
-----
-
-Installs the Python 3 programming language and associated tools and libraries.
+The following command installs the Python 3 programming language and associated tools and libraries:
 
 ----
 sudo dnf install python3
 ----
 
-----
-sudo dnf module install python36
-----
-
-Installs the Redis database and message broker
+The following command installs the Redis database and message broker:
 
 ----
 sudo dnf install redis
 ----
 
-Installs the Ruby programming language and associated tools and libraries.
+The following command installs the Ruby programming language and associated tools and libraries:
 
 ----
 sudo dnf install ruby
 ----
 
-Installs the Rust programming language and associated tools and libraries.
+The following command installs the Rust programming language and associated tools and libraries:
 
 ----
 sudo dnf install rust-toolset
 ----
 
-Installs the Scala programming language and associated tools and libraries.
+The following command installs the Scala programming language and associated tools and libraries:
 
 ----
 sudo dnf install scala
 ----
 
-Installs the Subversion source control management system
-
-----
-sudo dnf install subversion
-----
-
-Installs the SWIG interface compiler that connects programs written in C and C++ with scripting languages such as Perl, Python, Ruby, and Tcl.
+The following command installs the SWIG interface compiler, which connects programs written in C and C++ with scripting languages such as Perl, Python, Ruby, and Tcl:
 
 ----
 sudo dnf install swig
 ----
 
-Installs the SystemTap tool that allows users to study and monitor the activities of the operating system (particularly, the kernel) in fine detail.
+The following command installs the SystemTap tool, which allows users to study and monitor the activities of the operating system (particularly, the kernel) in fine detail:
 
 ----
 sudo dnf install systemtap
 ----
 
-Installs the Valgrind tool for debugging and profiling Linux programs.
+The following command installs the Valgrind tool for debugging and profiling Linux programs:
 
 ----
 sudo dnf install valgrind
 ----
 
-Installs the Varnish web application accelerator which can also be used as a caching HTTP reverse proxy
+The following command installs the Varnish web application accelerator, which can also be used as a caching HTTP reverse proxy:
 
 ----
 sudo dnf install varnish
