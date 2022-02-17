@@ -553,7 +553,7 @@ Hit return to start merge resolution tool (vimdiff):
 git blame [options] <file_of_interest>
 ----
 
-Displays of list of last commits on a file by to committer according to changes in the file. By default each list item container the commit uuid, the committer, date of commit, locale and the actual content added according to line number.
+Displays of list of last commits on a file by to committer according to changes in the file. By default each list item displays the commit uuid, the committer, date of commit, locale and the actual content added according to line number.
 
 *Example:*
 
