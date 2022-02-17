@@ -575,11 +575,11 @@ c9b791ce (John Lennon 2022-02-08 11:00:30 -0800 2)
 git tag [options] <tag_name>
 ----
 
-Tags a repository. This command is typically used to indicate a release. If the <tag_name> parameter is not provided, the command will display a list of existing tags.
+Tags a repository. This command is typically used to indicate a release. If the `<tag_name>`` parameter is not provided, the command will display a list of existing tags.
 
 *Examples:*
 
-The following example used `git tag` to declare a tag with the value `v1.0 `. The option `-m` is used to apply a message to the tag.
+The following example used `git tag` to declare a tag with the value `v1.0`. The option `-m` is used to apply a message to the tag.
 
 ----
 $ git tag v1.0 -m "first release of project"
