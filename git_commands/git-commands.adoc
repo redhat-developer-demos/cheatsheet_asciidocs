@@ -557,7 +557,7 @@ Displays of list of last commits on a file by to committer according to changes 
 
 *Example:*
 
-The following example uses `git blame` to list the last commits on the file `readme.md`. Notice that `Line 3` was the last line changed indicated by the timestamp `2022-02-16 08:41:07`
+The following example uses `git blame` to list the last commits on the file `readme.md`. Notice that `Line 3` for commit `2a86f76f` was the last line changed indicated by the timestamp `2022-02-16 08:41:07`
 
 ----
 $ git blame readme.md
