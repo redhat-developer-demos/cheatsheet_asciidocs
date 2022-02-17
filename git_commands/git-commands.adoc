@@ -575,7 +575,7 @@ c9b791ce (John Lennon 2022-02-08 11:00:30 -0800 2)
 git tag [options] <tag_name>
 ----
 
-Tags a repository. This command is typically used to indicate a release. If the `<tag_name>`` parameter is not provided, the command will display a list of existing tags.
+Tags a repository. This command is typically used to indicate a release. If the `<tag_name>` parameter is not provided, the command will display a list of existing tags.
 
 *Examples:*
 
