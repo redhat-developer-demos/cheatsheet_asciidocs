@@ -237,7 +237,7 @@ Get the files from a branch in a local repository according to the value of the 
 
 *Example:*
 
-The following example changes the current working branch to the branch named `dev`. Then the command `git branch` is called to verify the branch change. Notice that the asterisk symbol indicates the current working branch, in this case `\* dev`.
+The following example changes the current working branch to the branch named `dev`. Then the command `git branch` is called to verify the branch change. Notice that the asterisk symbol indicates the current working branch, in this case `* dev`.
 
 ----
 $ git checkout dev
