@@ -490,21 +490,21 @@ readme.md
 === git rebase
 
 ----
-git rebase <other_branch>
+git rebase [options] <other_branch>
 ----
 
 Merges one repository onto another while also transferring the commits from merge-from branch onto the merge-to branch. Operationally, `git` is deleting commits from one branch and adding them onto another.
 
 *Example:*
 
-The following example checks out the branch `new_feature` and then rebases the updates made in the branch `dev` onto the branch `new_feature`.
+The following example checks out the branch `dev` and then rebases the updates made in the branch `new_feature` onto the branch `dev`. The commits that were part of `new_feature` are now part of `dev`.
 
 ----
-$ git checkout new_feature 
-Switched to branch 'new_feature'
+$ git checkout dev 
+Switched to branch 'dev'
 
-$ git rebase dev
-Successfully rebased and updated refs/heads/new_feature.
+$ git rebase new_feature
+Successfully rebased and updated refs/heads/dev.
 ----
 
 === git mergetool
