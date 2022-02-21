@@ -3,11 +3,13 @@
 :product-name:
 :version: 1.0.0
 
-== Git operational overview
+Git is a version control system (also called a source control system) that allows programmers and other people working with text files to coordinate changes while working independently. Git also supports binary assets such as pictures, but those formats don't support the line-by-line version management that makes version control really powerful.
 
-Working with `git` source control management requires understanding the phases and conceptual structures that go with managing content flow to and from a `git` repository. Under`git` the source of truth is the remote `git` repository. A remote repository can be hosted on a private network or by a public service provider such as GitHub or BitBucket.
+== Git concepts and workflow
 
-Moving content to and from the remote repository happens in a formal manner. Under `git` there are four phases that code and assets goes through before finally being stored in the remote repository. Each of these four phases has an associated location in which code is stored. These locations are:
+Each user of Git maintains a separate repository (or multiple repositories) for working with the source code. The repository where the project was launched is considered the source of truth. A;; other users sync up with this remote repository, which can be hosted on a private network or by a public service provider such as GitHub, GitLab, or BitBucket.
+
+There are formal processes for moving content to and from the remote repository. Each change goes through four phases before finally being stored in the remote repository. Each of these four phases has an associated location in which code is stored. These locations are:
 
 * Working directory
 * Staging environment
@@ -18,36 +20,36 @@ The sections that follow describe the purpose and use of each location.
 
 === Working directory
 
-The working directory is the location in the file system of the local computer in which the code is stored. The working directory will have a hidden file named `.git`. The `.git` file is the physical representation of the local repository. Developers make changes to code in the working directory.
+The working directory is the location of the code in the file system of the local computer. Developers add and make changes to code in the working directory.
 
 === Staging environment
 
-The Staging environment is an area that is special to `git`. Developers use the `git add` and `get reset` commands to add files to and remove files from the Staging environment. You can think of Staging as the temporary area where file are stored before being committed to the local repository.
+The staging environment is an area that is special to Git, and does not appear in many other version control systems. Developers use the `git add` and `get reset` commands to add files to and remove files from the staging environment. You can think of staging as a temporary area where files are stored before being committed to the local repository.
 
 === Local repository
-The local repository is the instance of the git repository stored on the local computer. The physical representation of the local repository is the `.git` file. Once content has been added to the Staging environment, developers use the `git commit` to store new and updated content to the local repository. 
 
-The local repository is updated from the remote repository using the `git pull` command.
+The local repository is the instance of the Git repository stored on the local computer, physically represented by a subdirectory named `.git` (the initial period makes it hidden) under the top-level directory. The `.git` directory contains metadata and other information needed by Git to manage the project. Once content has been added to the staging environment, developers use the `git commit` command to store new and updated content to the local repository.
+
+The `git pull` command updates the local repository from the remote repository, bringing the local directory in sync with what other developers have done.
 
 === Remote repository
 
-The remote repository is the `git` repository on the network that is the single source of truth for all content being managed under a particular `git` repository. Developers use the `git push` to upload content from the local repository to a remote repository.
+The remote repository is the Git repository on the network that is the single source of truth for all content being managed under a particular project. Developers use the `git push` command to upload content from the local repository to a remote repository.
 
-Content in the remote repository can be versioned using branches. The root branch is typically named `main`.
-
-
-*Example:*
-
-The following example shows the Working Directory, Staging Environment, Local Repository and Remote Repository locations along with the `git` commands to move data to and from each location. Once content has been pulled from a remote repository to a local repository, that content is available in the local filesystem according to the given branch.
+[AO: Let's turn the following figure into a real figure.] The following figure shows the working directory, staging environment, local repository, and remote repository locations along with the `git` commands that move data to and from each location. After content has been pulled from a remote repository to a local repository, that content is available in the local filesystem.
 
 ----
 [Working Directory] → (add) → [Staging] → (commit) → [Local Repo] → (push) → [Remote Repo]
-                                                        ↑  ←  ←  ←  (pull)  ←   ←  ↲ 
+                                                        ↑  ←  ←  ←  (pull)  ←   ←  ↲
 ----
+
+=== Branches
+
+Content in the remote repository can be broken into different paths of development through the concept of branches. The root branch is typically named `main`.
 
 == Working with repositories
 
-The following sections describe `git` commands to create a local repository, download (clone) a remote repository to a local machine, and update a local repository with changes from a remote repository.
+The following sections describe `git` commands that create a local repository, download (clone) a remote repository to a local machine, and update a local repository with changes from a remote repository.
 
 === git init
 
@@ -55,8 +57,9 @@ The following sections describe `git` commands to create a local repository, dow
 git [options] init <repo_directory>
 ----
 
-Creates a local repository that will be represented by the file named `.git`. If the optional parameter `<repo_directory>` is not provided, the `.git` file is created in the current directory. If the parameter `<repo_directory>` is provided, that directory is created and the `.git` file is created in that directory.
+Creates a local repository that will be represented by the directory named `.git`. This command is not needed when working in a remote repository; use `git clone` to start work with other repositories.
 
+If the optional `<repo_directory>` parameter is not provided, the `.git` file is created in the current directory. If the parameter `<repo_directory>` is provided, that directory is created and the `.git` directory is created in that directory.
 
 *Example:*
 
@@ -67,14 +70,17 @@ $ git init ./coolcode
 Initialized empty Git repository in /home/lennonjohn/coolcode/.git/
 ----
 
+[]
+**Note:**: The initial `$` in the examples is the command prompt.
+
 === git clone
 
 ----
 git clone [options] <remote_repo_url> <target_directory>
 ----
 
-Downloads content from a remote repository for local operations. If the parameter `<target_directory>` is provided, the repository contents will be downloaded into that directory. (That directory must be empty.) Otherwise, `git` will create a directory based on the remote repository name.
- 
+Downloads content from a remote repository for local operations. If the parameter `<target_directory>` is provided, the repository contents are downloaded into that directory. (That directory must be empty.) Otherwise, `git` creates a directory based on the remote repository name.
+
 *Example:*
 
 The following example uses the command `git clone` to download the content of the remote repository found at `https://github.com/redhat-developer/developers.redhat.com` into the local directory `./rh`.
@@ -85,7 +91,7 @@ git clone https://github.com/redhat-developer/developers.redhat.com.git ./rh
 
 === git pull
 
-Calling the `git pull` from a directory of a local repository downloads the latest, current assets from the associated remote repository.
+When called within a local repository, downloads the latest, current assets from the associated remote repository.
 
 ----
 git pull [options]
@@ -93,7 +99,7 @@ git pull [options]
 
 *Example:*
 
-The following example uses `git pull` to download files from the associated remote repository. Since contents in the remote repository and local repository are the same, the command responds with a message `Already up to date.`.
+The following example uses `git pull` to download files from the associated remote repository. Because contents in the remote repository and local repository are the same, the command responds with a message `Already up to date.`
 
 ----
 $ git pull
@@ -106,7 +112,7 @@ Already up to date.
 git fetch [options] <repository>
 ----
 
-Downloads code and assets from the remote repository to the local machine without overwriting the existing local code and assets in the current branch. If the optional `<repository>` is not provided, `git fetch` is executed against the `git` repository associated with the present working directory.
+Downloads code and assets from the remote repository to the local machine without overwriting the existing local code and assets in the current branch. If the optional `<repository>` is not provided, `git fetch` is executed against the Git repository associated with the present working directory.
 
 *Example:*
 
@@ -122,7 +128,7 @@ $ git fetch
 git log [options]
 ----
 
-Displays the git log file that contains a history of all transactions in the repository.
+Displays the Git log file that contains a history of all transactions in the repository.
 
 *Example:*
 
@@ -147,10 +153,9 @@ f8be8a1 Update README.md
 41e85e1 Initial commit
 ----
 
-
 == Working with branches
 
-The following sections describe the various `git branch` command expressions you can use to work with branches in a repository
+The following sections describe the various `git branch` command expressions you can use to work with branches in a repository.
 
 === Getting the current branch name
 
@@ -158,11 +163,11 @@ The following sections describe the various `git branch` command expressions you
 git branch
 ----
 
-Gets the name of the current branch that is checkout out from the local repository.
+Shows all branches in the local repository, flagging the current branch that is checked out from the local repository.
 
 *Example:*
 
-The following example reports the current branch that is being worked on in the local repository. In this case the current branch is `my_feature` and is indicated by the asterisk before the branch name. (`$` is the command-prompt symbol.)
+The following example reports the current branch that is being worked on in the local repository. In this case the current branch is `my_feature` and is indicated by the asterisk before the branch name.
 ----
 $ git branch
   dev
@@ -176,11 +181,11 @@ $ git branch
 git branch -r
 ----
 
-Displays all the branches on the remote repository
+Displays all the branches in the remote repository.
 
 *Example:*
 
-The following example uses the `git branch` command along with the option `-r` to display the names of all branches on the remote repository. (`$` is the command-prompt symbol.)
+The following example uses the `git branch` command along with the `-r` option to display the names of all branches on the remote repository.
 
 ----
 $ git branch -r
@@ -195,10 +200,10 @@ $ git branch -r
 git branch -a
 ----
 
-Displays all branches both on the local and remote repositories
+Displays all branches both on the local and remote repositories.
 
 *Example:*
-The following example displays all branches, local and remote, for the repository associated with the current working directory. Notice that the symbol `*` indicates the current working branch, in this case `my_feature`. (`$` is the command-prompt symbol.)
+The following example displays all branches, local and remote, for the repository associated with the current working directory. The `*` symbol indicates the current working branch, in this case `my_feature`.
 
 ----
 $ git branch -a
@@ -221,7 +226,7 @@ Creates a new branch. If the optional parameter `<existing_branch_name>` is not 
 
 *Example:*
 
-The following example creates the a branch named `dev` that has the directories and files from the existing branch named `main`. (`$` is the command-prompt symbol.)
+The following example creates the a branch named `dev` that has the directories and files from the existing branch named `main`.
 
 ----
 $ git branch dev main
@@ -233,11 +238,11 @@ $ git branch dev main
 git checkout <branch_name>
 ----
 
-Get the files from a branch in a local repository according to the value of the parameter `<branch_name>`.
+Retrieves the files in the branch named `<branch_name>` in the local repository. Once `git checkout` is called, developers can work on the files in that branch.
 
 *Example:*
 
-The following example changes the current working branch to the branch named `dev`. Then the command `git branch` is called to verify the branch change. Notice that the asterisk symbol indicates the current working branch, in this case `* dev`.
+The following example changes the current working branch to the branch named `dev`. The `checkout` command is followed by a `git branch` command to verify the branch change. The `*` symbol indicates the current working branch, in this case `dev`.
 
 ----
 $ git checkout dev
@@ -259,11 +264,11 @@ The following sections describe the various `git` commands you can use to inspec
 git status [options] <directory_or_filename>
 ----
 
-Reports the status of the current filesystem associated with the local repository. The parameter `<directory_or_filename>` is optional. If no `<directory_or_filename>` is provided, status is reported according to the present working directory (`pwd0`).
+Reports the status of the current filesystem associated with the local repository. The `<directory_or_filename>` parameter is optional. If no directory or filename is provided, the status of the present working directory is reported.
 
 *Example:*
 
-The following example uses `git status` to report the status of file and directories in the present working directory in comparison the state of the local repository.
+The following example uses `git status` to report the status of file and directories in the present working directory in comparison to the state of the local repository. The final line of output shows that the local repository is currently in sync with the working directory.
 
 ----
 $ git status
@@ -282,11 +287,11 @@ no changes added to commit (use "git add" and/or "git commit -a")
 git add [options] <files or directories>
 ----
 
-Adds content to the Staging environment according to the current branch in the local repository.
+Adds content to the staging environment from the current branch in the working directory of the local computer.
 
 *Example:*
 
-The following example creates a directory named `git_cheat_sheet` in the current branch. Then a file named `readme.md` is added to directory named `git_cheat_sheet`. Finally the `git add` command is used to add the local git Staging environment.
+The following example creates a directory named `git_cheat_sheet` in the current branch. Then a file named `readme.md` is added to the directory. Finally, the `git add` command adds the contents of the directory to the local staging environment.
 
 ----
 $ mkdir git_cheat_sheet
@@ -300,11 +305,11 @@ $ git add ./git_cheat_sheet/
 git commit [options] <files or directories>
 ----
 
-Commits content to the local repository
+Commits content from the staging environment to the local repository.
 
 *Example:*
 
-The  following example uses the `git commit` command to commit the file `./git_cheat_sheet/readme.md` to the local repository along with a descriptive message: `adding new file for git-cheat-sheet`.
+The following example uses the `git commit` command to commit the file `./git_cheat_sheet/readme.md` to the local repository along with a descriptive message: "adding new file for git-cheat-sheet".
 
 ----
 $ git commit -m "adding new file for git-cheat-sheet" ./git_cheat_sheet/readme.md
@@ -319,17 +324,17 @@ $ git commit -m "adding new file for git-cheat-sheet" ./git_cheat_sheet/readme.m
 git push [options] <remote_repository>
 ----
 
-Uploads content from the local repository to the remote repository. The parameter `<remote_repository>` is optional. If no remote repository is defined, content is pushed to the repository associated with the current working directory.
+Uploads content from the local repository to the remote repository. The `<remote_repository>` parameter is optional. If no remote repository is defined, content is pushed to the repository associated with the current working directory. If the remote repository has updates that are not reflected in the local repository, the `push` command fails with an error message.
 
 *Example:*
 
-The following example uploads all content committed to the local repository up the default remote repository associated with the current working directory.
+The following example uploads all content committed to the local repository to the default remote repository associated with the current working directory.
 
 ----
 git push
 ----
 
-=== Rolling a file back from Staging
+=== Rolling a file back from the staging environment
 
 ----
 git restore [options] <filename>
@@ -339,9 +344,9 @@ Rolls back a file to its previous state under version control.
 
 *Example:*
 
-The following example uses `git add` to add a file named `config.json` to staging and then uses `git status` to inspect the state of the file, which is now in Staging and awaiting a commit.
+The following example uses `git add` to add a file named `config.json` to the staging environment and then uses `git status` to inspect the state of the file, which is now awaiting a commit.
 
-Then, the command `git restore` is used with the `--staged` option to remove the file `config.json` from Staging. The command `git status` is called again to reveal that the file `config.json` needs to be set to Staging using the command `git add`.
+Then the command `git restore` is used with the `--staged` option to remove the `config.json` file from the staging environment. The `git status` command is called again to reveal that the file `config.json` is no longer part of the staging environment.
 
 ----
 $ git add config.json
@@ -363,17 +368,17 @@ Changes not staged for commit:
 no changes added to commit (use "git add" and/or "git commit -a")
 ----
 
-=== Removing files added but not staged 
+=== Removing files that were added but not staged
 
 ----
 git clean [options] <filename>
 ----
 
-Rolls a file or files back to particular state according to particular context with the repository – local or remote, for example rolling back to the last commit.
+Rolls one or more files back to particular state according to particular context with the repository–local or remote–for example, rolling back to the last commit.
 
 *Example:*
 
-The following example displays the files in the working directory associated with a local repository. Then, a new file named `config.json` is added to the directory. Finally the command `git clean` is called with the `-f` option to reset the directory to the original state of the local repository removing the added file. The command `ls -1` is called again to show that the file `config.json` has been removed from the working directory.
+The following example displays the files in the working directory associated with a local repository. Then a new file named `config.json` is added to the directory. Finally the command `git clean` is called with the `-f` option to reset the directory to the original state of the local repository, removing the added file. The `ls -1` command is called again to show that the file `config.json` has been removed from the working directory.
 
 ----
 $ ls -1
@@ -392,19 +397,19 @@ $ ls -1
 readme.md
 ----
 
-== Rolling back to the last commit
+== Rolling back to the most recent commit
 
 ----
 git revert [options] <commit_uuid>
 ----
 
-Reverts the filesystem associated with a local `git` repository to a previous state while also updating changes to the local `git` log.
+Reverts the filesystem associated with a local `.git` repository to a previous state. Also updates changes to the local `git` log.
 
 *Example:*
 
-The following example displays the files the directory associated with a local repository. Then, a new file named `newfile.txt` is added to the directory as well as committed to the local repository. The contents of the directory are listed again. The command `git log` is called to show the latest git activity.
+The following example displays the files in the directory associated with a local repository. Then a new file named `newfile.txt` is added to the directory and committed to the local repository. The contents of the directory are listed again. The `git log` command shows the latest Git activity.
 
-Then, `git revert 98d7128 --no-edit` is called which reverts the state of the directory to the point before the commit `98d7128` was executed. The contents of the reverted directory are displayed. The reversion activity has been captured and is displayed by calling `git log`.
+Then `git revert 98d7128 --no-edit` reverts the state of the directory to the point before the commit `98d7128` was executed. The contents of the reverted directory are displayed. The reversion activity has been captured and is displayed by calling `git log`.
 
 ----
 $ ls -1
@@ -446,21 +451,21 @@ e5cf841 adding configuration file
 
 == Merging content between branches
 
-The following sections describe how to merge files between branches, rebase files between ranches and how to invoke the a diff tool when merge conflicts occur. 
+The following sections describe how to merge files between branches, rebase files between branches, and invoke the a `diff` tool when merge conflicts occur.
 
 === git merge
 
 ----
-git merge [options] <target_branch> <branch_to_merge_from> 
+git merge [options] <target_branch> <branch_to_merge_from>
 ----
 
-Merges the files and directories from `<branch_to_merge_from>` into the `<target_branch>`. If the `<target_branch>` parameter is not provided, the files and directories in the `<branch_to_merge_from>` will be merged into the current branch.
+Merges the files and directories from `<branch_to_merge_from>` into the `<target_branch>`. If the `<target_branch>` parameter is not provided, the files and directories in the `<branch_to_merge_from>` are merged into the current branch.
 
 *Example:*
 
 The following example shows the current branch as well as the files in that branch. The `dev` branch has two files, `newfile.txt` and `readme.md`.
 
-Then the branch is changed to `main`. The `main` branch has one file, `readme.md`. The command `git merge dev --no-edit` merges the files from the `dev` branch into the the current `main` branch. The option `--no-edit` is used to avoid having to write a message describing the merge. Finally, the contents of the merge into `main` is shown using the command `ls -1`.
+Then the branch is changed to `main`. The `main` branch has one file, `readme.md`. The command `git merge dev --no-edit` merges the files from the `dev` branch into the the current `main` branch. The option `--no-edit` is used to avoid having to write a message describing the merge. Finally, the `ls -1` command shows that the merge successfully added `newfile.txt` from the `dev` branch to `main`.
 
 ----
 $ git branch
@@ -493,14 +498,14 @@ readme.md
 git rebase [options] <other_branch>
 ----
 
-Merges one repository onto another while also transferring the commits from merge-from branch onto the merge-to branch. Operationally, `git` is deleting commits from one branch and adding them onto another.
+Merges one repository onto another while also transferring the commits from the merge-from branch onto the merge-to branch. Operationally, Git can delete commits from one branch while adding them to another.
 
 *Example:*
 
 The following example checks out the branch `dev` and then rebases the updates made in the branch `new_feature` onto the branch `dev`. The commits that were part of `new_feature` are now part of `dev`.
 
 ----
-$ git checkout dev 
+$ git checkout dev
 Switched to branch 'dev'
 
 $ git rebase new_feature
@@ -513,15 +518,20 @@ Successfully rebased and updated refs/heads/dev.
 git mergetool <tool>
 ----
 
-Invokes an editing tool to resolve merge conflicts between files. If no `<tool>` parameter is provided `mergetool` will used the globally configured merge editor. You can register a merge editor using the following command. In this case, the tool `vimdiff` is registered.
+Invokes an editing tool to resolve merge conflicts between files. If no `<tool>` parameter is provided, `mergetool` uses the globally configured merge editor. You can register a merge editor using the following command. 
 
 `git config --global merge.tool vimdiff`
+
+In this case, the command indicates that `vimdiff` should be used by default to show diffs between branches.
 
 You also use an alterative merge editor by using the `--tool` option.
 
 *Example:*
 
-The following example creates a merge conflict and then invokes `mergetool` using the `--tool` option to run merge editor `vimdiff`. **Note:** The tool `vimdiff` has been installed on the computer prior to using it with `mergetool`. The output that follows is an emulation of the command line UI for `vimdiff`.
+The following example creates a merge conflict and then invokes `mergetool` using the `--tool` option to run merge editor `vimdiff`.
+
+[]
+**Note:**: The `vimdiff` tool has to be installed on the computer prior to using it with `mergetool`. The output that follows is an emulation of the command-line interface for `vimdiff`.
 
 ----
 
@@ -532,7 +542,7 @@ Automatic merge failed; fix conflicts and then commit the result
 
 $ git mergetool --tool=vimdiff
 
-Hit return to start merge resolution tool (vimdiff): 
+Hit return to start merge resolution tool (vimdiff):
 +-----------------------------------------------------+
 | MAIN            | BASE         | DEV                |
 +-----------------|--------------|--------------------+
@@ -547,26 +557,28 @@ Hit return to start merge resolution tool (vimdiff):
 
 == Change control
 
+The following sections show some ways to keep track of changes in Git.
+
 === git blame
 
 ----
 git blame [options] <file_of_interest>
 ----
 
-Displays of list of last commits on a file by to committer according to changes in the file. By default each list item displays the commit uuid, the committer, date of commit, locale and the actual content added according to line number.
+Displays a list of recent commits on a file by committer along with changes in the file. By default each list item displays the commit UUID, the committer, the date of commit, the locale, and the actual content added.
 
 *Example:*
 
-The following example uses `git blame` to list the last commits on the file `readme.md`. Notice that `Line 3` for commit `2a86f76f` was the last line changed indicated by the timestamp `2022-02-16 08:41:07`
+The following example uses `git blame` to list recent commits on the file `readme.md`. Note that commit `2a86f76f` (the third line in the output) was the most recent change, because its timestamp `2022-02-16 08:41:07` is the most recent.
 
 ----
 $ git blame readme.md
 c9b791ce (John Lennon 2022-02-08 11:00:30 -0800 1) # RHEL 8 Cheat Sheet: Additional Resources
-c9b791ce (John Lennon 2022-02-08 11:00:30 -0800 2) 
+c9b791ce (John Lennon 2022-02-08 11:00:30 -0800 2)
 2a86f76f (Mick Jagger 2022-02-16 08:41:07 -0800 3) Contains a list of additional resources.
-4dfb6c37 (Mick Jagger 2022-02-16 08:32:12 -0800 4) 
+4dfb6c37 (Mick Jagger 2022-02-16 08:32:12 -0800 4)
 4dfb6c37 (Mick Jagger 2022-02-16 08:32:12 -0800 5) It is still a work in progress.
-4dfb6c37 (Mick Jagger 2022-02-16 08:32:12 -0800 6) 
+4dfb6c37 (Mick Jagger 2022-02-16 08:32:12 -0800 6)
 ----
 
 === git tag
@@ -575,28 +587,19 @@ c9b791ce (John Lennon 2022-02-08 11:00:30 -0800 2)
 git tag [options] <tag_name>
 ----
 
-Tags a repository. This command is typically used to indicate a release. If the `<tag_name>` parameter is not provided, the command will display a list of existing tags.
+Tags a repository. This command is usually used to mark a release. If the `<tag_name>` parameter is not provided, the command displays a list of existing tags.
 
 *Examples:*
 
-The following example used `git tag` to declare a tag with the value `v1.0`. The option `-m` is used to apply a message to the tag.
+The following example uses `git tag` to declare a tag with the value `v1.0`. The option `-m` is used to apply a message to the tag.
 
 ----
 $ git tag v1.0 -m "first release of project"
 ----
 
-The following example uses `git tag` to display a list of existing tags on the repository. The `-n` option is used to show the user defined message associated with each tag.
+The following example uses `git tag` to display a list of existing tags on the repository. The `-n` option is used to show the user-defined message associated with each tag.
 
 ----
 $ git tag -n
 v1.0            first release of project
 ----
-
-
-
-
-
-
-
-
-
