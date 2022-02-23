@@ -8,7 +8,7 @@ As stated by Podman.io, _Podman is a daemonless, open source, Linux native tool 
 
 As stated above, Podman is daemonless. This means the Podman interacts directly with the various components in the Linux container ecosystem instead of relying on a continuously running daemon to intermediate between these components on a callers behalf. Podman does not run as root by default which reduces the potential for a security hazard.
 
- Also, Podman does *not* spawn containers as child processes thus making the containers it creates durable and independent of Podman.
+Also, Podman does *not* spawn containers as child processes thus making the containers it creates durable and independent of Podman.
 
 == Working with image repositories
 
