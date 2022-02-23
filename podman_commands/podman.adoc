@@ -568,23 +568,10 @@ Loads a saved image from `docker-archive` or an image in another format
 TO BE PROVIDED
 ----
 
-== Working container images
+== Sharing container images
 
 TO BE PROVIDED
 
-=== podman images
-
-----
-podman images
-----
-
-Lists the container images stored in local cache on the host computer.
-
-*Example:*
-
-----
-TO BE PROVIDED
-----
 
 === podman push
 
