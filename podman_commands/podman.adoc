@@ -183,7 +183,7 @@ Creates and runs the container using the `nginx:latest` image. Then after the co
 ----
 $ podman run nginx:latest pwd
 /
----
+----
 
 === podman stop
 
