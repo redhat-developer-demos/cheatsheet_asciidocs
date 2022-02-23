@@ -359,21 +359,6 @@ kbd:[Ctrl+p] kbd:[Ctrl+q] detaches from the container but leaves it running.
 TO BE PROVIDED
 ----
 
-=== podman attach
-
-----
-podman attach <container_name_or_container_uuid>
-----
-
-Attaches to a running container and views its output or control it + 
-kbd:[Ctrl+p] kbd:[Ctrl+q] detaches from the container but leaves it running. 
-
-*Example:*
-
-----
-TO BE PROVIDED
-----
-
 === podman exec
 
 ----
