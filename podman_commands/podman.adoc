@@ -185,27 +185,150 @@ $ podman run nginx:latest pwd
 /
 ---
 
+=== podman stop
 
-.Other options
-****
-`-p _8080:32000_`:: Expose container port 8080 as localhost:32000
-`-v _/dev:/ldev_`:: Map the `/dev` directory on localhost to a volume named `/ldev` inside the container
-****
+----
+podman stop <container_name_or_container_uuid>
+----
 
-`podman commit _container newImage:tag_`:: Create a new image based on the current state of a running container
-`podman ps`:: List all running containers
-`podman create [--name _name_] _image:tag_`:: Create (but don't start) a container from an image
-`podman start _container_`:: Start an existing container from an image
-`podman restart _container_`:: Restart an existing container
-`podman wait _container1_ [_container2..._]`:: Wait on one or more containers to stop
-`podman stop _container_`:: Stop a running container gracefully
-`podman kill _container_`:: Stop a running container immediately
-`podman rm [-f] _container_`:: Remove a container (use `-f` if the container is running)
-`podman stats [_container_]`:: Display a live stream of a container's resource usage (or all containers)
-`podman inspect _container_`:: Return metadata (in JSON) about a running container 
+Gracefully stops a container from running.
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman start
+
+----
+podman start <container_name_or_container_uuid>
+----
+
+Starts an existing container
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman create
+
+----
+podman create <container_name_or_container_uuid>
+----
+
+Creates a container from a container image but does not start it
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman restart
+
+----
+podman restart <container_name_or_container_uuid>
+----
+
+Restarts an existing container
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman rm
+
+----
+podman rm <container_name_or_container_uuid>
+----
+
+Removes a container from memory
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman rm
+
+----
+podman rm <container_name_or_container_uuid>
+----
+
+ Removes a container from memory. Use `-f` if the container is running.
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman wait
+
+----
+podman wait <container_to_wait_for>
+----
+
+Waits for a the container defined by `<container_to_wait_for>` to stop.
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman stats
+
+----
+podman stats <container_name_or_container_uuid>
+----
+
+Displays a live stream of a container's resource usage (or all containers)
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman inspect
+
+----
+podman inspect <container_name_or_container_uuid>
+----
+
+Returns metadata (in JSON) describing a running container 
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
 
 == Working with container processes and resources
 
+=== podman ps
+
+----
+podman ps <container_to_wait_for>
+----
+
+Waits for a the container defined by `<container_to_wait_for>` to stop.
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+`podman commit _container newImage:tag_`:: Create a new image based on the current state of a running container
 `podman ps (--all)`:: Listing the running containers on the system
 `podman attach _container_`::
 Attach to a running container and view its output or control it + 
