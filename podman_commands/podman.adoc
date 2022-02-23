@@ -1,0 +1,253 @@
+= Podman Cheat Sheet
+:experimental: true
+:product-name:
+
+This cheat sheet covers the command used for working with Podman.
+
+As stated by Podman.io, _Podman is a daemonless, open source, Linux native tool designed to make it easy to find, run, build, share and deploy applications using Open Containers Initiative (OCI) Containers and Container Images._
+
+As stated above, Podman is daemonless. This means the Podman interacts directly with the various components in the Linux container ecosystem instead of relying on a continuously running daemon to intermediate between these components on a callers behalf. Podman does not run as root by default. Also, Podman does *not* spawn containers as child processes making the containers it creates durable independent of Podman.
+
+_container_ is either a container name or a container ID. 
+If _tag_ is omitted in _image:tag_, the default value is _latest_.
+
+== Working image repositories
+
+The following sections describe the Podman commands for working with image repositories.
+
+=== podman images
+
+----
+podman images
+----
+
+List all local images
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman history 
+
+----
+podman history <image:tag>
+----
+
+Display information about how an image was built
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman login
+
+----
+podman login <image_registry_url> -u <username> -p <password>
+----
+
+Log in to a remote image registry
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman pull
+
+----
+podman pull <remote_registry_url>/<username>/<image:tag>
+----
+
+Pulls an image from a remote registry
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman search
+----
+podman search <search_string>
+----
+
+Searches local cache and remote registries for images
+
+*NOTE:* The list of registries is defined in `/etc/containers/registries.conf`
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman logout
+
+----
+podman logout
+----
+
+Logs out of the current container registry
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+
+== Building images
+
+The following sections describe the various Podman commands for building container images
+
+=== podman build
+
+----
+podman build -t <image:tag_> -f <Dockerfile_filepath_or_url>
+----
+
+Builds and tags an image using the instructions in Dockerfile. The location of the Dockerfile is defined by the `-f` option. If the `-f` option is omitted, use a period (`.`) to indicate that the Dockerfile is in the current directory.
+
+*Examples:*
+
+The following example demonstrates how to use `podman build`` to create a container image using the Dockerfile in the local directory
+
+----
+TO BE PROVIDED
+----
+
+The following example demonstrates how to use `podman build`` to create a container image using the file named `mydockerfile`
+
+----
+TO BE PROVIDED
+----
+
+=== podman tag
+
+----
+podman tag <image:tag> <remote_registry_url>/<username>/<image:tag>
+----
+
+Tags an image
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+
+== Working with containers
+
+The following sections describe the Podman commands for creating and running containers
+
+=== podman run
+
+----
+podman run [options] <image:tag>
+----
+
+Runs a container based on a given image.
+
+`podman run --rm -it [--name _name_] _image:tag command_`::
+
+Run a container based on a given image.
+
+*Examples:*
+
+EXPLANATION TO BE PROVIDED
+
+----
+podman run nginx:latest
+----
+
+
+Creates and runs the container and uses the `--name` option to give the container the name `mywebserver`.
+
+----
+podman run --name mywebserver -it nginx:latest
+----
+
+Creates and runs the container. The option `--rm` makes it so that the container is removed after it exits
+
+----
+podman run --rm nginx:latest
+----
+
+Creates and runs the container. The option `-it` makes it so a terminal and command prompt within the container is presented after the container gets up and running.
+
+----
+podman run -it nginx:latest 
+----
+
+Creates and runs the container using the `nginx:latest` image. Then after the container is up and running, the command `pwd` is executed against file system internal to the container to report present working directory. The symbol `$` represents the command line prompt. The result of the running the command follows.
+
+----
+$ podman run nginx:latest pwd
+/
+---
+
+
+.Other options
+****
+`-p _8080:32000_`:: Expose container port 8080 as localhost:32000
+`-v _/dev:/ldev_`:: Map the `/dev` directory on localhost to a volume named `/ldev` inside the container
+****
+
+`podman commit _container newImage:tag_`:: Create a new image based on the current state of a running container
+`podman ps`:: List all running containers
+`podman create [--name _name_] _image:tag_`:: Create (but don't start) a container from an image
+`podman start _container_`:: Start an existing container from an image
+`podman restart _container_`:: Restart an existing container
+`podman wait _container1_ [_container2..._]`:: Wait on one or more containers to stop
+`podman stop _container_`:: Stop a running container gracefully
+`podman kill _container_`:: Stop a running container immediately
+`podman rm [-f] _container_`:: Remove a container (use `-f` if the container is running)
+`podman stats [_container_]`:: Display a live stream of a container's resource usage (or all containers)
+`podman inspect _container_`:: Return metadata (in JSON) about a running container 
+
+== Working with container processes and resources
+
+`podman ps (--all)`:: Listing the running containers on the system
+`podman attach _container_`::
+Attach to a running container and view its output or control it + 
+kbd:[Ctrl+p] kbd:[Ctrl+q] detaches from the container but leaves it running. 
+
+`podman exec _container command_`:: Execute a command in a running container
+`podman top _container_`:: Display the running processes of a container
+`podman logs [-tail] _container_`:: Display the logs of a container
+`podman pause [_container_]`:: Pause all the processes in a container (or all containers)
+`podman unpause [_container_]`:: Unpause all processes in a container (or all containers) 
+`podman port _container_`:: List the port mappings from a container to localhost 
+
+== Working with a container's filesystem
+
+`podman diff _container_`:: Display all the changes to a container’s filesystem
+Copy files and folders between a container and localhost:: 
+Use `podman mount`, copy files with `cp` or any Linux tool you like (`tar` or `dnf`, for example), then use `podman umount`
+`podman mount _container_`:: Mount a container’s root filesystem
+`podman umount _container_`:: Unmount a container’s root filesystem
+`podman import _tarball_`:: Import a tarball and save it as a filesystem image
+`podman export [-o _outputFile_] _container_`:: Export the container’s filesystem to a tar file
+`podman save [-o _archiveFile_] [--format _docker-archive_ | _oci-archive_ | _oci-dir_ | _docker-dir_] _image:tag_`:: 
+Save an image in docker-archive (default) or another format
+`podman load -i _archiveFile_`:: Load a saved image from docker-archive or another format 
+
+== Sharing images
+
+`podman push [_registry/username/_]_image:tag_`:: Push an image to a remote registry
+`podman rmi [-f] _image:tag_`:: Remove a local image from local cache (use -f to force removal)  
+`podman rmi [-f] [_registry/username/_]_image:tag_`:: 
+Remove a remote image from local cache (use -f to force removal)
+
+NOTE: This does not remove the image from the remote registry. 
+
+== Miscellaneous
+
+`podman version`:: Display podman version information
+`podman info`:: Display information about the podman environment
