@@ -151,10 +151,6 @@ podman run [options] <image:tag>
 
 Runs a container based on a given image.
 
-`podman run --rm -it [--name _name_] _image:tag command_`::
-
-Run a container based on a given image.
-
 *Examples:*
 
 EXPLANATION TO BE PROVIDED
