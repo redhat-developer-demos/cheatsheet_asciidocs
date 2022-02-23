@@ -399,6 +399,8 @@ Displays the logs of a container as defined by `<container_name_or_container_uui
 
 ----
 $ podman logs -tail mynginx
+
+MORE TO COME
 ----
 
 === podman pause
