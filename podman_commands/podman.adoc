@@ -314,13 +314,15 @@ TO BE PROVIDED
 
 == Working with container processes and resources
 
+The following sections describe the various Podman commands for working with containers and container images beyond creating, running and stopping containers.
+
 === podman ps
 
 ----
-podman ps <container_to_wait_for>
+podman ps [options]
 ----
 
-Waits for a the container defined by `<container_to_wait_for>` to stop.
+Lists the containers on the system
 
 *Example:*
 
@@ -328,42 +330,332 @@ Waits for a the container defined by `<container_to_wait_for>` to stop.
 TO BE PROVIDED
 ----
 
-`podman commit _container newImage:tag_`:: Create a new image based on the current state of a running container
-`podman ps (--all)`:: Listing the running containers on the system
-`podman attach _container_`::
-Attach to a running container and view its output or control it + 
+=== podman commit 
+
+----
+podman commit <<container_name_or_container_uuid> <new_image_name:tag_name>
+----
+
+Creates a new image based on the current state of a running container
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman attach
+
+----
+podman attach <container_name_or_container_uuid> <new_image_name:tag_name>
+----
+
+Attaches to a running container and views its output or control it + 
 kbd:[Ctrl+p] kbd:[Ctrl+q] detaches from the container but leaves it running. 
 
-`podman exec _container command_`:: Execute a command in a running container
-`podman top _container_`:: Display the running processes of a container
-`podman logs [-tail] _container_`:: Display the logs of a container
-`podman pause [_container_]`:: Pause all the processes in a container (or all containers)
-`podman unpause [_container_]`:: Unpause all processes in a container (or all containers) 
-`podman port _container_`:: List the port mappings from a container to localhost 
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman attach
+
+----
+podman attach <container_name_or_container_uuid>
+----
+
+Attaches to a running container and views its output or control it + 
+kbd:[Ctrl+p] kbd:[Ctrl+q] detaches from the container but leaves it running. 
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman exec
+
+----
+podman exec <container_name_or_container_uuid> <command>
+----
+
+Executes a command in a running container 
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman top
+
+----
+podman top <container_name_or_container_uuid>
+----
+
+Displays the running processes of a container 
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman logs
+
+----
+podman logs [options] <container_name_or_container_uuid>
+----
+
+Displays the logs of a container as defined by `<container_name_or_container_uuid>`
+
+*Example:*
+
+----
+$ podman logs -tail mynginx
+----
+
+=== podman pause
+
+----
+podman pause [options] <container_name_or_container_uuid>
+----
+
+Pauses all the processes in a container (or all containers)
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman unpause
+
+----
+podman unpause [options] <container_name_or_container_uuid>
+----
+
+Unpauses all processes in a container (or all containers) 
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman port
+
+----
+podman port [options] <container_name_or_container_uuid>
+----
+
+Lists the port mappings from a container to localhost 
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
 
 == Working with a container's filesystem
 
-`podman diff _container_`:: Display all the changes to a container’s filesystem
-Copy files and folders between a container and localhost:: 
+The sections describe the Podman commands for working a containers in terms of the host computers file system.
+
+=== podman diff
+
+----
+podman diff [options] <container_name_or_container_uuid>
+----
+
+Displays all the changes to a container’s filesystem
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman diff
+
+----
+podman diff [options] <container_name_or_container_uuid>
+----
+
+Displays all the changes to a container's filesystem
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman mount
+
+----
+podman mount [options] <container_name_or_container_uuid>
+----
+
+Mounts a container's root filesystem
+
+
+*Copy files and folders between a container and localhost:*
+
 Use `podman mount`, copy files with `cp` or any Linux tool you like (`tar` or `dnf`, for example), then use `podman umount`
-`podman mount _container_`:: Mount a container’s root filesystem
-`podman umount _container_`:: Unmount a container’s root filesystem
-`podman import _tarball_`:: Import a tarball and save it as a filesystem image
-`podman export [-o _outputFile_] _container_`:: Export the container’s filesystem to a tar file
-`podman save [-o _archiveFile_] [--format _docker-archive_ | _oci-archive_ | _oci-dir_ | _docker-dir_] _image:tag_`:: 
-Save an image in docker-archive (default) or another format
-`podman load -i _archiveFile_`:: Load a saved image from docker-archive or another format 
 
-== Sharing images
+*Example:*
 
-`podman push [_registry/username/_]_image:tag_`:: Push an image to a remote registry
-`podman rmi [-f] _image:tag_`:: Remove a local image from local cache (use -f to force removal)  
-`podman rmi [-f] [_registry/username/_]_image:tag_`:: 
-Remove a remote image from local cache (use -f to force removal)
+----
+TO BE PROVIDED
+----
 
-NOTE: This does not remove the image from the remote registry. 
+=== podman umount
+
+----
+podman umount [options] <container_name_or_container_uuid>
+----
+
+Unmounts a container's root filesystem
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman import
+
+----
+podman import <tarball_filename>
+----
+
+Imports a tarball as defined by the parameter <tarball_filename> and saves it as a filesystem image
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman export
+
+----
+podman export -o <output_filename> <container_name_or_container_uuid>
+----
+
+Exports a container's filesystem to a `.tar` file
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman save
+
+----
+podman export <container_image:tag> -o <archive_filename> --format <docker-archive> or <oci-archive> or <oci-dir> or <docker-dir> 
+----
+
+Saves a container image in `docker-archive` format (default) or another format
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman load
+
+----
+podman load -i <archive_path_and_filename>
+----
+
+Loads a saved image from `docker-archive` or an image in another format 
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+== Working container images
+
+TO BE PROVIDED
+
+=== podman images
+
+----
+podman images
+----
+
+Lists the container images stored in local cache on the host computer.
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman push
+
+----
+podman push <registry_url/username/image:tag>
+----
+
+Pushes a container image to a remote registry
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman rmi
+
+----
+podman rmi [-f] <container_image_name_or_image_uuid:tag>
+----
+
+Removes a local image from local cache. Use `-f`` to force removal. 
+
+*NOTE:* This command does not remove the image from the remote registry. 
+
+*Example:*
+
+----
+$ podman rmi [-f] c316d5a335a5 
+----
+
 
 == Miscellaneous
+TO BE PROVIDED
 
-`podman version`:: Display podman version information
-`podman info`:: Display information about the podman environment
+=== podman version
+
+----
+podman version 
+----
+
+Reports the installed version of Podman
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
+=== podman info
+
+----
+podman info 
+----
+
+Displays information about the podman environment
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+ 
