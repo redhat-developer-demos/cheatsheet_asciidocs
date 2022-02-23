@@ -6,7 +6,9 @@ This cheat sheet covers the command used for working with Podman.
 
 As stated by Podman.io, _Podman is a daemonless, open source, Linux native tool designed to make it easy to find, run, build, share and deploy applications using Open Containers Initiative (OCI) Containers and Container Images._
 
-As stated above, Podman is daemonless. This means the Podman interacts directly with the various components in the Linux container ecosystem instead of relying on a continuously running daemon to intermediate between these components on a callers behalf. Podman does not run as root by default. Also, Podman does *not* spawn containers as child processes making the containers it creates durable independent of Podman.
+As stated above, Podman is daemonless. This means the Podman interacts directly with the various components in the Linux container ecosystem instead of relying on a continuously running daemon to intermediate between these components on a callers behalf. Podman does not run as root by default which reduces the potential for a security hazard.
+
+ Also, Podman does *not* spawn containers as child processes thus making the containers it creates durable and independent of Podman.
 
 == Working with image repositories
 
