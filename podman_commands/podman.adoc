@@ -339,6 +339,10 @@ Starts an existing container
 
 *Example:*
 
+The following example uses `podman ps -a` to list containers on the local machine. Notice that the container named `mywebserver` has a STATUS of `Exited (0) 3 seconds ago`. The container is stopped.
+
+Next the command `podman start mywebserver` to start the container up. Then, `podman ps -a` is executed again. Notice that the container named `mywebserver` now has a status of `Up 31 seconds ago`. The container has been started and is running.
+
 ----
 $ podman ps -a
 CONTAINER ID  IMAGE                             COMMAND               CREATED         STATUS                    PORTS       NAMES
