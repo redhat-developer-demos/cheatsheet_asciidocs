@@ -204,7 +204,13 @@ Successfully tagged localhost/othernode:v1
 === podman tag
 
 ----
-podman tag <image_name:tag_or_image_uuid> <image_name:new_tag>
+podman tag <image_name:tag> <image_name:new_tag>
+----
+
+or
+
+----
+podman tag <image_uuid> <image_name:new_tag>
 ----
 
 Creates a new `image_name:tag` pair for an existing container image in the local repository.
