@@ -48,7 +48,7 @@ Displays historical information about a container image that has been download a
 The following example is an excerpt of output from using `podman history` to get the historical information for the container image the distributed tracing framework `zipkin` that was retrieved from the container image repository `quay.io`.
 
 ----
-$ podman history quay.io/openzipkin/zipkin
+$ podman history quay.io/openzipkin/zipkin:latest
 ID            CREATED       CREATED BY                                     SIZE        COMMENT
 b9fb334d7cd1  2 years ago   /busybox/sh -c #(nop)  ENTRYPOINT ["/busyb...  0 B         
 <missing>     2 years ago   /busybox/sh -c #(nop)  EXPOSE 9410 9411        0 B         
@@ -63,15 +63,20 @@ b9fb334d7cd1  2 years ago   /busybox/sh -c #(nop)  ENTRYPOINT ["/busyb...  0 B
 === podman login
 
 ----
-podman login <image_registry_url> -u <username> -p <password>
+podman login <image_registry_url>
 ----
 
-Log in to a remote image registry
+Logs a user in to a remote container image registry. After executing the command, the user will be prompted for a username and password
 
 *Example:*
 
+The following example uses `podman login` to login to the container image repository `quay.io`. Notice that after the command prompts for a Username and Password pair.
+
 ----
-TO BE PROVIDED
+$ podman login quay.io
+Username: cooluser
+Password: 
+Login Succeeded!
 ----
 
 === podman pull
@@ -95,14 +100,42 @@ $  podman pull quay.io/ansible/ansible-runner:latest
 podman search <search_string>
 ----
 
-Searches local cache and remote registries for images
+Will search container image registries according to those defined in the file `/etc/containers/registries.conf`. The following shows the entries in `/etc/containers/registries.conf` for defining the container image registries  to search.
 
-*NOTE:* The list of registries is defined in `/etc/containers/registries.conf`
+----
+[registries.search]
+registries = ["quay.io", "registry.fedoraproject.org", "registry.access.redhat.com", "registry.centos.org", "docker.io"]
+----
 
 *Example:*
 
+The following example uses `podman search` to find container image include the string `pinger`. The response in displayed in an abbreviated format.
+
 ----
-TO BE PROVIDED
+$ podman search pinger
+INDEX       NAME                                    DESCRIPTION                                      STARS       OFFICIAL    AUTOMATED
+quay.io     quay.io/giantswarm/calico-ipip-pinger                                                    0                       
+quay.io     quay.io/dontpayfull/calico-ipip-pinger                                                   0                       
+quay.io     quay.io/zonggen/fcos-pinger-backend     Server image for telemetry service of FCOS (...  0                       
+quay.io     quay.io/fredriksvensson/pinger                                                           0                       
+quay.io     quay.io/marian/pinger                                                                    0                       
+quay.io     quay.io/latchmihay/edge-pinger          Small utility that pings a list or domain na...  0                       
+quay.io     quay.io/jdzon/pinger                                                                     0                       
+quay.io     quay.io/ksemaev/pinger                                                                   0                       
+quay.io     quay.io/murph83/pinger                                                                   0                       
+quay.io     quay.io/sosivio/sosivio-node-pinger                                                      0                       
+quay.io     quay.io/sebv/pinger                                                                      0                       
+docker.io   docker.io/hosterping/pinger             Pinger v2 für Hoster-Ping.de                     0                       
+docker.io   docker.io/nefilim/pinger                Simple network monitor based on latency chec...  1                       
+docker.io   docker.io/dariob/pinger-alpine                                                           0                       
+docker.io   docker.io/dariob/pinger-nano-1809                                                        0                       
+docker.io   docker.io/appcelerator/pinger           Simple service that sends a pong response        0                       [OK]
+docker.io   docker.io/clambin/pinger                Measures the latency and packet loss to one ...  0                       
+docker.io   docker.io/afrank/pinger                                                                  0                       
+docker.io   docker.io/subfuzion/pinger              Simple service that sends a pong response        0                       
+docker.io   docker.io/pingerua/samples                                                               0                       
+docker.io   docker.io/superbrilliant/pinger                                                          0                       
+docker.io   docker.io/reselbob/pinger               A simple utility web server image that outpu...  1                       
 ----
 
 === podman logout
