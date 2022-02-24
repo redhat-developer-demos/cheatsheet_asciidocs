@@ -166,34 +166,66 @@ The following sections describe the various Podman commands for building contain
 podman build -t <image:tag_> -f <Dockerfile_filepath_or_url>
 ----
 
-Builds and tags an image using the instructions in Dockerfile. The location of the Dockerfile is defined by the `-f` option. If the `-f` option is omitted, use a period (`.`) to indicate that the Dockerfile is in the current directory.
+Builds and tags an image using the instructions in Dockerfile. The location of the Dockerfile is defined by the `-f` option. If the `-f` option is omitted, use a period (`.`) to indicate that the Dockerfile is in the current directory. Once the container image is built it is stored in container image repository on the local machine.
 
 *Examples:*
 
-The following example demonstrates how to use `podman build`` to create a container image using the Dockerfile in the local directory
+The following example demonstrates how to use `podman build`` to create a container image using the default Dockerfile in the local directory. Then the command `podman images` is used to list the container images stored in the local repository. The output of the container image list is pipe to `grep` to filter out those container images that have the string `mynode`.
 
 ----
-TO BE PROVIDED
+$ podman build -t mynode:v1 .
+STEP 1/3: FROM node:latest
+STEP 2/3: CMD ["-v"]
+--> 959e797d01b
+STEP 3/3: ENTRYPOINT ["node"]
+COMMIT mynode:v1
+--> a6b028f25b4
+Successfully tagged localhost/mynode:v1
+a6b028f25b45f533ae3078fe1d97df2a9cd27691e8d7b3317a0bdeaa24d1e705
+
+$ podman images | grep mynode
+localhost/mynode                v1          a6b028f25b45  About a minute ago  1.02 GB
 ----
 
-The following example demonstrates how to use `podman build`` to create a container image using the file named `mydockerfile`
+
+The following example demonstrates how to use `podman build`` to create a container image using the file named `Otherdockerfile`
 
 ----
-TO BE PROVIDED
+$ podman build -t othernode:v1 -f Otherdockerfile
+STEP 1/2: FROM node:latest
+STEP 2/2: RUN echo "The latest version of Node is installed"
+The latest version of Node is installed
+COMMIT othernode:v1
+--> 600590954fc
+Successfully tagged localhost/othernode:v1
+600590954fc5dff1d32ffda6bf34f07e674feee056183c8a7bfb726c3421b49e
 ----
 
 === podman tag
 
 ----
-podman tag <image:tag> <remote_registry_url>/<username>/<image:tag>
+podman tag <image_name:tag_or_image_uuid> <image_name:new_tag>
 ----
 
-Tags an image
+Creates a new `image_name:tag` pair for an existing container image in the local repository.
 
 *Example:*
 
+The following example lists existing container images on the local machine and then executes `podman tag` against the image with the UUID `a6b028f25b45` applying the new tag `best`. The container images are listed again to show the added `image_name:tag`` pair.
+
 ----
-TO BE PROVIDED
+$ podman images
+REPOSITORY                      TAG         IMAGE ID      CREATED         SIZE
+localhost/othernode             v1          600590954fc5  5 minutes ago   1.02 GB
+localhost/mynode                v1          a6b028f25b45  14 minutes ago  1.02 GB
+
+$ podman tag a6b028f25b45 mynode:best
+
+$ podman images
+REPOSITORY                      TAG         IMAGE ID      CREATED         SIZE
+localhost/othernode             v1          600590954fc5  6 minutes ago   1.02 GB
+localhost/mynode                v1          a6b028f25b45  15 minutes ago  1.02 GB
+localhost/mynode                best        a6b028f25b45  15 minutes ago  1.02 GB
 ----
 
 
