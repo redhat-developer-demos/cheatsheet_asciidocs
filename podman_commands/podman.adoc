@@ -358,6 +358,17 @@ ea35aa9eda87  quay.io/openzipkin/zipkin:latest                        33 minutes
 90ac3eb5f5a6  docker.io/library/nginx:latest    nginx -g daemon o...  27 minutes ago  Up 31 seconds ago              mywebserver
 ----
 
+The following examples uses `podman run` to run the container image `docker.io/library/nginx`. The `-d` option is used to run the container in the background. The `--name` is used to give the container the name `mywebserver`. The `-p` option is used to assign port number `8181` on localhost to the port number `80` which is the port number on which the nginx web server within the container is listening for income requests.
+
+----
+$ podman run --name mynginx -d -p 8181:80 docker.io/library/nginx 
+a4b59499314f7c4c6819340ec8e15732cb93c21c131fbd709e09370972fda1b7
+
+$ podman ps -a
+CONTAINER ID  IMAGE                           COMMAND               CREATED        STATUS            PORTS                 NAMES
+a4b59499314f  docker.io/library/nginx:latest  nginx -g daemon o...  8 seconds ago  Up 7 seconds ago  0.0.0.0:8181->80/tcp  mynginx
+----
+
 === podman create
 
 ----
@@ -369,7 +380,11 @@ Creates a container from a container image but does not start it
 *Example:*
 
 ----
-TO BE PROVIDED
+$ podman create --name myredis quay.io/quay/redis
+dcc2491a3d16809c5c7b939e48aa99ded40779cb79140b1b9ae8702561901952
+$ podman ps -a
+CONTAINER ID  IMAGE                      COMMAND          CREATED        STATUS      PORTS       NAMES
+dcc2491a3d16  quay.io/quay/redis:latest  conf/redis.conf  3 seconds ago  Created                 myredis
 ----
 
 === podman restart
