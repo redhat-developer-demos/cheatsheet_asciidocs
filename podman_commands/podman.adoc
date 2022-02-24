@@ -20,12 +20,19 @@ The following sections describe the Podman commands for working with image repos
 podman images
 ----
 
-List all local images
+Lists all local images
 
 *Example:*
 
+The following example lists all the container images stored on the local machine. Notice that the local machine has container images from two public container image repositories, `quay.io` and `docker.io`. (The `$` symbol represents the command line prompt.)
+
 ----
-TO BE PROVIDED
+$ podman images
+REPOSITORY                      TAG         IMAGE ID      CREATED       SIZE
+quay.io/ansible/ansible-runner  latest      697a4af2d624  16 hours ago  738 MB
+docker.io/library/mysql         latest      6126b4587b1b  18 hours ago  525 MB
+docker.io/library/redis         latest      f1b6973564e9  4 weeks ago   116 MB
+docker.io/library/nginx         latest      c316d5a335a5  4 weeks ago   146 MB
 ----
 
 === podman history 
@@ -34,12 +41,23 @@ TO BE PROVIDED
 podman history <image:tag>
 ----
 
-Display information about how an image was built
+Displays historical information about a container image that has been download and stored on the local machine
 
 *Example:*
 
+The following example is an excerpt of output from using `podman history` to get the historical information for the container image the distributed tracing framework `zipkin` that was retrieved from the container image repository `quay.io`.
+
 ----
-TO BE PROVIDED
+$ podman history quay.io/openzipkin/zipkin
+ID            CREATED       CREATED BY                                     SIZE        COMMENT
+b9fb334d7cd1  2 years ago   /busybox/sh -c #(nop)  ENTRYPOINT ["/busyb...  0 B         
+<missing>     2 years ago   /busybox/sh -c #(nop)  EXPOSE 9410 9411        0 B         
+<missing>     2 years ago   /busybox/sh -c #(nop)  USER zipkin             0 B         
+<missing>     2 years ago   /busybox/sh -c ln -s /busybox/* /bin           197 kB      
+<missing>     2 years ago   /busybox/sh -c #(nop) WORKDIR /zipkin          0 B         
+.
+.
+.
 ----
 
 === podman login
@@ -66,8 +84,10 @@ Pulls an image from a remote registry
 
 *Example:*
 
+The following example demonstrates how to `podman pull` to retrieve the latest version of the container image for the tool `ansible-runner` from the container image repository at quay.io. 
+
 ----
-TO BE PROVIDED
+$  podman pull quay.io/ansible/ansible-runner:latest
 ----
 
 === podman search
