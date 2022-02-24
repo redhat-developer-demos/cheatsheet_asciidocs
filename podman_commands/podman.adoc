@@ -408,7 +408,7 @@ TO BE PROVIDED
 podman rm <container_name_or_container_uuid>
 ----
 
-Removes a container from memory
+Removes a container from memory xx
 
 *Example:*
 
