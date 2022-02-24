@@ -382,6 +382,7 @@ Creates a container from a container image but does not start it
 ----
 $ podman create --name myredis quay.io/quay/redis
 dcc2491a3d16809c5c7b939e48aa99ded40779cb79140b1b9ae8702561901952
+
 $ podman ps -a
 CONTAINER ID  IMAGE                      COMMAND          CREATED        STATUS      PORTS       NAMES
 dcc2491a3d16  quay.io/quay/redis:latest  conf/redis.conf  3 seconds ago  Created                 myredis
