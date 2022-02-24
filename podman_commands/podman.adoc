@@ -134,20 +134,11 @@ INDEX       NAME                                    DESCRIPTION                 
 quay.io     quay.io/giantswarm/calico-ipip-pinger                                                    0                       
 quay.io     quay.io/dontpayfull/calico-ipip-pinger                                                   0                       
 quay.io     quay.io/zonggen/fcos-pinger-backend     Server image for telemetry service of FCOS (...  0                       
-quay.io     quay.io/fredriksvensson/pinger                                                           0                       
-quay.io     quay.io/marian/pinger                                                                    0                       
-quay.io     quay.io/latchmihay/edge-pinger          Small utility that pings a list or domain na...  0                       
-quay.io     quay.io/jdzon/pinger                                                                     0                       
 quay.io     quay.io/ksemaev/pinger                                                                   0                       
 quay.io     quay.io/murph83/pinger                                                                   0                       
 quay.io     quay.io/sosivio/sosivio-node-pinger                                                      0                       
 quay.io     quay.io/sebv/pinger                                                                      0                       
 docker.io   docker.io/hosterping/pinger             Pinger v2 für Hoster-Ping.de                     0                       
-docker.io   docker.io/nefilim/pinger                Simple network monitor based on latency chec...  1                       
-docker.io   docker.io/dariob/pinger-alpine                                                           0                       
-docker.io   docker.io/dariob/pinger-nano-1809                                                        0                       
-docker.io   docker.io/appcelerator/pinger           Simple service that sends a pong response        0                       [OK]
-docker.io   docker.io/clambin/pinger                Measures the latency and packet loss to one ...  0                       
 docker.io   docker.io/afrank/pinger                                                                  0                       
 docker.io   docker.io/subfuzion/pinger              Simple service that sends a pong response        0                       
 docker.io   docker.io/pingerua/samples                                                               0                       
