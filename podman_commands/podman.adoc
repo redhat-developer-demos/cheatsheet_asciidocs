@@ -242,30 +242,49 @@ The following sections describe the Podman commands for creating and running con
 === podman run
 
 ----
-podman run [options] <image:tag>
+podman run [options] <repo/image_name:tag>
 ----
 
-Runs a container based on a given image.
+Runs a container based on a given `image:tag` pair. If the image exists on the local machine, that image will be used. Otherwise, `podman run` will attempt to get the container image from the remote repository that's defined/
 
 *Examples:*
 
-EXPLANATION TO BE PROVIDED
+The following example runs a container using the latest version of the container image for the distributed tracing tool `zipkin` that stored in the `quay.io` container repository. The option `-d` is used to run the container in the background in order to free up the terminal window to accept future input. 
+
+Then, the command `podman ps -a` is executed to list the running containers. Notice that since the `zipkin` as not assigned a name when created, the arbitrary name `laughing_mahavira` is assigned to the container. Also, notice that the result of executing `podman run` is the containers UUID.
 
 ----
-podman run nginx:latest
+$ podman run -d quay.io/openzipkin/zipkin 
+ea35aa9eda875dd0c3ea34beb6216cf1148725272f28829ea1d3ba262f9f2ada
+
+$ podman ps -a
+CONTAINER ID  IMAGE                             COMMAND     CREATED        STATUS            PORTS       NAMES
+ea35aa9eda87  quay.io/openzipkin/zipkin:latest              3 minutes ago  Up 3 minutes ago              laughing_mahavira
 ----
 
 
-Creates and runs the container and uses the `--name` option to give the container the name `mywebserver`.
+The following example creates and runs the container using the container image `ngnix:latest`` The `-d` option runs the container in the background. The `--name` option gives the container the name `mywebserver`.
+
+After the container is created, the command `podman ps -a` is executed to list the containers running on the local machine. Notic the the `nginx` container has the name `mywebserver`.
 
 ----
-podman run --name mywebserver -it nginx:latest
+$ podman run -d --name mywebserver -it nginx:latest
+
+$ podman ps -a
+CONTAINER ID  IMAGE                             COMMAND               CREATED        STATUS            PORTS       NAMES
+ea35aa9eda87  quay.io/openzipkin/zipkin:latest                        6 minutes ago  Up 6 minutes ago              laughing_mahavira
+90ac3eb5f5a6  docker.io/library/nginx:latest    nginx -g daemon o...  4 seconds ago  Up 4 seconds ago              mywebserver
 ----
 
-Creates and runs the container. The option `--rm` makes it so that the container is removed after it exits
+Creates and runs the container. The option `--rm` makes it so that the container is removed after it exits. After ` podman run` executes the command ` podman ps -a` lists the available containers. Notice that the nodejs container is not listed. This is because the `-rm` option was used. The `nodej`s` container spun up and then because there was no activities to it to run, it exited. Once the container exited, it was removed from the local machine.
 
 ----
-podman run --rm nginx:latest
+$ podman run --rm quay.io/centos7/nodejs-14-centos7:latest
+
+$ podman ps -a
+CONTAINER ID  IMAGE                             COMMAND               CREATED         STATUS             PORTS       NAMES
+ea35aa9eda87  quay.io/openzipkin/zipkin:latest                        15 minutes ago  Up 15 minutes ago              laughing_mahavira
+90ac3eb5f5a6  docker.io/library/nginx:latest    nginx -g daemon o...  9 minutes ago   Up 9 minutes ago               mywebserve
 ----
 
 Creates and runs the container. The option `-it` makes it so a terminal and command prompt within the container is presented after the container gets up and running.
@@ -274,7 +293,7 @@ Creates and runs the container. The option `-it` makes it so a terminal and comm
 podman run -it nginx:latest 
 ----
 
-Creates and runs the container using the `nginx:latest` image. Then after the container is up and running, the command `pwd` is executed against file system internal to the container to report present working directory. The symbol `$` represents the command line prompt. The result of the running the command follows.
+Creates and runs the container using the `nginx:latest` image. Then after the container is up and running, the command `pwd` is executed against file system internal to the container to report present working directory. The symbol `$` represents the command line prompt. The result of the running the command follows. Notice that the present working directory is the root (`/`) directory.
 
 ----
 $ podman run nginx:latest pwd
@@ -291,8 +310,23 @@ Gracefully stops a container from running.
 
 *Example:*
 
+The following example lists all containers on the local machine using `podman ps -a`. Notice that the two container listed have a status of `Up ## minutes ago`. The command `podman stop mywebserver` is then executed against the container with the name `podman stop mywebserver`.
+
+The command podman ps -a` is called again. Both containers are listed but the container named `mywebserver` has a STATUS of `Exited (0) 3 seconds ago` which is the point in time when the command `podman stop`` was called.
+
 ----
-TO BE PROVIDED
+$ podman ps -a
+CONTAINER ID  IMAGE                             COMMAND               CREATED         STATUS             PORTS       NAMES
+ea35aa9eda87  quay.io/openzipkin/zipkin:latest                        27 minutes ago  Up 27 minutes ago              laughing_mahavira
+90ac3eb5f5a6  docker.io/library/nginx:latest    nginx -g daemon o...  21 minutes ago  Up 21 minutes ago              mywebserver
+
+$ podman stop mywebserver
+mywebserver
+
+$ podman ps -a
+CONTAINER ID  IMAGE                             COMMAND               CREATED         STATUS                    PORTS       NAMES
+ea35aa9eda87  quay.io/openzipkin/zipkin:latest                        28 minutes ago  Up 28 minutes ago                     laughing_mahavira
+90ac3eb5f5a6  docker.io/library/nginx:latest    nginx -g daemon o...  21 minutes ago  Exited (0) 3 seconds ago              mywebserver
 ----
 
 === podman start
@@ -306,13 +340,24 @@ Starts an existing container
 *Example:*
 
 ----
-TO BE PROVIDED
+$ podman ps -a
+CONTAINER ID  IMAGE                             COMMAND               CREATED         STATUS                    PORTS       NAMES
+ea35aa9eda87  quay.io/openzipkin/zipkin:latest                        28 minutes ago  Up 28 minutes ago                     laughing_mahavira
+90ac3eb5f5a6  docker.io/library/nginx:latest    nginx -g daemon o...  21 minutes ago  Exited (0) 3 seconds ago              mywebserver
+
+$ podman start mywebserver
+mywebserver
+
+$ podman ps -a
+CONTAINER ID  IMAGE                             COMMAND               CREATED         STATUS             PORTS       NAMES
+ea35aa9eda87  quay.io/openzipkin/zipkin:latest                        33 minutes ago  Up 33 minutes ago              laughing_mahavira
+90ac3eb5f5a6  docker.io/library/nginx:latest    nginx -g daemon o...  27 minutes ago  Up 31 seconds ago              mywebserver
 ----
 
 === podman create
 
 ----
-podman create <container_name_or_container_uuid>
+podman create </repo/image_name:tag>
 ----
 
 Creates a container from a container image but does not start it
