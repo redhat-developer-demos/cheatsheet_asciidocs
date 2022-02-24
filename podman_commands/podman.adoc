@@ -89,8 +89,11 @@ Logs out of the current container registry
 
 *Example:*
 
+The following example logs the user out of the Quay container image repository. (The `$` symbol represents the command line prompt.)
+
 ----
-TO BE PROVIDED
+$ podman logout quay.io
+Removed login credentials for quay.io
 ----
 
 === podman pull
