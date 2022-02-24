@@ -79,6 +79,20 @@ Password:
 Login Succeeded!
 ----
 
+=== podman logout
+
+----
+podman logout
+----
+
+Logs out of the current container registry
+
+*Example:*
+
+----
+TO BE PROVIDED
+----
+
 === podman pull
 
 ----
@@ -136,20 +150,6 @@ docker.io   docker.io/subfuzion/pinger              Simple service that sends a 
 docker.io   docker.io/pingerua/samples                                                               0                       
 docker.io   docker.io/superbrilliant/pinger                                                          0                       
 docker.io   docker.io/reselbob/pinger               A simple utility web server image that outpu...  1                       
-----
-
-=== podman logout
-
-----
-podman logout
-----
-
-Logs out of the current container registry
-
-*Example:*
-
-----
-TO BE PROVIDED
 ----
 
 
