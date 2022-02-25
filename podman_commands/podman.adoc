@@ -265,7 +265,7 @@ ea35aa9eda87  quay.io/openzipkin/zipkin:latest                        6 minutes 
 90ac3eb5f5a6  docker.io/library/nginx:latest    nginx -g daemon o...  4 seconds ago  Up 4 seconds ago              mywebserver
 ----
 
-Creates and runs the container. The option `--rm` makes it so that the container is removed after it exits. After ` podman run` executes the command ` podman ps -a` lists the available containers. Notice that the nodejs container is not listed. This is because the `-rm` option was used. The `nodejs` container spun up and then because there was no activities for it to execute, it exited. Once the container exited, it was removed from the local machine.
+The following example creates and runs the container. The option `--rm` makes it so that the container is removed after it exits. After ` podman run` executes the command ` podman ps -a` lists the available containers. Notice that the nodejs container is not listed. This is because the `-rm` option was used. The `nodejs` container spun up and then because there was no activities for it to execute, it exited. Once the container exited, it was removed from the local machine.
 
 ----
 $ podman run --rm quay.io/centos7/nodejs-14-centos7:latest
@@ -276,13 +276,13 @@ ea35aa9eda87  quay.io/openzipkin/zipkin:latest                        15 minutes
 90ac3eb5f5a6  docker.io/library/nginx:latest    nginx -g daemon o...  9 minutes ago   Up 9 minutes ago               mywebserve
 ----
 
-Creates and runs the container. The option `-it` makes it so a terminal and command prompt within the container is presented after the container gets up and running.
+The following example creates and runs the container using the `-it` options. The options `-it` makes it so a terminal and command prompt within the container is presented after the container gets up and running.
 
 ----
 podman run -it nginx:latest 
 ----
 
-Creates and runs the container using the `nginx:latest` image. Then after the container is up and running, the command `pwd` is executed against file system internal to the container to report present working directory. The symbol `$` represents the command line prompt. The result of the running the command follows. Notice that the present working directory is the root (`/`) directory.
+The following example creates and runs the container using the `nginx:latest` image. Then after the container is up and running, the command `pwd` is executed against file system internal to the container to report present working directory. The symbol `$` represents the command line prompt. The result of the running the command follows. Notice that the present working directory is the root (`/`) directory.
 
 ----
 $ podman run nginx:latest pwd
