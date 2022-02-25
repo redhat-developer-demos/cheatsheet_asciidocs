@@ -265,7 +265,7 @@ ea35aa9eda87  quay.io/openzipkin/zipkin:latest                        6 minutes 
 90ac3eb5f5a6  docker.io/library/nginx:latest    nginx -g daemon o...  4 seconds ago  Up 4 seconds ago              mywebserver
 ----
 
-Creates and runs the container. The option `--rm` makes it so that the container is removed after it exits. After ` podman run` executes the command ` podman ps -a` lists the available containers. Notice that the nodejs container is not listed. This is because the `-rm` option was used. The `nodej`s` container spun up and then because there was no activities to it to run, it exited. Once the container exited, it was removed from the local machine.
+Creates and runs the container. The option `--rm` makes it so that the container is removed after it exits. After ` podman run` executes the command ` podman ps -a` lists the available containers. Notice that the nodejs container is not listed. This is because the `-rm` option was used. The `nodejs` container spun up and then because there was no activities to it to run, it exited. Once the container exited, it was removed from the local machine.
 
 ----
 $ podman run --rm quay.io/centos7/nodejs-14-centos7:latest
