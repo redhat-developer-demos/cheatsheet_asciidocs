@@ -299,9 +299,9 @@ Gracefully stops a container from running.
 
 *Example:*
 
-The following example lists all containers on the local machine using `podman ps -a`. Notice that the two container listed have a status of `Up ## minutes ago`. The command `podman stop mywebserver` is then executed against the container with the name `podman stop mywebserver`.
+The following example lists all containers on the local machine using `podman ps -a`. Notice that the two container listed have a status of `Up ## minutes ago`. The command `podman stop` is then executed against the container that has the name `mywebserver`.
 
-The command podman ps -a` is called again. Both containers are listed but the container named `mywebserver` has a STATUS of `Exited (0) 3 seconds ago` which is the point in time when the command `podman stop`` was called.
+The command podman ps -a` is called again. Both containers are listed but the container named `mywebserver` has a STATUS of `Exited (0) 3 seconds ago` which is the point in time when the command `podman stop` was called.
 
 ----
 $ podman ps -a
