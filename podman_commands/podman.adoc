@@ -569,7 +569,8 @@ Executes a command in a running container
 
 ----
 $ podman exec -it myzipkin sh
-~ $ 
+~ $ ls
+BOOT-INF   META-INF   classpath  org        run.sh
 ----
 
 === podman top
