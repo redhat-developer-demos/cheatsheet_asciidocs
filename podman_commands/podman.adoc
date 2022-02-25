@@ -17,7 +17,7 @@ The following sections describe the Podman commands for working with image repos
 === podman images
 
 ----
-podman images
+podman images [options] 
 ----
 
 Lists all local images
@@ -38,7 +38,7 @@ docker.io/library/nginx         latest      c316d5a335a5  4 weeks ago   146 MB
 === podman history 
 
 ----
-podman history <image:tag>
+podman history [options] <image:tag>
 ----
 
 Displays historical information about a container image that has been download and stored on the local machine
@@ -63,7 +63,7 @@ b9fb334d7cd1  2 years ago   /busybox/sh -c #(nop)  ENTRYPOINT ["/busyb...  0 B
 === podman login
 
 ----
-podman login <image_registry_url>
+podman login [options] <image_registry_url>
 ----
 
 Logs a user in to a remote container image registry. After executing the command, the user will be prompted for a username and password
@@ -82,7 +82,7 @@ Login Succeeded!
 === podman logout
 
 ----
-podman logout
+podman logout [options] 
 ----
 
 Logs out of the current container registry
@@ -99,7 +99,7 @@ Removed login credentials for quay.io
 === podman pull
 
 ----
-podman pull <remote_registry_url>/<username>/<image:tag>
+podman pull [options] <remote_registry_url>/<username>/<image:tag>
 ----
 
 Pulls an image from a remote registry
@@ -114,7 +114,7 @@ $  podman pull quay.io/ansible/ansible-runner:latest
 
 === podman search
 ----
-podman search <search_string>
+podman search [options] <search_string>
 ----
 
 Will search container image registries according to those defined in the file `/etc/containers/registries.conf`. The following shows the entries in `/etc/containers/registries.conf` for defining the container image registries  to search.
@@ -153,7 +153,7 @@ The following sections describe the various Podman commands for building contain
 === podman build
 
 ----
-podman build -t <image:tag_> -f <Dockerfile_filepath_or_url>
+podman build [options] <image:tag_> -f <Dockerfile_filepath_or_url>
 ----
 
 Builds and tags an image using the instructions in Dockerfile. The location of the Dockerfile is defined by the `-f` option. If the `-f` option is omitted, use a period (`.`) to indicate that the Dockerfile is in the current directory. Once the container image is built it is stored in container image repository on the local machine.
@@ -292,7 +292,7 @@ $ podman run nginx:latest pwd
 === podman stop
 
 ----
-podman stop <container_name_or_container_uuid>
+podman stop [options] <container_name_or_container_uuid>
 ----
 
 Gracefully stops a container from running.
@@ -321,7 +321,7 @@ ea35aa9eda87  quay.io/openzipkin/zipkin:latest                        28 minutes
 === podman start
 
 ----
-podman start <container_name_or_container_uuid>
+podman start [options] <container_name_or_container_uuid>
 ----
 
 Starts an existing container
@@ -430,21 +430,28 @@ CONTAINER ID  IMAGE                                   COMMAND               CREA
 === podman wait
 
 ----
-podman wait <container_to_wait_for>
+podman wait [options] <container_to_wait_for>
 ----
 
-Waits for a the container defined by `<container_to_wait_for>` to stop.
+Waits for a the container defined by `<container_to_wait_for>` to meet a condition. The default condition is `stopped`,
 
 *Example:*
 
+The following example uses the `podman ps -a` to list containers on the local computer. Then `podman wait` against the container with the UUID of `569ddc895737`. Command line activity halts until the container with the UUID `569ddc895737` stops.
+
 ----
-TO BE PROVIDED
+$ podman ps -a
+CONTAINER ID  IMAGE                             COMMAND               CREATED         STATUS                PORTS                 NAMES
+a4b59499314f  docker.io/library/nginx:latest    nginx -g daemon o...  23 hours ago    Up About an hour ago  0.0.0.0:8181->80/tcp  mynginx
+569ddc895737  quay.io/openzipkin/zipkin:latest                        46 minutes ago  Up 44 minutes ago                           myzipkin
+
+$ podman wait 569ddc895737
 ----
 
 === podman stats
 
 ----
-podman stats <container_name_or_container_uuid>
+podman stats [options] <container_name_or_container_uuid>
 ----
 
 Displays a live stream of a container's resource usage. If no container name or UUID is defined, `podman stats` displays a live stream of the stats for all container running as root. *Note:* The command  `podman stats` must be executed as `sudo` and will only show containers running with root privileges.
@@ -464,16 +471,15 @@ f7ac2c719ff7  myredis     0.19%       7.631MB / 8.148GB  0.09%       978B / 7.47
 === podman inspect
 
 ----
-podman inspect <container_name_or_container_uuid>
+podman inspect [options] <container_name_or_container_uuid>
 ----
 
-Returns metadata (in JSON) describing a running container. 
+Returns metadata describing a running container. The default format for the metadata is JSON.
 
 *Example:*
 
 The following example uses `podman inspect` to inspect the container with the name `mynginx`. The result is piped to the `more` command with the `-10` option to display the first 10 lines of output from the `podman inspect`.
 
-The following 
 ----
 $ podman inspect mynginx | more -10
 [
@@ -516,10 +522,10 @@ a4b59499314f  docker.io/library/nginx:latest    nginx -g daemon o...  23 hours a
 === podman commit 
 
 ----
-podman commit <container_name_or_container_uuid> <new_image_name:tag_name>
+podman commit [options] <container_name_or_container_uuid> <new_image_name:tag_name>
 ----
 
-Creates a new image based on the current state of a running container
+Creates a new container image based on the current state of a running container.
 
 *Example:*
 
@@ -539,7 +545,7 @@ localhost/mynode                           v1                        a6b028f25b4
 === podman attach
 
 ----
-podman attach <container_name_or_container_uuid> <new_image_name:tag_name>
+podman attach [options] <container_name_or_container_uuid> <new_image_name:tag_name>
 ----
 
 Attaches to a running container and views its output or control it + 
@@ -548,7 +554,7 @@ kbd:[Ctrl+p] kbd:[Ctrl+q] detaches from the container but leaves it running.
 *Example:*
 
 ----
-TO BE PROVIDED
+$ podman attach myzipkin
 ----
 
 === podman exec
@@ -562,7 +568,8 @@ Executes a command in a running container
 *Example:*
 
 ----
-TO BE PROVIDED
+$ podman exec -it myzipkin sh
+~ $ 
 ----
 
 === podman top
