@@ -361,7 +361,7 @@ a4b59499314f  docker.io/library/nginx:latest  nginx -g daemon o...  8 seconds ag
 === podman create
 
 ----
-podman create </repo/image_name:tag>
+podman create [options] </repo/image_name:tag>
 ----
 
 Creates a container from a container image but does not start it
