@@ -146,7 +146,6 @@ docker.io   docker.io/superbrilliant/pinger                                     
 docker.io   docker.io/reselbob/pinger               A simple utility web server image that outpu...  1                       
 ----
 
-
 == Building images
 
 The following sections describe the various Podman commands for building container images
@@ -252,7 +251,6 @@ $ podman ps -a
 CONTAINER ID  IMAGE                             COMMAND     CREATED        STATUS            PORTS       NAMES
 ea35aa9eda87  quay.io/openzipkin/zipkin:latest              3 minutes ago  Up 3 minutes ago              laughing_mahavira
 ----
-
 
 The following example creates and runs the container using the container image `ngnix:latest`` The `-d` option runs the container in the background. The `--name` option gives the container the name `mywebserver`.
 
@@ -382,43 +380,51 @@ dcc2491a3d16  quay.io/quay/redis:latest  conf/redis.conf  3 seconds ago  Created
 === podman restart
 
 ----
-podman restart <container_name_or_container_uuid>
+podman restart [options] <container_name_or_container_uuid>
 ----
 
 Restarts an existing container
 
 *Example:*
+The following example uses `podman ps -a` to list the containers installed on the host computer. Notice the `STATUS` of the container named `myredis` is `Created`. Then the command `podman restart` is used to start the container named `myredis`. Finally the command Finally `podman ps -a` is called again. Notice that the `STATUS` of the container is now `Up 8 seconds ago`, hence the container is running.
 
 ----
-TO BE PROVIDED
-----
+$ podman ps -a
+CONTAINER ID  IMAGE                                  COMMAND               CREATED       STATUS      PORTS              NAMES
+dcc2491a3d16  quay.io/quay/redis:latest              conf/redis.conf       22 hours ago  Created                        myredis
 
-=== podman rm
+$ podman restart  myredis
 
-----
-podman rm <container_name_or_container_uuid>
-----
+$ podman ps -a
+CONTAINER ID  IMAGE                                  COMMAND               CREATED       STATUS            PORTS         NAMES
+dcc2491a3d16  quay.io/quay/redis:latest              conf/redis.conf       22 hours ago  Up 8 seconds ago                myredis
 
-Removes a container from memory
-
-*Example:*
-
-----
-TO BE PROVIDED
 ----
 
 === podman rm
 
 ----
-podman rm <container_name_or_container_uuid>
+podman rm [options] <container_name_or_container_uuid>
 ----
 
- Removes a container from memory. Use `-f` if the container is running.
+Removes a container from the host computer
 
 *Example:*
 
+The following example uses `podman ps -a` to list the containers installed on the host computer. Notice that the container named `myredis` is running. Then the command `podman rm` is used with the `-f` option to force the removal of the running container named `myredis`.
+
+Finally `podman ps -a` is called again. Notice that the container has been removed from the computer.
+
 ----
-TO BE PROVIDED
+$ podman ps -a
+CONTAINER ID  IMAGE                                  COMMAND               CREATED       STATUS            PORTS         NAMES
+dcc2491a3d16  quay.io/quay/redis:latest              conf/redis.conf       22 hours ago  Up 8 seconds ago                myredis
+
+$ podman rm -f myredis
+dcc2491a3d16809c5c7b939e48aa99ded40779cb79140b1b9ae8702561901952
+
+$ podman ps -a
+CONTAINER ID  IMAGE                                   COMMAND               CREATED       STATUS      PORTS               NAMES
 ----
 
 === podman wait
@@ -441,12 +447,18 @@ TO BE PROVIDED
 podman stats <container_name_or_container_uuid>
 ----
 
-Displays a live stream of a container's resource usage (or all containers)
+Displays a live stream of a container's resource usage. If no container name or UUID is defined, `podman stats` displays a live stream of the stats for all container running as root. *Note:* The command  `podman stats` must be executed as `sudo` and will only show containers running with root privileges.
 
 *Example:*
 
+The follow example calls the command `podmam stats` as the root user. Since no container name or UUID is defined in the call, `podmam stats` shows the stats for all containers running as root on the local machine
+
 ----
-TO BE PROVIDED
+sudo podmam stats
+
+ID            NAME        CPU %       MEM USAGE / LIMIT  MEM %       NET IO          BLOCK IO           PIDS        CPU TIME      AVG CPU %
+153aa53a52b9  rootnginx   --          2.044MB / 8.148GB  0.03%       698B / 2.574kB  8.192kB / 62.46kB  2           67.274094ms   1.02%
+f7ac2c719ff7  myredis     0.19%       7.631MB / 8.148GB  0.09%       978B / 7.474kB  -- / --            5           717.895399ms  0.14%
 ----
 
 === podman inspect
@@ -455,12 +467,26 @@ TO BE PROVIDED
 podman inspect <container_name_or_container_uuid>
 ----
 
-Returns metadata (in JSON) describing a running container 
+Returns metadata (in JSON) describing a running container. 
 
 *Example:*
 
+The following example uses `podman inspect` to inspect the container with the name `mynginx`. The result is piped to the `more` command with the `-10` option to display the first 10 lines of output from the `podman inspect`.
+
+The following 
 ----
-TO BE PROVIDED
+$ podman inspect mynginx | more -10
+[
+    {
+        "Id": "a4b59499314f7c4c6819340ec8e15732cb93c21c131fbd709e09370972fda1b7",
+        "Created": "2022-02-24T11:17:00.499462518-08:00",
+        "Path": "/docker-entrypoint.sh",
+        "Args": [
+            "nginx",
+            "-g",
+            "daemon off;"
+        ],
+--More--
 ----
 
 
@@ -478,22 +504,36 @@ Lists the containers on the system
 
 *Example:*
 
+The following uses `podman ps` with the `-a` option to show all containers on the local computer, including those that are running or in another state such `Created` or `Exited`.
+
 ----
-TO BE PROVIDED
+$ podman ps -a
+CONTAINER ID  IMAGE                             COMMAND               CREATED         STATUS                      PORTS                 NAMES
+a4b59499314f  docker.io/library/nginx:latest    nginx -g daemon o...  23 hours ago    Up 22 minutes ago           0.0.0.0:8181->80/tcp  mynginx
+569ddc895737  quay.io/openzipkin/zipkin:latest                        38 seconds ago  Exited (143) 3 seconds ago                        myzipkin
 ----
 
 === podman commit 
 
 ----
-podman commit <<container_name_or_container_uuid> <new_image_name:tag_name>
+podman commit <container_name_or_container_uuid> <new_image_name:tag_name>
 ----
 
 Creates a new image based on the current state of a running container
 
 *Example:*
 
+The following example uses `podman commit` to create a new container image named `yourzipkin` with the tag `test` from the running container named `myzipkin`.
+
+Then `podman images` is called to list the container images on the computer. Notice that the container image `localhost/yourzipkin:test` is listed.
+
 ----
-TO BE PROVIDED
+$ podman commit myzipkin yourzipkin:test
+
+$ podman images
+REPOSITORY                                 TAG                       IMAGE ID      CREATED         SIZE
+localhost/yourzipkin                       test                      179d9b389a21  21 seconds ago  156 MB
+localhost/mynode                           v1                        a6b028f25b45  24 hours ago    1.02 GB
 ----
 
 === podman attach
@@ -536,7 +576,10 @@ Displays the running processes of a container
 *Example:*
 
 ----
-TO BE PROVIDED
+$ podman top mynginx
+USER        PID         PPID        %CPU        ELAPSED           TTY         TIME        COMMAND
+root        1           0           0.000       29m55.560928305s  ?           0s          nginx: master process nginx -g daemon off; 
+nginx       23          1           0.000       29m54.561101763s  ?           0s          nginx: worker process 
 ----
 
 === podman logs
@@ -550,9 +593,21 @@ Displays the logs of a container as defined by `<container_name_or_container_uui
 *Example:*
 
 ----
-$ podman logs -tail mynginx
-
-MORE TO COME
+$ podman logs -t mynginx
+2022-02-25T09:37:46.090921000-08:00 /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+2022-02-25T09:37:46.091742000-08:00 /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+2022-02-25T09:37:46.104675000-08:00 /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+2022-02-25T09:37:46.180498000-08:00 10-listen-on-ipv6-by-default.sh: info: IPv6 listen already enabled
+2022-02-25T09:37:46.181151000-08:00 /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+2022-02-25T09:37:46.223979000-08:00 /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+2022-02-25T09:37:46.232448000-08:00 /docker-entrypoint.sh: Configuration complete; ready for start up
+2022-02-25T09:37:46.361178000-08:00 2022/02/25 17:37:46 [notice] 1#1: using the "epoll" event method
+2022-02-25T09:37:46.361275000-08:00 2022/02/25 17:37:46 [notice] 1#1: nginx/1.21.6
+2022-02-25T09:37:46.361323000-08:00 2022/02/25 17:37:46 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6) 
+2022-02-25T09:37:46.361362000-08:00 2022/02/25 17:37:46 [notice] 1#1: OS: Linux 4.18.0-348.el8.x86_64
+2022-02-25T09:37:46.361397000-08:00 2022/02/25 17:37:46 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 262144:262144
+2022-02-25T09:37:46.361434000-08:00 2022/02/25 17:37:46 [notice] 1#1: start worker processes
+2022-02-25T09:37:46.361470000-08:00 2022/02/25 17:37:46 [notice] 1#1: start worker process 23
 ----
 
 === podman pause
@@ -566,7 +621,12 @@ Pauses all the processes in a container (or all containers)
 *Example:*
 
 ----
-TO BE PROVIDED
+$ sudo podman pause rootnginx
+153aa53a52b93a480deab0f781d4a2b851ab8559d72c033c875f534af5e282f8
+$ sudo podman ps -a
+CONTAINER ID  IMAGE                           COMMAND               CREATED         STATUS             PORTS       NAMES
+f7ac2c719ff7  docker.io/library/redis:latest  redis-server          36 minutes ago  Up 36 minutes ago              myredis
+153aa53a52b9  docker.io/library/nginx:latest  nginx -g daemon o...  30 minutes ago  paused                         rootnginx
 ----
 
 === podman unpause
@@ -580,7 +640,12 @@ Unpauses all processes in a container (or all containers)
 *Example:*
 
 ----
-TO BE PROVIDED
+$ sudo podman unpause rootnginx
+153aa53a52b93a480deab0f781d4a2b851ab8559d72c033c875f534af5e282f8
+$ sudo podman ps -a
+CONTAINER ID  IMAGE                           COMMAND               CREATED         STATUS             PORTS       NAMES
+f7ac2c719ff7  docker.io/library/redis:latest  redis-server          37 minutes ago  Up 37 minutes ago              myredis
+153aa53a52b9  docker.io/library/nginx:latest  nginx -g daemon o...  30 minutes ago  Up 30 minutes ago              rootnginx
 ----
 
 === podman port
@@ -594,7 +659,8 @@ Lists the port mappings from a container to localhost
 *Example:*
 
 ----
-TO BE PROVIDED
+$ podman port mynginx
+80/tcp -> 0.0.0.0:8181
 ----
 
 == Working with a container's filesystem
@@ -612,21 +678,20 @@ Displays all the changes to a container’s filesystem
 *Example:*
 
 ----
-TO BE PROVIDED
-----
-
-=== podman diff
-
-----
-podman diff [options] <container_name_or_container_uuid>
-----
-
-Displays all the changes to a container's filesystem
-
-*Example:*
-
-----
-TO BE PROVIDED
+$ podman diff mynginx
+C /etc
+C /etc/nginx
+C /etc/nginx/conf.d
+C /etc/nginx/conf.d/default.conf
+A /run/nginx.pid
+C /var
+C /var/cache
+C /var/cache/nginx
+A /var/cache/nginx/client_temp
+A /var/cache/nginx/fastcgi_temp
+A /var/cache/nginx/proxy_temp
+A /var/cache/nginx/scgi_temp
+A /var/cache/nginx/uwsgi_temp
 ----
 
 === podman mount
@@ -755,7 +820,7 @@ $ podman rmi [-f] c316d5a335a5
 
 
 == Miscellaneous
-TO BE PROVIDED
+The following sections describe commands for discovering version and other information about podman
 
 === podman version
 
@@ -763,12 +828,19 @@ TO BE PROVIDED
 podman version 
 ----
 
-Reports the installed version of Podman
+Reports information about the installed version of Podman
 
 *Example:*
 
+The following example uses `podman version` to show information about the installed version of Podman.
+
 ----
-TO BE PROVIDED
+$ podman version 
+Version:      3.4.2
+API Version:  3.4.2
+Go Version:   go1.16.7
+Built:        Thu Jan 13 02:15:49 2022
+OS/Arch:      linux/amd64
 ----
 
 === podman info
@@ -777,11 +849,24 @@ TO BE PROVIDED
 podman info 
 ----
 
-Displays information about the podman environment
+Displays information about the instance of Podman installed on the local computer
 
 *Example:*
 
+The following example uses `podman info` to display information about the instance of Podman installed on the local computer. The output is piped to the `more` command using the `-10` option to show the first 10 lines of output.
+
 ----
-TO BE PROVIDED
+$ podman info | more -10
+host:
+  arch: amd64
+  buildahVersion: 1.23.1
+  cgroupControllers: []
+  cgroupManager: cgroupfs
+  cgroupVersion: v1
+  conmon:
+    package: conmon-2.0.32-1.module+el8.5.0+13852+150547f7.x86_64
+    path: /usr/bin/conmon
+    version: 'conmon version 2.0.32, commit: 4b12bce835c3f8acc006a43620dd955a6a73bae0'
+--More--
 ----
  
