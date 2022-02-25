@@ -254,7 +254,7 @@ ea35aa9eda87  quay.io/openzipkin/zipkin:latest              3 minutes ago  Up 3 
 
 The following example creates and runs the container using the container image `ngnix:latest`` The `-d` option runs the container in the background. The `--name` option gives the container the name `mywebserver`.
 
-After the container is created, the command `podman ps -a` is executed to list the containers running on the local machine. Notic the the `nginx` container has the name `mywebserver`.
+After the container is created, the command `podman ps -a` is executed to list the containers running on the local machine. Notice that the `nginx` container has the name `mywebserver`.
 
 ----
 $ podman run -d --name mywebserver -it nginx:latest
