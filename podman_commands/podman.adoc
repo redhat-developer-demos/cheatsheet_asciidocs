@@ -710,17 +710,23 @@ A /var/cache/nginx/uwsgi_temp
 podman mount [options] <container_name_or_container_uuid>
 ----
 
-Mounts a container's root filesystem
+Mounts and reports the location of a container's filesystem on the host computer.
 
-
-*Copy files and folders between a container and localhost:*
-
-Use `podman mount`, copy files with `cp` or any Linux tool you like (`tar` or `dnf`, for example), then use `podman umount`
 
 *Example:*
 
+The following example uses the command `sudo podman ps -a` to list the containers running as root on the local computer. Then the command `sudo podman mount` is called on the running container named `myredis`. The result of calling `sudo podman mount` is the directory where the container's files are located. Finally, `sudo ls` is called on the container's directory is called. Notice that the filesystem has the root directories of a Linux computer running Redis.
+
 ----
-TO BE PROVIDED
+$ sudo podman ps -a
+CONTAINER ID  IMAGE                           COMMAND               CREATED        STATUS            PORTS       NAMES
+f7ac2c719ff7  docker.io/library/redis:latest  redis-server          3 days ago     Created                       myredis
+
+$ sudo podman mount myredis
+/var/lib/containers/storage/overlay/b4f1aaed89bc56ab7b6b63fc6124623036497619cc9f7392bfb529bf1f38ba45/merged
+
+$ sudo ls /var/lib/containers/storage/overlay/b4f1aaed89bc56ab7b6b63fc6124623036497619cc9f7392bfb529bf1f38ba45/merged
+bin  boot  data  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 ----
 
 === podman umount
@@ -809,7 +815,13 @@ Pushes a container image to a remote registry
 *Example:*
 
 ----
-TO BE PROVIDED
+build -t quay.io/myrepo/customer_container:v1 .
+
+$ podman images
+REPOSITORY                                 TAG                       IMAGE ID      CREATED       SIZE
+quay.io/myrepo/customer_container          v1                        a6b028f25b45  4 days ago    1.02 GB
+
+$ podman push myrepo/custom_container
 ----
 
 === podman rmi
