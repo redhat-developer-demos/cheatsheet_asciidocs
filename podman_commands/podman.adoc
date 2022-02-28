@@ -703,6 +703,8 @@ Unpauses all processes in a container (or all containers).  The command can only
 
 *Example:*
 
+The following example uses the command `podman unpause` to get the container named `rootnginx` running from a paused state. Notice that the command is run using the `sudo` command because the container named `rootnginx` has root privileges.
+
 ----
 $ sudo podman unpause rootnginx
 153aa53a52b93a480deab0f781d4a2b851ab8559d72c033c875f534af5e282f8
