@@ -608,12 +608,14 @@ $ podman attach myzipkin
 === podman exec
 
 ----
-podman exec <container_name_or_container_uuid> <command>
+podman exec <container_name_or_container_uuid> <internal_command>
 ----
 
 Executes a command in a running container 
 
 *Example:*
+
+The following example uses the command `podman exec` with the `-it` option to enter into the container named `myzipkin` and display a command prompt within the container by using the internal shell invoked by the command `sh`.
 
 ----
 $ podman exec -it myzipkin sh
@@ -630,6 +632,8 @@ podman top <container_name_or_container_uuid>
 Displays the running processes of a container 
 
 *Example:*
+
+The following example uses the command `podman top` to display the processes along with the CPU utilization running within the container named `mynginx`.
 
 ----
 $ podman top mynginx
