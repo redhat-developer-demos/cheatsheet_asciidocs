@@ -35,6 +35,53 @@ docker.io/library/redis         latest      f1b6973564e9  4 weeks ago   116 MB
 docker.io/library/nginx         latest      c316d5a335a5  4 weeks ago   146 MB
 ----
 
+=== podman rmi
+
+----
+podman rmi [-f] <container_image_name_or_image_uuid:tag>
+----
+
+Removes a local image from local cache. Use `-f`` to force removal. 
+
+*NOTE:* This command does not remove the image from the remote registry. 
+
+*Example:*
+
+The following example uses the command `podman rmi` to remove a container image with the UUID `c316d5a335a5` from the container image repository on the local computer.
+
+----
+$ podman rmi [-f] c316d5a335a5 
+----
+
+=== podman push
+
+----
+podman push <registry_url/username/image:tag>
+----
+
+Pushes a container image to a remote registry
+
+*Example:*
+
+The following use the command `podman build ` with tag `-t` to create a local container image with the name and tag, `quay.io/myrepo/customer_container:v1`. The result of `podman build` is shown in an abbreviated format. Then the command `podman images` lists the created container image. Finally, the command `podman push quay.io/myrepo/customer_container:v1` is used to push the container image to the remote repository, `quay.io`
+
+----
+$ podman build -t quay.io/myrepo/customer_container:v1 .
+.
+.
+Successfully tagged quay.io/myrepo/customer_container:v1
+Successfully tagged localhost/mynode:v1
+Successfully tagged localhost/mynode:best
+a6b028f25b45f533ae3078fe1d97df2a9cd27691e8d7b3317a0bdeaa24d1e705
+
+$ podman images
+REPOSITORY                                 TAG                       IMAGE ID      CREATED       SIZE
+quay.io/myrepo/customer_container          v1                        a6b028f25b45  4 days ago    1.02 GB
+
+$ podman push quay.io/myrepo/customer_container:v1
+----
+
+
 === podman history 
 
 ----
@@ -795,84 +842,6 @@ $ podman images
 REPOSITORY           TAG         IMAGE ID      CREATED         SIZE
 localhost/new-nginx  v1          ad3620ffa74c  41 minutes ago  144 MB
 ----
-
-=== podman save
-
-----
-podman export <container_image:tag> -o <archive_filename> --format <docker-archive> or <oci-archive> or <oci-dir> or <docker-dir> 
-----
-
-Saves a container image in `docker-archive` format (default) or another format
-
-*Example:*
-
-----
-TO BE PROVIDED
-----
-
-=== podman load
-
-----
-podman load -i <archive_path_and_filename>
-----
-
-Loads a saved image from `docker-archive` or an image in another format 
-
-*Example:*
-
-----
-TO BE PROVIDED
-----
-
-== Sharing container images
-
-TO BE PROVIDED
-
-
-=== podman push
-
-----
-podman push <registry_url/username/image:tag>
-----
-
-Pushes a container image to a remote registry
-
-*Example:*
-
-The following use the command `podman build ` with tag `-t` to create a local container image with the name and tag, `quay.io/myrepo/customer_container:v1`. The result of `podman build` is shown in an abbreviated format. Then the command `podman images` lists the created container image. Finally, the command `podman push quay.io/myrepo/customer_container:v1` is used to push the container image to the remote repository, `quay.io`
-
-----
-$ podman build -t quay.io/myrepo/customer_container:v1 .
-.
-.
-Successfully tagged quay.io/myrepo/customer_container:v1
-Successfully tagged localhost/mynode:v1
-Successfully tagged localhost/mynode:best
-a6b028f25b45f533ae3078fe1d97df2a9cd27691e8d7b3317a0bdeaa24d1e705
-
-$ podman images
-REPOSITORY                                 TAG                       IMAGE ID      CREATED       SIZE
-quay.io/myrepo/customer_container          v1                        a6b028f25b45  4 days ago    1.02 GB
-
-$ podman push quay.io/myrepo/customer_container:v1
-----
-
-=== podman rmi
-
-----
-podman rmi [-f] <container_image_name_or_image_uuid:tag>
-----
-
-Removes a local image from local cache. Use `-f`` to force removal. 
-
-*NOTE:* This command does not remove the image from the remote registry. 
-
-*Example:*
-
-----
-$ podman rmi [-f] c316d5a335a5 
-----
-
 
 == Miscellaneous
 The following sections describe commands for discovering version and other information about podman
