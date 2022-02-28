@@ -710,12 +710,11 @@ A /var/cache/nginx/uwsgi_temp
 podman mount [options] <container_name_or_container_uuid>
 ----
 
-Mounts and reports the location of a container's filesystem on the host computer.
-
+Mounts and reports the location of a container's filesystem on the host computer. This command is useful to inspect the filesystem of a container without having to `podman exec -it` into the running container.
 
 *Example:*
 
-The following example uses the command `sudo podman ps -a` to list the containers running as root on the local computer. Then the command `sudo podman mount` is called on the running container named `myredis`. The result of calling `sudo podman mount` is the directory where the container's files are located. Finally, `sudo ls` is called on the container's directory is called. Notice that the filesystem has the root directories of a Linux computer running Redis.
+The following example uses the command `sudo podman ps -a` to list the containers running as root on the local computer. Then the command `sudo podman mount` is called on the running container named `myredis`. The result of calling `sudo podman mount` is the directory where the container's files are located. Finally, `sudo ls` is called on the container's directory is called. Notice that the filesystem has the root directories of a Linux computer running Redis.  Notice that the command must be run as `sudo`.
 
 ----
 $ sudo podman ps -a
@@ -739,22 +738,10 @@ Unmounts a container's root filesystem
 
 *Example:*
 
+The following command runs `sudo podman unmount` against a container named `myredis`. Notice that the command must be run as `sudo`.
 ----
-TO BE PROVIDED
-----
-
-=== podman import
-
-----
-podman import <tarball_filename>
-----
-
-Imports a tarball as defined by the parameter <tarball_filename> and saves it as a filesystem image
-
-*Example:*
-
-----
-TO BE PROVIDED
+$ sudo podman unmount myredis
+myredis
 ----
 
 === podman export
@@ -767,8 +754,44 @@ Exports a container's filesystem to a `.tar` file
 
 *Example:*
 
+The following example uses the command `podman ps -a` to list the containers running on the local computer. Then the command `podman export` is used to export the filesystem of the container named `mynginx` to a `.tar` file named `mynginx.tar`. Finally the command `ls -lh` is called to describe the details of the `.tar` file.
+
 ----
-TO BE PROVIDED
+$ podman ps -a
+CONTAINER ID  IMAGE                             COMMAND               CREATED     STATUS             PORTS                 NAMES
+a4b59499314f  docker.io/library/nginx:latest    nginx -g daemon o...  3 days ago  Up 50 minutes ago  0.0.0.0:8181->80/tcp  mynginx
+
+$ podman export mynginx > mynginx.tar
+
+$ ls -lh
+total 138M
+-rw-rw-r--. 1 guest guest 138M Feb 28 09:44 mynginx.tar
+----
+
+=== podman import
+
+----
+podman import <tarball_filename>
+----
+
+Imports a tarball as defined by the parameter <tarball_filename> and saves it as a filesystem image
+
+*Example:*
+
+The following example creates a container image from an existing `.tar` file named `mynginx.tar`. The example uses the `cat` command against the file named `mynginx.tar` to output the contents of the file which is then piped to the `podman import` command. The command creates a container image named `new-nginx:` with the tag `beta`. Finally the command `podman images` is called to list the container image that was created.
+
+----
+$ cat mynginx.tar | podman import - new-nginx:beta
+Getting image source signatures
+Copying blob 51ae4d2a0ffb done  
+Copying config 8d555a4dac done  
+Writing manifest to image destination
+Storing signatures
+sha256:8d555a4dac4bdeb2840ca21a1540e4e736c5c5ee65d1b3e18f3dd81a913b133d
+
+$ podman images
+REPOSITORY           TAG         IMAGE ID      CREATED         SIZE
+localhost/new-nginx  beta        8d555a4dac4b  15 seconds ago  144 MB
 ----
 
 === podman save
@@ -814,14 +837,22 @@ Pushes a container image to a remote registry
 
 *Example:*
 
+The following use the command `podman build ` with tag `-t` to create a local container image with the name and tag, `quay.io/myrepo/customer_container:v1`. The result of `podman build` is shown in an abbreviated format. Then the command `podman images` lists the created container image. Finally, the command `podman push quay.io/myrepo/customer_container:v1` is used to push the container image to the remote repository, `quay.io`
+
 ----
-build -t quay.io/myrepo/customer_container:v1 .
+$ podman build -t quay.io/myrepo/customer_container:v1 .
+.
+.
+Successfully tagged quay.io/myrepo/customer_container:v1
+Successfully tagged localhost/mynode:v1
+Successfully tagged localhost/mynode:best
+a6b028f25b45f533ae3078fe1d97df2a9cd27691e8d7b3317a0bdeaa24d1e705
 
 $ podman images
 REPOSITORY                                 TAG                       IMAGE ID      CREATED       SIZE
 quay.io/myrepo/customer_container          v1                        a6b028f25b45  4 days ago    1.02 GB
 
-$ podman push myrepo/custom_container
+$ podman push quay.io/myrepo/customer_container:v1
 ----
 
 === podman rmi
