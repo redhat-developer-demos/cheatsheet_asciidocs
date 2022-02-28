@@ -433,6 +433,7 @@ podman restart [options] <container_name_or_container_uuid>
 Restarts an existing container
 
 *Example:*
+
 The following example uses `podman ps -a` to list the containers installed on the host computer. Notice the `STATUS` of the container named `myredis` is `Created`. Then the command `podman restart` is used to start the container named `myredis`. Finally the command Finally `podman ps -a` is called again. Notice that the `STATUS` of the container is now `Up 8 seconds ago`, hence the container is running.
 
 ----
