@@ -288,7 +288,7 @@ Runs a container based on a given `image:tag` pair. If the image exists on the l
 
 The following example runs a container using the latest version of the container image for the distributed tracing tool `zipkin` that stored in the `quay.io` container repository. The option `-d` is used to run the container in the background in order to free up the terminal window to accept future input. 
 
-Then, the command `podman ps -a` is executed to list the running containers. Notice that since the `zipkin` as not assigned a name when created, the arbitrary name `laughing_mahavira` is assigned to the container. Also, notice that the result of executing `podman run` is the containers UUID.
+Then, the command `podman ps -a` is executed to list the running containers. Notice that since the `zipkin` container was not assigned a name when created. Thus, the arbitrary name `laughing_mahavira` is assigned to the container. Also, notice that the result of executing `podman run` is the containers UUID.
 
 ----
 $ podman run -d quay.io/openzipkin/zipkin 
