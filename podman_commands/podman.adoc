@@ -671,9 +671,11 @@ $ podman logs -t mynginx
 podman pause [options] <container_name_or_container_uuid>
 ----
 
-Pauses all the processes in a container (or all containers)
+Pauses all the processes in a container (or all containers). The command can only be run against containers that have root privileges.
 
 *Example:*
+
+The following example use the command `sudo podman pause` to pause the container named `rootnginx`. Notice that the command is run using the `sudo` command because the container named `rootnginx` has root privileges.
 
 ----
 $ sudo podman pause rootnginx
@@ -681,7 +683,7 @@ $ sudo podman pause rootnginx
 $ sudo podman ps -a
 CONTAINER ID  IMAGE                           COMMAND               CREATED         STATUS             PORTS       NAMES
 f7ac2c719ff7  docker.io/library/redis:latest  redis-server          36 minutes ago  Up 36 minutes ago              myredis
-153aa53a52b9  docker.io/library/nginx:latest  nginx -g daemon o...  30 minutes ago  paused                         rootnginx
+153aa53a52b9  quay.io/bitnami/nginx:latest    nginx -g daemon o...  30 minutes ago  paused                         rootnginx
 ----
 
 === podman unpause
@@ -690,7 +692,7 @@ f7ac2c719ff7  docker.io/library/redis:latest  redis-server          36 minutes a
 podman unpause [options] <container_name_or_container_uuid>
 ----
 
-Unpauses all processes in a container (or all containers) 
+Unpauses all processes in a container (or all containers).  The command can only be run against containers that have root privileges.
 
 *Example:*
 
@@ -700,7 +702,7 @@ $ sudo podman unpause rootnginx
 $ sudo podman ps -a
 CONTAINER ID  IMAGE                           COMMAND               CREATED         STATUS             PORTS       NAMES
 f7ac2c719ff7  docker.io/library/redis:latest  redis-server          37 minutes ago  Up 37 minutes ago              myredis
-153aa53a52b9  docker.io/library/nginx:latest  nginx -g daemon o...  30 minutes ago  Up 30 minutes ago              rootnginx
+153aa53a52b9  quay.io/bitnami/nginx:latest    nginx -g daemon o...  30 minutes ago  Up 30 minutes ago              rootnginx
 ----
 
 === podman port
