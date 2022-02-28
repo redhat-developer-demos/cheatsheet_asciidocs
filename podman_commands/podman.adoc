@@ -652,6 +652,8 @@ Displays the logs of a container as defined by `<container_name_or_container_uui
 
 *Example:*
 
+The following example uses the command `podman logs` to display logs information about the container named `mynginx`. The `-t` option is used to display the timestamp for each log entry.
+
 ----
 $ podman logs -t mynginx
 2022-02-25T09:37:46.090921000-08:00 /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
