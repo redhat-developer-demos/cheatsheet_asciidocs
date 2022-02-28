@@ -666,6 +666,8 @@ Lists the port mappings from a container to localhost
 
 *Example:*
 
+The following example uses the command `podman port` to report the port binding for the container named `mynginx`.
+
 ----
 $ podman port mynginx
 80/tcp -> 0.0.0.0:8181
@@ -778,10 +780,10 @@ Imports a tarball as defined by the parameter <tarball_filename> and saves it as
 
 *Example:*
 
-The following example creates a container image from an existing `.tar` file named `mynginx.tar`. The example uses the `cat` command against the file named `mynginx.tar` to output the contents of the file which is then piped to the `podman import` command. The command creates a container image named `new-nginx:` with the tag `beta`. Finally the command `podman images` is called to list the container image that was created.
+The following example creates a container image from an existing `.tar` file named `mynginx.tar`. The example uses the command `podman import` to important the file named `mynginx.tar`. The command creates a container image named `new-nginx:` with the tag `v1`. Finally the command `podman images` is called to list the container image that was created.
 
 ----
-$ cat mynginx.tar | podman import - new-nginx:beta
+$ podman import mynginx.tar new-nginx:v1
 Getting image source signatures
 Copying blob 51ae4d2a0ffb done  
 Copying config 8d555a4dac done  
@@ -791,7 +793,7 @@ sha256:8d555a4dac4bdeb2840ca21a1540e4e736c5c5ee65d1b3e18f3dd81a913b133d
 
 $ podman images
 REPOSITORY           TAG         IMAGE ID      CREATED         SIZE
-localhost/new-nginx  beta        8d555a4dac4b  15 seconds ago  144 MB
+localhost/new-nginx  v1          ad3620ffa74c  41 minutes ago  144 MB
 ----
 
 === podman save
