@@ -1,0 +1,52 @@
+[
+    {
+        "type": "navel",
+        "price": 2.99,
+        "countryOfOrigin": "USA"
+    },
+    {
+        "type": "seville",
+        "price": 0.99,
+        "countryOfOrigin": "Spain"
+    },
+    {
+        "type": "blood",
+        "price": 1.69,
+        "countryOfOrigin": "USA"
+    },
+    {
+        "type": "mandarin",
+        "price": 1.59,
+        "countryOfOrigin": "USA"
+    },
+    {
+        "type": "jaffa",
+        "price": 1.59,
+        "countryOfOrigin": "Israel"
+    },
+    {
+        "type": "lima",
+        "price": 0.99,
+        "countryOfOrigin": "Brazil"
+    },
+    {
+        "type": "cara cara",
+        "price": 0.99,
+        "countryOfOrigin": "Venezuela"
+    },
+    {
+        "type": "cara cara",
+        "price": 1.29,
+        "countryOfOrigin": "USA"
+    },
+    {
+        "type": "cherry",
+        "price": 1.09,
+        "countryOfOrigin": "Japan"
+    },
+    {
+        "type": "queen",
+        "price": 1.09,
+        "countryOfOrigin": "South Africa"
+    }
+]

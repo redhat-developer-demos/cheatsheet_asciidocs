@@ -1,0 +1,47 @@
+[
+    {
+        "type": "granny smith",
+        "price": 2.99,
+        "countryOfOrigin": "USA"
+    },
+    {
+        "type": "golden delicious",
+        "price": 0.99,
+        "countryOfOrigin": "Ireland"
+    },
+    {
+        "type": "gala",
+        "price": 1.29,
+        "countryOfOrigin": "USA"
+    },
+    {
+        "type": "empire",
+        "price": 1.59,
+        "countryOfOrigin": "USA"
+    },
+    {
+        "type": "delicious",
+        "price": 1.59,
+        "countryOfOrigin": "USA"
+    },
+    {
+        "type": "macintosh",
+        "price": 0.99,
+        "countryOfOrigin": "USA"
+    },
+    {
+        "type": "fuji",
+        "price": 0.99,
+        "countryOfOrigin": "Chile"
+    },
+    {
+        "type": "golden delicious",
+        "price": 0.99,
+        "countryOfOrigin": "Mexico"
+    },
+    {
+        "type": "crab",
+        "price": 0.09,
+        "countryOfOrigin": "Canada"
+    }
+]
