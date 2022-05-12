@@ -3,11 +3,301 @@
 :product-name: MongoDB Cheat Sheet
 
 
-The `$` symbol that proceeds commands in the examples represents the command line prompt.
+The `>` symbol that proceeds commands in the examples represents the Mongo shell prompt.
 
-== Starting the mongo shell
+== Accessing the Mongo shell
+
+=== mongo
+
+`mongo <optional URL> -u <username> -p <password>``
+
+*Examples:*
+
+----
+> mongo -u root -p password
+----
+
+- Result
+
+----
+MongoDB shell version v4.4.14
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("2d62ffdb-a70d-40bf-af6e-15de859ecc62") }
+MongoDB server version: 5.0.8
+----
+
+Access remote instance of Mongo
+
+----
+mongo remotemongo.com:27017/users -u someuser -p mYs3cretz
+----
+
+- Result
+ 
+----
+TO BE PROVIDED
+----
+
+== Navigating around Mongo
+
+=== Show all databases in a Mongo instance
+
+`show dbs`
+
+*Example:*
+
+----
+> show dbs
+----
+
+- Result
+ 
+----
+admin   0.000GB
+config  0.000GB
+fruit   0.000GB
+local   0.000GB
+----
+
+=== Switch to a particular database
+
+`use <database_name>`
+
+*Example:*
+
+----
+> use fruit
+----
+
+- Result
+
+----
+switched to db fruit
+----
+
+=== show collections in database
+
+`show collections`
+
+*Example:*
+
+----
+> show collections
+----
+
+- Result
+
+----
+apples
+oranges
+----
+
+=== Show roles in a Mongo instance
+
+`show roles <database name [optional]>`
+
+*Example:*
+
+----
+> show roles
+----
+
+- Result
+
+----
+{
+        "role" : "enableSharding",
+        "db" : "test",
+        "isBuiltin" : true,
+        "roles" : [ ],
+        "inheritedRoles" : [ ]
+}
+{
+        "role" : "dbOwner",
+        "db" : "test",
+        "isBuiltin" : true,
+        "roles" : [ ],
+        "inheritedRoles" : [ ]
+}
+{
+        "role" : "dbAdmin",
+        "db" : "test",
+        "isBuiltin" : true,
+        "roles" : [ ],
+        "inheritedRoles" : [ ]
+}
+{
+        "role" : "userAdmin",
+        "db" : "test",
+        "isBuiltin" : true,
+        "roles" : [ ],
+        "inheritedRoles" : [ ]
+}
+{
+        "role" : "read",
+        "db" : "test",
+        "isBuiltin" : true,
+        "roles" : [ ],
+        "inheritedRoles" : [ ]
+}
+{
+        "role" : "readWrite",
+        "db" : "test",
+        "isBuiltin" : true,
+        "roles" : [ ],
+        "inheritedRoles" : [ ]
+}
+----
+
+== Working with a users
+
+=== Create user
+
+`db.runCommand(createUser <username> . . . . )`
+
+*Example:*
+
+----
+db.runCommand(
+   {
+     createUser: "cooluser",
+     pwd: "newpassword",
+     roles: [
+       { role: "readWrite", db: "fruit" } 
+     ]
+   })
+----
+
+- Result
+
+----
+{ "ok" : 1 }
+----
+
+=== Show users
+
+`show users`
+
+*Example:*
+
+----
+show users
+----
+
+- Result
+
+----
+{
+    "_id" : "fruit.cooluser",
+    "userId" : UUID("78e368a7-dff0-45be-8633-f3d63802ca93"),
+    "user" : "cooluser",
+    "db" : "fruit",
+    "roles" : [
+            {
+                "role" : "readWrite",
+                "db" : "fruit"
+            }
+    ],
+    "mechanisms" : [
+            "SCRAM-SHA-1",
+            "SCRAM-SHA-256"
+    ]
+}
+----
+
+=== Delete user
+
+`db.dropUser("<user_name>")`
+
+*Example:*
+
+----
+> use fruit
+switched to db fruit
+
+> db.dropUser("cooluser")
+true
+----
+
+Or
+
+----
+> use fruit
+switched to db fruit
+
+> db.runCommand( { dropUser: "cooluser" } )
+{ "ok" : 1 }
+----
 
 == Working with a collection
+
+=== Find all documents in a collection
+
+`db.<collection_name>.find()`
+
+`db.["<collection_name>"].find()`
+
+*Examples:*
+
+----
+> db["apples"].find()
+----
+
+- Result
+
+----
+ "_id" : ObjectId("627d9053f7e6008a00844a81"), "type" : "granny smith", "price" : 2.99, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a82"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Ireland" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a83"), "type" : "gala", "price" : 1.29, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a84"), "type" : "empire", "price" : 1.59, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a85"), "type" : "delicious", "price" : 1.59, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a86"), "type" : "macintosh", "price" : 0.99, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a87"), "type" : "fuji", "price" : 0.99, "countryOfOrigin" : "Chile" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a88"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Mexico" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a89"), "type" : "crab", "price" : 0.09, "countryOfOrigin" : "Canada" }
+----
+
+Or
+
+----
+> db.apples.find()
+----
+
+- Result
+
+----
+ "_id" : ObjectId("627d9053f7e6008a00844a81"), "type" : "granny smith", "price" : 2.99, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a82"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Ireland" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a83"), "type" : "gala", "price" : 1.29, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a84"), "type" : "empire", "price" : 1.59, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a85"), "type" : "delicious", "price" : 1.59, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a86"), "type" : "macintosh", "price" : 0.99, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a87"), "type" : "fuji", "price" : 0.99, "countryOfOrigin" : "Chile" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a88"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Mexico" }
+{ "_id" : ObjectId("627d9053f7e6008a00844a89"), "type" : "crab", "price" : 0.09, "countryOfOrigin" : "Canada" }
+----
+
+=== Find one of any document in a collection
+
+`db.<collection_name>.findOne()`
+
+*Example:*
+
+----
+> db.apples.findOne()
+----
+
+- Result
+
+----
+{
+    "_id" : ObjectId("627d9053f7e6008a00844a81"),
+    "type" : "granny smith",
+    "price" : 2.99,
+    "countryOfOrigin" : "USA"
+}
+----
+
 
 == Changing Groups of Documents
 
@@ -17,7 +307,7 @@ The `$` symbol that proceeds commands in the examples represents the command lin
 
 == Dangerous Tasks
 
-== Example Collections
+== Example Collection Data
 
 === Apples
 
