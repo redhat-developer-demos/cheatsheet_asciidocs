@@ -13,28 +13,22 @@ The `>` symbol that proceeds commands in the examples represents the Mongo shell
 
 *Examples:*
 
+*Access local instance*
+
 ----
 > mongo -u root -p password
-----
 
-- Result
-
-----
 MongoDB shell version v4.4.14
 connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
 Implicit session: session { "id" : UUID("2d62ffdb-a70d-40bf-af6e-15de859ecc62") }
 MongoDB server version: 5.0.8
 ----
 
-Access remote instance of Mongo
+*Access remote instance*
 
 ----
 mongo remotemongo.com:27017/users -u someuser -p mYs3cretz
-----
 
-- Result
- 
-----
 TO BE PROVIDED
 ----
 
@@ -48,11 +42,7 @@ TO BE PROVIDED
 
 ----
 > show dbs
-----
 
-- Result
- 
-----
 admin   0.000GB
 config  0.000GB
 fruit   0.000GB
@@ -67,11 +57,7 @@ local   0.000GB
 
 ----
 > use fruit
-----
 
-- Result
-
-----
 switched to db fruit
 ----
 
@@ -83,11 +69,7 @@ switched to db fruit
 
 ----
 > show collections
-----
 
-- Result
-
-----
 apples
 oranges
 ----
@@ -100,11 +82,7 @@ oranges
 
 ----
 > show roles
-----
 
-- Result
-
-----
 {
         "role" : "enableSharding",
         "db" : "test",
@@ -166,11 +144,7 @@ db.runCommand(
        { role: "readWrite", db: "fruit" } 
      ]
    })
-----
 
-- Result
-
-----
 { "ok" : 1 }
 ----
 
@@ -181,12 +155,8 @@ db.runCommand(
 *Example:*
 
 ----
-show users
-----
+> show users
 
-- Result
-
-----
 {
     "_id" : "fruit.cooluser",
     "userId" : UUID("78e368a7-dff0-45be-8633-f3d63802ca93"),
@@ -231,7 +201,46 @@ switched to db fruit
 
 == Working with a collection
 
-=== Find all documents in a collection
+=== Create a collection
+
+`db.createCollection(<collection_name>)`
+
+*Example:*
+
+```
+> db.createCollection("pears")
+
+{ "ok" : 1 }
+```
+
+=== Show all collections
+
+`show collections`
+
+*Example:*
+
+```
+> show collections
+
+apples
+oranges
+pears
+```
+
+=== Delete a collection
+
+`db.<collection_name>.drop()`
+
+*Example:*
+
+``` 
+> db.pears.drop()
+true
+```
+
+== Working with documents
+
+=== Show all documents in a collection
 
 `db.<collection_name>.find()`
 
@@ -241,11 +250,7 @@ switched to db fruit
 
 ----
 > db["apples"].find()
-----
 
-- Result
-
-----
  "_id" : ObjectId("627d9053f7e6008a00844a81"), "type" : "granny smith", "price" : 2.99, "countryOfOrigin" : "USA" }
 { "_id" : ObjectId("627d9053f7e6008a00844a82"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Ireland" }
 { "_id" : ObjectId("627d9053f7e6008a00844a83"), "type" : "gala", "price" : 1.29, "countryOfOrigin" : "USA" }
@@ -261,11 +266,7 @@ Or
 
 ----
 > db.apples.find()
-----
 
-- Result
-
-----
  "_id" : ObjectId("627d9053f7e6008a00844a81"), "type" : "granny smith", "price" : 2.99, "countryOfOrigin" : "USA" }
 { "_id" : ObjectId("627d9053f7e6008a00844a82"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Ireland" }
 { "_id" : ObjectId("627d9053f7e6008a00844a83"), "type" : "gala", "price" : 1.29, "countryOfOrigin" : "USA" }
@@ -277,6 +278,29 @@ Or
 { "_id" : ObjectId("627d9053f7e6008a00844a89"), "type" : "crab", "price" : 0.09, "countryOfOrigin" : "Canada" }
 ----
 
+=== Sort all documents in a collection
+
+`db.apples.find().sort({<field_name_1> : <sort_order>, <field_name_2> : <sort_order>, <field_name_n> : <sort_order>,})`
+
+When `<sort_order>` is 1, the documents will be listed in ascending order; -1 indicates descending order.
+
+*Example:*
+
+The following example shows how to sort all documents in ascending first sorting on `countryOfOrigin` and then sorting on `price`.
+
+```
+> db.apples.find().sort({countryOfOrigin : 1, price: 1})
+{ "_id" : ObjectId("627e79917107db0de3aeb497"), "type" : "crab", "price" : 0.09, "countryOfOrigin" : "Canada" }
+{ "_id" : ObjectId("627e79917107db0de3aeb495"), "type" : "fuji", "price" : 0.99, "countryOfOrigin" : "Chile" }
+{ "_id" : ObjectId("627e79917107db0de3aeb490"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Ireland" }
+{ "_id" : ObjectId("627e79917107db0de3aeb496"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Mexico" }
+{ "_id" : ObjectId("627e79917107db0de3aeb494"), "type" : "macintosh", "price" : 0.99, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627e79917107db0de3aeb491"), "type" : "gala", "price" : 1.29, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627e79917107db0de3aeb492"), "type" : "empire", "price" : 1.59, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627e79917107db0de3aeb493"), "type" : "delicious", "price" : 1.59, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627e79917107db0de3aeb48f"), "type" : "granny smith", "price" : 2.99, "countryOfOrigin" : "USA" }
+```
+
 === Find one of any document in a collection
 
 `db.<collection_name>.findOne()`
@@ -285,11 +309,7 @@ Or
 
 ----
 > db.apples.findOne()
-----
 
-- Result
-
-----
 {
     "_id" : ObjectId("627d9053f7e6008a00844a81"),
     "type" : "granny smith",
@@ -298,10 +318,102 @@ Or
 }
 ----
 
+=== Find a document in a collection according to Mongo `_id`
+
+when looking up an document by ObjectID as a string the unique `_id` needs to be cast to an ObjectId.
+
+`db.<collection_name>.findOne({ _id : ObjectId (“<object_identifier>) })`
+
+*Example:*
+
+```
+> db.apples.findOne({ _id : ObjectId ("627e79917107db0de3aeb496") })
+{
+        "_id" : ObjectId("627e79917107db0de3aeb496"),
+        "type" : "golden delicious",
+        "price" : 0.99,
+        "countryOfOrigin" : "Mexico"
+}
+```
+
+=== Find one of any document in a collection according to query criteria
+
+`db.<collection_name>.findOne({<query:criteria>})`
+
+*Example:*
+
+```
+>  db.apples.findOne({price: 0.99})
+{
+    "_id" : ObjectId("627e79917107db0de3aeb490"),
+    "type" : "golden delicious",
+    "price" : 0.99,
+    "countryOfOrigin" : "Ireland"
+}
+```
+
+=== Find all documents according to query criteria
+
+`db.<collection_name>.find({ <search_field>: <field_value>, <search_field>: <field_value>})`
+
+*Examples:*
+
+Find all documents that have a `price` that is equal to `0.99`
+
+```
+> db.apples.find({price: 0.99})
+{ "_id" : ObjectId("627e79917107db0de3aeb490"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Ireland" }
+{ "_id" : ObjectId("627e79917107db0de3aeb494"), "type" : "macintosh", "price" : 0.99, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627e79917107db0de3aeb495"), "type" : "fuji", "price" : 0.99, "countryOfOrigin" : "Chile" }
+{ "_id" : ObjectId("627e79917107db0de3aeb496"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Mexico" }
+```
+
+Find all documents that have a `price` that is equal to `0.99` and a `countryOfOrigin` of `USA`.
+
+```
+> db.apples.find({price: 0.99, countryOfOrigin: "USA"})
+{ "_id" : ObjectId("627e79917107db0de3aeb494"), "type" : "macintosh", "price" : 0.99, "countryOfOrigin" : "USA" }
+```
+
+Find all documents that have a `price` that is greater than `0.99`.
+
+```
+> db.apples.find({ price:{$gt: 0.99} })
+{ "_id" : ObjectId("627e79917107db0de3aeb48f"), "type" : "granny smith", "price" : 2.99, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627e79917107db0de3aeb491"), "type" : "gala", "price" : 1.29, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627e79917107db0de3aeb492"), "type" : "empire", "price" : 1.59, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627e79917107db0de3aeb493"), "type" : "delicious", "price" : 1.59, "countryOfOrigin" : "USA" }
+```
+
+Find all documents that have a `price` that is less than `1.29`.
+
+```
+> db.apples.find({ price:{$lt: 1.29} })
+{ "_id" : ObjectId("627e79917107db0de3aeb490"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Ireland" }
+{ "_id" : ObjectId("627e79917107db0de3aeb494"), "type" : "macintosh", "price" : 0.99, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627e79917107db0de3aeb495"), "type" : "fuji", "price" : 0.99, "countryOfOrigin" : "Chile" }
+{ "_id" : ObjectId("627e79917107db0de3aeb496"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Mexico" }
+{ "_id" : ObjectId("627e79917107db0de3aeb497"), "type" : "crab", "price" : 0.09, "countryOfOrigin" : "Canada" }
+```
+
+=== Add field to all documents in a collection
+
+```
+> db.apples.update({},{$set : {"genus":"malus"}},false,true)
+WriteResult({ "nMatched" : 9, "nUpserted" : 0, "nModified" : 9 })
+
+> db.apples.find( {price: 0.99})
+{ "_id" : ObjectId("627e79917107db0de3aeb490"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Ireland", "genus" : "malus" }
+{ "_id" : ObjectId("627e79917107db0de3aeb494"), "type" : "macintosh", "price" : 0.99, "countryOfOrigin" : "USA", "genus" : "malus" }
+{ "_id" : ObjectId("627e79917107db0de3aeb495"), "type" : "fuji", "price" : 0.99, "countryOfOrigin" : "Chile", "genus" : "malus" }
+{ "_id" : ObjectId("627e79917107db0de3aeb496"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Mexico", "genus" : "malus" }
+```
+
+== Adding and updating documents
+
+
 
 == Changing Groups of Documents
-
-== Working with Individual Documents
 
 == Working with Indexes
 
