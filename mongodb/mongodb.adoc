@@ -566,25 +566,79 @@ An `<sort_order>` is created by concatenating the `<field_name>` with the `<sort
 { "nIndexesWas" : 3, "ok" : 1 }
 ```
 
+== Aggregation
+
+```
+> db.apples.aggregate([
+    {$match:{ countryOfOrigin: "Mexico"}},
+    { $lookup:
+        {
+           from: "countries",
+           localField: "countryOfOrigin",
+           foreignField: "country",
+           as: "regional_info"
+        }
+    }
+]).pretty()
+
+{
+    "_id" : ObjectId("627efc53a96c699c93564740"),
+    "type" : "golden delicious",
+    "price" : 0.99,
+    "countryOfOrigin" : "Mexico",
+    "regional_info" : [
+        {
+            "_id" : ObjectId("627efc54bb142679f4604979"),
+            "country" : "Mexico",
+            "continent" : "North America"
+        }
+    ]
+}
+
+```
+
 == Dangerous Tasks
 
 === Unintended document creation on insert
 
-**Don't do this:**
+*Don't do this:*
 
-The following replaces the entire document, removing all fields by `type` and `price`,
+The following replaces the entire document, removing all fields except `price`
 
 `db.apples.update({ type : "granny smith" }, { price : 2.49 })`
 
-**Do this:**
+*Example:*
+
+```
+> db.apples.update({ type : "granny smith" }, { price : 2.49 })
+
+> db.apples.find()
+
+{ "_id" : ObjectId("627ec6019145af3d0eca46b9"), "price" : 2.49 }
+{ "_id" : ObjectId("627ec6019145af3d0eca46ba"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Ireland" }
+{ "_id" : ObjectId("627ec6019145af3d0eca46bb"), "type" : "gala", "price" : 1.29, "countryOfOrigin" : "USA" }
+```
+
+*Do this:*
 
 Using the `$set` keyword in the following only update the `price` field in the document
 
-`db.apples.update({ type : “granny smith”}, {$set : { price : 2.99 }})`
+`db.apples.update({ type : "granny smith"}, {$set : { price : 2.49 }})`
+
+```
+> db.apples.update({ type : "granny smith"}, {$set : { price : 2.49 }})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+> db.apples.find()
+{ "_id" : ObjectId("627ec9c81a9f54fbff86f145"), "type" : "granny smith", "price" : 2.49, "countryOfOrigin" : "USA" }
+{ "_id" : ObjectId("627ec9c81a9f54fbff86f146"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Ireland" }
+{ "_id" : ObjectId("627ec9c81a9f54fbff86f147"), "type" : "gala", "price" : 1.29, "countryOfOrigin" : "USA" }
+
+```
 
 === Dropping an entire collection
 
-db.<collection_name>.drop()
+`db.<collection_name>.drop()`
 
 *Example:*
 
