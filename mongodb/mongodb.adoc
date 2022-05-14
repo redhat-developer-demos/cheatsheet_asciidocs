@@ -371,7 +371,7 @@ Find all documents that have a `price` that is equal to `0.99`
 Find all documents that have a `price` that is equal to `0.99` and a `countryOfOrigin` of `USA`.
 
 ```
-> db.apples.find({price: 0.99, countryOfOrigin: "USA"})
+> db.apples.find({price: 0.99, countryOfOrigin: "USA" })
 { "_id" : ObjectId("627e79917107db0de3aeb494"), "type" : "macintosh", "price" : 0.99, "countryOfOrigin" : "USA" }
 ```
 
@@ -399,7 +399,7 @@ Find all documents that have a `price` that is less than `1.29`.
 === Add a field to all documents in a collection
 
 ```
-> db.apples.update({},{$set : {"genus":"malus"}},false,true)
+> db.apples.update({},{$set : { "genus":"malus" }},false,true)
 WriteResult({ "nMatched" : 9, "nUpserted" : 0, "nModified" : 9 })
 
 > db.apples.find( {price: 0.99})
@@ -427,7 +427,7 @@ WriteResult({ "nInserted" : 1 })
 === Updating a document in a collection
 
 ```
-> db.apples.update({ "_id" : ObjectId("627e9200be5baf249878171d") },{ $set:{"price":1.09} })
+> db.apples.update({ "_id" : ObjectId("627e9200be5baf249878171d") },{ $set:{ "price":1.09} })
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 
 > db.apples.find({ "_id" : ObjectId("627e9200be5baf249878171d") } )
@@ -570,7 +570,7 @@ An `<sort_order>` is created by concatenating the `<field_name>` with the `<sort
 
 ```
 > db.apples.aggregate([
-    {$match:{ countryOfOrigin: "Mexico"}},
+    {$match:{ countryOfOrigin: "Mexico" }},
     { $lookup:
         {
            from: "countries",
@@ -623,10 +623,10 @@ The following replaces the entire document, removing all fields except `price`
 
 Using the `$set` keyword in the following only update the `price` field in the document
 
-`db.apples.update({ type : "granny smith"}, {$set : { price : 2.49 }})`
+`db.apples.update({ type : "granny smith" }, {$set : { price : 2.49 }})`
 
 ```
-> db.apples.update({ type : "granny smith"}, {$set : { price : 2.49 }})
+> db.apples.update({ type : "granny smith" }, {$set : { price : 2.49 }})
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 
 > db.apples.find()
@@ -665,50 +665,15 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 
 ```json
 [
-    {
-        "type": "granny smith",
-        "price": 2.99,
-        "countryOfOrigin": "USA"
-    },
-    {
-        "type": "golden delicious",
-        "price": 0.99,
-        "countryOfOrigin": "Ireland"
-    },
-    {
-        "type": "gala",
-        "price": 1.29,
-        "countryOfOrigin": "USA"
-    },
-    {
-        "type": "empire",
-        "price": 1.59,
-        "countryOfOrigin": "USA"
-    },
-    {
-        "type": "delicious",
-        "price": 1.59,
-        "countryOfOrigin": "USA"
-    },
-    {
-        "type": "macintosh",
-        "price": 0.99,
-        "countryOfOrigin": "USA"
-    },
-    {
-        "type": "fuji",
-        "price": 0.99,
-        "countryOfOrigin": "Chile"
-    },
-    {
-        "type": "golden delicious",
-        "price": 0.99,
-        "countryOfOrigin": "Mexico"
-    },
-    {
-        "type": "crab",
-        "price": 0.09,
-        "countryOfOrigin": "Canada"
+    { "type": "granny smith", "price": 2.99, "countryOfOrigin": "USA" },
+    { "type": "golden delicious", "price": 0.99, "countryOfOrigin": "Ireland" },
+    { "type": "gala", "price": 1.29, "countryOfOrigin": "USA" },
+    { "type": "empire", "price": 1.59, "countryOfOrigin": "USA" },
+    { "type": "delicious", "price": 1.59, "countryOfOrigin": "USA" },
+    { "type": "macintosh", "price": 0.99, "countryOfOrigin": "USA" },
+    { "type": "fuji", "price": 0.99, "countryOfOrigin": "Chile" },
+    { "type": "golden delicious", "price": 0.99, "countryOfOrigin": "Mexico" },
+    { "type": "crab", "price": 0.09, "countryOfOrigin": "Canada"
     }
 ]
 ```
@@ -717,56 +682,33 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 
 ```json
 [
-    {
-        "type": "navel",
-        "price": 2.99,
-        "countryOfOrigin": "USA"
-    },
-    {
-        "type": "seville",
-        "price": 0.99,
-        "countryOfOrigin": "Spain"
-    },
-    {
-        "type": "blood",
-        "price": 1.69,
-        "countryOfOrigin": "USA"
-    },
-    {
-        "type": "mandarin",
-        "price": 1.59,
-        "countryOfOrigin": "USA"
-    },
-    {
-        "type": "jaffa",
-        "price": 1.59,
-        "countryOfOrigin": "Israel"
-    },
-    {
-        "type": "lima",
-        "price": 0.99,
-        "countryOfOrigin": "Brazil"
-    },
-    {
-        "type": "cara cara",
-        "price": 0.99,
-        "countryOfOrigin": "Venezuela"
-    },
-    {
-        "type": "cara cara",
-        "price": 1.29,
-        "countryOfOrigin": "USA"
-    },
-    {
-        "type": "cherry",
-        "price": 1.09,
-        "countryOfOrigin": "Japan"
-    },
-    ,
-    {
-        "type": "queen",
-        "price": 1.09,
-        "countryOfOrigin": "South Africa"
-    }
+    { "type": "navel", "price": 2.99, "countryOfOrigin": "USA" },
+    { "type": "seville", "price": 0.99, "countryOfOrigin": "Spain" },
+    { "type": "blood", "price": 1.69, "countryOfOrigin": "USA" },
+    { "type": "mandarin", "price": 1.59, "countryOfOrigin": "USA" },
+    { "type": "jaffa", "price": 1.59, "countryOfOrigin": "Israel" },
+    { "type": "lima", "price": 0.99, "countryOfOrigin": "Brazil" },
+    { "type": "cara cara", "price": 0.99, "countryOfOrigin": "Venezuela" },
+    { "type": "cara cara", "price": 1.29, "countryOfOrigin": "USA" },
+    { "type": "cherry", "price": 1.09, "countryOfOrigin": "Japan" },
+    { "type": "queen", "price": 1.09, "countryOfOrigin": "South Africa" }
+]
+```
+
+=== Countries
+
+```json
+[
+    { "country": "USA", "continent": "North America" },
+    { "country": "Spain", "continent": "Europe" },
+    { "country": "Brazil", "continent": "South America" },
+    { "country": "Venezuela", "continent": "South America" },
+    { "country": "Japan", "continent": "Asia" },
+    { "country": "South Africa", "continent": "Africa" },
+    { "country": "Chile", "continent": "South America" },
+    { "country": "Ireland", "continent": "Europe" },
+    { "country": "Mexico", "continent": "North America" },
+    { "country": "Canada", "continent": "North America" },
+    { "country": "China", "continent": "Asia" }
 ]
 ```
