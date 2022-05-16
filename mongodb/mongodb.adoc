@@ -2,21 +2,24 @@
 :experimental: true
 :product-name: MongoDB Cheat Sheet
 
+The `$` symbol in the examples represents the console prompt for a terminal window.
 
-The `>` symbol that proceeds commands in the examples represents the Mongo shell prompt.
+The `>` symbol in the examples represents the Mongo shell prompt.
 
 == Accessing the Mongo shell
 
+The following sections describe the commands to access the Mongo shell from a terminal window.
+
 === mongo
 
-`mongo <optional URL> -u <username> -p <password>``
+`mongo <optional URL> -u <username> -p <password>`
 
 *Examples:*
 
 *Access local instance*
 
 ----
-> mongo -u root -p password
+$ mongo -u root -p password
 
 MongoDB shell version v4.4.14
 connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
@@ -27,12 +30,13 @@ MongoDB server version: 5.0.8
 *Access remote instance*
 
 ----
-mongo remotemongo.com:27017/users -u someuser -p mYs3cretz
+$ mongo remotemongo.com:27017/users -u someuser -p mYs3cretz
 
 TO BE PROVIDED
 ----
 
 == Navigating around Mongo
+The following sections shows you how to list and select the database to work with as well as list collections and roles in a given database.
 
 === Show all databases in a Mongo instance
 
@@ -129,6 +133,8 @@ oranges
 
 == Working with users
 
+The following sections show you now to create a user, delete a user and list users in a given database.
+
 === Create user
 
 `db.runCommand(createUser <username> . . . . )`
@@ -201,6 +207,11 @@ switched to db fruit
 
 == Working with a collection
 
+A collection is an array of documents that exist within a given database. You can think of a document as a NoSQL record.
+
+The following sections show you how to create and delete a collection in a given database as well as how to list collections in a given 
+database.
+
 === Create a collection
 
 `db.createCollection(<collection_name>)`
@@ -239,6 +250,8 @@ true
 ```
 
 == Working with documents
+
+The  following sections show you how perform basic queries against a given database
 
 === Show all documents in a collection
 
@@ -282,7 +295,7 @@ Or
 
 `db.apples.find().sort({<field_name_1> : <sort_order>, <field_name_2> : <sort_order>, <field_name_n> : <sort_order>,})`
 
-When `<sort_order>` is 1, the documents will be listed in ascending order; -1 indicates descending order.
+Where `<sort_order>` is 1, the documents will be listed in ascending order; -1 indicates descending order.
 
 *Example:*
 
