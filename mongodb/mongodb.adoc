@@ -2,9 +2,9 @@
 :experimental: true
 :product-name: MongoDB Cheat Sheet
 
-The `$` symbol in the examples represents the console prompt for a terminal window.
+The `$` symbol in the examples below represents the console prompt for a terminal window.
 
-The `>` symbol in the examples represents the Mongo shell prompt.
+The `>` symbol in the examples below represents the Mongo shell prompt.
 
 == Accessing the Mongo shell
 
@@ -30,9 +30,17 @@ MongoDB server version: 5.0.8
 *Access remote instance*
 
 ----
-$ mongo remotemongo.com:27017/users -u someuser -p mYs3cretz
+$ mongo 192.168.86.93:27017/fruit -u root -p password  --authenticationDatabase "admin"
 
-TO BE PROVIDED
+MongoDB shell version v4.4.14
+connecting to: mongodb://192.168.86.93:27017/fruit?authSource=admin&compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("7c9b0ec4-51b3-4906-88bc-0b221cfcccf8") }
+MongoDB server version: 4.4.2
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+.
+.
+.
 ----
 
 == Navigating around Mongo
@@ -424,6 +432,8 @@ WriteResult({ "nMatched" : 9, "nUpserted" : 0, "nModified" : 9 })
 
 == Adding, updating and removing documents
 
+The following sections describe how update and remove existing documents in a given database.
+
 === Adding a document to a collection
 
 `db.<collection_name>.insert({ <document_declaration_in_json>})`
@@ -471,7 +481,9 @@ WriteResult({ "nRemoved" : 5 })
 
 == Setting query results to a variable
 
-=== Set a variable to a document
+You can use a variable to store the results of query. Once the result is stored, the variable can be used to modify data within the variable. A variable provides a shorthand for working with data.
+
+=== Set the result set of a query to a variable
 
 `var <variable_name> = <mongo_statement>`
 
@@ -487,12 +499,16 @@ WriteResult({ "nRemoved" : 5 })
 }
 ```
 
-=== Set a variable to a cursor
+=== Set a cursor to a variable
+
+A cursor is a point to documents in a database.
 
 `var <variable_name> = <mongo_statement>`
 
 ```
 > var usa = db.apples.find({ countryOfOrigin : "USA" })
+
+Display the contents of the variable `usa`.
 
 > usa
 { "_id" : ObjectId("627ea4c10d8bd2fbf249eadf"), "type" : "granny smith", "price" : 2.99, "countryOfOrigin" : "USA" }
@@ -504,6 +520,8 @@ WriteResult({ "nRemoved" : 5 })
 ```
 
 === Manipulating data using a variable
+
+You can making changes in a data assigned to a variable and then persist that data by saving the variable.
 
 *Example:*
 
@@ -527,6 +545,10 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 ```
 
 == Working with Indexes
+
+An index is digest of data in a Mongo database. If an index does not exist in the database, then Mongo scans every document in the given collection in order to select those documents that match the query statement. The efficiency of using an index is apparent.
+
+A database can have any number of indexes. Indexes are created and removed according to a particular property in the documents. 
 
 === Get indexes
 
@@ -581,7 +603,16 @@ An `<sort_order>` is created by concatenating the `<field_name>` with the `<sort
 
 == Aggregation
 
+Aggregation is the capability to combine two collections together using a single query to create a single result set.
+
+
 ```
+
+The following query combines the `apples` and `countries` collections together. The `apple` collection is combined with the `countries` collection to by using the `apple.countryOfOrigin` field and the data in the `countries.country` as the common join fields.
+
+The statement `{$match:{ countryOfOrigin: "Mexico" }}` indicates the the query will return only those documents in which the field `apples.countryOfOrigin` equals `Mexico`.
+
+
 > db.apples.aggregate([
     {$match:{ countryOfOrigin: "Mexico" }},
     { $lookup:
@@ -611,6 +642,8 @@ An `<sort_order>` is created by concatenating the `<field_name>` with the `<sort
 ```
 
 == Dangerous Tasks
+
+The following sections describe tasks that need to be executed with care. 
 
 === Unintended document creation on insert
 
