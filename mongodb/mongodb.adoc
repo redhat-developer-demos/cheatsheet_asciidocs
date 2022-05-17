@@ -547,7 +547,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 
 == Working with Indexes
 
-An index is digest of data in a Mongo database. If an index does not exist in the database, then Mongo scans every document in the given collection in order to select those documents that match the query statement. The efficiency of using an index is apparent.
+An index is a digest of the data in a Mongo database. If an index does not exist in the database, then Mongo scans every document in the given collection in order to select those documents that match the query statement. The efficiency of using an index is apparent.
 
 A database can have any number of indexes. Indexes are created and removed according to a particular property in the documents. 
 
