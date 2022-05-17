@@ -84,6 +84,7 @@ switched to db fruit
 
 apples
 oranges
+countries
 ----
 
 === Show roles in a Mongo instance
