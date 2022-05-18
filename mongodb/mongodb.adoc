@@ -2,13 +2,15 @@
 :experimental: true
 :product-name: MongoDB Cheat Sheet
 
+
+
 The `$` symbol in the examples below represents the console prompt for a terminal window.
 
 The `>` symbol in the examples below represents the Mongo shell prompt.
 
 == Accessing the Mongo shell
 
-The following sections describe the commands to access the Mongo shell from a terminal window.
+The following sections describe commands to access the Mongo shell from a terminal window.
 
 === mongo
 
@@ -44,7 +46,11 @@ For interactive help, type "help".
 ----
 
 == Navigating around Mongo
-The following sections shows you how to list and select the database to work with as well as list collections and roles in a given database.
+The following sections show you how to list and select:
+
+* a database running within a given Mongo server
+* collections within a database 
+* roles in the given database.
 
 === Show all databases in a Mongo instance
 
@@ -260,7 +266,7 @@ true
 
 == Working with documents
 
-The  following sections show you how perform basic queries against a given database
+The  following sections show you how perform basic queries against a given collection in a database
 
 === Show all documents in a collection
 
@@ -502,7 +508,7 @@ You can use a variable to store the results of query. Once the result is stored,
 
 === Set a cursor to a variable
 
-A cursor is a point to documents in a database.
+A cursor is a pointer to documents in a database.
 
 `var <variable_name> = <mongo_statement>`
 
@@ -588,14 +594,18 @@ When `<sort_order>` is 1, order is ascending. A `<sort_order>` of -1 is descendi
 
 `db.<collection_name>.dropIndex(<field_name>, <sort_order>)`
 
-An `<sort_order>` is created by concatenating the `<field_name>` with the `<sort_order>` for example `price_1`.
+An `<index_name>` is created by concatenating the `<field_name>` with the `<sort_order>` for example `price_1`.
 
 *Example:*
+
+Drop an index according to `index_name`.
 
 ```
 > db.apples.dropIndex ("countryOfOrigin_1")
 { "nIndexesWas" : 2, "ok" : 1 }
 ```
+
+Drop an index according to the field name upon which index as created.
 
 ```
 > db.apples.dropIndex ({ price : 1})
@@ -605,7 +615,6 @@ An `<sort_order>` is created by concatenating the `<field_name>` with the `<sort
 == Aggregation
 
 Aggregation is the capability to combine two collections together using a single query to create a single result set.
-
 
 ```
 
@@ -646,7 +655,30 @@ The statement `{$match:{ countryOfOrigin: "Mexico" }}` indicates the the query w
 
 The following sections describe tasks that need to be executed with care. 
 
-=== Unintended document creation on insert
+=== Dropping an entire collection
+
+`db.<collection_name>.drop()`
+
+*Example:*
+
+```
+> db.apples.drop()
+```
+
+=== Dropping an entire database
+
+`<database>.dropDatabase()`
+
+*Example:*
+
+```
+> use fruit
+
+> db.dropDatabase()
+{ "ok" : 1 }
+```
+
+=== Unintended document modification when a document is updated
 
 *Don't do this:*
 
@@ -681,29 +713,6 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 { "_id" : ObjectId("627ec9c81a9f54fbff86f146"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Ireland" }
 { "_id" : ObjectId("627ec9c81a9f54fbff86f147"), "type" : "gala", "price" : 1.29, "countryOfOrigin" : "USA" }
 
-```
-
-=== Dropping an entire collection
-
-`db.<collection_name>.drop()`
-
-*Example:*
-
-```
-> db.apples.drop()
-```
-
-=== Dropping an entire database
-
-`<database>.dropDatabase()`
-
-*Example:*
-
-```
-> use fruit
-
-> db.dropDatabase()
-{ "ok" : 1 }
 ```
 
 == The collection data used in the examples
