@@ -1,0 +1,315 @@
+= Buildah Cheat Sheet
+:experimental: true
+:product-name: Buildah Cheat Sheet
+
+The `$` symbol in the examples below represents the console prompt for a terminal window.
+
+== Installing buildah
+
+`yum -y install buildah`
+
+== Working with container images
+
+=== List all local container images
+
+`buildah images`
+
+*Example*
+
+```
+$ buildah images
+
+REPOSITORY                       TAG            IMAGE ID       CREATED         SIZE
+docker.io/library/busybox        latest         1a80408de790   5 weeks ago     1.46 MB
+quay.io/app-sre/ubi8-nodejs-14   latest         528baa338298   8 months ago    659 MB
+docker.io/library/node           12.18-alpine   e13d60032d4d   19 months ago   93.8 MB
+docker.io/reselbob/pinger        latest         c5fa4df9cfe4   3 years ago     74.8 MB
+```
+
+=== Pulling a container image
+
+`buildah from <repo>/<container_image_name>:<tag>`
+
+*Example*
+
+The following example pulls the container image `busybox:latest` from the remote registry `docker.io`.
+
+```
+$ buildah from docker.io/busybox:latest
+
+Trying to pull docker.io/library/busybox:latest...
+Getting image source signatures
+Copying blob 50e8d59317eb done  
+Copying config 1a80408de7 done  
+Writing manifest to image destination
+Storing signatures
+1a80408de790c0b1075d0a7e23ff7da78b311f85f36ea10098e4a6184c200964
+```
+
+=== Modifying an existing container image to create a new one
+
+*Example*
+
+The following example creates a working container based on the container image `myecho-image`. Then, a new file is created the echoes a message. There is an older version of the new file already in the container. The older file has an older message.
+
+The command `buildah copy`  is used to replace the older file with the contents of the new file. Finally the command `buildah commit` is used to create a new container image named `new-myecho-image`. The container image `new-myecho-image` has the content of the new file under the same filename as the legacy container image.
+
+Create the working container
+
+```
+$ buildah from myecho-image
+myecho-image-working-container
+```
+
+Create the new file with new content.
+
+```
+$ echo "echo This is another container that works!"" > myecho
+```
+
+Copy the new file contents into the running working container.
+
+```
+buildah copy myecho-image-working-container myecho /tmp/myecho
+5f270702af64a52e355b3bcff955bdde2648418bea6e9e4d5d68cbba91450598
+```
+
+Exercise the running working container to verify that the contents of the new file will be displayed.
+
+```
+$ buildah run myecho-image-working-container sh /tmp/myecho
+This is another container that works!
+```
+
+Create a new container image based on the file system of the legacy container image that also has replacement content in the script file `/tmp/myecho`.
+
+```
+$ buildah commit myecho-image-working-container new-myecho-image
+Getting image source signatures
+Copying blob 5bf135c4a0de skipped: already exists  
+Copying blob 773711fd02f0 skipped: already exists  
+Copying blob 80062d3ed257 skipped: already exists  
+Copying blob c823fae997d4 done  
+Copying config f6dc970a52 done  
+Writing manifest to image destination
+Storing signatures
+f6dc970a528ce2c94eba3d957170ac612537e1bd9a9f6def15e246d5b965f4e5
+```
+
+List the local container images on the machine to verify that the new container image has been created.
+
+```
+$ buildah images
+REPOSITORY                            TAG            IMAGE ID       CREATED          SIZE
+localhost/new-myecho-image            latest         f6dc970a528c   10 seconds ago   225 MB
+localhost/myecho-image                latest         636de016ba7a   3 hours ago      225 MB
+```
+
+=== Deleting a container image from local machine
+
+`buildah rmi <repo>/<container_image_name>:<tag>`
+
+or
+
+`buildah rmi <container_image_id>`
+
+```
+$ buildah rmi docker.io/library/busybox
+untagged: docker.io/library/busybox:latest
+1a80408de790c0b1075d0a7e23ff7da78b311f85f36ea10098e4a6184c200964
+```
+
+=== Building a container image
+
+`buildah bud -t <image_name> <container_file_path>`
+
+*Example*
+
+The following example creates a container file and then build a container image using the container file.
+
+Create the container file:
+
+```
+$ echo "echo This container works!" > myecho
+
+$ chmod 755 myecho
+
+$ cat << 'EOF' > Containerfile
+FROM registry.access.redhat.com/ubi8/ubi
+ADD myecho /tmp
+ENTRYPOINT "/tmp/myecho"
+EOF
+
+$ buildah bud -t myecho-image Containerfile
+```
+
+Build the container image:
+
+```
+STEP 1/3: FROM registry.access.redhat.com/ubi8/ubi
+STEP 2/3: ADD myecho /tmp
+STEP 3/3: ENTRYPOINT "/tmp/myecho"
+COMMIT myecho_image
+Getting image source signatures
+Copying blob 5bf135c4a0de skipped: already exists  
+Copying blob 773711fd02f0 skipped: already exists  
+Copying blob 12113fa850f7 done  
+Copying config b479141386 done  
+Writing manifest to image destination
+Storing signatures
+--> b4791413861
+Successfully tagged localhost/myecho_image:latest
+b4791413861b0245023d9781857000709f5c4ea22d464d16fcc6ce1b5daee2d5
+```
+
+List the container image:
+
+```
+$ buildah images
+REPOSITORY                  TAG        IMAGE ID       CREATED         SIZE
+localhost/myecho-image      latest     636de016ba7a   9 seconds ago   225 MB
+```
+
+=== Logging into a remote container image registry
+
+`buildah login <registry_domain_name>`
+
+*Example*
+
+The following example executes `buildah login`. The command prompts for a username and password.
+
+```
+buildah login quay.io
+
+Username:
+Password:
+Login Succeeded!
+```
+
+=== Pushing a container image to a container image registry
+
+`buildah push <local_image_name>:<optional_tag> <registry_domain_name>/<repo_username>/<image_name>:<optional_tag>`
+
+*Example*
+
+The following command pushes the local container image the  repository of a user named `cooluser` on remote registry `quay.io`.
+
+```
+buildah push localhost/myecho-image quay.io/cooluser/myecho-image:v1.0
+```
+
+== Working with containers
+
+=== List all working containers
+
+`buildah containers`
+
+The command `buildah containers` lists all working containers. A working container is a container that has been created using the `buildah from <container_image>` command
+
+*Example*
+
+The following example created 3 working containers using the `buildah from` command. Then, the working directories are listed using the `buildah containers` command.
+
+Create the containers
+
+```
+$ buildah from httpd
+httpd-working-container
+$ buildah from busybox
+busybox-working-container
+$ buildah from nginx
+nginx-working-container
+```
+
+List the containers
+
+```
+$ buildah containers
+
+$ buildah containers
+CONTAINER ID  BUILDER  IMAGE ID     IMAGE NAME                       CONTAINER NAME
+7071c5bab4ff     *     c58ef9bfbb57 docker.io/library/httpd:latest   httpd-working-container
+da51dced0afe     *     1a80408de790 docker.io/library/busybox:latest busybox-working-container
+bc1473702c2d     *     de2543b9436b docker.io/library/nginx:latest   nginx-working-container
+```
+
+=== Display details about a container
+
+`buildah inspect  [options] <container_id>`
+
+or
+
+`buildah inspect [options] <container_name>`
+
+The ``buildah inspect` returns a very large JSON object that describe the many details of the working container.
+
+**Example**
+
+The following example inspects the working container named `httpd-working-container`. The option `--format '{{.MountLabel}}'` is used to display only the information associated with the `Mount` property of the JSON object.
+
+```
+$ buildah inspect --format '{{.MountLabel}}' httpd-working-container
+system_u:object_r:container_file_t:s0:c404,c734
+```
+
+=== Running a container with buildah
+
+`buildah run [options] <working_container> <command>`
+
+
+*Example*
+
+The following example builds an working container from the image `httpd`. Since the image might exist in a number of remote registries, `buildah` displays a interactive list of registries to choose from.
+
+
+```
+$ buildah from httpd
+ 
+  Please select an image: 
+    quay.io/httpd:latest
+    registry.fedoraproject.org/httpd:latest
+    registry.access.redhat.com/httpd:latest
+    registry.centos.org/httpd:latest
+  ▸ docker.io/library/httpd:latest
+
+  httpd-working-container
+```
+The `buildah run` command is then executed against the working container created by `buildah from`. The example executes the `ls /var` command listing the contents of the `/var` directory located within the working container.
+
+```
+$ buildah run httpd-working-container ls /var
+backups  cache	lib  local  lock  log  mail  opt  run  spool  tmp
+```
+
+=== Delete a container
+
+`buildah delete <container_id>`
+
+or 
+
+`buildah delete <container_name>`
+
+**Example**
+
+```
+buildah delete 35b88d7ef180
+35b88d7ef1807a4d5e085472a23cea6425920ac94845fdcb33c036d89a804f3e
+```
+
+or
+
+```
+$ buildah delete httpd-working-container
+f892d7f36f5f1d0b70fd40ebb00c0861cab44260f6b44add9574381673307ef5
+```
+
+=== Delete all containers on a machine
+
+The following command will delete all containers created under `buildah run`. If no containers are running, the command will throw an error.
+
+```
+buildah delete $(buildah list  -a -q)
+7071c5bab4ff60de473b37c5a152b2c566e0f6a8d401ba916ba761d77ad88d7a
+da51dced0afec9db1178eb48631433462d26853baa2f472d67b587b2f04c7866
+bc1473702c2d82f0a14741a49747a8077149bf2945177e107ad4057d7c9b67dc
+```

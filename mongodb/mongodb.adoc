@@ -2,7 +2,9 @@
 :experimental: true
 :product-name: MongoDB Cheat Sheet
 
+MongoDB is a NoSQL, document-centric database. MongoDB is intended to used small and enterprise grade projects that need a document-centric database solution that scale up on demand.
 
+The following section describe the command and tasks that are basic to using MongoDB.
 
 The `$` symbol in the examples below represents the console prompt for a terminal window.
 
