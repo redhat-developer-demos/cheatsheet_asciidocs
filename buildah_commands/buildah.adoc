@@ -2,13 +2,28 @@
 :experimental: true
 :product-name: Buildah Cheat Sheet
 
-The `$` symbol in the examples below represents the console prompt for a terminal window.
+Buildah is a tool for creating OCI compliant container images. Also, Buildah provides the capability to create a container based on a particular container image, update the contents of that container and then create a brand new container image based on the altered container.
+
+Although you can use Buildah to run a container on a local machine in a limited manner, the tool's fundamental intention is to provide versatility for creating container images and pushing them to a container registry.
+
+The sections that follow show you how to use Buildah to work with existing container images and build new ones. There is also a section that goes over the basics of pushing a container to a container registry.
+
+The `$` symbol in the examples in the sections below represents the console prompt for a terminal window.
 
 == Installing buildah
 
 `yum -y install buildah`
 
 == Working with container images
+
+The following sections describe how to 
+
+* list container imagess
+* pull a container image
+* create a container image
+* delete a container image
+
+There is also a section that demonstrates how to create a new container image based on an existing container image.
 
 === List all local container images
 
@@ -45,6 +60,106 @@ Writing manifest to image destination
 Storing signatures
 1a80408de790c0b1075d0a7e23ff7da78b311f85f36ea10098e4a6184c200964
 ```
+=== Deleting a container image from local machine
+
+`buildah rmi <repo>/<container_image_name>:<tag>`
+
+or
+
+`buildah rmi <container_image_id>`
+
+```
+$ buildah rmi docker.io/library/busybox
+untagged: docker.io/library/busybox:latest
+1a80408de790c0b1075d0a7e23ff7da78b311f85f36ea10098e4a6184c200964
+```
+
+=== Deleting all container images from local machine
+
+`buildah rmi --all`
+
+*Example*
+
+```
+$ buildah rmi --all`
+
+untagged: docker.io/library/node:12.18-alpine
+untagged: quay.io/app-sre/ubi8-nodejs-14:latest
+untagged: docker.io/reselbob/pinger:latest
+untagged: docker.io/library/busybox:latest
+untagged: docker.io/library/httpd:latest
+untagged: registry.access.redhat.com/ubi8/ubi:latest
+e13d60032d4d14e88485db13b65a7e38b2588bc3101456278b5e2daddec7e862
+528baa33829859e2b854b1f7c2356a8223e449aff78d18ee4cc2fad298199611
+c5fa4df9cfe436469dab3d89be4dafcbfb61bc9e594778e12de02ee89ca7fa9a
+1a80408de790c0b1075d0a7e23ff7da78b311f85f36ea10098e4a6184c200964
+c58ef9bfbb5789a9882cee610ba778b1368d21b513d6caf32e3075542e13fe81
+1264065f6ae851d6a33d7be03ffde100356592e385b9b72f65f91b5d9b944b92
+```
+
+
+
+=== Building a container image
+
+`buildah bud -t <image_name> <container_file_path>`
+
+*Example*
+
+The following example creates a container file and then build a container image using the container file.
+
+Create the container file:
+
+```
+$ echo "echo This container works!" > myecho
+
+$ chmod 755 myecho
+
+$ cat << 'EOF' > Containerfile
+FROM registry.access.redhat.com/ubi8/ubi
+ADD myecho /tmp
+ENTRYPOINT "/tmp/myecho"
+EOF
+
+$ buildah bud -t myecho-image Containerfile
+```
+
+Build the container image:
+
+```
+STEP 1/3: FROM registry.access.redhat.com/ubi8/ubi
+STEP 2/3: ADD myecho /tmp
+STEP 3/3: ENTRYPOINT "/tmp/myecho"
+COMMIT myecho_image
+Getting image source signatures
+Copying blob 5bf135c4a0de skipped: already exists  
+Copying blob 773711fd02f0 skipped: already exists  
+Copying blob 12113fa850f7 done  
+Copying config b479141386 done  
+Writing manifest to image destination
+Storing signatures
+--> b4791413861
+Successfully tagged localhost/myecho_image:latest
+b4791413861b0245023d9781857000709f5c4ea22d464d16fcc6ce1b5daee2d5
+```
+
+List the container image:
+
+```
+$ buildah images
+REPOSITORY                  TAG        IMAGE ID       CREATED         SIZE
+localhost/myecho-image      latest     636de016ba7a   9 seconds ago   225 MB
+```
+=== Inspect a container image
+
+` buildah inspect --type image image-id`
+
+or
+
+`buildah inspect --type image image-name`
+
+The `buildah inspect` command returns a very large JSON object that describes the many details of a container image.
+
+*Example*
 
 === Modifying an existing container image to create a new one
 
@@ -105,70 +220,13 @@ localhost/new-myecho-image            latest         f6dc970a528c   10 seconds a
 localhost/myecho-image                latest         636de016ba7a   3 hours ago      225 MB
 ```
 
-=== Deleting a container image from local machine
+== Working with a container image registry
 
-`buildah rmi <repo>/<container_image_name>:<tag>`
+The following sections show you how to:
 
-or
-
-`buildah rmi <container_image_id>`
-
-```
-$ buildah rmi docker.io/library/busybox
-untagged: docker.io/library/busybox:latest
-1a80408de790c0b1075d0a7e23ff7da78b311f85f36ea10098e4a6184c200964
-```
-
-=== Building a container image
-
-`buildah bud -t <image_name> <container_file_path>`
-
-*Example*
-
-The following example creates a container file and then build a container image using the container file.
-
-Create the container file:
-
-```
-$ echo "echo This container works!" > myecho
-
-$ chmod 755 myecho
-
-$ cat << 'EOF' > Containerfile
-FROM registry.access.redhat.com/ubi8/ubi
-ADD myecho /tmp
-ENTRYPOINT "/tmp/myecho"
-EOF
-
-$ buildah bud -t myecho-image Containerfile
-```
-
-Build the container image:
-
-```
-STEP 1/3: FROM registry.access.redhat.com/ubi8/ubi
-STEP 2/3: ADD myecho /tmp
-STEP 3/3: ENTRYPOINT "/tmp/myecho"
-COMMIT myecho_image
-Getting image source signatures
-Copying blob 5bf135c4a0de skipped: already exists  
-Copying blob 773711fd02f0 skipped: already exists  
-Copying blob 12113fa850f7 done  
-Copying config b479141386 done  
-Writing manifest to image destination
-Storing signatures
---> b4791413861
-Successfully tagged localhost/myecho_image:latest
-b4791413861b0245023d9781857000709f5c4ea22d464d16fcc6ce1b5daee2d5
-```
-
-List the container image:
-
-```
-$ buildah images
-REPOSITORY                  TAG        IMAGE ID       CREATED         SIZE
-localhost/myecho-image      latest     636de016ba7a   9 seconds ago   225 MB
-```
+* log in to a container image registry
+* push a container image to a registry
+* add an additional tag to a container image
 
 === Logging into a remote container image registry
 
@@ -198,7 +256,36 @@ The following command pushes the local container image the  repository of a user
 buildah push localhost/myecho-image quay.io/cooluser/myecho-image:v1.0
 ```
 
+=== Create an additional image tag on an existing image
+
+`buildah tag <image_name>:<existing-image-tag> <image_name>:<new-image-tag>`
+
+*Example*
+
+The following example creates a new tag, `verylatest` and applies it to the existing container image `docker.io/library/nginx` that as the tag `latest`. Notice that the values of the `IMAGE ID`` are identical.
+
+```
+$ buildah images
+REPOSITORY                TAG      IMAGE ID       CREATED      SIZE
+docker.io/library/nginx   latest   de2543b9436b   2 days ago   146 MB
+
+$ buildah tag docker.io/library/nginx:latest docker.io/library/nginx:verylatest
+
+$ buildah images
+REPOSITORY                TAG          IMAGE ID       CREATED      SIZE
+docker.io/library/nginx   latest       de2543b9436b   2 days ago   146 MB
+docker.io/library/nginx   verylatest   de2543b9436b   2 days ago   146 MB
+```
+
+
 == Working with containers
+
+The following sections show you how to:
+
+* List all working container
+* Run a working container
+* Display details about a working container
+* Delete a working container
 
 === List all working containers
 
@@ -208,7 +295,7 @@ The command `buildah containers` lists all working containers. A working contain
 
 *Example*
 
-The following example created 3 working containers using the `buildah from` command. Then, the working directories are listed using the `buildah containers` command.
+The following example creates 3 working containers using the `buildah from` command. Then, the working directories are listed using the `buildah containers` command.
 
 Create the containers
 
@@ -231,25 +318,6 @@ CONTAINER ID  BUILDER  IMAGE ID     IMAGE NAME                       CONTAINER N
 7071c5bab4ff     *     c58ef9bfbb57 docker.io/library/httpd:latest   httpd-working-container
 da51dced0afe     *     1a80408de790 docker.io/library/busybox:latest busybox-working-container
 bc1473702c2d     *     de2543b9436b docker.io/library/nginx:latest   nginx-working-container
-```
-
-=== Display details about a container
-
-`buildah inspect  [options] <container_id>`
-
-or
-
-`buildah inspect [options] <container_name>`
-
-The ``buildah inspect` returns a very large JSON object that describe the many details of the working container.
-
-**Example**
-
-The following example inspects the working container named `httpd-working-container`. The option `--format '{{.MountLabel}}'` is used to display only the information associated with the `Mount` property of the JSON object.
-
-```
-$ buildah inspect --format '{{.MountLabel}}' httpd-working-container
-system_u:object_r:container_file_t:s0:c404,c734
 ```
 
 === Running a container with buildah
@@ -281,6 +349,25 @@ $ buildah run httpd-working-container ls /var
 backups  cache	lib  local  lock  log  mail  opt  run  spool  tmp
 ```
 
+=== Display details about a container
+
+`buildah inspect  [options] <container_id>`
+
+or
+
+`buildah inspect [options] <container_name>`
+
+The `buildah inspect` command returns a very large JSON object that describes the many details of the working container.
+
+**Example**
+
+The following example inspects the working container image named `registry.access.redhat.com/ubi8/ubi`. The option `--format '{{.IDMappingOptions}}'` is used to display only the information associated with the `IDMappingOptions` property of the JSON object.
+
+```
+$ buildah inspect --format '{{.IDMappingOptions}}' --type image registry.access.redhat.com/ubi8/ubi
+{true true [] []}
+```
+
 === Delete a container
 
 `buildah delete <container_id>`
@@ -292,7 +379,7 @@ or
 **Example**
 
 ```
-buildah delete 35b88d7ef180
+$ buildah delete 35b88d7ef180
 35b88d7ef1807a4d5e085472a23cea6425920ac94845fdcb33c036d89a804f3e
 ```
 
@@ -303,13 +390,22 @@ $ buildah delete httpd-working-container
 f892d7f36f5f1d0b70fd40ebb00c0861cab44260f6b44add9574381673307ef5
 ```
 
-=== Delete all containers on a machine
+=== Delete all containers on a machine 1
+
+$ buildah rm --all
+4666ea9b554494c204dcc5c30ae0fcad8f8195a3d896845d100899b4e956313f
+9b181a3172cefa5c92e33bd7ff2619bd6ac2bab9d87ab2a2bd9a226f70016282
+
+
+=== Delete all containers on a machine 2
 
 The following command will delete all containers created under `buildah run`. If no containers are running, the command will throw an error.
 
 ```
-buildah delete $(buildah list  -a -q)
+$ buildah delete $(buildah list  -a -q)
+
 7071c5bab4ff60de473b37c5a152b2c566e0f6a8d401ba916ba761d77ad88d7a
 da51dced0afec9db1178eb48631433462d26853baa2f472d67b587b2f04c7866
 bc1473702c2d82f0a14741a49747a8077149bf2945177e107ad4057d7c9b67dc
 ```
+
