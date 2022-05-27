@@ -61,6 +61,8 @@ echo ${#names[@]} # 3
 
 ```
 cat << 'EOF' > arrays-01.sh
+#!/usr/bin/env bash
+
 names=('Alex' 'Ada' 'Alexandra')
 names+=('Soto') # Appends element, Soto
 unset names[3] # Removes element at index 3, (Soto)
@@ -81,21 +83,135 @@ sh arrays-01.sh
 === Maps
 
 ```
-declare -a score
+declare -A score
 score[alex]="1"
 score[edson]="2"
 score[sebi]="3"
-unset score[alex] # Delete alex entry
- echo ${!score[@]} # alex edson sebi echo ${score[@]} # 2 1 3
-echo ${!score[@]} # alex edson sebi
-echo ${score[@]} # 2 1 3
-echo ${#score[@]} # 3
+score[chris]="4"
+echo ${!score[@]} # alex edson sebi chris
+unset score[chris] # Delete chris entry
+echo ${score[@]} # show all the values
+echo ${!score[@]} # show all keys
+echo ${score[edson]} # show the value of edson: 2
+echo ${#score[@]} # show the number of elements in the map: 3
+EOF
 ```
 
 *Copy, paste and run in your terminal:*
 
+```
+cat << 'EOF' > maps-01.sh
+#!/usr/bin/env bash
+
+declare -A score
+score[alex]="1"
+score[edson]="2"
+score[sebi]="3"
+score[chris]="4"
+echo ${!score[@]} # alex edson sebi chris
+unset score[chris] # Delete chris entry
+echo ${score[@]} # show all the values
+echo ${!score[@]} # show all keys
+echo ${score[edson]} # show the value of edson: 2
+echo ${#score[@]} # show the number of elements in the map: 3
+EOF
+sh maps-01.sh
+```
+
 == Functions
 
+A basic function
+
+```
+helloworld() {
+  echo "Number of arguments $#" # 2
+  echo "Hello World $1 from $2" # Hello World Alex from Bash
+  }
+
+helloworld "Alex" "Bash"
+```
+
+*Copy, paste and run in your terminal:*
+
+```
+cat << 'EOF' > function-01.sh
+#!/usr/bin/env bash
+
+helloworld() {
+  echo "Number of arguments $#" # 2
+  echo "Hello World $1 from $2" # Hello World Alex from Bash
+  }
+
+helloworld "Alex" "Bash"
+EOF
+
+
+sh function-01.sh
+```
+
+---
+
+A function that sets a value to a global variable
+
+```
+goodmorning () {
+  # set a value for the global variable named myresult
+  myresult='Good Morning'
+ }
+```
+
+*Copy, paste and run in your terminal:*
+
+```
+cat << 'EOF' > function-02.sh
+#!/usr/bin/env bash
+
+goodmorning () {
+  # set a value for the global variable named myresult
+  myresult='Good Morning'
+ }
+
+goodmorning
+echo $myresult
+EOF
+
+sh function-02.sh
+```
+
+---
+
+A function that returns a numeric code on exit
+
+Exiting with a value of `0` means success. Any higher number means a failure condition by convention
+
+```
+myfunc()
+{
+    echo "this is a message from myfunc()"
+    exit 0
+}
+```
+
+*Copy, paste and run in your terminal:*
+
+```
+cat << 'EOF' > function-03.sh
+#!/usr/bin/env bash
+
+myfunc()
+{
+echo "this is a message from myfunc()"
+exit 0
+}
+
+# run the custom function named myfunc
+myfunc
+EOF
+
+sh function-03.sh && echo "$?"
+```
+
+A function that returns a numeric code on using return
 
 == Conditional Statements
 
@@ -108,8 +224,115 @@ echo ${#score[@]} # 3
 == Loops
 
 === Range
+```
+for i in {1..5}; do
+  echo "Hello World $i"
+done
+```
+
+*Copy, paste and run in your terminal:*
+
+```
+cat << 'EOF' > basic-range-01.sh
+#!/usr/bin/env bash
+
+for i in {1..5}; do
+  echo "Hello World $i"
+done
+
+EOF
+
+sh basic-range-01.sh
+```
 
 === Collections
+
+Print all elements from a plain array:
+
+```
+for i in "${names[@]}"; do
+  echo "Hello $i"
+done
+```
+
+*Copy, paste and run in your terminal:*
+
+```
+cat << 'EOF' > range-names-01.sh
+#!/usr/bin/env bash
+
+names=('Alex' 'Ada' 'Alexandra', 'Soto')
+
+for i in "${names[@]}"; do
+  echo "Hello $i"
+done
+
+EOF
+
+sh range-names-01.sh
+```
+
+---
+
+Print keys of all elements from a key/value array:
+
+```
+for key in "${!score[@]}"; do
+  echo $key
+done
+```
+
+*Copy, paste and run in your terminal:*
+
+```
+cat << 'EOF' > range-keys-01.sh
+#!/usr/bin/env bash
+
+declare -A score
+
+score[alex]="1"
+score[edson]="2"
+score[sebi]="3"
+score[chris]="4"
+
+for key in "${!score[@]}"; do
+  echo $key
+done
+
+EOF
+sh range-keys-01.sh
+```
+
+---
+
+Print values of all elements from a key/value array:
+
+```
+for val in "${score[@]}"; do
+  echo $val
+done
+```
+
+*Copy, paste and run in your terminal:*
+
+```
+cat << 'EOF' > value-keys-01.sh
+#!/usr/bin/env bash
+
+declare -A score
+
+score[alex]="1"
+score[edson]="2"
+score[sebi]="3"
+score[chris]="4"
+
+for val in "${score[@]}"; do
+  echo $val
+done
+
+EOF
+sh value-keys-01.sh
+```
 
 === Files and Directories
 
@@ -127,6 +350,10 @@ done
 
 ```
 cat << 'EOF' > files-01.sh
+#!/usr/bin/env bash
+
+echo All log files in the /tmp directory
+
 for i in /tmp/*.log; do
   echo $i
 done
@@ -149,7 +376,11 @@ done
 *Copy, paste and run in your terminal:*
 
 ```
-cat << 'EOF' > files-01.sh
+cat << 'EOF' > files-02.sh
+#!/usr/bin/env bash
+
+echo All subdirectories in /var
+
 for i in /var/*; do
   echo $(basename "$i")
 done
@@ -163,8 +394,27 @@ sh files-02.sh
 x=1;
 while [ $x -le 5 ]; do
   echo "Hello World"
+  ((x=x+1))
 done
 ```
+
+*Copy, paste and run in your terminal:*
+
+```
+cat << 'EOF' > while-loop-01.sh
+#!/usr/bin/env bash
+
+x=1;
+while [ $x -le 5 ]; do
+  echo "Hello World"
+  ((x=x+1))
+done
+EOF
+
+sh while-loop-01.sh
+```
+
+*Copy, paste and run in your terminal:*
 == Executing Commands
 
 == Useful Snippets
