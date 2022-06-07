@@ -392,11 +392,15 @@ f892d7f36f5f1d0b70fd40ebb00c0861cab44260f6b44add9574381673307ef5
 
 === Delete all containers on a machine, technique 1
 
+The following command will delete all containers on the local machine
+
+```
 $ buildah rm --all
+
 4666ea9b554494c204dcc5c30ae0fcad8f8195a3d896845d100899b4e956313f
 9b181a3172cefa5c92e33bd7ff2619bd6ac2bab9d87ab2a2bd9a226f70016282
 
-
+```
 === Delete all containers on a machine, technique 2
 
 The following command will delete all containers created under `buildah run`. If no containers are running, the command will throw an error.
