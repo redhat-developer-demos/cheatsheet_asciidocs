@@ -151,7 +151,7 @@ localhost/myecho-image      latest     636de016ba7a   9 seconds ago   225 MB
 ```
 === Inspect a container image
 
-` buildah inspect --type image image-id`
+`buildah inspect --type image image-id`
 
 or
 
