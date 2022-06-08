@@ -4,38 +4,177 @@
 
 == Bash Script Header
 
+Typically a bash script has a ![shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) declaration on the first line to specify the interpreter that executes the script's commands.
+
+The `env` command tells the system to search for the specified interpreter through the `$PATH` variable. Usually the interpreter is located in the `/usr/bin/env`` directory of a Unix-based system.
+
 ```
 #!/usr/bin/env bash
 ```
 
+In this case, the shebang clause tells the system to use `bash`. Another interpreter such as `sh` could be defined as well.
+
 == Variables & Strings
 
 === Variable declaration
+
+You declare a variable in a bash script like so `VARIABLE_NAME=<value>` **WHERE**  `<value>` is the value assigned to the variable. Then, to reference the variable, put the `$` symbol before the variable name being referenced, like so: `$VARIABLE_NAME`.
+
+*Example:*
+
 ```
 #!/usr/bin/env bash
 MSG="Hello World"
 echo "$MSG Alex" # Hello World Alex echo '$MSG Alex' # $MSG Alex
 ```
 
+**BE CAREFUL** to make sure there is no space on either side of the `=` symbol when declaring a variable. The following will **not** work: `MYVARIABLE = foo`.
+
 *Copy, paste and run in your terminal:*
 
-=== String manipulation
+=== String manipulation using parameter expansion
+
+Parameter expansion a technique to get the value from the referenced entity such as a variable in a Linux script or an environment variable according to a piece of processing logic. A variable is processed by enclosing the variable name within the `${  }` characters. The processing logic is defined by characters that follow the variable name. For example to the variable named `MSG`, the statement `${MSG^^}` turns all lowercase characters in the variable `MSG` to uppercase, like so:
+
 ```
-MSG="hello world"
-# Replace
-echo ${MSG/w/W} # hello World
-echo ${MSG//[a-zA-Z]/X} # XXXXX XXXXX # Substring
-echo ${MSG:0:5} # hello
-echo ${MSG%world} # hello
-echo ${MSG#hello} # world
-# Uppercase
-echo ${MSG^} # Hello world
-echo ${MSG^^} # HELLO WORLD MSG="HELLO WORLD"
-echo ${MSG,} # hELLO WORLD
-echo ${MSG,,} # hello world
-# Alternative
-echo ${MSG:-val} # HELLO WORLD
-echo ${FOO:-val} # val
+MSG="aBcDeFg"
+echo ${MSG^^}
+
+#returns ABCDEFG
+```
+
+And the statement `${MSG,,}` turns all uppercase characters in the variable `MSG` to lowercase, like so:
+
+```
+MSG="aBcDeFg"
+echo ${MSG,,}
+
+#returns abcdef
+```
+
+The following examples demonstrate various ways use parameter expansion on Linux variables.
+
+*Word Replacement*
+
+```
+MSG="Say hi to Chris and Sidney"
+echo ${MSG//Chris/Billy}
+
+#returns Say hi to Billy and Sidney
+```
+
+*Character Replacement Using Regular Expressions*
+
+Replace all alphabetic characters with the character `X` but leave numeral alone
+
+```
+MSG="I need 10"
+echo ${MSG//[a-zA-Z]/X}
+
+#returns X XXXX 10
+```
+
+---
+
+Replace all numeric characters with the character `Z` but leave alphabetic characters alone
+
+```
+MSG="I need 10"
+echo ${MSG//[0-9]/Z}
+
+#returns I need ZZ
+```
+
+*Extracting Substrings*
+
+Get the substring of all the characters after the starting at position 4
+
+```
+MSG="The Rolling Stones"
+echo ${MSG:4}
+
+#returns Rolling Stones
+```
+
+---
+
+Get the substring that has 7 characters starting at position 4
+
+```
+MSG="The Rolling Stones"
+echo ${MSG:4:7}
+
+#returns Rolling
+```
+
+---
+
+Use the `#` symbol to get the substring after the characters `The` starting from the left side of the string
+
+```
+MSG="The Rolling Stones"
+echo ${MSG#The} 
+
+#returns Rolling Stones
+
+---
+
+Use the `%` symbol to get the substring before the characters `Rolling Sones` starting the right side of the string
+
+```
+MSG="The Rolling Stones"
+echo ${MSG%Rolling Stones} 
+
+#returns The
+
+```
+
+*Case Conversion*
+
+Use the `^` symbol to convert the first character in a string to uppercase.
+
+```
+ MSG="aBcDeFg"
+ echo ${MSG^}
+
+ #returns ABcDeFg
+
+```
+
+---
+
+Use the `^^` symbols to convert the all lowercase characters in a string to uppercase.
+
+```
+ MSG="aBcDeFg"
+ echo ${MSG^^}
+
+ #returns ABCDEFG
+
+```
+
+---
+
+Use the `,` symbol to convert the first character in a string to lowercase.
+
+```
+ MSG="TuVwXyZ"
+ echo ${MSG,}
+
+ #returns tuVwXyZ
+
+```
+
+---
+
+Use the `,,` symbols to convert all characters in a string to lowercase.
+
+```
+ MSG="TuVwXyZ"
+ echo ${MSG,}
+
+ #returns tuvwxyz
+
 ```
 
 == Collections

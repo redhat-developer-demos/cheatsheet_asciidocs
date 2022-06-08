@@ -845,7 +845,7 @@ Imports a tar file and saves it as a filesystem image.
 
 *Example:*
 
-The following example creates a container image from an existing tar file named `mynginx.tar`. tar`. The command creates a container image named `new-nginx` with the tag `v1`. Finally, the command `podman images` is called to list the container image that was created:
+The following example creates a container image from an existing tar file named `mynginx.tar`. The command creates a container image named `new-nginx` with the tag `v1`. Finally, the command `podman images` is called to list the container image that was created:
 
 ----
 $ podman import mynginx.tar new-nginx:v1

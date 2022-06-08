@@ -7,7 +7,7 @@ This cheat sheet presents a collection of Linux commands and executables typical
 
 == Console and output management commands
 
-Commands in this section apply to working in a terminal window console and output from a computer or virtual machine running the Linux operating system.
+Commands in this section apply to working in a terminal window console and illustrate output from a computer or virtual machine running the Linux operating system.
 
 === history
 
