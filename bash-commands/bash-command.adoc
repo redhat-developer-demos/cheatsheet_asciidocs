@@ -117,6 +117,8 @@ echo ${MSG#The}
 
 #returns Rolling Stones
 
+```
+
 ---
 
 Use the `%` symbol to get the substring before the characters `Rolling Sones` starting the right side of the string
