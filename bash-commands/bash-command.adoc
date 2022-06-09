@@ -30,8 +30,6 @@ echo "$MSG " # Hello World
 
 **BE CAREFUL** to make sure there is no space on either side of the `=` symbol when declaring a variable. The following will **not** work: `MYVARIABLE = foo`.
 
-*Copy, paste and run in your terminal:*
-
 === String manipulation using parameter expansion
 
 Parameter expansion a technique to get the value from the referenced entity such as a variable in a Linux script or an environment variable according to a piece of processing logic. A variable is processed by enclosing the variable name within the `${  }` characters. The processing logic is defined by characters that follow the variable name. For example to the variable named `MSG`, the statement `${MSG^^}` turns all lowercase characters in the variable `MSG` to uppercase, like so:
@@ -87,7 +85,7 @@ echo ${MSG//[0-9]/Z}
 
 *Extracting Substrings*
 
-Get the substring of all the characters after the starting at position 4
+Use the `:` symbol to get the substring of all the characters after the starting at position 4
 
 ```
 MSG="The Rolling Stones"
@@ -98,7 +96,7 @@ echo ${MSG:4}
 
 ---
 
-Get the substring that has 7 characters starting at position 4
+Use the `:` symbol to get the substring that has 7 characters starting at position 4
 
 ```
 MSG="The Rolling Stones"
