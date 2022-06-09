@@ -268,6 +268,12 @@ sh arrays-01.sh
 
 === Maps
 
+NEEDS A SENTENCE
+
+*Creating a map*
+
+TO BE COMPLETED
+
 ```
 declare -A score
 score[alex]="1"
@@ -368,7 +374,7 @@ sh function-02.sh
 
 A function that returns a numeric code on exit
 
-Exiting with a value of `0` means success. Any higher number means a failure condition by convention
+Exiting with a value of `0` means success. Any higher number means, by convention, a failure condition exists.
 
 ```
 myfunc()
@@ -401,13 +407,23 @@ A function that returns a numeric code on using return
 
 == Conditional Statements
 
+NEEDS A SENTENCE
+
 === Numeric statements
+
+TO BE COMPLETED
 
 === String statements
 
+TO BE COMPLETED
+
 === File statements
 
+TO BE COMPLETED
+
 == Loops
+
+NEEDS A SENTENCE
 
 === Range
 ```
@@ -431,7 +447,7 @@ EOF
 sh basic-range-01.sh
 ```
 
-=== Collections
+=== Looping Collections
 
 Print all elements from a plain array:
 
