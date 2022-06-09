@@ -6,7 +6,7 @@
 
 Typically a bash script has a ![shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) declaration on the first line to specify the interpreter that executes the script's commands.
 
-The `env` command tells the system to search for the specified interpreter through the `$PATH` variable. Usually the interpreter is located in the `/usr/bin/env`` directory of a Unix-based system.
+The `env` command tells the system to search for the specified interpreter through the `$PATH` variable. Usually the interpreter is located in the `/usr/bin/env` directory of a Unix-based system.
 
 ```
 #!/usr/bin/env bash
@@ -25,7 +25,7 @@ You declare a variable in a bash script like so `VARIABLE_NAME=<value>` **WHERE*
 ```
 #!/usr/bin/env bash
 MSG="Hello World"
-echo "$MSG Alex" # Hello World Alex echo '$MSG Alex' # $MSG Alex
+echo "$MSG " # Hello World
 ```
 
 **BE CAREFUL** to make sure there is no space on either side of the `=` symbol when declaring a variable. The following will **not** work: `MYVARIABLE = foo`.
