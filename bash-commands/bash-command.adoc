@@ -119,7 +119,7 @@ echo ${MSG#The}
 
 ---
 
-Use the `%` symbol to get the substring before the characters `Rolling Sones` starting the right side of the string
+Use the `%` symbol to get the substring before the characters `Rolling Stones` starting the right side of the string
 
 ```
 MSG="The Rolling Stones"
