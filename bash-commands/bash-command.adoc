@@ -179,24 +179,71 @@ Use the `,,` symbols to convert all characters in a string to lowercase.
 
 == Collections
 
+The following sections describe how to group data as a collection in a bash script. Bash supports two types of collection. One type is an `array`. The other type is a `map`.
+
+An `array` is a collection in which elements of the collection are accessed according to a number.
+
+A `map` is a collection in which elements of the collection a key value.
+
 === Arrays
+
+*Creating an array*
+
+The following creates an array with three elements and assigns the array to the variable named `my_array`.
+
 ```
-names=('Alex' 'Ada' 'Alexandra')
-names+=('Soto') # Appends element, Soto
-unset names[3] # Removes element at index 3, (Soto)
+my_array=('Alex' 'Ada' 'Alexandra')
+```
 
-echo ${names[0]} # Alex
-echo ${names[1]} # Ada
-echo ${names[2]} # Alexandra
+*Adding an element to an array*
 
-# @ indicates all elements in the array
-echo ${names[@]} # Alex Ada Alexandra
+The following uses the `+=` operator to add an element with the value `Soto` to the array named `my_array`.
 
-# Count of names
+```
+my_array+=('Soto')
+```
+
+*Removing  an element to an array*
+
+The following uses the `unset` keyword to remove the fourth element from the array named `my_array` at index `3`.
+
+```
+unset my_array[3]
+```
+
+*Viewing data in an array*
+
+The following uses an index number to view the data in the first element of the array named `my_array`.
+
+```
+echo ${my_array[0]}
+```
+
+The following uses an index number to view the data in the third element of the array named `my_array`.
+
+```
+echo ${my_array[2]}
+```
+
+The following uses the `@` symbol to view all elements in the array named `my_array`.
+
+```
+echo ${my_array[@]}
+```
+
+*Getting the number of elements in an array*
+
+The following uses the `#` and `@` symbols to get a count of the number of elements in the array named `my_array`.
+
+```
 echo ${#names[@]} # 3
 ```
 
 *Copy, paste and run in your terminal:*
+
+Copy and paste the following code into your terminal window to create and execute a Bash script with the filename `arrays-01.sh`.
+
+The Bash script demonstrates the array commands described above.
 
 ```
 cat << 'EOF' > arrays-01.sh
