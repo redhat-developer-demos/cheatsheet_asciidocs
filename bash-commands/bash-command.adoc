@@ -134,11 +134,10 @@ echo ${MSG%Rolling Stones}
 Use the `^` symbol to convert the first character in a string to uppercase.
 
 ```
- MSG="aBcDeFg"
- echo ${MSG^}
+MSG="aBcDeFg"
+echo ${MSG^}
 
- #returns ABcDeFg
-
+#returns ABcDeFg
 ```
 
 ---
@@ -150,7 +149,6 @@ Use the `^^` symbols to convert the all lowercase characters in a string to uppe
  echo ${MSG^^}
 
  #returns ABCDEFG
-
 ```
 
 ---
@@ -263,30 +261,63 @@ echo ${names[@]} # Alex Ada Alexandra
 # Count of names
 echo ${#names[@]} # 3
 EOF
-sh arrays-01.sh
+bash arrays-01.sh
 ```
 
 === Maps
 
-NEEDS A SENTENCE
+In Bash, a map is a collection of elements that are organized as key-value pairs. Another way to think of a map is as a named associative array.
+
+To access an element in a map you reference its key.
 
 *Creating a map*
 
-TO BE COMPLETED
+You create a map using the command `declare -A <map_name>` *WHERE* the option `-A` indicates that the variable represents an associative array, which is that same as a map.
 
+*Examples:*
+
+The following example demonstrates creating a map variable named `score`. The variable `score` has four elements that describe the scores of four people named `alex`, `edson`, `sebi` and `chris`.
 ```
 declare -A score
 score[alex]="1"
 score[edson]="2"
 score[sebi]="3"
 score[chris]="4"
-echo ${!score[@]} # alex edson sebi chris
+```
+
+---
+The following example demonstrates using the `!` and `@` symbols to show all the keys in the map named `score`.
+
+```
+echo ${!score[@]}
+```
+
+---
+The following example demonstrates using the `unset` keyword to delete the element identified by the key `chris` from the map variable named `score`.
+
+```
 unset score[chris] # Delete chris entry
+```
+
+---
+The following example demonstrates using the `@` symbol to show all the values in the map named `score`.
+
+```
 echo ${score[@]} # show all the values
-echo ${!score[@]} # show all keys
+```
+
+---
+The following example demonstrates calling the value of the element associated with the key `edson`.
+
+```
 echo ${score[edson]} # show the value of edson: 2
+```
+
+---
+The following example demonstrates using the `#` and `@` symbols to get a count of the number of elements in the map variable named `score`.
+
+```
 echo ${#score[@]} # show the number of elements in the map: 3
-EOF
 ```
 
 *Copy, paste and run in your terminal:*
@@ -307,119 +338,278 @@ echo ${!score[@]} # show all keys
 echo ${score[edson]} # show the value of edson: 2
 echo ${#score[@]} # show the number of elements in the map: 3
 EOF
-sh maps-01.sh
+bash maps-01.sh
 ```
 
 == Functions
 
-A basic function
+Functions provide a way to group commands in a bash script together under a common name for reuse.
+
+=== Basic function syntax 
+
+The following demonstrates basic function syntax. The function named `printmessages`. The function uses the `echo` command to send two messages to standard output.
 
 ```
-helloworld() {
-  echo "Number of arguments $#" # 2
-  echo "Hello World $1 from $2" # Hello World Alex from Bash
-  }
-
-helloworld "Alex" "Bash"
-```
-
-*Copy, paste and run in your terminal:*
-
-```
-cat << 'EOF' > function-01.sh
-#!/usr/bin/env bash
-
-helloworld() {
-  echo "Number of arguments $#" # 2
-  echo "Hello World $1 from $2" # Hello World Alex from Bash
-  }
-
-helloworld "Alex" "Bash"
-EOF
-
-
-sh function-01.sh
-```
-
----
-
-A function that sets a value to a global variable
-
-```
-goodmorning () {
-  # set a value for the global variable named myresult
-  myresult='Good Morning'
- }
-```
-
-*Copy, paste and run in your terminal:*
-
-```
-cat << 'EOF' > function-02.sh
-#!/usr/bin/env bash
-
-goodmorning () {
-  # set a value for the global variable named myresult
-  myresult='Good Morning'
- }
-
-goodmorning
-echo $myresult
-EOF
-
-sh function-02.sh
-```
-
----
-
-A function that returns a numeric code on exit
-
-Exiting with a value of `0` means success. Any higher number means, by convention, a failure condition exists.
-
-```
-myfunc()
-{
-    echo "this is a message from myfunc()"
-    exit 0
+printmessages() {
+  echo "I am message 1"
+  echo "I am message 2"
 }
 ```
 
 *Copy, paste and run in your terminal:*
 
+Copy and paste the following code into your terminal window to create and execute a Bash script that has a function named `printmessages`.
+
 ```
-cat << 'EOF' > function-03.sh
+cat << 'EOF' > function-example-01.sh
 #!/usr/bin/env bash
 
-myfunc()
-{
-echo "this is a message from myfunc()"
-exit 0
+printmessages() {
+  echo "I am message 1"
+  echo "I am message 2"
 }
 
-# run the custom function named myfunc
-myfunc
+# call the function
+printmessages
 EOF
 
-sh function-03.sh && echo "$?"
+bash function-example-01.sh
 ```
 
-A function that returns a numeric code on using return
+=== Using parameters
+Parameters are passed to a function implicitly when added to the execution command of the function.
+
+Parameters are detected in a function by using the `$` symbol to call the parameter according the position of the parameter in the command line.
+
+The following code demonstrates a function that reads the parameter passed as the first argument in the command line
+
+```
+helloworld() {
+  echo "Hello World from $1"
+  }
+
+helloworld "Alex"
+```
+
+*Copy, paste and run in your terminal:*
+
+Copy and paste the following code into your terminal window to create and execute a Bash script that has a function named `helloworld` that processes the first parameter in the command line execution.
+
+```
+cat << 'EOF' > function-example-02.sh
+#!/usr/bin/env bash
+
+helloworld() {
+  echo "Hello World from $1"
+  }
+
+# call the function
+helloworld "Alex"
+EOF
+
+bash function-example-02.sh
+```
+
+Returns `Hello World from Alex`
+
+---
+
+*Copy, paste and run in your terminal:*
+
+Copy and paste the following code into your terminal window to create and execute a Bash script that has a function named `helloworld` that processes the two parameters in the command line execution.
+
+```
+cat << 'EOF' > function-example-03.sh
+#!/usr/bin/env bash
+
+helloworld() {
+  echo "Hello World from $1 and $2"
+  }
+
+# call the function
+helloworld "Alex" "Edson"
+EOF
+
+bash function-example-03.sh
+```
+
+Returns `Hello World from Alex and Edson`
+
+---
+
+=== Setting a global variable
+
+A function can write data to a variable previous defined in a Bash script. The following bash script demonstrates the technique.
+
+```
+function set_favorite_food(){
+  favorite_food=$1
+}
+
+favorite_food="apples"
+echo favorite_food
+
+set_favorite_food "cheese"
+
+echo favorite_food
+
+```
+
+*Copy, paste and run in your terminal:*
+
+```
+cat << 'EOF' > function-04.sh
+set_favorite_food(){
+  favorite_food=$1
+}
+
+favorite_food="apples"
+echo $favorite_food
+
+set_favorite_food "cheese"
+
+echo $favorite_food
+EOF
+
+bash function-04.sh
+```
+
+Returns 
+
+```
+apples
+cheese
+```
 
 == Conditional Statements
 
-NEEDS A SENTENCE
+A conditional statement is typically thought of as an `if..then..else` statement. When writing a conditional statement you check to see if an expression is true or false and respond accordingly.
+
+A simple conditional statement uses the following syntax:
+
+```
+if [<statement>]; then
+   <consequence statement(s)>
+fi
+```
+
+**WHERE `if`, `then` and `fi` are keywords with `if` indicating the beginning of the statement and `fi` indicating the end of the statement.
+
+An `if..then` conditional statement uses the following syntax with the `else` keyword :
+
+```
+if [<statement>]; then
+   <consequence statement(s)>
+else
+  <consequence statement(s)>
+fi
+```
 
 === Numeric statements
 
-TO BE COMPLETED
+The following bash script demonstrates using a conditional statement to test numeric values. The code uses the `$RANDOM` function to get a random number. `$RANDOM` is defined by the operating system and always present. The `expr` keyword is the bash command that evaluates an expression. Also, the bash script uses the predefined modulus (`%`) operator which is available to the script by default from the operating system.
+
+```
+  mynum=$RANDOM
+  echo $mynum
+  if [ $(expr $mynum % 2) == "0" ]; then
+      echo even
+  else
+    echo odd
+  fi
+```
+
+*Copy, paste and run in your terminal:*
+
+Copy and paste the following code into your terminal window to create and execute a Bash script that creates a random number and then runs an `if..then..else` conditional statement to determine if the random value is even or odd.
+
+```
+cat << 'EOF' > conditional-example-01.sh
+#!/usr/bin/env bash
+mynum=$RANDOM
+echo $mynum
+if [ $(expr $mynum % 2) == "0" ]; then
+    echo even
+else
+  echo odd
+fi
+EOF
+
+bash conditional-example-01.sh
+```
 
 === String statements
 
-TO BE COMPLETED
+The following bash script demonstrates using a conditional statement to check if a word exists in a string.
+
+```
+mystring="I like cherries"
+positive_indicator=" like "
+if [[ "$mystring" == *"$positive_indicator"* ]]; then
+  echo "It's a good review"
+fi
+EOF
+```
+
+*Copy, paste and run in your terminal:*
+
+Copy and paste the following code into your terminal window to create and execute a Bash script that tests if  certain substrings exists and do not exist in a string provided as a parameter to the script.
+
+```
+cat << 'EOF' > conditional-example-02.sh
+#!/usr/bin/env bash
+mystring=$1
+
+positive_indicator=" like "
+negative_indicator=" don't "
+
+if [[ ("$mystring" == *"$positive_indicator"* ) && ( "$mystring" != *"$negative_indicator"* )]]; then
+  echo "It's a good review."
+else
+  echo "It's a bad review."
+fi
+
+EOF
+
+bash conditional-example-02.sh  "I like cherries"
+
+bash conditional-example-02.sh  "I hate cherries"
+
+bash conditional-example-02.sh  "I don't like cherries"
+
+bash conditional-example-02.sh  "I like apple"
+
+```
 
 === File statements
 
-TO BE COMPLETED
+The following bash script demonstrates using a conditional statement to determine if a file exists.
+
+```
+FILE=/<path/to/filename>
+if test -f "$FILE"; then
+    echo "$FILE exists."
+fi
+```
+
+*Copy, paste and run in your terminal:*
+
+TO BE PROVIDED
+
+```
+touch newfile.txt
+
+cat << 'EOF' > conditional-example-03.sh
+#!/usr/bin/env bash
+FILE=newfile.txt
+if test -f "$FILE"; then
+    echo "$FILE exists."
+fi
+EOF
+
+bash conditional-example-03.sh
+
+```
 
 == Loops
 
@@ -444,7 +634,7 @@ done
 
 EOF
 
-sh basic-range-01.sh
+bash basic-range-01.sh
 ```
 
 === Looping Collections
@@ -471,7 +661,7 @@ done
 
 EOF
 
-sh range-names-01.sh
+bash range-names-01.sh
 ```
 
 ---
@@ -502,7 +692,7 @@ for key in "${!score[@]}"; do
 done
 
 EOF
-sh range-keys-01.sh
+bash range-keys-01.sh
 ```
 
 ---
@@ -533,7 +723,7 @@ for val in "${score[@]}"; do
 done
 
 EOF
-sh value-keys-01.sh
+bash value-keys-01.sh
 ```
 
 === Files and Directories
@@ -560,7 +750,7 @@ for i in /tmp/*.log; do
   echo $i
 done
 EOF
-sh files-01.sh
+bash files-01.sh
 ```
 
 ---
@@ -588,7 +778,7 @@ for i in /var/*; do
 done
 EOF
 
-sh files-02.sh
+bash files-02.sh
 ```
 
 === While loop
@@ -613,10 +803,11 @@ while [ $x -le 5 ]; do
 done
 EOF
 
-sh while-loop-01.sh
+bash while-loop-01.sh
 ```
 
 *Copy, paste and run in your terminal:*
+
 == Executing Commands
 
 == Useful Snippets
