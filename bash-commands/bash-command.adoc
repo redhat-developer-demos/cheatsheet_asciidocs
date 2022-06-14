@@ -14,7 +14,9 @@ The `env` command tells the system to search for the specified interpreter throu
 
 In this case, the shebang clause tells the system to use `bash`. Another interpreter such as `sh` could be defined as well.
 
-== Variables & Strings
+== Variables
+
+Being able to use variables is a critical need for programming Bash scripts. The following sections describe various aspect of working with variables under Bash.
 
 === Variable declaration
 
@@ -483,7 +485,7 @@ cheese
 
 == Conditional Statements
 
-A conditional statement is typically thought of as an `if..then..else` statement. When writing a conditional statement you check to see if an expression is true or false and respond accordingly.
+A conditional statement is an `if..then..else` statement. When writing a conditional statement you check to see if an expression is true or false and respond accordingly.
 
 A simple conditional statement uses the following syntax:
 
@@ -493,7 +495,7 @@ if [<statement>]; then
 fi
 ```
 
-**WHERE `if`, `then` and `fi` are keywords with `if` indicating the beginning of the statement and `fi` indicating the end of the statement.
+**WHERE** `if`, `then` and `fi` are keywords with `if` indicating the beginning of the conditional statement and `fi` indicating the end of the conditional statement.
 
 An `if..then` conditional statement uses the following syntax with the `else` keyword :
 
@@ -594,7 +596,7 @@ fi
 
 *Copy, paste and run in your terminal:*
 
-TO BE PROVIDED
+Copy and paste the following to create a file and then run the Bash script that checks for the file's existence.
 
 ```
 touch newfile.txt
@@ -613,9 +615,13 @@ bash conditional-example-03.sh
 
 == Loops
 
-NEEDS A SENTENCE
+Looping is a technique that enables Bash scripts to run programming statements and expressions continuously.
+
+The following section different types of loops.
 
 === Range
+
+The following code demonstrates running a loop over a range according to lower and upper limits.
 ```
 for i in {1..5}; do
   echo "Hello World $i"
@@ -623,6 +629,8 @@ done
 ```
 
 *Copy, paste and run in your terminal:*
+
+Copy and paste the code to run a Bash script that runs a loop over 5 iterations.
 
 ```
 cat << 'EOF' > basic-range-01.sh
@@ -639,7 +647,7 @@ bash basic-range-01.sh
 
 === Looping Collections
 
-Print all elements from a plain array:
+The following code uses the `do` keyword to demonstrate running printing all elements from a plain array:
 
 ```
 for i in "${names[@]}"; do
@@ -648,6 +656,8 @@ done
 ```
 
 *Copy, paste and run in your terminal:*
+
+Copy and paste the code to run a Bash script that prints all the elements in an array using a `for` loop and the `@` keyword.
 
 ```
 cat << 'EOF' > range-names-01.sh
@@ -675,6 +685,8 @@ done
 ```
 
 *Copy, paste and run in your terminal:*
+
+Copy and paste the code to run a Bash script that prints all the elements in a key/value array.
 
 ```
 cat << 'EOF' > range-keys-01.sh
@@ -767,7 +779,7 @@ done
 
 *Copy, paste and run in your terminal:*
 
-TO BE PROVIDED
+Copy and paste the code to run a Bash script traverses all the subdirectories in the directory `/var`.
 
 ```
 cat << 'EOF' > files-02.sh
@@ -784,6 +796,11 @@ bash files-02.sh
 ```
 
 === While loop
+
+A while loops runs continuously until a certain condition is met.
+
+The following code uses the less then or equal to symbol `-le` to run a loop until the counter variable `x` reaches the number `5`.
+
 ```
 x=1;
 while [ $x -le 5 ]; do
@@ -793,6 +810,8 @@ done
 ```
 
 *Copy, paste and run in your terminal:*
+
+Copy and paste the following code to create and run a Bash script that demonstrates a `while` loop.
 
 ```
 cat << 'EOF' > while-loop-01.sh
@@ -808,8 +827,76 @@ EOF
 bash while-loop-01.sh
 ```
 
+== Working with status codes
+
+Reporting success and error is a Bash script is accomplished using status codes. By convention success is reported exiting with the number `0`. Any number greater than `0` indicates an error. Also, there is a convention for error numbers which is explained in the article on Red Hat System Admin https://www.redhat.com/sysadmin/exit-codes-demystified[Bash command line exit codes demystified].
+
+=== Using the exit keyword 
+
+The following demonstrates Bash code that returns an error code `22` when the script is executed without a parameter.
+
+```
+if [ -z "$1" ]; then 
+  echo "No parameter";
+  exit 22;
+fi
+```
+
 *Copy, paste and run in your terminal:*
 
-== Executing Commands
+Copy and paste the following code to create and run a Bash script that returns an error code when the script is executed without a parameter.
 
-== Useful Snippets
+```
+cat << 'EOF' > status-code-01.sh
+#!/usr/bin/env bash
+if [ -z "$1" ]; then 
+  echo "No parameter";
+  exit 22;
+fi
+EOF
+
+bash status-code-01.sh
+
+echo $?
+```
+
+Returns 22
+
+=== Return a status value from a function
+
+```
+function echoMessage(){
+  if [ -z "$1" ]; then 
+   return 22;
+  fi
+}
+```
+
+```
+cat << 'EOF' > status-code-02.sh
+#!/usr/bin/env bash
+function echoMessage(){
+  if [ -z "$1" ]; then 
+   return 22;
+  fi
+
+  echo $1 after the IF/THEN STATEMENT
+}
+
+echoMessage
+res=$?
+echo The first result of the call to echoMessage is $res
+
+echoMessage "Bash Rocks!"
+res=$?
+echo The second result of the call to echoMessage is $res
+
+EOF
+
+bash status-code-02.sh
+```
+Returns
+
+The first result of the call to echoMessage is 22
+Bash Rocks! after the IF/THEN STATEMENT
+The second result of the call to echoMessage is 0
