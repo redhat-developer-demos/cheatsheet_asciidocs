@@ -767,6 +767,8 @@ done
 
 *Copy, paste and run in your terminal:*
 
+TO BE PROVIDED
+
 ```
 cat << 'EOF' > files-02.sh
 #!/usr/bin/env bash
