@@ -31,6 +31,8 @@ There is also a section that demonstrates how to create a new container image ba
 
 *Example*
 
+The following example demonstrates how to list container images stored on the local machine.
+
 ```
 $ buildah images
 
@@ -79,6 +81,8 @@ untagged: docker.io/library/busybox:latest
 `buildah rmi --all`
 
 *Example*
+
+The following example demonstrates how to remove all container images stored on the local machine.
 
 ```
 $ buildah rmi --all`

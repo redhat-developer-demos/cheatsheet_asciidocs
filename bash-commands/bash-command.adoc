@@ -864,6 +864,8 @@ Returns 22
 
 === Return a status value from a function
 
+The following code demonstrates using the `return` keyword to return a status code from a function in a Bash script.
+
 ```
 function echoMessage(){
   if [ -z "$1" ]; then 
@@ -898,5 +900,7 @@ bash status-code-02.sh
 Returns
 
 The first result of the call to echoMessage is 22
+
 Bash Rocks! after the IF/THEN STATEMENT
+
 The second result of the call to echoMessage is 0
