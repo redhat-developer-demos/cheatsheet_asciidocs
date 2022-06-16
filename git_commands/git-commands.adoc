@@ -20,7 +20,7 @@ The sections that follow describe the purpose and use of each location.
 
 === Working directory
 
-The working directory is the location of the code in the file system of the local computer. Developers add and make changes to code in the working directory.
+The working directory is the location of the code in the local computer's file system. Developers add and make changes to code in the working directory.
 
 === Staging environment
 
@@ -59,13 +59,13 @@ The following sections describe `git` commands that create a local repository, d
 git [options] init <repo_directory>
 ----
 
-Creates a local repository that will be represented by the directory named `.git`. This command is not needed when working in a remote repository; use `git clone` to start work with other repositories.
+Creates a local repository that will be represented by the directory named `.git`. This command is not needed when working in a remote repository. Use `git clone` to start work with other repositories.
 
 If the optional `<repo_directory>` parameter is not provided, the `.git` file is created in the current directory. If the parameter `<repo_directory>` is provided, that directory is created and the `.git` directory is created in that directory.
 
 *Example:*
 
-The following example uses the `git init` command to create a local repository in the `/home` directory of the user `lennonjohn`. The example creates the directory `coolcode` as the repository directory in which the repository `.git` file is stored.
+The following example uses the `git init` command to create a local repository in the `/home` directory of the user `lennonjohn`. The example creates the directory `coolcode` as the repository directory in which the repository `.git` file is stored:
 
 ----
 $ git init ./coolcode
