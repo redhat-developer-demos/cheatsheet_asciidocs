@@ -71,6 +71,10 @@ or
 
 `buildah rmi <container_image_id>`
 
+*Example*
+
+The following example demonstrates how delete a container image with the name `buildah rmi docker.io/library/busybox`.
+
 ```
 $ buildah rmi docker.io/library/busybox
 untagged: docker.io/library/busybox:latest
@@ -163,7 +167,23 @@ or
 
 The `buildah inspect` command returns a very large JSON object that describes the many details of a container image.
 
+
 *Example*
+
+The following example demonstrates executing the `build inspect` command against the image id `a134be2e5346`. The command produces a good deal of screen output. Thus the example shows a snippet of output.
+
+```
+buildah inspect --type image a134be2e5346
+
+{
+    "Type": "buildah 0.0.1",
+    "FromImage": "localhost/instrumentreseller:latest",
+    "FromImageID": "a134be2e5346307e5999d059bbfabafa43763318b90be569454474e9d2289cf9",
+    "FromImageDigest": "sha256:ab86f8d2e3907728f9dcdeb62271e9f165b9dff6aa4507e352df97fc2e81e367",
+    "Config": "{\"created\":\"2022-06-14T18:16:42.578103429Z\",\"architecture\":\"amd64\",\"os\":\"............\"}
+ 
+}
+```
 
 === Modifying an existing container image to create a new one
 
@@ -296,7 +316,7 @@ The following sections show you how to:
 
 The command `buildah containers` lists all working containers. A working container is a container that has been created using the `buildah from <container_image>` command.
 
-*Example*
+*Examples*
 
 The following example creates three working containers using the `buildah from` command. Then, the working directories are listed using the `buildah containers` command.
 
@@ -378,7 +398,9 @@ or
 
 `buildah delete <container_name>`
 
-**Example**
+**Examples**
+
+The following examples demonstrate deleting containers created by buildah.
 
 ```
 $ buildah delete 35b88d7ef180
@@ -394,7 +416,11 @@ f892d7f36f5f1d0b70fd40ebb00c0861cab44260f6b44add9574381673307ef5
 
 === Delete all containers on a machine, technique 1
 
-The following command will delete all containers on the local machine:
+` buildah rm --all`
+
+*Example*
+
+The following example deletes all containers on the local machine:
 
 ```
 $ buildah rm --all
@@ -405,7 +431,11 @@ $ buildah rm --all
 ```
 === Delete all containers on a machine, technique 2
 
-The following command will delete all containers created under `buildah run`. If no containers are running, the command will throw an error:
+`buildah delete $(buildah list  -a -q)`
+
+*Example*
+
+The following example deletes all containers created under `buildah run`. If no containers are running, the command will throw an error:
 
 ```
 $ buildah delete $(buildah list  -a -q)
