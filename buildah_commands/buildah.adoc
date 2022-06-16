@@ -2,7 +2,7 @@
 :experimental: true
 :product-name: Buildah Cheat Sheet
 
-Buildah is a tool for creating OCI compliant container images. Also, Buildah provides the capability to create a container based on a particular container image, update the contents of that container and then create a brand new container image based on the altered container.
+Buildah is a tool for creating OCI-compliant container images. Also, Buildah provides the capability to create a container based on a particular container image, update the contents of that container, and then create a brand new container image based on the altered container.
 
 Although you can use Buildah to run a container on a local machine in a limited manner, the tool's fundamental intention is to provide versatility for creating container images and pushing them to a container registry.
 
@@ -18,10 +18,10 @@ The `$` symbol in the examples in the sections below represents the console prom
 
 The following sections describe how to 
 
-* list container imagess
-* pull a container image
-* create a container image
-* delete a container image
+* List container images.
+* Pull a container image.
+* Create a container image.
+* Delete a container image.
 
 There is also a section that demonstrates how to create a new container image based on an existing container image.
 
@@ -49,7 +49,7 @@ docker.io/reselbob/pinger        latest         c5fa4df9cfe4   3 years ago     7
 
 *Example*
 
-The following example pulls the container image `busybox:latest` from the remote registry `docker.io`.
+The following example pulls the container image `busybox:latest` from the remote registry `docker.io`:
 
 ```
 $ buildah from docker.io/busybox:latest
@@ -62,7 +62,8 @@ Writing manifest to image destination
 Storing signatures
 1a80408de790c0b1075d0a7e23ff7da78b311f85f36ea10098e4a6184c200964
 ```
-=== Deleting a container image from local machine
+
+=== Deleting a container image from a local machine
 
 `buildah rmi <repo>/<container_image_name>:<tag>`
 
@@ -101,15 +102,13 @@ c58ef9bfbb5789a9882cee610ba778b1368d21b513d6caf32e3075542e13fe81
 1264065f6ae851d6a33d7be03ffde100356592e385b9b72f65f91b5d9b944b92
 ```
 
-
-
 === Building a container image
 
 `buildah bud -t <image_name> <container_file_path>`
 
 *Example*
 
-The following example creates a container file and then build a container image using the container file.
+The following example creates a container file and then builds a container image using that file.
 
 Create the container file:
 
@@ -153,6 +152,7 @@ $ buildah images
 REPOSITORY                  TAG        IMAGE ID       CREATED         SIZE
 localhost/myecho-image      latest     636de016ba7a   9 seconds ago   225 MB
 ```
+
 === Inspect a container image
 
 `buildah inspect --type image image-id`
@@ -171,36 +171,36 @@ The `buildah inspect` command returns a very large JSON object that describes th
 
 The following example creates a working container based on the container image `myecho-image`. Then, a new file is created the echoes a message. There is an older version of the new file already in the container. The older file has an older message.
 
-The command `buildah copy`  is used to replace the older file with the contents of the new file. Finally the command `buildah commit` is used to create a new container image named `new-myecho-image`. The container image `new-myecho-image` has the content of the new file under the same filename as the legacy container image.
+The command `buildah copy` is used to replace the older file with the contents of the new file. Finally the command `buildah commit` is used to create a new container image named `new-myecho-image`. The container image `new-myecho-image` has the content of the new file under the same filename as the legacy container image.
 
-Create the working container
+Create the working container:
 
 ```
 $ buildah from myecho-image
 myecho-image-working-container
 ```
 
-Create the new file with new content.
+Create the new file with new content:
 
 ```
 $ echo "echo This is another container that works!"" > myecho
 ```
 
-Copy the new file contents into the running working container.
+Copy the new file contents into the running working container:
 
 ```
 buildah copy myecho-image-working-container myecho /tmp/myecho
 5f270702af64a52e355b3bcff955bdde2648418bea6e9e4d5d68cbba91450598
 ```
 
-Exercise the running working container to verify that the contents of the new file will be displayed.
+Exercise the running working container to verify that the contents of the new file will be displayed:
 
 ```
 $ buildah run myecho-image-working-container sh /tmp/myecho
 This is another container that works!
 ```
 
-Create a new container image based on the file system of the legacy container image that also has replacement content in the script file `/tmp/myecho`.
+Create a new container image based on the file system of the legacy container image that also has replacement content in the script file `/tmp/myecho`:
 
 ```
 $ buildah commit myecho-image-working-container new-myecho-image
@@ -215,7 +215,7 @@ Storing signatures
 f6dc970a528ce2c94eba3d957170ac612537e1bd9a9f6def15e246d5b965f4e5
 ```
 
-List the local container images on the machine to verify that the new container image has been created.
+List the local container images on the machine to verify that the new container image has been created:
 
 ```
 $ buildah images
@@ -228,9 +228,9 @@ localhost/myecho-image                latest         636de016ba7a   3 hours ago 
 
 The following sections show you how to:
 
-* log in to a container image registry
-* push a container image to a registry
-* add an additional tag to a container image
+* Log into a container image registry.
+* Push a container image to a registry.
+* Add an additional tag to a container image.
 
 === Logging into a remote container image registry
 
@@ -238,7 +238,7 @@ The following sections show you how to:
 
 *Example*
 
-The following example executes `buildah login`. The command prompts for a username and password.
+The following example executes `buildah login`. The command prompts for a username and password:
 
 ```
 buildah login quay.io
@@ -254,7 +254,7 @@ Login Succeeded!
 
 *Example*
 
-The following command pushes the local container image the  repository of a user named `cooluser` on remote registry `quay.io`.
+The following command pushes the local container image to the repository of a user named `cooluser` on remote registry `quay.io`:
 
 ```
 buildah push localhost/myecho-image quay.io/cooluser/myecho-image:v1.0
@@ -266,7 +266,7 @@ buildah push localhost/myecho-image quay.io/cooluser/myecho-image:v1.0
 
 *Example*
 
-The following example creates a new tag, `verylatest` and applies it to the existing container image `docker.io/library/nginx` that as the tag `latest`. Notice that the values of the `IMAGE ID`` are identical.
+The following example creates a new tag, `verylatest` and applies it to the existing container image `docker.io/library/nginx` that has the tag `latest`. Notice that the values of the `IMAGE ID`` are identical:
 
 ```
 $ buildah images
@@ -281,25 +281,24 @@ docker.io/library/nginx   latest       de2543b9436b   2 days ago   146 MB
 docker.io/library/nginx   verylatest   de2543b9436b   2 days ago   146 MB
 ```
 
-
 == Working with containers
 
 The following sections show you how to:
 
-* List all working container
-* Run a working container
-* Display details about a working container
-* Delete a working container
+* List all working containers.
+* Run a working container.
+* Display details about a working container.
+* Delete a working container.
 
 === List all working containers
 
 `buildah containers`
 
-The command `buildah containers` lists all working containers. A working container is a container that has been created using the `buildah from <container_image>` command
+The command `buildah containers` lists all working containers. A working container is a container that has been created using the `buildah from <container_image>` command.
 
 *Example*
 
-The following example creates 3 working containers using the `buildah from` command. Then, the working directories are listed using the `buildah containers` command.
+The following example creates three working containers using the `buildah from` command. Then, the working directories are listed using the `buildah containers` command.
 
 Create the containers
 
@@ -328,11 +327,9 @@ bc1473702c2d     *     de2543b9436b docker.io/library/nginx:latest   nginx-worki
 
 `buildah run [options] <working_container> <command>`
 
-
 *Example*
 
-The following example builds an working container from the image `httpd`. Since the image might exist in a number of remote registries, `buildah` displays a interactive list of registries to choose from.
-
+The following example builds a working container from the image `httpd`. Since the image might exist in a number of remote registries, `buildah` displays a interactive list of registries to choose from:
 
 ```
 $ buildah from httpd
@@ -346,7 +343,8 @@ $ buildah from httpd
 
   httpd-working-container
 ```
-The `buildah run` command is then executed against the working container created by `buildah from`. The example executes the `ls /var` command listing the contents of the `/var` directory located within the working container.
+
+The `buildah run` command is then executed against the working container created by `buildah from`. The example executes the `ls /var` command listing the contents of the `/var` directory located within the working container:
 
 ```
 $ buildah run httpd-working-container ls /var
@@ -355,7 +353,7 @@ backups  cache	lib  local  lock  log  mail  opt  run  spool  tmp
 
 === Display details about a container
 
-`buildah inspect  [options] <container_id>`
+`buildah inspect [options] <container_id>`
 
 or
 
@@ -365,7 +363,7 @@ The `buildah inspect` command returns a very large JSON object that describes th
 
 **Example**
 
-The following example inspects the working container image named `registry.access.redhat.com/ubi8/ubi`. The option `--format '{{.IDMappingOptions}}'` is used to display only the information associated with the `IDMappingOptions` property of the JSON object.
+The following example inspects the working container image named `registry.access.redhat.com/ubi8/ubi`. The option `--format '{{.IDMappingOptions}}'` is used to display only the information associated with the `IDMappingOptions` property of the JSON object:
 
 ```
 $ buildah inspect --format '{{.IDMappingOptions}}' --type image registry.access.redhat.com/ubi8/ubi
@@ -396,7 +394,7 @@ f892d7f36f5f1d0b70fd40ebb00c0861cab44260f6b44add9574381673307ef5
 
 === Delete all containers on a machine, technique 1
 
-The following command will delete all containers on the local machine
+The following command will delete all containers on the local machine:
 
 ```
 $ buildah rm --all
@@ -407,7 +405,7 @@ $ buildah rm --all
 ```
 === Delete all containers on a machine, technique 2
 
-The following command will delete all containers created under `buildah run`. If no containers are running, the command will throw an error.
+The following command will delete all containers created under `buildah run`. If no containers are running, the command will throw an error:
 
 ```
 $ buildah delete $(buildah list  -a -q)
