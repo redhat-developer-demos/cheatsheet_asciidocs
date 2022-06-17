@@ -16,7 +16,7 @@ The `$` symbol in the examples in the sections below represents the console prom
 
 == Working with container images
 
-The following sections describe how to 
+The following sections describe how to:
 
 * List container images.
 * Pull a container image.
@@ -31,7 +31,7 @@ There is also a section that demonstrates how to create a new container image ba
 
 *Example*
 
-The following example demonstrates how to list container images stored on the local machine.
+The following example demonstrates how to list container images stored on the local machine:
 
 ```
 $ buildah images
@@ -73,7 +73,7 @@ or
 
 *Example*
 
-The following example demonstrates how delete a container image with the name `buildah rmi docker.io/library/busybox`.
+The following example demonstrates how delete a container image with the name `buildah rmi docker.io/library/busybox`:
 
 ```
 $ buildah rmi docker.io/library/busybox
@@ -87,7 +87,7 @@ untagged: docker.io/library/busybox:latest
 
 *Example*
 
-The following example demonstrates how to remove all container images stored on the local machine.
+The following example demonstrates how to remove all container images stored on the local machine:
 
 ```
 $ buildah rmi --all`
@@ -167,10 +167,9 @@ or
 
 The `buildah inspect` command returns a very large JSON object that describes the many details of a container image.
 
-
 *Example*
 
-The following example demonstrates executing the `build inspect` command against the image id `a134be2e5346`. The command produces a good deal of screen output. Thus the example shows a snippet of output.
+The following example demonstrates executing the `build inspect` command against the image id `a134be2e5346`. The command produces a good deal of screen output. Thus the example shows a snippet of output:
 
 ```
 buildah inspect --type image a134be2e5346
@@ -189,9 +188,9 @@ buildah inspect --type image a134be2e5346
 
 *Example*
 
-The following example creates a working container based on the container image `myecho-image`. Then, a new file is created the echoes a message. There is an older version of the new file already in the container. The older file has an older message.
+The following example creates a working container based on the container image `myecho-image`. Then, a new file is created that echoes a message. There is an older version of the new file already in the container. The older file has an older message.
 
-The command `buildah copy` is used to replace the older file with the contents of the new file. Finally the command `buildah commit` is used to create a new container image named `new-myecho-image`. The container image `new-myecho-image` has the content of the new file under the same filename as the legacy container image.
+The command `buildah copy` is used to replace the older file with the contents of the new file. Finally the command `buildah commit` is used to create a new container image named `new-myecho-image`. The container image `new-myecho-image` has the content of the new file under the same file name as the legacy container image.
 
 Create the working container:
 
@@ -364,7 +363,7 @@ $ buildah from httpd
   httpd-working-container
 ```
 
-The `buildah run` command is then executed against the working container created by `buildah from`. The example executes the `ls /var` command listing the contents of the `/var` directory located within the working container:
+The `buildah run` command is then executed against the working container created by `buildah from`. The example executes the `ls /var` command, listing the contents of the `/var` directory located within the working container:
 
 ```
 $ buildah run httpd-working-container ls /var
@@ -400,7 +399,7 @@ or
 
 **Examples**
 
-The following examples demonstrate deleting containers created by buildah.
+The following examples demonstrate deleting containers created by buildah:
 
 ```
 $ buildah delete 35b88d7ef180
