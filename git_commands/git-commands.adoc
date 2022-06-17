@@ -38,11 +38,6 @@ The remote repository is the Git repository on the network that is the single so
 
 The following figure shows the working directory, staging environment, local repository, and remote repository locations along with the `git` commands that move data to and from each location. After content has been pulled from a remote repository to a local repository, that content is available in the local file system.
 
-----
-[Working Directory] → (add) → [Staging] → (commit) → [Local Repo] → (push) → [Remote Repo]
-                                                        ↑  ←  ←  ←  (pull)  ←   ←  ↲
-----
-
 image::../images/git-workflow.png[] 
 
 === Branches
