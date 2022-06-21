@@ -1,19 +1,66 @@
 = Bash Commands Cheat Sheet
 :experimental: true
 :product-name: Bash Commands Cheat Sheet
+:hide-uri-scheme:
 
-== Bash Script Header
 
-Typically a bash script has a ![shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) declaration on the first line to specify the interpreter that executes the script's commands.
+== Running a bash script
 
-The `env` command tells the system to search for the specified interpreter through the `$PATH` variable. Usually the interpreter is located in the `/usr/bin/env` directory of a Unix-based system.
+There are two ways to run a bash script. The first way is to execute it as a parameter of a direct call to the the binary file `bash`, like so:
 
 ```
-#!/usr/bin/env bash
+$ bash myscript
+
+Hello from Bash
 ```
 
-In this case, the shebang clause tells the system to use `bash`. Another interpreter such as `sh` could be defined as well.
+*WHERE* the content of the file `myscript` is as follows:
 
+```
+echo "Hello from Bash"
+```
+
+The second way to use the `chmod` command to change the permissions of the bash script to include running it as an executable, like so:
+
+```
+$ chmod +x ./myscript
+
+$ ./myscript
+```
+
+== Using a shebang header
+
+Unlike a standalone binary executable which knows how to interact with the computer's operating system, as shown above, a bash script requires another program to run it. This other program in called an interpreter. The interpreter that runs a bash script is, as the name implies, `bash`. However, in many cases, a bash script can be run by another interpreter that's installed on the host computer. An example of another interpreter is `sh`.
+
+Also, it is entirely possible to run a script that uses an interpreter such as Perl. (Of course, the script needs to written in the Perl programming language.)
+
+The way a bash script lets the operating system know which interpreter to use is according to a declaration made at the first line of the script. This first line declaration is called a script header. It is also called a https://en.wikipedia.org/wiki/Shebang_(Unix)[shebang]. A shebang starts with the character `#!`
+
+An example of a shebang is as follows:
+
+```
+#!/usr/bin/bash
+```
+
+The shebang shown above tells the operating system to use the interpreter located at the filepath `/usr/bin/bash` to execute the lines of code that will follow in the script. In this case the interpreter is `bash`.
+
+Another form of a shebang is as follows:
+
+```
+#!/usr/env bash
+```
+
+Unlike the shebang in the first example that explicitly tells the operating system where to locate the interpreter in file system, the shebang `#!/usr/env bash` tells the operating system to search the computer's `$PATH` to find the `bash` interpreter. Thus, any intance of `bash` can be used as long as the it's in a location defined by the `$PATH` environment variable.
+
+The example below illustrates using a script header that tells the operating system to execute the file as a Perl script:
+
+```
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+print "Hello World from Perl\n";
+```
 == Variables
 
 Being able to use variables is a critical need for programming Bash scripts. The following sections describe various aspect of working with variables under Bash.
