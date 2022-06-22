@@ -944,6 +944,7 @@ res=$?
 echo The first result of the call to echoMessage is $res
 
 echoMessage "Bash Rocks!"
+
 res=$?
 echo The second result of the call to echoMessage is $res
 
@@ -955,9 +956,7 @@ Returns
 
 ```
 The first result of the call to echoMessage is 22
-
 Bash Rocks! after the IF/THEN STATEMENT
-
 The second result of the call to echoMessage is 0
 ```
 
