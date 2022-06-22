@@ -35,7 +35,7 @@ $ ./myscript
 
 Unlike a binary executable file which knows how to interact with the computer's operating system directly, a Bash script, which is always text based, requires another program to run its commands. This other program in called an interpreter. The interpreter that runs a Bash script is, as the name implies, `bash`. However, in other cases, a bash script can be run by another interpreter that's installed on the host computer. An example of another interpreter is `sh`.
 
-The way a bash script lets the operating system know which interpreter to use is according to a declaration made at the first line of the script. This first line declaration is called a script header. It is also called a https://en.wikipedia.org/wiki/Shebang_(Unix)[shebang]. A shebang starts with the character `#!`
+The way a Bash script lets the operating system know which interpreter to use is according to a declaration made at the first line of the script. This first line declaration is called a script header. It is also called a https://en.wikipedia.org/wiki/Shebang_(Unix)[shebang]. A shebang starts with the characters `#!`
 
 An example of a shebang is as follows:
 
@@ -43,7 +43,7 @@ An example of a shebang is as follows:
 #!/usr/bin/bash
 ```
 
-The shebang shown above tells the operating system to use the interpreter located at the filepath `/usr/bin/bash` to execute the lines of code that will follow in the script. In this case the interpreter is `bash`.
+The shebang shown above tells the operating system to use the interpreter located at the filepath `/usr/bin/bash` to execute the lines of code that will follow in the script.
 
 Another form of a shebang is as follows:
 
@@ -53,15 +53,9 @@ Another form of a shebang is as follows:
 
 The shebang `#!/usr/env bash` tells the operating system to search the computer's `$PATH` to find the `bash` interpreter. Thus, any instance of `bash` can be used as long as the it's in a location defined by the `$PATH` environment variable.
 
-The shebang for declaring a Perl script is
+As mentioned above, a host operating system has be capability to run scripts for other interpreted programming languages as long as the given interpreter is installed on the host computer and the shebang has been configured properly.
 
-```
-#!/usr/env perl
-```
-
-Be advised that it is entirely possible to run a script written in another language as long as long as the operating system knows which language interpreter to use. For example, you can write a program in the Perl programming language and use the associated interpreter.
-
-The example below illustrates using a script header that tells the operating system to execute the file as a Perl script:
+The example below illustrates using a script header (shebang) that tells the operating system to execute the file as a Perl script:
 
 ```
 #!/usr/bin/perl
