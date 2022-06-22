@@ -953,8 +953,11 @@ bash status-code-02.sh
 ```
 Returns
 
+```
 The first result of the call to echoMessage is 22
 
 Bash Rocks! after the IF/THEN STATEMENT
 
 The second result of the call to echoMessage is 0
+```
+
