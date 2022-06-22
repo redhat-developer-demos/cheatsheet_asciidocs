@@ -53,9 +53,11 @@ Another form of a shebang is as follows:
 
 The shebang `#!/usr/env bash` tells the operating system to search the computer's `$PATH` to find the `bash` interpreter. Thus, any instance of `bash` can be used as long as the it's in a location defined by the `$PATH` environment variable.
 
+=== Executing scripts in another language
+
 As mentioned above, a host operating system has be capability to run scripts for other interpreted programming languages as long as the given interpreter is installed on the host computer and the shebang has been configured properly.
 
-The example below illustrates using a script header (shebang) that tells the operating system to execute the file as a Perl script:
+The example below shows a Perl script file. Notice that the script header (a.k.a. shebang) declares the file as a Perl script:
 
 ```
 #!/usr/bin/perl
