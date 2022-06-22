@@ -403,7 +403,7 @@ Functions provide a way to group commands in a bash script together under a comm
 
 === Basic function syntax 
 
-The following demonstrates basic function syntax. The function named `printmessages`. The function uses the `echo` command to send two messages to standard output.
+The following demonstrates basic function syntax. The function is named `printmessages`. The function uses the `echo` command to send two messages to standard output.
 
 ```
 printmessages() {
