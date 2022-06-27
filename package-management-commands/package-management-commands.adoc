@@ -6,9 +6,14 @@
 
 RPM is a popular package management tool in Red Hat Enterprise Linux-based distros. Using RPM, you can install, uninstall, and query individual software packages. Still, it cannot manage dependency resolution like YUM. RPM does provide you useful output, including a list of required packages. An RPM package consists of an archive of files and metadata. Metadata includes helper scripts, file attributes, and information about packages.
 
-RPM maintains a database of installed packages, which enables powerful and fast queries. The RPM database is inside /var/lib, and the file is named __db*.
+RPM keeps a list of installed packages in a database that located on inside the folder `/var/lib` on the host computer.
 
-You can use the RPM command line tool `rpm` to install, updated, delete and query packages. The following sections describe the various way to use `rpm`.
+You can use the RPM command line tool `rpm` to install, updated, delete and query packages.
+
+Capabilities are assigned to the `rpm` command by assigning options to the `rpm` command. For example, the `-i` option tells `rpm` to install a package.
+
+
+The following sections describe the various way to use `rpm`.
 
 === Listing all installed packages
 
@@ -17,6 +22,8 @@ rpm -qa
 ```
 
 *Example*
+
+The following example demonstrates using the `rpm` command with the `-qa` options to list all the packages installed on the host computer. The  result is piped to the `more` command in order to limit the number of package listings returned.
 
 ```
 $ rpm -qa | more -5
@@ -34,6 +41,8 @@ rpm -ql <package_name>
 ```
 
 *Example*
+
+The following example demonstrates using the `rpm` command with the `ql` options to list all the packages associated with the Linux command `curl`. 
 
 ```
 rpm -ql curl
@@ -64,6 +73,8 @@ rpm -ivh <package_url>
 
 *Example*
 
+The following example demonstrates using the `rpm` with the `-ivh` options to install an `rpm` package from a location on the internet.
+
 ```
 $ sudo rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
@@ -81,6 +92,14 @@ Updating / installing...
 rpm -ivh --nodeps <url>
 ```
 
+*Example*
+
+The following example demonstrates using the `rpm` with the `-ivh` and  `--nodeps` options to install an `rpm` package from a location on the internet. Using the `--nodeps` option constrains the installation to add only the main package without its dependencies.
+
+```
+$ sudo rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+```
+
 === Upgrading a package
 
 ```
@@ -88,6 +107,8 @@ rpm -Uvh <url>
 ```
 
 *Example*
+
+The following example demonstrates using the `rpm` with the `-Uvh` options to update a package hosted on the internet. In this case the command reports that the  latest version of the package is installed.
 
 ```
 $ sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
@@ -105,6 +126,8 @@ rpm -e <package_name>
 
 *Example*
 
+The following example demonstrates using the `rpm` with the `-e` option to remove a package and its dependencies installed on the host computer.
+
 ```
 sudo rpm -e epel-release-8-15.el8.noarch
 ```
@@ -117,8 +140,10 @@ rpm -evh --nodeps <package_name>
 
 *Example*
 
+The following example demonstrates using the `rpm` with the `-e` option to remove a package yet leaves its dependencies intact.
+
 ```
-sudo rpm -evh epel-release-8-15.el8.noarch
+sudo rpm -evh --nodeps epel-release-8-15.el8.noarch
 ```
 
 === Querying a package
@@ -129,8 +154,11 @@ rpm -q <package_name>
 
 *Example*
 
+The following example demonstrates using the `rpm` with the `-q` option to query for all the details about the package `buildah`.
+
 ```
 $ rpm -q buildah
+
 buildah-1.24.2-4.module+el8.6.0+14877+f643d2d6.x86_64
 ```
 
@@ -141,6 +169,8 @@ rpm -qi <package_name>
 ```
 
 *Example*
+
+The following example demonstrates using the `rpm` with the `-qi` option to query for the version information for the package `buildah`.
 
 ```
 $ rpm -qi buildah
@@ -222,6 +252,9 @@ sudo ls -l /etc/yum.repos.d
 
 *Example*
 
+The following example demonstrates listing the repositories stored in the `/etc/yum.repos.d` folder of host computer using the Linux `ls` command.
+
+
 ```
 $ sudo ls -l /etc/yum.repos.d
 
@@ -240,6 +273,8 @@ dnf config-manager --add-repo /etc/yum.repos.d/fedora_extras.repo
 ```
 
 *Example*
+
+The following example demonstrates using the `dnf` command with the `config-manager` subcommand along with the `--add-repo` option to add the `epel.repo` repository the the RHEL Subscription Management.
 
 ```
 $ sudo dnf config-manager --add-repo /etc/yum.repos.d/epel.repo
@@ -265,6 +300,8 @@ WHERE `-y` is the option that overrides prompting the user for permission to ins
 
 *Example*
 
+The following example snippet demonstrates using the `dnf` command with the `install` subcommand to install the package `buildah` on the host computer. The `-y` option overrides prompting the user for permission to install the package.
+
 ```
 $ sudo dnf install buildah -y
 Updating Subscription Management repositories.
@@ -288,6 +325,8 @@ dnf sudo remove <package_name> -y
 ```
 
 *Example*
+
+The following example snippet demonstrates using the `dnf` command with the `remove` subcommand to remove the package `buildah` on the host computer. The `-y` option overrides prompting the user for permission to remove the package.
 
 ```
 sudo dnf remove buildah -y
@@ -330,6 +369,8 @@ sudo dnf upgrade
 
 *Example*
 
+The following example snippet demonstrates using the `dnf` command with the `upgrade` subcommand to upgrade the repositories stored on the host computer. The `-y` option overrides prompting the user for permission to upgrade the host computer.
+
 ```
 sudo dnf upgrade -y
 Updating Subscription Management repositories.
@@ -366,6 +407,8 @@ sudo dnf search <package_name>
 
 *Example*
 
+The following example demonstrates using the `dnf` command with the `search` subcommand to search for the package `curl` along with its dependencies on the host computer.
+
 ```
 $ sudo dnf search curl
 Updating Subscription Management repositories.
@@ -391,6 +434,8 @@ dnf info <package_name>
 ```
 
 *Example*
+
+The following example demonstrates using the `dnf` command with the `info` subcommand to get detail information about the package `curl`.
 
 ```
 $ dnf info curl
@@ -418,13 +463,15 @@ Description  : curl is a command line tool for transferring data with URL syntax
 
 === update
 ```
-dnf update buildah <package_name>
+dnf update <package_name>
 ```
 
 *Example*
 
+The following example demonstrates using the `dnf` command with the `update` subcommand to update the the `buildah` package stored on the host computer. The `-y` option overrides prompting the user for permission to upgrade the host computer.
+
 ```
-$ sudo dnf update buildah
+$ sudo dnf update buildah -y
 Updating Subscription Management repositories.
 Last metadata expiration check: 1:24:13 ago on Tue 21 Jun 2022 06:18:32 AM PDT.
 Dependencies resolved.
@@ -439,12 +486,16 @@ dnf repolist
 
 *Example*
 
+The following example demonstrates using the `dnf` command with the `repolist` subcommand to list the package repositories installed on the host computer.
+
 ```
-$ dnf repolist
-Not root, Subscription Management repositories not updated
-repo id                                                               repo name
-rhel-8-for-x86_64-appstream-rpms                                      Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs)
-rhel-8-for-x86_64-baseos-rpms                                         Red Hat Enterprise Linux 8 for x86_64 - BaseOS (RPMs)D
+$ sudo dnf repolist
+Updating Subscription Management repositories.
+repo id                                             repo name
+epel                                                Extra Packages for Enterprise Linux 8 - x86_64
+epel-modular                                        Extra Packages for Enterprise Linux Modular 8 - x86_64
+rhel-8-for-x86_64-appstream-rpms                    Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs)
+rhel-8-for-x86_64-baseos-rpms                       Red Hat Enterprise Linux 8 for x86_64 - BaseOS (RPMs)
 ```
 
 === history
@@ -453,6 +504,8 @@ sudo dnf history
 ```
 
 *Example*
+
+The following example demonstrates using the `dnf` command with the `history` subcommand to get the history of `dnf` activity on the host computer.
 
 ```
 $ sudo dnf history
