@@ -108,7 +108,7 @@ echo ${MSG,,}
 
 The following examples demonstrate various ways use parameter expansion on Linux variables.
 
-*Word Replacement*
+*Word replacement*
 
 ```
 MSG="Say hi to Chris and Sidney"
@@ -117,7 +117,7 @@ echo ${MSG//Chris/Billy}
 #returns Say hi to Billy and Sidney
 ```
 
-*Character Replacement Using Regular Expressions*
+*Character replacement using regular expressions*
 
 Replace all alphabetic characters with the character `X` but leave numeral alone
 
@@ -139,7 +139,7 @@ echo ${MSG//[0-9]/Z}
 #returns I need ZZ
 ```
 
-*Extracting Substrings*
+*Extracting substrings*
 
 Use the `:` symbol to get the substring of all the characters after the starting at position 4
 
@@ -185,7 +185,7 @@ echo ${MSG%Rolling Stones}
 
 ```
 
-*Case Conversion*
+*Case conversion*
 
 Use the `^` symbol to convert the first character in a string to uppercase.
 
@@ -792,7 +792,7 @@ EOF
 bash value-keys-01.sh
 ```
 
-=== Files and Directories
+=== Files and directories
 
 *Get all files in a directory sub-directories*
 
