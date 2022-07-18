@@ -5,9 +5,9 @@
 
 A Bash script is a text file that contains programming statements that execute commands that are part of the host computer's operating system. Typically system administrators and programmers use Bash scripts to avoid having to repetitively execute tasks manually in a terminal.
 
-A typical use case for a Bash script is to do set up tasks for a new provisioned computer. Thus, in addition to be ing a tool for system administrators and programmers, a Bash script can also be used by system provisioning software.
+A typical use case for a Bash script is to do set up tasks for a newly provisioned computer. Thus, in addition to being a tool for system administrators and programmers, a Bash script can also be used by system provisioning software.
 
-== Running a bash script
+== Running a Bash script
 
 There are two ways to run a Bash script. The first way is to execute it as a parameter of a direct call to the `bash` executable binary, like so:
 
