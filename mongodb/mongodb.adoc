@@ -388,7 +388,7 @@ When looking up a document by unique identifier, the unique `_id` needs to be ca
 
 *Examples:*
 
-Find all documents that have a `price` that is equal to `0.99`?:
+Find all documents that have a `price` that is equal to `0.99`:
 
 ```
 > db.apples.find({price: 0.99})
