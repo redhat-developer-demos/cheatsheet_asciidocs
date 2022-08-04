@@ -618,13 +618,12 @@ Drop an index according to the field name upon which index as created:
 
 Aggregation is the capability to combine two collections together using a single query to create a single result set.
 
-```
-
-The following query combines the `apples` and `countries` collections together. The `apple` collection is combined with the `countries` collection to by using the `apple.countryOfOrigin` field and the data in the `countries.country` as the common join fields.
+The following query combines the `apples` and `countries` collections together. The `apple` collection is combined with the `countries` collection by using the `apple.countryOfOrigin` field and the `countries.country` field as the common join fields.
 
 The statement `{$match:{ countryOfOrigin: "Mexico" }}` indicates the the query will return only those documents in which the field `apples.countryOfOrigin` equals `Mexico`:
 
 
+```
 > db.apples.aggregate([
     {$match:{ countryOfOrigin: "Mexico" }},
     { $lookup:
