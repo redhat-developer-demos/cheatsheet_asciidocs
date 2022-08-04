@@ -50,9 +50,9 @@ For interactive help, type "help".
 == Navigating around Mongo
 The following sections show you how to list and select:
 
-* a database running within a given Mongo server
-* collections within a database 
-* roles in the given database.
+* A database running within a given Mongo server.
+* Collections within a database. 
+* Roles in the given database.
 
 === Show all databases in a Mongo instance
 
@@ -268,7 +268,7 @@ true
 
 == Working with documents
 
-The  following sections show you how perform basic queries against a given collection in a database
+The following sections show you how perform basic queries against a given collection in a database.
 
 === Show all documents in a collection
 
@@ -316,7 +316,7 @@ Where `<sort_order>` is 1, the documents will be listed in ascending order; -1 i
 
 *Example:*
 
-The following example shows how to sort all documents in ascending first sorting on `countryOfOrigin` and then sorting on `price`.
+The following example shows how to sort all documents in ascending first sorting on `countryOfOrigin` and then sorting on `price`:
 
 ```
 > db.apples.find().sort({countryOfOrigin : 1, price: 1})
@@ -388,7 +388,7 @@ When looking up a document by unique identifier, the unique `_id` needs to be ca
 
 *Examples:*
 
-Find all documents that have a `price` that is equal to `0.99`
+Find all documents that have a `price` that is equal to `0.99`:
 
 ```
 > db.apples.find({price: 0.99})
@@ -398,14 +398,14 @@ Find all documents that have a `price` that is equal to `0.99`
 { "_id" : ObjectId("627e79917107db0de3aeb496"), "type" : "golden delicious", "price" : 0.99, "countryOfOrigin" : "Mexico" }
 ```
 
-Find all documents that have a `price` that is equal to `0.99` and a `countryOfOrigin` of `USA`.
+Find all documents that have a `price` that is equal to `0.99` and a `countryOfOrigin` of `USA`:
 
 ```
 > db.apples.find({price: 0.99, countryOfOrigin: "USA" })
 { "_id" : ObjectId("627e79917107db0de3aeb494"), "type" : "macintosh", "price" : 0.99, "countryOfOrigin" : "USA" }
 ```
 
-Find all documents that have a `price` that is greater than `0.99`.
+Find all documents that have a `price` that is greater than `0.99`:
 
 ```
 > db.apples.find({ price:{$gt: 0.99} })
@@ -415,7 +415,7 @@ Find all documents that have a `price` that is greater than `0.99`.
 { "_id" : ObjectId("627e79917107db0de3aeb493"), "type" : "delicious", "price" : 1.59, "countryOfOrigin" : "USA" }
 ```
 
-Find all documents that have a `price` that is less than `1.29`.
+Find all documents that have a `price` that is less than `1.29`:
 
 ```
 > db.apples.find({ price:{$lt: 1.29} })
@@ -510,14 +510,14 @@ You can use a variable to store the results of query. Once the result is stored,
 
 === Set a cursor to a variable
 
-A cursor is a pointer to documents in a database.
+A cursor is a pointer to documents in a database:
 
 `var <variable_name> = <mongo_statement>`
 
 ```
 > var usa = db.apples.find({ countryOfOrigin : "USA" })
 
-Display the contents of the variable `usa`.
+Display the contents of the variable `usa`:
 
 > usa
 { "_id" : ObjectId("627ea4c10d8bd2fbf249eadf"), "type" : "granny smith", "price" : 2.99, "countryOfOrigin" : "USA" }
@@ -553,7 +553,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 
 ```
 
-== Working with Indexes
+== Working with indexes
 
 An index is a digest of the data in a Mongo database. If an index does not exist in the database, then Mongo scans every document in the given collection in order to select those documents that match the query statement. The efficiency of using an index is apparent.
 
@@ -600,14 +600,14 @@ An `<index_name>` is created by concatenating the `<field_name>` with the `<sort
 
 *Example:*
 
-Drop an index according to `index_name`.
+Drop an index according to `index_name`:
 
 ```
 > db.apples.dropIndex ("countryOfOrigin_1")
 { "nIndexesWas" : 2, "ok" : 1 }
 ```
 
-Drop an index according to the field name upon which index as created.
+Drop an index according to the field name upon which index as created:
 
 ```
 > db.apples.dropIndex ({ price : 1})
@@ -618,13 +618,12 @@ Drop an index according to the field name upon which index as created.
 
 Aggregation is the capability to combine two collections together using a single query to create a single result set.
 
+The following query combines the `apples` and `countries` collections together. The `apple` collection is combined with the `countries` collection by using the `apple.countryOfOrigin` field and the `countries.country` field as the common join fields.
+
+The statement `{$match:{ countryOfOrigin: "Mexico" }}` indicates the the query will return only those documents in which the field `apples.countryOfOrigin` equals `Mexico`:
+
+
 ```
-
-The following query combines the `apples` and `countries` collections together. The `apple` collection is combined with the `countries` collection to by using the `apple.countryOfOrigin` field and the data in the `countries.country` as the common join fields.
-
-The statement `{$match:{ countryOfOrigin: "Mexico" }}` indicates the the query will return only those documents in which the field `apples.countryOfOrigin` equals `Mexico`.
-
-
 > db.apples.aggregate([
     {$match:{ countryOfOrigin: "Mexico" }},
     { $lookup:
@@ -653,7 +652,7 @@ The statement `{$match:{ countryOfOrigin: "Mexico" }}` indicates the the query w
 
 ```
 
-== Dangerous Tasks
+== Dangerous tasks
 
 The following sections describe tasks that need to be executed with care. 
 
@@ -684,7 +683,7 @@ The following sections describe tasks that need to be executed with care.
 
 *Don't do this:*
 
-The following replaces the entire document, removing all fields except `price`
+The following replaces the entire document, removing all fields except `price`:
 
 `db.apples.update({ type : "granny smith" }, { price : 2.49 })`
 
@@ -702,7 +701,7 @@ The following replaces the entire document, removing all fields except `price`
 
 *Do this:*
 
-Using the `$set` keyword in the following only update the `price` field in the document
+Using the `$set` keyword in the following only update the `price` field in the document:
 
 `db.apples.update({ type : "granny smith" }, {$set : { price : 2.49 }})`
 
