@@ -40,7 +40,7 @@ docker.io/library/nginx         latest      c316d5a335a5  4 weeks ago   146 MB
 === podman rmi
 
 ----
-podman rmi [-f] <<image>:<tag>
+podman rmi [-f] <image_name_or_image_id>
 ----
 
 Removes a local image from the local cache. Use the `-f`` option to force removal. This command removes the image only from the local system, not from the remote registry. The image can be specified by a name or a UUID.
